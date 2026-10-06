@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells v10 — Fitted Ivory Tips</title>
+  <desc id="desc">Two refinements of the selected left v9 composition. Both bring the narrow lower spell notes up closer to the original upper page lines. The first uses horizontal-topped fitted ivory inserts; the second uses a subtle angled upper cut. Both follow the A-leg tip contours with a purple rim, without pill strokes.</desc>
+  <defs><symbol id="spelling-01-fitted-ivory-tips" viewBox="0 0 256 256"><g id="01-fitted-ivory-tips-book" transform="translate(0 -14)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path id="01-fitted-ivory-tips-original-upper-page-lines" d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+        <path id="01-fitted-ivory-tips-left-lower-spell-note" d="M60 208C65 204 70 204 75 208S85 212 90 208"/>
+        <path id="01-fitted-ivory-tips-right-lower-spell-note" d="M196 208C191 204 186 204 181 208S171 212 166 208"/>
+      </g>
+    </g>
+    <g id="01-fitted-ivory-tips-left-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="01-fitted-ivory-tips-right-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="01-fitted-ivory-tips-letter-a" transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <g id="01-fitted-ivory-tips-fitted-a-leg-tips" fill="#FFF9EA">
+        <path d="M61 202H92L87 217H55Z"/>
+        <path d="M211 202H180L185 217H217Z"/>
+      </g>
+    </g>
+    <path id="01-fitted-ivory-tips-centered-spark" fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></symbol><symbol id="spelling-02-angled-fitted-tips" viewBox="0 0 256 256"><g id="02-angled-fitted-tips-book" transform="translate(0 -14)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path id="02-angled-fitted-tips-original-upper-page-lines" d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+        <path id="02-angled-fitted-tips-left-lower-spell-note" d="M60 208C65 204 70 204 75 208S85 212 90 208"/>
+        <path id="02-angled-fitted-tips-right-lower-spell-note" d="M196 208C191 204 186 204 181 208S171 212 166 208"/>
+      </g>
+    </g>
+    <g id="02-angled-fitted-tips-left-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="02-angled-fitted-tips-right-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="02-angled-fitted-tips-letter-a" transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <g id="02-angled-fitted-tips-fitted-a-leg-tips" fill="#FFF9EA">
+        <path d="M61 201L91 209L88 217H55Z"/>
+        <path d="M211 201L181 209L184 217H217Z"/>
+      </g>
+    </g>
+    <path id="02-angled-fitted-tips-centered-spark" fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></symbol></defs>
+  <rect width="1600" height="1000" fill="#17102B"/>
+  <g font-family="Avenir Next, Arial, sans-serif">
+    <text x="66" y="70" fill="#FFC857" font-size="15" font-weight="700" letter-spacing="3">SPELLING-SPELLS / LOGO CONCEPTS / V10</text>
+    <text x="66" y="128" fill="#FFF9EA" font-size="44" font-weight="700" letter-spacing="-1">Closer page notes. Fitted ivory tips.</text>
+    <text x="66" y="166" fill="#BFAFDE" font-size="19">Chosen left composition retained · Lower notes raised · Filled shapes follow the A legs</text>
+    <rect x="60" y="211" width="724" height="692" rx="28" fill="#F8F4FF"/>
+    <rect x="816" y="211" width="724" height="692" rx="28" fill="#F8F4FF"/>
+    <text x="100" y="257" fill="#6039D8" font-size="14" font-weight="700" letter-spacing="2">01 / FITTED IVORY TIPS</text>
+    <text x="856" y="257" fill="#6039D8" font-size="14" font-weight="700" letter-spacing="2">02 / ANGLED FITTED TIPS</text>
+    <use href="#spelling-01-fitted-ivory-tips" x="214" y="303" width="416" height="416"/>
+    <use href="#spelling-02-angled-fitted-tips" x="970" y="303" width="416" height="416"/>
+    <text x="422" y="769" fill="#20134D" font-size="40" font-weight="750" text-anchor="middle" letter-spacing="-1">Spelling-Spells</text>
+    <text x="1178" y="769" fill="#20134D" font-size="40" font-weight="750" text-anchor="middle" letter-spacing="-1">Spelling-Spells</text>
+    <text x="422" y="814" fill="#705D8E" font-size="18" text-anchor="middle">Horizontal upper cut · Narrow purple rim</text>
+    <text x="1178" y="814" fill="#705D8E" font-size="18" text-anchor="middle">Angled upper cut · Narrow purple rim</text>
+    <text x="422" y="846" fill="#705D8E" font-size="16" text-anchor="middle">Original upper lines with the lower notes eight units closer</text>
+    <text x="1178" y="846" fill="#705D8E" font-size="16" text-anchor="middle">Same overlap, palette, external wands and page content</text>
+    <g transform="translate(64 936)">
+      <circle cx="10" cy="0" r="10" fill="#6039D8"/>
+      <circle cx="43" cy="0" r="10" fill="#FFC857"/>
+      <circle cx="76" cy="0" r="10" fill="#D8C8F2"/>
+      <circle cx="109" cy="0" r="10" fill="#FFF9EA"/>
+      <text x="136" y="6" fill="#BFAFDE" font-size="16">Selected palette retained</text>
+    </g>
+    <text x="1536" y="942" fill="#BFAFDE" font-size="16" text-anchor="end">Editable vectors · Local concept round · October 2026</text>
+  </g>
+</svg>

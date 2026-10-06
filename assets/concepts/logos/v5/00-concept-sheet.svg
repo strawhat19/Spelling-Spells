@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — restored Angled Wand Tips v5</title>
+  <desc id="desc">Two restrained refinements of the selected v3 logo. Original A, angled wand ends, spark, book geometry, and colors are kept; the book is six or ten units closer, and both pages contain clean identical reflected scribbles.</desc>
+  <rect width="1600" height="1000" fill="#17102B"/>
+  <g font-family="Avenir Next, Arial, sans-serif">
+    <text x="56" y="62" fill="#FFC857" font-size="18" font-weight="700" letter-spacing="3">ANGLED WAND TIPS REFINEMENTS / V5</text>
+    <text x="56" y="128" fill="#F8F4FF" font-size="54" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+    <text x="56" y="172" fill="#D8C8F2" font-size="23">Back to the selected v3 form, with a closer book and clean mirrored scribbles.</text>
+    <g id="concept-1">
+    <rect x="56" y="225" width="716" height="690" rx="24" fill="#F8F4FF"/>
+    <text x="88" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">01</text>
+    <text x="88" y="309" fill="#20134D" font-size="34" font-weight="700">Angled Book · Close</text>
+    <g transform="translate(273 334) scale(1.1)"><g transform="translate(0 -6)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M47 195Q53 190 59 195T72 195T86 195T104 196"/>
+      <path d="M50 207Q56 203 62 207T75 207T89 207T105 208"/>
+      <path d="M53 219Q59 215 65 219T77 219T90 219T103 220"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M47 195Q53 190 59 195T72 195T86 195T104 196"/>
+      <path d="M50 207Q56 203 62 207T75 207T89 207T105 208"/>
+      <path d="M53 219Q59 215 65 219T77 219T90 219T103 220"/></g>
+      </g>
+    </g>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-angled-v5-6-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-angled-v5-6-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+    <text x="414" y="665" fill="#20134D" font-size="38" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="88" y="715" fill="#6D5F85" font-size="21">The v3 design, with the book six units closer.</text>
+    <text x="88" y="748" fill="#6D5F85" font-size="21">Three clean spell lines mirror across the fold.</text>
+    <circle cx="99" cy="795" r="11" fill="#6039D8"/>
+    <circle cx="129" cy="795" r="11" fill="#FFC857"/>
+    <circle cx="159" cy="795" r="11" fill="#D8C8F2"/>
+    <circle cx="189" cy="795" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <text x="88" y="874" fill="#6D5F85" font-size="15" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(650 807) scale(.34)"><g transform="translate(0 -6)">
+      <path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#20134D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M47 195Q53 190 59 195T72 195T86 195T104 196"/>
+      <path d="M50 207Q56 203 62 207T75 207T89 207T105 208"/>
+      <path d="M53 219Q59 215 65 219T77 219T90 219T103 220"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M47 195Q53 190 59 195T72 195T86 195T104 196"/>
+      <path d="M50 207Q56 203 62 207T75 207T89 207T105 208"/>
+      <path d="M53 219Q59 215 65 219T77 219T90 219T103 220"/></g>
+      </g>
+    </g>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-angled-v5-6-20134D" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-angled-v5-6-20134D)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#F8F4FF" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#F8F4FF" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+  </g><g id="concept-2">
+    <rect x="828" y="225" width="716" height="690" rx="24" fill="#F8F4FF"/>
+    <text x="860" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">02</text>
+    <text x="860" y="309" fill="#20134D" font-size="34" font-weight="700">Angled Book · Closer</text>
+    <g transform="translate(1045 334) scale(1.1)"><g transform="translate(0 -10)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M47 195Q53 190 59 195T72 195T86 195T104 196"/>
+      <path d="M50 207Q56 203 62 207T75 207T89 207T105 208"/>
+      <path d="M53 219Q59 215 65 219T77 219T90 219T103 220"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M47 195Q53 190 59 195T72 195T86 195T104 196"/>
+      <path d="M50 207Q56 203 62 207T75 207T89 207T105 208"/>
+      <path d="M53 219Q59 215 65 219T77 219T90 219T103 220"/></g>
+      </g>
+    </g>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-angled-v5-10-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-angled-v5-10-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+    <text x="1186" y="665" fill="#20134D" font-size="38" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="860" y="715" fill="#6D5F85" font-size="21">The same v3 design, with a slightly closer book.</text>
+    <text x="860" y="748" fill="#6D5F85" font-size="21">The A, wand tips, spark, and colors stay intact.</text>
+    <circle cx="871" cy="795" r="11" fill="#6039D8"/>
+    <circle cx="901" cy="795" r="11" fill="#FFC857"/>
+    <circle cx="931" cy="795" r="11" fill="#D8C8F2"/>
+    <circle cx="961" cy="795" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <text x="860" y="874" fill="#6D5F85" font-size="15" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(1422 807) scale(.34)"><g transform="translate(0 -10)">
+      <path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#20134D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M47 195Q53 190 59 195T72 195T86 195T104 196"/>
+      <path d="M50 207Q56 203 62 207T75 207T89 207T105 208"/>
+      <path d="M53 219Q59 215 65 219T77 219T90 219T103 220"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M47 195Q53 190 59 195T72 195T86 195T104 196"/>
+      <path d="M50 207Q56 203 62 207T75 207T89 207T105 208"/>
+      <path d="M53 219Q59 215 65 219T77 219T90 219T103 220"/></g>
+      </g>
+    </g>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-angled-v5-10-20134D" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-angled-v5-10-20134D)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#F8F4FF" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#F8F4FF" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+  </g>
+    <text x="56" y="963" fill="#D8C8F2" font-size="17">Concepts for review · v3 Angled Wand Tips restored as the base · Earlier rounds preserved</text>
+  </g>
+</svg>

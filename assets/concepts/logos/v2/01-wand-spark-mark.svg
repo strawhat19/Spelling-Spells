@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — Wand Spark mark</title>
+  <desc id="desc">The original A beside a tilted golden wand. A clear spark at its tip keeps the magic direct.</desc>
+  <g transform="translate(0 27) scale(.8)"><path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></g>
+    <path fill="none" stroke="#FFC857" stroke-width="15" stroke-linecap="round" d="M151 220 212 85"/>
+    <path fill="none" stroke="#6039D8" stroke-width="7" d="M162 185 177 192"/>
+    <path fill="#FFC857" d="M219 24Q224.51 47.49 248 53Q224.51 58.51 219 82Q213.49 58.51 190 53Q213.49 47.49 219 24Z"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 320" role="img" aria-labelledby="logo-title logo-description">
+  <title id="logo-title">Spelling-Spells — Rune Tiles</title>
+  <desc id="logo-description">Two bold letter tiles form an asymmetric symbol. The exact Spelling-Spells wordmark appears beside the symbol.</desc>
+  <g transform="translate(36 32)"><rect x="86" y="29" width="139" height="139" rx="29" fill="#FFC857"/>
+    <path fill="none" stroke="#6039D8" stroke-width="11" stroke-linecap="round" d="M183 54V93M164 73H203"/>
+    <rect x="31" y="86" width="150" height="150" rx="32" fill="#6039D8"/>
+    <path fill="none" stroke="white" stroke-width="17" stroke-linecap="round" d="M132 120C112 108 80 121 80 138C80 156 130 154 132 175C134 195 102 210 80 195"/></g>
+  <text x="338" y="164" fill="#20134D" font-family="Avenir Next, Arial, sans-serif" font-size="64" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+</svg>

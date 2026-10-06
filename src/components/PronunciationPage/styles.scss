@@ -1,0 +1,54 @@
+.ss-pronunciation {
+  width: min(1150px, calc(100% - 96px));
+  margin: 45px auto 70px;
+  &-heading { max-width: 695px; margin-bottom: 36px; }
+  &-heading > p { display: flex; align-items: center; gap: 8px; color: var(--lavender, #d8c8f2); text-transform: uppercase; font-size: 9px; letter-spacing: 1.8px; font-weight: 650; }
+  h1 { font-family: Georgia, serif; font-size: 47px; font-weight: 500; letter-spacing: -1.2px; line-height: 1.14; margin: 20px 0 17px; }
+  &-heading > span { display: block; color: var(--body, #c8bcda); font-size: 13px; line-height: 1.8; }
+  &-layout { display: grid; grid-template-columns: 295px 1fr; gap: 26px; align-items: start; }
+  &-selector { border: 1px solid var(--line, #514065); border-radius: 18px; background: var(--card, #211536); padding: 19px; }
+  &-search { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line, #514065); border-radius: 8px; background: var(--page, #17102b); color: var(--soft, #b8aacd); padding: 10px; }
+  &-search input { background: transparent; color: var(--ink, #fff9ea); border: 0; outline: 0; min-width: 0; width: 100%; font-size: 10px; }
+  &-search input::placeholder { color: var(--soft, #b8aacd); }
+  &-results-count { color: var(--soft, #b8aacd); font-size: 9px; padding: 6px 2px; }
+  &-spell-list { display: flex; flex-direction: column; gap: 7px; }
+  &-spell-list button { display: flex; align-items: center; gap: 10px; border-radius: 10px; border: 1px solid transparent; text-align: left; padding: 12px 10px; color: var(--body, #c8bcda); background: transparent; cursor: pointer; transition: color .25s, background .25s; }
+  &-spell-list button[aria-pressed='true'] { color: var(--ink, #fff9ea); background: var(--muted, #2d2043); border-color: var(--line, #514065); }
+  &-spell-list button:hover { background: var(--muted, #2d2043); }
+  &-spell-list button > svg:first-child { color: var(--lavender, #d8c8f2); flex: 0 0 auto; }
+  &-spell-list button > svg:last-child { margin-left: auto; flex: 0 0 auto; opacity: .55; }
+  &-spell-list strong { display: block; font-size: 13px; font-weight: 600; }
+  &-spell-list small { display: block; font-size: 9px; color: var(--soft, #b8aacd); margin-top: 5px; }
+  &-empty { color: var(--soft, #b8aacd); font-size: 11px; line-height: 1.8; padding: 5px; }
+  &-guide { padding: 32px 35px; border: 1px solid var(--line, #514065); border-radius: 18px; background: var(--card, #211536); }
+  &-kicker { margin: 0 0 13px; color: var(--soft, #b8aacd); text-transform: uppercase; font-size: 8px; letter-spacing: 1.8px; font-weight: 650; }
+  h2 { font-family: Georgia, serif; font-size: 48px; font-weight: 500; margin: 0 0 12px; letter-spacing: -1px; }
+  &-phonetic { font-size: 22px; font-family: Georgia, serif; color: var(--gold, #ffc857); margin: 0 0 21px; }
+  &-syllables { display: flex; gap: 8px; flex-wrap: wrap; }
+  &-syllables span { color: var(--lavender, #d8c8f2); background: var(--muted, #2d2043); padding: 11px 16px; border-radius: 8px; font-family: Georgia, serif; font-size: 22px; }
+  &-note { color: var(--body, #c8bcda); font-size: 12px; line-height: 1.85; margin: 22px 0; }
+  &-reader { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: var(--muted, #2d2043); color: var(--lavender, #d8c8f2); border: 1px solid var(--line, #514065); border-radius: 9px; cursor: pointer; font-size: 10px; }
+  &-reader-status { font-size: 9px; line-height: 1.8; color: var(--soft, #b8aacd); margin: 12px 0 0; }
+  &-spelling { margin-top: 29px; border-top: 1px solid var(--line, #514065); padding-top: 27px; }
+  &-letters { display: flex; gap: 7px; flex-wrap: wrap; }
+  &-letters span { min-width: 42px; height: 45px; padding: 0 10px; display: grid; place-items: center; border-radius: 8px; border: 1px solid #9c7db750; background: var(--muted, #2d2043); color: var(--lavender, #d8c8f2); font-family: Georgia, serif; font-size: 29px; }
+  &-letters span.is-space { padding: 0; border: 0; width: 6px; min-width: 6px; background: none; }
+  &-practice { margin-top: 25px; }
+  &-practice > label { display: block; color: var(--body, #c8bcda); font-size: 10px; margin-bottom: 10px; }
+  &-practice > div { display: flex; gap: 9px; }
+  &-practice input { min-width: 0; flex: 1; background: var(--page, #17102b); color: var(--ink, #fff9ea); border: 1px solid var(--line, #514065); border-radius: 8px; padding: 11px 13px; font-size: 12px; }
+  &-practice input::placeholder { color: var(--soft, #b8aacd); }
+  &-practice button { display: flex; align-items: center; gap: 7px; flex-shrink: 0; background: #ffc857; color: #20134d; padding: 11px 14px; border: 0; border-radius: 8px; font-size: 10px; font-weight: 650; cursor: pointer; }
+  &-practice > p { min-height: 18px; color: var(--soft, #b8aacd); font-size: 9px; line-height: 1.8; margin: 10px 0 0; }
+  &-story-link { display: flex; align-items: center; gap: 8px; color: var(--lavender, #d8c8f2); font-size: 11px; text-decoration: none; margin-top: 23px; }
+  &-guide-empty { display: grid; place-content: center; min-height: 420px; text-align: center; color: var(--soft, #b8aacd); border: 1px solid var(--line, #514065); background: var(--card, #211536); border-radius: 18px; font-size: 13px; }
+  &-guide-empty svg { margin: auto; }
+  &-editorial { display: flex; gap: 17px; background: #6039d813; border: 1px solid var(--line, #514065); border-radius: 17px; padding: 25px 28px; margin-top: 31px; }
+  &-editorial > svg { flex: 0 0 auto; color: var(--gold, #ffc857); margin-top: 4px; }
+  &-editorial p { color: var(--body, #c8bcda); font-size: 11px; line-height: 1.9; margin: 0; }
+  &-editorial strong { display: block; color: var(--ink, #fff9ea); font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+}
+[data-theme='ivory'] .ss-pronunciation { &-heading > p, &-spell-list button > svg:first-child, &-phonetic, &-syllables span, &-reader, &-letters span, &-story-link, &-editorial > svg { color: #6039d8; } }
+@media (max-width: 900px) { .ss-pronunciation { width: calc(100% - 64px); } .ss-pronunciation-layout { grid-template-columns: 245px 1fr; gap: 19px; } .ss-pronunciation-guide { padding: 28px; } .ss-pronunciation-practice > div { flex-wrap: wrap; } }
+@media (max-width: 680px) { .ss-pronunciation { width: calc(100% - 38px); margin-top: 27px; } .ss-pronunciation h1 { font-size: 39px; } .ss-pronunciation-layout { grid-template-columns: 1fr; } .ss-pronunciation-selector { padding: 17px; } .ss-pronunciation-spell-list { display: grid; grid-template-columns: repeat(2, 1fr); max-height: 246px; overflow: auto; } .ss-pronunciation-spell-list button { padding: 10px 7px; } .ss-pronunciation-spell-list button > svg:last-child { display: none; } .ss-pronunciation-spell-list strong { font-size: 12px; } .ss-pronunciation-guide { padding: 25px 21px; } .ss-pronunciation h2 { font-size: 43px; } .ss-pronunciation-letters span { min-width: 35px; height: 41px; font-size: 25px; padding: 0 8px; } .ss-pronunciation-editorial { padding: 22px 20px; gap: 12px; } }
+@media (prefers-reduced-motion: reduce) { .ss-pronunciation-spell-list button { transition: none; } }

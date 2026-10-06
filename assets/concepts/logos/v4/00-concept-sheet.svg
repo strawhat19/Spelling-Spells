@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — close Book Spark refinements v4</title>
+  <desc id="desc">Two closer overlapping Book Spark treatments. Both retain purple angled wand legs and a symmetrical gold spark; the lavender book now contains visible A and B lettering and handwritten spell scribbles.</desc>
+  <rect width="1600" height="1000" fill="#17102B"/>
+  <g font-family="Avenir Next, Arial, sans-serif">
+    <text x="56" y="62" fill="#FFC857" font-size="18" font-weight="700" letter-spacing="3">BOOK SPARK REFINEMENTS / V4</text>
+    <text x="56" y="128" fill="#F8F4FF" font-size="54" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+    <text x="56" y="172" fill="#D8C8F2" font-size="23">Closer forms, clear wand tips, and handwritten spells inside the book.</text>
+    <g id="concept-1">
+    <rect x="56" y="225" width="716" height="690" rx="24" fill="#F8F4FF"/>
+    <text x="88" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">01</text>
+    <text x="88" y="309" fill="#20134D" font-size="34" font-weight="700">Bound Spellbook</text>
+    <g transform="translate(273 340) scale(1.1)"><g transform="translate(0 -18)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="#6039D8" font-family="Georgia, Times New Roman, serif" font-size="25" font-weight="700" font-style="italic">
+        <text x="51" y="220" transform="rotate(-5 60 210)">A</text>
+        <text x="150" y="220" transform="rotate(5 159 210)">B</text>
+      </g>
+      <g fill="none" stroke="#6039D8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M82 197Q86 193 90 197T98 197T106 196M82 206Q87 202 93 207T107 205M81 216Q86 212 91 216T106 215"/>
+        <path d="M181 196Q185 200 189 196T199 197T211 196M180 207Q185 202 190 207T201 206T211 207M182 216Q188 213 193 217T210 216"/>
+      </g>
+    </g>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="spellbook-a-18-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#spellbook-a-18-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+    <text x="414" y="665" fill="#20134D" font-size="38" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="88" y="715" fill="#6D5F85" font-size="21">The book rises to meet the angled wand tips.</text>
+    <text x="88" y="748" fill="#6D5F85" font-size="21">Visible A/B lettering and handwritten spell lines.</text>
+    <circle cx="99" cy="795" r="11" fill="#6039D8"/>
+    <circle cx="129" cy="795" r="11" fill="#FFC857"/>
+    <circle cx="159" cy="795" r="11" fill="#D8C8F2"/>
+    <circle cx="189" cy="795" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <text x="88" y="874" fill="#6D5F85" font-size="15" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(650 807) scale(.34)"><g transform="translate(0 -18)">
+      <path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="#20134D" font-family="Georgia, Times New Roman, serif" font-size="25" font-weight="700" font-style="italic">
+        <text x="51" y="220" transform="rotate(-5 60 210)">A</text>
+        <text x="150" y="220" transform="rotate(5 159 210)">B</text>
+      </g>
+      <g fill="none" stroke="#20134D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M82 197Q86 193 90 197T98 197T106 196M82 206Q87 202 93 207T107 205M81 216Q86 212 91 216T106 215"/>
+        <path d="M181 196Q185 200 189 196T199 197T211 196M180 207Q185 202 190 207T201 206T211 207M182 216Q188 213 193 217T210 216"/>
+      </g>
+    </g>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="spellbook-a-18-20134D" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#spellbook-a-18-20134D)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#F8F4FF" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#F8F4FF" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+  </g><g id="concept-2">
+    <rect x="828" y="225" width="716" height="690" rx="24" fill="#F8F4FF"/>
+    <text x="860" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">02</text>
+    <text x="860" y="309" fill="#20134D" font-size="34" font-weight="700">Deep Spellbook</text>
+    <g transform="translate(1045 340) scale(1.1)"><g transform="translate(0 -28)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="#6039D8" font-family="Georgia, Times New Roman, serif" font-size="25" font-weight="700" font-style="italic">
+        <text x="51" y="220" transform="rotate(-5 60 210)">A</text>
+        <text x="150" y="220" transform="rotate(5 159 210)">B</text>
+      </g>
+      <g fill="none" stroke="#6039D8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M82 197Q86 193 90 197T98 197T106 196M82 206Q87 202 93 207T107 205M81 216Q86 212 91 216T106 215"/>
+        <path d="M181 196Q185 200 189 196T199 197T211 196M180 207Q185 202 190 207T201 206T211 207M182 216Q188 213 193 217T210 216"/>
+      </g>
+    </g>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="spellbook-a-28-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#spellbook-a-28-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+    <text x="1186" y="665" fill="#20134D" font-size="38" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="860" y="715" fill="#6D5F85" font-size="21">A closer overlap unifies the A and its spellbook.</text>
+    <text x="860" y="748" fill="#6D5F85" font-size="21">Lettering stays below the ivory tips on both pages.</text>
+    <circle cx="871" cy="795" r="11" fill="#6039D8"/>
+    <circle cx="901" cy="795" r="11" fill="#FFC857"/>
+    <circle cx="931" cy="795" r="11" fill="#D8C8F2"/>
+    <circle cx="961" cy="795" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <text x="860" y="874" fill="#6D5F85" font-size="15" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(1422 807) scale(.34)"><g transform="translate(0 -28)">
+      <path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="#20134D" font-family="Georgia, Times New Roman, serif" font-size="25" font-weight="700" font-style="italic">
+        <text x="51" y="220" transform="rotate(-5 60 210)">A</text>
+        <text x="150" y="220" transform="rotate(5 159 210)">B</text>
+      </g>
+      <g fill="none" stroke="#20134D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M82 197Q86 193 90 197T98 197T106 196M82 206Q87 202 93 207T107 205M81 216Q86 212 91 216T106 215"/>
+        <path d="M181 196Q185 200 189 196T199 197T211 196M180 207Q185 202 190 207T201 206T211 207M182 216Q188 213 193 217T210 216"/>
+      </g>
+    </g>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="spellbook-a-28-20134D" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#spellbook-a-28-20134D)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#F8F4FF" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#F8F4FF" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+  </g>
+    <text x="56" y="963" fill="#D8C8F2" font-size="17">Concepts for review · Continuing v3 Angled Wand Tips · Earlier rounds preserved</text>
+  </g>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — Book Spark refinements v3</title>
+  <desc id="desc">Two focused Book Spark refinements with a centered symmetrical four-point gold spark and ivory stage-wand end caps on both legs of the purple A.</desc>
+  <rect width="1600" height="1000" fill="#17102B"/>
+  <g font-family="Avenir Next, Arial, sans-serif">
+    <text x="56" y="62" fill="#FFC857" font-size="18" font-weight="700" letter-spacing="3">BOOK SPARK REFINEMENTS / V3</text>
+    <text x="56" y="128" fill="#F8F4FF" font-size="54" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+    <text x="56" y="172" fill="#D8C8F2" font-size="23">Centered symmetry and stage-magician wand tips, in the selected purple and gold.</text>
+    <g id="concept-1">
+    <rect x="56" y="225" width="716" height="690" rx="24" fill="#F8F4FF"/>
+    <text x="88" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">01</text>
+    <text x="88" y="309" fill="#20134D" font-size="34" font-weight="700">Classic Wand Tips</text>
+    <g transform="translate(273 334) scale(1.1)"><path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+    <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+    <path fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-classic-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-classic-6039D8)">
+        <path fill="#20134D" d="M57.71 197H100L97 205H54.47Z"/>
+        <path fill="#20134D" d="M172 197H214.29L217.53 205H175Z"/>
+        <path fill="#FFF9EA" d="M54.47 205H97L91 221H48Z"/>
+        <path fill="#FFF9EA" d="M175 205H217.53L224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+    <text x="414" y="665" fill="#20134D" font-size="38" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="88" y="715" fill="#6D5F85" font-size="21">A centered gold spark balances the spellbook.</text>
+    <text x="88" y="748" fill="#6D5F85" font-size="21">Ivory end caps finish both purple wand legs.</text>
+    <circle cx="99" cy="795" r="11" fill="#6039D8"/>
+    <circle cx="129" cy="795" r="11" fill="#FFC857"/>
+    <circle cx="159" cy="795" r="11" fill="#D8C8F2"/>
+    <circle cx="189" cy="795" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <text x="88" y="874" fill="#6D5F85" font-size="15" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(650 807) scale(.34)"><path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+    <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+    <path fill="none" stroke="#20134D" stroke-width="6" stroke-linecap="round" d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-classic-20134D" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-classic-20134D)">
+        <path fill="#20134D" d="M57.71 197H100L97 205H54.47Z"/>
+        <path fill="#20134D" d="M172 197H214.29L217.53 205H175Z"/>
+        <path fill="#F8F4FF" d="M54.47 205H97L91 221H48Z"/>
+        <path fill="#F8F4FF" d="M175 205H217.53L224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+  </g><g id="concept-2">
+    <rect x="828" y="225" width="716" height="690" rx="24" fill="#F8F4FF"/>
+    <text x="860" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">02</text>
+    <text x="860" y="309" fill="#20134D" font-size="34" font-weight="700">Angled Wand Tips</text>
+    <g transform="translate(1045 334) scale(1.1)"><path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+    <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+    <path fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-angled-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-angled-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+    <text x="1186" y="665" fill="#20134D" font-size="38" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="860" y="715" fill="#6D5F85" font-size="21">The same centered spark, book, and purple A.</text>
+    <text x="860" y="748" fill="#6D5F85" font-size="21">Angled ivory caps follow the legs' diagonal.</text>
+    <circle cx="871" cy="795" r="11" fill="#6039D8"/>
+    <circle cx="901" cy="795" r="11" fill="#FFC857"/>
+    <circle cx="931" cy="795" r="11" fill="#D8C8F2"/>
+    <circle cx="961" cy="795" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <text x="860" y="874" fill="#6D5F85" font-size="15" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(1422 807) scale(.34)"><path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+    <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+    <path fill="none" stroke="#20134D" stroke-width="6" stroke-linecap="round" d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-angled-20134D" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-angled-20134D)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#F8F4FF" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#F8F4FF" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+  </g>
+    <text x="56" y="963" fill="#D8C8F2" font-size="17">Concepts for review · Continuing v2 Book Spark · Earlier rounds preserved</text>
+  </g>
+</svg>

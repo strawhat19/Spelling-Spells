@@ -1,0 +1,72 @@
+.spell-card {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  border-radius: 19px;
+  border: 1px solid var(--line, #514065);
+  padding: 24px;
+  color: var(--ink, #fff9ea);
+  background: var(--card, #211536);
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+  &:hover { border-color: #9979c5; transform: translateY(-3px); box-shadow: 0 13px 35px #0e071721; }
+  &-topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 15px; }
+  &-label { display: flex; align-items: center; gap: 7px; color: var(--soft, #b8aacd); font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; }
+  &-label svg { color: var(--gold, #ffc857); }
+  &-save { display: grid; place-items: center; width: 32px; height: 32px; border: 0; border-radius: 50%; color: var(--lavender, #d8c8f2); background: var(--muted, #2d2043); cursor: pointer; }
+  &-save.is-saved { color: #ffc857; background: #ffc85725; }
+  &-origin { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; color: var(--soft, #b8aacd); font-size: 10px; }
+  &-origin-dot { width: 5px; height: 5px; border-radius: 50%; background: #ffc857; }
+  &-title { margin: 0; font-size: 32px; font-family: Georgia, 'Times New Roman', serif; font-weight: 500; letter-spacing: -.7px; line-height: 1.15; }
+  &-title a { color: inherit; text-decoration: none; }
+  &-pronunciation { display: flex; align-items: center; gap: 8px; color: var(--soft, #b8aacd); margin: 10px 0 16px; font-size: 11px; }
+  &-definition { margin: 0 0 23px; color: var(--body, #c8bcda); font-size: 12px; line-height: 1.85; }
+  &-open { display: flex; gap: 8px; align-items: center; margin-top: auto; font-size: 11px; color: var(--gold, #ffc857); text-decoration: none; }
+  &--compact { padding: 23px; }
+  &--featured {
+    --ink: #20134d;
+    --body: #6c587b;
+    --soft: #7a658d;
+    --muted: #efe7f8;
+    --lavender: #6039d8;
+    --line: #dcd0e9;
+    --gold: #6039d8;
+    height: auto;
+    padding: 25px 28px 22px;
+    background: #fff9ea;
+    border-color: #fff9ea;
+    box-shadow: 0 27px 65px #0c041b65;
+    .spell-card-label { font-size: 9px; }
+    .spell-card-title { font-size: 57px; }
+    .spell-card-definition { font-size: 12px; margin-bottom: 15px; }
+    .spell-card-open { margin-top: 14px; font-weight: 650; }
+    .spell-card-save.is-saved { color: #6039d8; background: #e4d4fa; }
+    .spell-card-kind { font-size: 9px; }
+    &:hover { transform: none; box-shadow: 0 27px 65px #0c041b65; }
+  }
+  &-spelling { padding-top: 16px; border-top: 1px solid var(--line, #dcd0e9); }
+  &-field-label { margin: 0 0 10px; color: var(--soft, #7a658d); font-size: 8px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; }
+  &-letters { display: flex; gap: 6px; flex-wrap: wrap; }
+  &-letter { display: grid; place-items: center; height: 34px; min-width: 34px; padding: 0 8px; border-radius: 7px; border: 1px solid #d6c7e5; color: #6039d8; background: #efe7f8; font-size: 20px; font-family: Georgia, serif; }
+  &-letter.is-space { width: 5px; min-width: 5px; border: 0; padding: 0; background: none; }
+  &-root { display: flex; gap: 9px; align-items: flex-start; padding: 11px 13px; border-radius: 8px; margin: 15px 0 0; background: #eee5f54d; color: #776285; font-size: 9px; line-height: 1.7; }
+  &-root svg { flex: 0 0 auto; color: #6039d8; margin-top: 2px; }
+  &-root strong { display: block; font-size: 9px; font-weight: 650; color: #20134d; }
+  &-ratings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; border-top: 1px solid var(--line, #dcd0e9); padding-top: 15px; margin-top: 15px; }
+  &-rating-label { display: flex; align-items: center; gap: 5px; font-size: 9px; color: #7a658d; }
+  &-rating strong { display: block; margin-top: 7px; font-size: 10px; color: #20134d; font-weight: 650; }
+  &-rating-bars { display: flex; gap: 4px; margin-top: 7px; }
+  &-rating-bars i { height: 3px; flex: 1; border-radius: 10px; background: #e3d7eb; }
+  &-rating-bars i.is-active { background: #6039d8; }
+  &-editorial { margin: 13px 0 0; font-size: 8px; color: #8f7b9c; }
+}
+[data-theme='ivory'] .spell-card:not(.spell-card--featured) {
+  .spell-card-label svg, .spell-card-open { color: #6039d8; }
+  .spell-card-save { color: #6039d8; }
+  .spell-card-save.is-saved { background: #e6d8f7; }
+}
+@media (max-width: 760px) {
+  .spell-card--featured { padding: 23px; }
+  .spell-card--featured .spell-card-title { font-size: 49px; }
+}
+@media (prefers-reduced-motion: reduce) { .spell-card { transition: none; &:hover { transform: none; } } }

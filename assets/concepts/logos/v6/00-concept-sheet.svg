@@ -1,0 +1,252 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1540" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — spellbook and wand concepts v6</title>
+  <desc id="desc">Four concepts: refined selected A, wands parallel to its legs, two upright parallel wands, and S with pale wand tips. All use compact centered mirrored calligraphy within the lavender book.</desc>
+  <rect width="1600" height="1540" fill="#17102B"/>
+  <g font-family="Avenir Next, Arial, sans-serif">
+    <text x="56" y="62" fill="#FFC857" font-size="18" font-weight="700" letter-spacing="3">SPELLBOOK &amp; WAND EXPLORATIONS / V6</text>
+    <text x="56" y="128" fill="#F8F4FF" font-size="54" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+    <text x="56" y="172" fill="#D8C8F2" font-size="23">Centered calligraphy, mirrored wand pairs, and a new S direction.</text>
+    <g id="concept-1">
+    <rect x="56" y="226" width="716" height="592" rx="24" fill="#F8F4FF"/>
+    <text x="88" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">01</text>
+    <text x="88" y="307" fill="#20134D" font-size="32" font-weight="700">Centered Spellbook</text>
+    <g transform="translate(286 337)"><g transform="translate(0 -6)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/></g>
+      </g>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-v6-a-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-v6-a-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+</g>
+    <text x="414" y="631" fill="#20134D" font-size="36" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="88" y="681" fill="#6D5F85" font-size="20">The selected A, with a quieter page treatment.</text>
+    <text x="88" y="712" fill="#6D5F85" font-size="20">Short calligraphic lines sit inside both pages.</text>
+    <circle cx="99" cy="765" r="11" fill="#6039D8"/>
+    <circle cx="129" cy="765" r="11" fill="#FFC857"/>
+    <circle cx="159" cy="765" r="11" fill="#D8C8F2"/>
+    <circle cx="189" cy="765" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <g transform="translate(660 737) scale(.24)"><g transform="translate(0 -6)">
+      <path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#20134D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/></g>
+      </g>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-v6-a-20134D" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-v6-a-20134D)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#F8F4FF" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#F8F4FF" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+</g>
+  </g><g id="concept-2">
+    <rect x="828" y="226" width="716" height="592" rx="24" fill="#F8F4FF"/>
+    <text x="860" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">02</text>
+    <text x="860" y="307" fill="#20134D" font-size="32" font-weight="700">Leg-Parallel Wands</text>
+    <g transform="translate(1058 337)"><g transform="translate(0 -6)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/></g>
+      </g>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-v6-leg-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-v6-leg-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+</g>
+    <text x="1186" y="631" fill="#20134D" font-size="36" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="860" y="681" fill="#6D5F85" font-size="20">Two mirrored wands follow the A's leg angles.</text>
+    <text x="860" y="712" fill="#6D5F85" font-size="20">Ivory end caps keep the magician-wand detail.</text>
+    <circle cx="871" cy="765" r="11" fill="#6039D8"/>
+    <circle cx="901" cy="765" r="11" fill="#FFC857"/>
+    <circle cx="931" cy="765" r="11" fill="#D8C8F2"/>
+    <circle cx="961" cy="765" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <g transform="translate(1432 737) scale(.24)"><g transform="translate(0 -6)">
+      <path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#20134D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/></g>
+      </g>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#20134D" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#F8F4FF" stroke-width="6"/>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#20134D" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#F8F4FF" stroke-width="6"/>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-v6-leg-20134D" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-v6-leg-20134D)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#F8F4FF" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#F8F4FF" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+</g>
+  </g><g id="concept-3">
+    <rect x="56" y="850" width="716" height="592" rx="24" fill="#F8F4FF"/>
+    <text x="88" y="892" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">03</text>
+    <text x="88" y="931" fill="#20134D" font-size="32" font-weight="700">Parallel Wand Pair</text>
+    <g transform="translate(286 961)"><g transform="translate(0 -6)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/></g>
+      </g>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M57 65L57 167" stroke="#6039D8" stroke-width="10"/>
+      <path d="M57 65L57.000 76.000M57 167L57.000 156.000" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M199 65L199 167" stroke="#6039D8" stroke-width="10"/>
+      <path d="M199 65L199.000 76.000M199 167L199.000 156.000" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-v6-parallel-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-v6-parallel-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+</g>
+    <text x="414" y="1255" fill="#20134D" font-size="36" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="88" y="1305" fill="#6D5F85" font-size="20">Two upright parallel wands frame the A.</text>
+    <text x="88" y="1336" fill="#6D5F85" font-size="20">Symmetrical spacing creates a calm silhouette.</text>
+    <circle cx="99" cy="1389" r="11" fill="#6039D8"/>
+    <circle cx="129" cy="1389" r="11" fill="#FFC857"/>
+    <circle cx="159" cy="1389" r="11" fill="#D8C8F2"/>
+    <circle cx="189" cy="1389" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <g transform="translate(660 1361) scale(.24)"><g transform="translate(0 -6)">
+      <path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#20134D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/></g>
+      </g>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M57 65L57 167" stroke="#20134D" stroke-width="10"/>
+      <path d="M57 65L57.000 76.000M57 167L57.000 156.000" stroke="#F8F4FF" stroke-width="6"/>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M199 65L199 167" stroke="#20134D" stroke-width="10"/>
+      <path d="M199 65L199.000 76.000M199 167L199.000 156.000" stroke="#F8F4FF" stroke-width="6"/>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-v6-parallel-20134D" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-v6-parallel-20134D)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#F8F4FF" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#F8F4FF" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+</g>
+  </g><g id="concept-4">
+    <rect x="828" y="850" width="716" height="592" rx="24" fill="#F8F4FF"/>
+    <text x="860" y="892" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">04</text>
+    <text x="860" y="931" fill="#20134D" font-size="32" font-weight="700">S Spellbook</text>
+    <g transform="translate(1058 961)"><g transform="translate(0 -6)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/></g>
+      </g>
+    </g><path fill="none" stroke="#6039D8" stroke-width="26" stroke-linecap="round" d="M159 76C147 58 104 55 94 78C79 108 120 111 139 119C168 132 156 161 127 166C108 170 94 164 86 153"/>
+    <g fill="none" stroke-linecap="round">
+      <path d="M155 70L151 65M91 160L95 165" stroke="#20134D" stroke-width="22"/>
+      <path d="M159 76L155 70M86 153L91 160" stroke="#FFF9EA" stroke-width="16"/>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+    <text x="1186" y="1255" fill="#20134D" font-size="36" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="860" y="1305" fill="#6D5F85" font-size="20">A custom purple S replaces the central A.</text>
+    <text x="860" y="1336" fill="#6D5F85" font-size="20">Matching pale tips, purple bands, and gold spark.</text>
+    <circle cx="871" cy="1389" r="11" fill="#6039D8"/>
+    <circle cx="901" cy="1389" r="11" fill="#FFC857"/>
+    <circle cx="931" cy="1389" r="11" fill="#D8C8F2"/>
+    <circle cx="961" cy="1389" r="11" fill="#FFF9EA" stroke="#DFD8ED"/>
+    <g transform="translate(1432 1361) scale(.24)"><g transform="translate(0 -6)">
+      <path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#20134D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/></g>
+      </g>
+    </g><path fill="none" stroke="#20134D" stroke-width="26" stroke-linecap="round" d="M159 76C147 58 104 55 94 78C79 108 120 111 139 119C168 132 156 161 127 166C108 170 94 164 86 153"/>
+    <g fill="none" stroke-linecap="round">
+      <path d="M155 70L151 65M91 160L95 165" stroke="#20134D" stroke-width="22"/>
+      <path d="M159 76L155 70M86 153L91 160" stroke="#F8F4FF" stroke-width="16"/>
+    </g>
+    <path fill="#20134D" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></g>
+  </g>
+    <text x="56" y="1497" fill="#D8C8F2" font-size="17">Concepts for review · Original purple, lavender, and gold palette · Earlier rounds preserved</text>
+  </g>
+</svg>

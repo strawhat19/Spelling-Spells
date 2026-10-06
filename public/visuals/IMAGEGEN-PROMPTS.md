@@ -1,0 +1,7 @@
+# Midnight Archive — Runtime Background
+
+Method: built-in `image_gen.imagegen`; no CLI/API fallback. Input reference: `assets/concepts/mockups/v1/01-midnight-archive.png`. Opaque output copied into `public/visuals/hero-night-background.png`.
+
+```text
+Use case: background-extraction / precise-object-edit. Image 1 is the approved Midnight Archive WEBSITE MOCKUP reference and edit target. Produce ONLY a full-bleed wide 16:10 atmospheric hero BACKGROUND asset for the actual Spelling Spells app, no interface baked in. Remove every piece of text, every headline, all cards, the header/nav/logo, all controls, search bars, buttons, chips, footer links, and all watermarked letters/book-logo shapes. Preserve and reconstruct the beautiful deep sleeping-purple and indigo starry sky, soft violet nebula glow, flowing mist, subtle gold hairline star-orbit curves on the right, faint fantasy forest and mountains along the low horizon, distant tiny castle silhouette, and the warm candle/quill/stack of dark leather books at the far LOWER RIGHT edge. Book spines must have NO letters/titles. Much of upper and middle area must remain calm low-contrast open space, especially left upper two thirds for actual HTML headline and right central region behind actual spell cards. Preserve original nighttime palette #17102B, #6039D8, #D8C8F2, warm #FFC857 gold glow. No new subjects, no big gold orb, no screen/device frame, no logos, no typography of any kind, no third-party trademark. Background only, professionally polished illustration, soft rich gradients not flat shapes.
+```

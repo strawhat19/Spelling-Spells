@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — Letter Spark refinements v2</title>
+  <desc id="desc">Three refinements of the selected Letter Spark direction: a companion wand, an open spellbook, and a wand integrated into the A. Purple, lavender, and yellow gold.</desc>
+  <rect width="1600" height="1000" fill="#17102B"/>
+  <g font-family="Avenir Next, Arial, sans-serif">
+    <text x="56" y="62" fill="#FFC857" font-size="18" font-weight="700" letter-spacing="3">LETTER SPARK REFINEMENTS / V2</text>
+    <text x="56" y="128" fill="#F8F4FF" font-size="54" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+    <text x="56" y="172" fill="#D8C8F2" font-size="23">Familiar letterforms, golden magic, and a quiet nighttime purple palette.</text>
+    <g id="concept-1">
+    <rect x="56" y="225" width="464" height="690" rx="24" fill="#F8F4FF"/>
+    <text x="84" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">01</text>
+    <text x="84" y="305" fill="#20134D" font-size="30" font-weight="700">Wand Spark</text>
+    <g transform="translate(160 345)"><g transform="translate(0 27) scale(.8)"><path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></g>
+    <path fill="none" stroke="#FFC857" stroke-width="15" stroke-linecap="round" d="M151 220 212 85"/>
+    <path fill="none" stroke="#6039D8" stroke-width="7" d="M162 185 177 192"/>
+    <path fill="#FFC857" d="M219 24Q224.51 47.49 248 53Q224.51 58.51 219 82Q213.49 58.51 190 53Q213.49 47.49 219 24Z"/></g>
+    <text x="288" y="653" fill="#20134D" font-size="31" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="84" y="701" fill="#6D5F85" font-size="17">The original A beside a tilted golden wand.</text>
+    <text x="84" y="728" fill="#6D5F85" font-size="17">A clear spark at its tip keeps the magic direct.</text>
+    <circle cx="95" cy="772" r="11" fill="#6039D8"/>
+    <circle cx="125" cy="772" r="11" fill="#FFC857"/>
+    <circle cx="155" cy="772" r="11" fill="#D8C8F2"/>
+    <text x="84" y="877" fill="#6D5F85" font-size="14" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(389 807) scale(.34)"><g transform="translate(0 27) scale(.8)"><path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></g>
+    <path fill="none" stroke="#20134D" stroke-width="15" stroke-linecap="round" d="M151 220 212 85"/>
+    <path fill="none" stroke="#20134D" stroke-width="7" d="M162 185 177 192"/>
+    <path fill="#20134D" d="M219 24Q224.51 47.49 248 53Q224.51 58.51 219 82Q213.49 58.51 190 53Q213.49 47.49 219 24Z"/></g>
+  </g><g id="concept-2">
+    <rect x="568" y="225" width="464" height="690" rx="24" fill="#F8F4FF"/>
+    <text x="596" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">02</text>
+    <text x="596" y="305" fill="#20134D" font-size="30" font-weight="700">Book Spark</text>
+    <g transform="translate(672 345)"><g transform="translate(40 0) scale(.65)"><path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></g>
+    <path fill="#FFC857" d="M211 35Q215.37 53.63 234 58Q215.37 62.37 211 81Q206.63 62.37 188 58Q206.63 53.63 211 35Z"/>
+    <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 170Q76 148 128 173Q180 148 232 170V226Q180 208 128 233Q76 208 24 226Z"/>
+    <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 174V226"/>
+    <path fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" d="M47 188Q77 182 105 194M151 194Q179 182 209 188"/></g>
+    <text x="800" y="653" fill="#20134D" font-size="31" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="596" y="701" fill="#6D5F85" font-size="17">The original A rises from an open spellbook.</text>
+    <text x="596" y="728" fill="#6D5F85" font-size="17">Lavender pages and a gold fold soften the mark.</text>
+    <circle cx="607" cy="772" r="11" fill="#6039D8"/>
+    <circle cx="637" cy="772" r="11" fill="#FFC857"/>
+    <circle cx="667" cy="772" r="11" fill="#D8C8F2"/>
+    <text x="596" y="877" fill="#6D5F85" font-size="14" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(901 807) scale(.34)"><g transform="translate(40 0) scale(.65)"><path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></g>
+    <path fill="#20134D" d="M211 35Q215.37 53.63 234 58Q215.37 62.37 211 81Q206.63 62.37 188 58Q206.63 53.63 211 35Z"/>
+    <path fill="#F8F4FF" stroke="#20134D" stroke-width="10" stroke-linejoin="round" d="M24 170Q76 148 128 173Q180 148 232 170V226Q180 208 128 233Q76 208 24 226Z"/>
+    <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M128 174V226"/>
+    <path fill="none" stroke="#20134D" stroke-width="6" stroke-linecap="round" d="M47 188Q77 182 105 194M151 194Q179 182 209 188"/></g>
+  </g><g id="concept-3">
+    <rect x="1080" y="225" width="464" height="690" rx="24" fill="#F8F4FF"/>
+    <text x="1108" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">03</text>
+    <text x="1108" y="305" fill="#20134D" font-size="30" font-weight="700">Wand Letter</text>
+    <g transform="translate(1184 345)"><path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+    <path fill="#FFC857" d="M147 62 165 55 228 209Q231 219 221 223L204 224Z"/>
+    <path fill="#6039D8" d="M190 177 211 169 217 184 196 192Z"/>
+    <path fill="#FFC857" d="M137 10Q142.32 32.68 165 38Q142.32 43.32 137 66Q131.68 43.32 109 38Q131.68 32.68 137 10Z"/></g>
+    <text x="1312" y="653" fill="#20134D" font-size="31" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="1108" y="701" fill="#6D5F85" font-size="17">The A's right stroke becomes the golden wand.</text>
+    <text x="1108" y="728" fill="#6D5F85" font-size="17">One unified letterform, crowned by its spark.</text>
+    <circle cx="1119" cy="772" r="11" fill="#6039D8"/>
+    <circle cx="1149" cy="772" r="11" fill="#FFC857"/>
+    <circle cx="1179" cy="772" r="11" fill="#D8C8F2"/>
+    <text x="1108" y="877" fill="#6D5F85" font-size="14" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(1413 807) scale(.34)"><path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+    <path fill="#20134D" d="M147 62 165 55 228 209Q231 219 221 223L204 224Z"/>
+    <path fill="#20134D" d="M190 177 211 169 217 184 196 192Z"/>
+    <path fill="#20134D" d="M137 10Q142.32 32.68 165 38Q142.32 43.32 137 66Q131.68 43.32 109 38Q131.68 32.68 137 10Z"/></g>
+  </g>
+    <text x="56" y="963" fill="#D8C8F2" font-size="17">Concepts for review · Continuing v1 Letter Spark · No identity adopted</text>
+  </g>
+</svg>

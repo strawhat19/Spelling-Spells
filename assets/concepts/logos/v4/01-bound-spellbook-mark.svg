@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — Bound Spellbook mark</title>
+  <desc id="desc">The book rises to meet the angled wand tips. Visible A/B lettering and handwritten spell lines. The purple A retains angled magician-wand caps and a centered gold spark.</desc>
+  <g transform="translate(0 -18)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="#6039D8" font-family="Georgia, Times New Roman, serif" font-size="25" font-weight="700" font-style="italic">
+        <text x="51" y="220" transform="rotate(-5 60 210)">A</text>
+        <text x="150" y="220" transform="rotate(5 159 210)">B</text>
+      </g>
+      <g fill="none" stroke="#6039D8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M82 197Q86 193 90 197T98 197T106 196M82 206Q87 202 93 207T107 205M81 216Q86 212 91 216T106 215"/>
+        <path d="M181 196Q185 200 189 196T199 197T211 196M180 207Q185 202 190 207T201 206T211 207M182 216Q188 213 193 217T210 216"/>
+      </g>
+    </g>
+    <g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="spellbook-a-18-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#spellbook-a-18-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+</svg>

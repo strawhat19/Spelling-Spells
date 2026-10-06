@@ -1,0 +1,7 @@
+.app-shell { display: flex; flex-direction: column; }
+.skip-to-content { top: 10px; left: 16px; z-index: 100; position: fixed; transform: translateY(-150%); color: #20134d; background: #ffc857; padding: 12px 18px; border-radius: 9px; transition: transform .2s ease; }
+.skip-to-content:focus { transform: translateY(0); }
+.scroll-to-top { right: 25px; bottom: 25px; z-index: 40; width: 48px; height: 48px; position: fixed; display: grid; place-items: center; border: 1px solid #ffc85770; color: #20134d; background: #ffc857; border-radius: 14px; box-shadow: 0 8px 30px #00000030; opacity: 0; visibility: hidden; transform: translateY(12px); pointer-events: none; transition: opacity .25s ease, transform .25s ease, visibility .25s ease; }
+.scroll-to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+.scroll-to-top:hover { transform: translateY(-3px); }
+@media (max-width: 580px) { .scroll-to-top { right: 16px; bottom: 18px; width: 43px; height: 43px; } }

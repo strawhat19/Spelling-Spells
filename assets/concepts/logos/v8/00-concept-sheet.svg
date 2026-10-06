@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells v8 — Original Ink</title>
+  <desc id="desc">Two equal-column refinements of the selected Leg-Parallel Wands identity. The left restores the original Book Spark page lines, and the right uses integrated symmetrical spell notes in the same solid-purple rounded stroke. Both restore the curved lavender book.</desc>
+  <defs>
+    <symbol id="spelling-01-original-page-lines" viewBox="0 0 256 256"><g transform="translate(0 -6)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+      </g>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="sheet-book-spark-v8-01-original-page-lines" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#sheet-book-spark-v8-01-original-page-lines)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></symbol><symbol id="spelling-02-integrated-spell-notes" viewBox="0 0 256 256"><g transform="translate(0 -6)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M53 196C60 190 66 190 72 195S82 201 88 196S97 191 103 196"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M53 196C60 190 66 190 72 195S82 201 88 196S97 191 103 196"/></g>
+      </g>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="sheet-book-spark-v8-02-integrated-spell-notes" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#sheet-book-spark-v8-02-integrated-spell-notes)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></symbol>
+  </defs>
+  <rect width="1600" height="1000" fill="#17102B"/>
+  <g font-family="Avenir Next, Arial, sans-serif">
+    <text x="66" y="70" fill="#FFC857" font-size="15" font-weight="700" letter-spacing="3">SPELLING-SPELLS / LOGO CONCEPTS / V8</text>
+    <text x="66" y="128" fill="#FFF9EA" font-size="44" font-weight="700" letter-spacing="-1">Original book. Unified purple ink.</text>
+    <text x="66" y="166" fill="#BFAFDE" font-size="19">Selected leg-parallel wands · Original page strokes · Integrated spell notes</text>
+    <rect x="60" y="211" width="724" height="692" rx="28" fill="#F8F4FF"/>
+    <rect x="816" y="211" width="724" height="692" rx="28" fill="#F8F4FF"/>
+    <text x="100" y="257" fill="#6039D8" font-size="14" font-weight="700" letter-spacing="2">01 / ORIGINAL PAGE LINES</text>
+    <text x="856" y="257" fill="#6039D8" font-size="14" font-weight="700" letter-spacing="2">02 / INTEGRATED SPELL NOTES</text>
+    <use href="#spelling-01-original-page-lines" x="214" y="303" width="416" height="416"/>
+    <use href="#spelling-02-integrated-spell-notes" x="970" y="303" width="416" height="416"/>
+    <text x="422" y="769" fill="#20134D" font-size="40" font-weight="750" text-anchor="middle" letter-spacing="-1">Spelling-Spells</text>
+    <text x="1178" y="769" fill="#20134D" font-size="40" font-weight="750" text-anchor="middle" letter-spacing="-1">Spelling-Spells</text>
+    <text x="422" y="814" fill="#705D8E" font-size="18" text-anchor="middle">Original Book Spark strokes · Rounded ends</text>
+    <text x="1178" y="814" fill="#705D8E" font-size="18" text-anchor="middle">Centered, mirrored notes · Same solid ink</text>
+    <text x="422" y="846" fill="#705D8E" font-size="16" text-anchor="middle">The earlier short page marks are restored exactly</text>
+    <text x="1178" y="846" fill="#705D8E" font-size="16" text-anchor="middle">Six-unit rounded stroke, clean curves and page margins</text>
+    <g transform="translate(64 936)">
+      <circle cx="10" cy="0" r="10" fill="#6039D8"/>
+      <circle cx="43" cy="0" r="10" fill="#FFC857"/>
+      <circle cx="76" cy="0" r="10" fill="#D8C8F2"/>
+      <circle cx="109" cy="0" r="10" fill="#FFF9EA"/>
+      <text x="136" y="6" fill="#BFAFDE" font-size="16">Selected palette retained</text>
+    </g>
+    <text x="1536" y="942" fill="#BFAFDE" font-size="16" text-anchor="end">Editable vectors · Local concept round · October 2026</text>
+  </g>
+</svg>

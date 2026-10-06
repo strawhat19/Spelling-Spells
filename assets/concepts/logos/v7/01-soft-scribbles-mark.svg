@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — Soft Spell Notes mark</title>
+  <desc id="desc">Faint, flowing page notes sit inside a straight-edged spellbook with soft corners. The selected purple A, mirrored wands parallel to its legs, ivory magician tips, and centered gold spark continue the Leg-Parallel Wands design from v6. Transparent surrounding canvas.</desc>
+  <g transform="translate(0 -6)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 174 128 184 232 174V232L128 242 24 232Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 184V235"/>
+      <g fill="none" stroke="#6039D8" stroke-opacity=".28" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M56 193C62 191 65 195 71 193S80 191 85 193S92 195 100 193"/>
+        <path d="M60 206C66 204 69 208 75 206S83 204 88 206S93 208 96 206"/>
+        <path d="M64 219C69 217.5 73 220.5 78 219S86 217.5 92 219"/>
+        <g transform="translate(256 0) scale(-1 1)">
+          <path d="M56 193C62 191 65 195 71 193S80 191 85 193S92 195 100 193"/>
+        <path d="M60 206C66 204 69 208 75 206S83 204 88 206S93 208 96 206"/>
+        <path d="M64 219C69 217.5 73 220.5 78 219S86 217.5 92 219"/>
+        </g>
+      </g>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-v7-soft-scribbles" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-v7-soft-scribbles)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+</svg>

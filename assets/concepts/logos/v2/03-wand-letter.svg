@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 320" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — Wand Letter</title>
+  <desc id="desc">A refinement of Letter Spark, pairing its A with a wand or spellbook. The A's right stroke becomes the golden wand. Transparent canvas and editable Spelling-Spells wordmark.</desc>
+  <g transform="translate(36 32)"><path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+    <path fill="#FFC857" d="M147 62 165 55 228 209Q231 219 221 223L204 224Z"/>
+    <path fill="#6039D8" d="M190 177 211 169 217 184 196 192Z"/>
+    <path fill="#FFC857" d="M137 10Q142.32 32.68 165 38Q142.32 43.32 137 66Q131.68 43.32 109 38Q131.68 32.68 137 10Z"/></g>
+  <text x="338" y="164" fill="#20134D" font-family="Avenir Next, Arial, sans-serif" font-size="64" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+</svg>

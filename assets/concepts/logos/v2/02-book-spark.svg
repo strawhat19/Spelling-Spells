@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 320" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — Book Spark</title>
+  <desc id="desc">A refinement of Letter Spark, pairing its A with a wand or spellbook. The original A rises from an open spellbook. Transparent canvas and editable Spelling-Spells wordmark.</desc>
+  <g transform="translate(36 32)"><g transform="translate(40 0) scale(.65)"><path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></g>
+    <path fill="#FFC857" d="M211 35Q215.37 53.63 234 58Q215.37 62.37 211 81Q206.63 62.37 188 58Q206.63 53.63 211 35Z"/>
+    <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 170Q76 148 128 173Q180 148 232 170V226Q180 208 128 233Q76 208 24 226Z"/>
+    <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 174V226"/>
+    <path fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" d="M47 188Q77 182 105 194M151 194Q179 182 209 188"/></g>
+  <text x="338" y="164" fill="#20134D" font-family="Avenir Next, Arial, sans-serif" font-size="64" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+</svg>

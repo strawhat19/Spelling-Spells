@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells v9 — Combined Page Notes</title>
+  <desc id="desc">Two equal-column concepts combine the original upper page lines with narrower lower spell notes. Both replace the A's old flat tip wedges and dark collars with rounded ivory pill tips. The left uses a closer curved book; the right adds six units of overlap.</desc>
+  <defs><symbol id="spelling-01-combined-page-notes" viewBox="0 0 256 256"><g id="01-combined-page-notes-book" transform="translate(0 -14)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path id="01-combined-page-notes-original-upper-page-lines" d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+        <path id="01-combined-page-notes-left-lower-spell-note" d="M60 216C65 212 70 212 75 216S85 220 90 216"/>
+        <path id="01-combined-page-notes-right-lower-spell-note" d="M196 216C191 212 186 212 181 216S171 220 166 216"/>
+      </g>
+    </g>
+    <g id="01-combined-page-notes-left-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="01-combined-page-notes-right-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="01-combined-page-notes-letter-a" transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <g id="01-combined-page-notes-rounded-a-leg-tips" fill="none" stroke="#FFF9EA" stroke-width="24" stroke-linecap="round">
+        <path d="M76.75 204.333L83.625 187.338"/>
+        <path d="M195.25 204.333L188.375 187.338"/>
+      </g>
+    </g>
+    <path id="01-combined-page-notes-centered-spark" fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></symbol><symbol id="spelling-02-compact-page-notes" viewBox="0 0 256 256"><g id="02-compact-page-notes-book" transform="translate(0 -20)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path id="02-compact-page-notes-original-upper-page-lines" d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+        <path id="02-compact-page-notes-left-lower-spell-note" d="M60 216C65 212 70 212 75 216S85 220 90 216"/>
+        <path id="02-compact-page-notes-right-lower-spell-note" d="M196 216C191 212 186 212 181 216S171 220 166 216"/>
+      </g>
+    </g>
+    <g id="02-compact-page-notes-left-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="02-compact-page-notes-right-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="02-compact-page-notes-letter-a" transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <g id="02-compact-page-notes-rounded-a-leg-tips" fill="none" stroke="#FFF9EA" stroke-width="24" stroke-linecap="round">
+        <path d="M76.75 204.333L83.625 187.338"/>
+        <path d="M195.25 204.333L188.375 187.338"/>
+      </g>
+    </g>
+    <path id="02-compact-page-notes-centered-spark" fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/></symbol></defs>
+  <rect width="1600" height="1000" fill="#17102B"/>
+  <g font-family="Avenir Next, Arial, sans-serif">
+    <text x="66" y="70" fill="#FFC857" font-size="15" font-weight="700" letter-spacing="3">SPELLING-SPELLS / LOGO CONCEPTS / V9</text>
+    <text x="66" y="128" fill="#FFF9EA" font-size="44" font-weight="700" letter-spacing="-1">Two page rows. Rounded wand tips.</text>
+    <text x="66" y="166" fill="#BFAFDE" font-size="19">Original lines above · Narrower spell notes below · Closer curved book</text>
+    <rect x="60" y="211" width="724" height="692" rx="28" fill="#F8F4FF"/>
+    <rect x="816" y="211" width="724" height="692" rx="28" fill="#F8F4FF"/>
+    <text x="100" y="257" fill="#6039D8" font-size="14" font-weight="700" letter-spacing="2">01 / COMBINED PAGE NOTES</text>
+    <text x="856" y="257" fill="#6039D8" font-size="14" font-weight="700" letter-spacing="2">02 / COMPACT PAGE NOTES</text>
+    <use href="#spelling-01-combined-page-notes" x="214" y="303" width="416" height="416"/>
+    <use href="#spelling-02-compact-page-notes" x="970" y="303" width="416" height="416"/>
+    <text x="422" y="769" fill="#20134D" font-size="40" font-weight="750" text-anchor="middle" letter-spacing="-1">Spelling-Spells</text>
+    <text x="1178" y="769" fill="#20134D" font-size="40" font-weight="750" text-anchor="middle" letter-spacing="-1">Spelling-Spells</text>
+    <text x="422" y="814" fill="#705D8E" font-size="18" text-anchor="middle">Closer book · Integrated two-row page detail</text>
+    <text x="1178" y="814" fill="#705D8E" font-size="18" text-anchor="middle">Deeper overlap · Same lettering and page detail</text>
+    <text x="422" y="846" fill="#705D8E" font-size="16" text-anchor="middle">Ivory pill tips match the parallel wands</text>
+    <text x="1178" y="846" fill="#705D8E" font-size="16" text-anchor="middle">Six extra units of book overlap</text>
+    <g transform="translate(64 936)">
+      <circle cx="10" cy="0" r="10" fill="#6039D8"/>
+      <circle cx="43" cy="0" r="10" fill="#FFC857"/>
+      <circle cx="76" cy="0" r="10" fill="#D8C8F2"/>
+      <circle cx="109" cy="0" r="10" fill="#FFF9EA"/>
+      <text x="136" y="6" fill="#BFAFDE" font-size="16">Selected palette retained</text>
+    </g>
+    <text x="1536" y="942" fill="#BFAFDE" font-size="16" text-anchor="end">Editable vectors · Local concept round · October 2026</text>
+  </g>
+</svg>

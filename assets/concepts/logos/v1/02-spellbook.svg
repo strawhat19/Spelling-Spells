@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 320" role="img" aria-labelledby="logo-title logo-description">
+  <title id="logo-title">Spelling-Spells — Spellbook</title>
+  <desc id="logo-description">An open book carries a flowing S across its pages. The exact Spelling-Spells wordmark appears beside the symbol.</desc>
+  <g transform="translate(36 32)"><path fill="#E9E2FF" stroke="#6039D8" stroke-width="12" stroke-linejoin="round" d="M39 64Q83 42 128 66Q173 42 217 64V202Q173 180 128 203Q83 180 39 202Z"/>
+    <path fill="none" stroke="#6039D8" stroke-width="10" d="M128 66V202"/>
+    <path fill="none" stroke="#6039D8" stroke-width="16" stroke-linecap="round" d="M158 93C142 81 110 84 105 103C100 121 127 119 144 127C166 137 151 163 129 164C115 166 103 160 98 154"/>
+    <path fill="#FFC857" d="M201 10Q206 30 225 35Q206 40 201 60Q196 40 177 35Q196 30 201 10Z"/></g>
+  <text x="338" y="164" fill="#20134D" font-family="Avenir Next, Arial, sans-serif" font-size="64" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+</svg>

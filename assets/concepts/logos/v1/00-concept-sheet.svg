@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="logo-title logo-description">
+  <title id="logo-title">Spelling-Spells — first logo concept round</title>
+  <desc id="logo-description">Three distinct logo directions: Letter Spark, Spellbook, and Rune Tiles. Each is shown in color and a small single-ink treatment.</desc>
+  <rect width="1600" height="1000" fill="#F6F3FC"/>
+  <g font-family="Avenir Next, Arial, sans-serif">
+    <text x="56" y="62" fill="#6039D8" font-size="18" font-weight="700" letter-spacing="3">LOGO EXPLORATIONS / V1</text>
+    <text x="56" y="128" fill="#20134D" font-size="54" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+    <text x="56" y="172" fill="#665A7E" font-size="23">Three directions for a spelling tool with a playful sense of discovery.</text>
+    <g id="concept-1">
+    <rect x="56" y="225" width="464" height="690" rx="24" fill="white" stroke="#DED8ED"/>
+    <text x="84" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">01</text>
+    <text x="84" y="305" fill="#20134D" font-size="30" font-weight="700">Letter Spark</text>
+    <g transform="translate(160 345)"><path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+    <path fill="#FFC857" d="M215 26Q220 54 245 60Q220 66 215 93Q209 66 184 60Q209 54 215 26Z"/></g>
+    <text x="288" y="653" fill="#20134D" font-size="31" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="84" y="701" fill="#665A7E" font-size="17">An architectural A with a bright four-point spark.</text>
+    <text x="84" y="728" fill="#665A7E" font-size="17">Direct, confident, and easy to recognize.</text>
+    <circle cx="95" cy="772" r="11" fill="#6039D8"/>
+    <circle cx="125" cy="772" r="11" fill="#FFC857"/>
+    <circle cx="155" cy="772" r="11" fill="#E9E2FF" stroke="#D8CFEC"/>
+    <text x="84" y="877" fill="#665A7E" font-size="14" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(389 807) scale(.34)"><path fill="#20134D" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+    <path fill="#20134D" d="M215 26Q220 54 245 60Q220 66 215 93Q209 66 184 60Q209 54 215 26Z"/></g>
+  </g><g id="concept-2">
+    <rect x="568" y="225" width="464" height="690" rx="24" fill="white" stroke="#DED8ED"/>
+    <text x="596" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">02</text>
+    <text x="596" y="305" fill="#20134D" font-size="30" font-weight="700">Spellbook</text>
+    <g transform="translate(672 345)"><path fill="#E9E2FF" stroke="#6039D8" stroke-width="12" stroke-linejoin="round" d="M39 64Q83 42 128 66Q173 42 217 64V202Q173 180 128 203Q83 180 39 202Z"/>
+    <path fill="none" stroke="#6039D8" stroke-width="10" d="M128 66V202"/>
+    <path fill="none" stroke="#6039D8" stroke-width="16" stroke-linecap="round" d="M158 93C142 81 110 84 105 103C100 121 127 119 144 127C166 137 151 163 129 164C115 166 103 160 98 154"/>
+    <path fill="#FFC857" d="M201 10Q206 30 225 35Q206 40 201 60Q196 40 177 35Q196 30 201 10Z"/></g>
+    <text x="800" y="653" fill="#20134D" font-size="31" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="596" y="701" fill="#665A7E" font-size="17">An open book carries a flowing S across its pages.</text>
+    <text x="596" y="728" fill="#665A7E" font-size="17">Warm, educational, and quietly storybook.</text>
+    <circle cx="607" cy="772" r="11" fill="#6039D8"/>
+    <circle cx="637" cy="772" r="11" fill="#FFC857"/>
+    <circle cx="667" cy="772" r="11" fill="#E9E2FF" stroke="#D8CFEC"/>
+    <text x="596" y="877" fill="#665A7E" font-size="14" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(901 807) scale(.34)"><path fill="white" stroke="#20134D" stroke-width="12" stroke-linejoin="round" d="M39 64Q83 42 128 66Q173 42 217 64V202Q173 180 128 203Q83 180 39 202Z"/>
+    <path fill="none" stroke="#20134D" stroke-width="10" d="M128 66V202"/>
+    <path fill="none" stroke="#20134D" stroke-width="16" stroke-linecap="round" d="M158 93C142 81 110 84 105 103C100 121 127 119 144 127C166 137 151 163 129 164C115 166 103 160 98 154"/>
+    <path fill="#20134D" d="M201 10Q206 30 225 35Q206 40 201 60Q196 40 177 35Q196 30 201 10Z"/></g>
+  </g><g id="concept-3">
+    <rect x="1080" y="225" width="464" height="690" rx="24" fill="white" stroke="#DED8ED"/>
+    <text x="1108" y="268" fill="#6039D8" font-size="17" font-weight="700" letter-spacing="2">03</text>
+    <text x="1108" y="305" fill="#20134D" font-size="30" font-weight="700">Rune Tiles</text>
+    <g transform="translate(1184 345)"><rect x="86" y="29" width="139" height="139" rx="29" fill="#FFC857"/>
+    <path fill="none" stroke="#6039D8" stroke-width="11" stroke-linecap="round" d="M183 54V93M164 73H203"/>
+    <rect x="31" y="86" width="150" height="150" rx="32" fill="#6039D8"/>
+    <path fill="none" stroke="white" stroke-width="17" stroke-linecap="round" d="M132 120C112 108 80 121 80 138C80 156 130 154 132 175C134 195 102 210 80 195"/></g>
+    <text x="1312" y="653" fill="#20134D" font-size="31" font-weight="750" letter-spacing="-1" text-anchor="middle">Spelling-Spells</text>
+    <text x="1108" y="701" fill="#665A7E" font-size="17">Two bold letter tiles form an asymmetric symbol.</text>
+    <text x="1108" y="728" fill="#665A7E" font-size="17">Playful, tactile, and ready for a tool icon.</text>
+    <circle cx="1119" cy="772" r="11" fill="#6039D8"/>
+    <circle cx="1149" cy="772" r="11" fill="#FFC857"/>
+    <circle cx="1179" cy="772" r="11" fill="#E9E2FF" stroke="#D8CFEC"/>
+    <text x="1108" y="877" fill="#665A7E" font-size="14" letter-spacing="1">SINGLE INK</text>
+    <g transform="translate(1413 807) scale(.34)"><rect x="86" y="29" width="139" height="139" rx="29" fill="#20134D"/>
+    <path fill="none" stroke="#20134D" stroke-width="11" stroke-linecap="round" d="M183 54V93M164 73H203"/>
+    <rect x="31" y="86" width="150" height="150" rx="32" fill="#20134D"/>
+    <path fill="none" stroke="white" stroke-width="17" stroke-linecap="round" d="M132 120C112 108 80 121 80 138C80 156 130 154 132 175C134 195 102 210 80 195"/></g>
+  </g>
+    <text x="56" y="963" fill="#665A7E" font-size="17">Concepts for review · Original editable SVG artwork · No identity selected</text>
+  </g>
+</svg>

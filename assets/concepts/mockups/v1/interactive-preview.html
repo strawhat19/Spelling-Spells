@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en" data-theme="night">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Spelling-Spells · Landing Hero Concept</title>
+    <style>
+      :root {
+        --gold: #ffc857;
+        --ink: #fff9ea;
+        --purple: #6039d8;
+        --lavender: #d8c8f2;
+        --page: #17102b;
+        --soft: #b8aacd;
+        --card: #211536;
+        --line: #514065;
+        --muted: #2d2043;
+        --shade: #110a22;
+        --body: #c8bcda;
+        --glow: #6039d840;
+        --header: #17102bc9;
+        --button-ink: #2a1a44;
+        --round: 22px;
+        color-scheme: dark;
+        font-family: 'Avenir Next', 'Segoe UI', Arial, sans-serif;
+      }
+      :root[data-theme='ivory'] {
+        --ink: #20134d;
+        --page: #fff9ea;
+        --soft: #77668f;
+        --card: #fffcf5;
+        --line: #ded2e9;
+        --muted: #f0e7f8;
+        --shade: #e4d3ed;
+        --body: #695778;
+        --glow: #b897ef4d;
+        --header: #fff9ead1;
+        --button-ink: #2a1a44;
+        color-scheme: light;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; color: var(--ink); background: var(--page); transition: color .4s, background .4s; }
+      button, input { font: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      button { color: inherit; cursor: pointer; }
+      button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+      button { border: 0; }
+      a { color: inherit; text-decoration: none; }
+      svg { display: block; }
+      .icon { width: 19px; height: 19px; flex: 0 0 auto; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+      .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+      .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      .site-header { z-index: 20; height: 94px; transition: background .35s, box-shadow .35s; }
+      .site-header.is-sticky { position: sticky; top: 0; }
+      .site-header.is-scrolled { background: var(--header); box-shadow: 0 1px 0 var(--line); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+      .header-content { width: min(1340px, calc(100% - 96px)); height: 100%; margin: auto; display: flex; align-items: center; gap: 32px; }
+      .brand-link { display: flex; align-items: center; gap: 14px; margin-right: auto; }
+      .brand-mark { width: 61px; height: 61px; filter: drop-shadow(0 8px 17px #6039d826); }
+      .brand-name { font-size: 23px; font-weight: 750; letter-spacing: -.7px; }
+      .site-navigation { display: flex; align-items: center; gap: 22px; }
+      .nav-item { display: flex; align-items: center; gap: 7px; padding: 12px 0; color: var(--body); background: transparent; font-size: 13px; font-weight: 650; transition: color .25s; }
+      .nav-item[aria-current='page'], .nav-item:hover { color: var(--gold); }
+      :root[data-theme='ivory'] .nav-item[aria-current='page'], :root[data-theme='ivory'] .nav-item:hover { color: var(--purple); }
+      .theme-toggle { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 100px; padding: 11px 14px; background: transparent; font-size: 12px; }
+      .hero-scene { isolation: isolate; position: relative; overflow: hidden; padding: 49px 0 24px; min-height: 687px; }
+      .hero-glow { z-index: -3; position: absolute; inset: -200px -10% -20%; background: radial-gradient(ellipse at 71% 51%, var(--glow), transparent 51%), radial-gradient(ellipse at 20% 9%, #6039d825, transparent 41%); pointer-events: none; }
+      .hero-orbits { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; color: var(--lavender); opacity: .23; pointer-events: none; }
+      .hero-watermark { position: absolute; z-index: -1; right: -71px; top: 90px; width: 482px; height: 482px; opacity: .035; transform: rotate(13deg); pointer-events: none; }
+      :root[data-theme='ivory'] .hero-watermark { opacity: .09; }
+      .hero-container { width: min(1276px, calc(100% - 128px)); margin: auto; display: grid; grid-template-columns: 1fr 1.03fr; align-items: center; gap: 72px; }
+      .hero-copy { padding: 0 0 23px; position: relative; z-index: 2; }
+      .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 22px; color: var(--lavender); font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: 2.4px; }
+      :root[data-theme='ivory'] .eyebrow { color: var(--purple); }
+      .eyebrow .icon { width: 16px; height: 16px; color: var(--gold); }
+      h1 { max-width: 550px; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(43px, 4.45vw, 66px); line-height: 1.05; font-weight: 500; letter-spacing: -2.7px; }
+      .headline-accent { position: relative; display: inline-block; color: var(--gold); }
+      :root[data-theme='ivory'] .headline-accent { color: var(--purple); }
+      .headline-underline { width: 97%; height: 14px; color: var(--gold); opacity: .75; margin: -2px 0 0 1%; }
+      .hero-description { max-width: 435px; color: var(--body); margin: 20px 0 23px; font-size: 15px; line-height: 1.8; }
+      .feature-row { display: flex; gap: 19px; margin-bottom: 29px; color: var(--lavender); font-size: 11px; font-weight: 650; }
+      :root[data-theme='ivory'] .feature-row { color: var(--purple); }
+      .feature-item { display: inline-flex; align-items: center; gap: 7px; }
+      .feature-item .icon { width: 16px; height: 16px; }
+      .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; }
+      .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 14px; background: var(--gold); color: var(--button-ink); padding: 15px 20px; border-radius: 11px; font-size: 13px; font-weight: 750; box-shadow: 0 5px 20px #ffc85712; transition: transform .25s, box-shadow .25s; }
+      .primary-button:hover { transform: translateY(-2px); box-shadow: 0 8px 28px #ffc8572b; }
+      .secondary-button { display: inline-flex; align-items: center; gap: 8px; padding: 12px 0; background: transparent; color: var(--body); font-size: 12px; }
+      .search-control { display: flex; align-items: center; gap: 11px; max-width: 408px; margin-top: 29px; border-bottom: 1px solid var(--line); padding: 0 0 12px; color: var(--soft); }
+      .search-input { width: 100%; padding: 2px 0; border: 0; outline: 0; color: var(--ink); background: transparent; font-size: 12px; }
+      .search-input::placeholder { color: var(--soft); }
+      .search-key { flex: 0 0 auto; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 4px; border: 1px solid var(--line); font-size: 12px; opacity: .75; }
+      .universe-row { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 16px; }
+      .universe-label { color: var(--soft); font-size: 10px; margin-right: 4px; }
+      .universe-button { border: 1px solid var(--line); background: transparent; border-radius: 99px; padding: 6px 10px; color: var(--body); font-size: 9px; transition: color .25s, background .25s, border-color .25s; }
+      .universe-button[aria-pressed='true'], .universe-button:hover { color: var(--ink); background: var(--muted); border-color: var(--purple); }
+      .spell-stage { position: relative; padding: 12px 25px 38px 12px; }
+      .stage-spark { position: absolute; z-index: 5; right: 1px; top: -13px; width: 33px; height: 33px; fill: var(--gold); }
+      .stage-caption { position: absolute; z-index: 3; left: -12px; top: 3px; color: var(--gold); font-family: Georgia, serif; font-size: 14px; font-style: italic; transform: rotate(-8deg); }
+      .stage-caption svg { width: 73px; margin-left: 80px; height: 31px; stroke: var(--gold); stroke-width: 1.2; fill: none; }
+      .back-page { position: absolute; inset: 22px 11px 26px 25px; border: 1px solid #7d59b95c; border-radius: var(--round); background: var(--muted); transform: rotate(4deg); }
+      .back-page.second { inset: 30px 28px 17px 17px; transform: rotate(-3deg); background: #6039d818; }
+      .spell-card { position: relative; z-index: 2; border: 1px solid #77608688; border-radius: var(--round); background: var(--card); padding: 22px 25px 19px; box-shadow: 0 25px 90px #0b061a45, inset 0 1px 0 #ffffff07; }
+      :root[data-theme='ivory'] .spell-card { box-shadow: 0 25px 75px #44246b15, inset 0 1px 0 #fff; border-color: #d7c2ed; }
+      .card-topline { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+      .record-label { display: flex; align-items: center; gap: 7px; color: var(--soft); font-size: 9px; font-weight: 650; text-transform: uppercase; letter-spacing: 2px; }
+      .record-label .icon { width: 15px; height: 15px; color: var(--gold); }
+      .bookmark-button { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; background: var(--muted); color: var(--lavender); }
+      :root[data-theme='ivory'] .bookmark-button { color: var(--purple); }
+      .bookmark-button[aria-pressed='true'] { color: var(--gold); background: #ffc85723; }
+      .spell-origin { margin: 0 0 7px; display: flex; align-items: center; gap: 8px; color: var(--lavender); font-size: 10px; }
+      :root[data-theme='ivory'] .spell-origin { color: var(--purple); }
+      .source-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+      .spell-title { margin: 0; font-family: Georgia, serif; font-size: 54px; letter-spacing: -1.3px; line-height: 1.05; font-weight: 500; }
+      .pronunciation-row { display: flex; align-items: center; gap: 12px; margin: 8px 0 12px; }
+      .pronunciation-value { color: var(--soft); font-size: 13px; letter-spacing: .5px; }
+      .listen-button { display: inline-flex; align-items: center; gap: 5px; background: transparent; color: var(--gold); font-size: 10px; padding: 4px 0; }
+      :root[data-theme='ivory'] .listen-button { color: var(--purple); }
+      .listen-button .icon { width: 14px; height: 14px; }
+      .spell-definition { margin: 0; min-height: 38px; font-size: 11px; line-height: 1.7; color: var(--body); }
+      .record-tabs { display: flex; gap: 21px; border-bottom: 1px solid var(--line); margin-top: 15px; }
+      .record-tab { position: relative; background: transparent; color: var(--soft); padding: 9px 0 8px; font-size: 10px; }
+      .record-tab[aria-selected='true'] { color: var(--ink); }
+      .record-tab[aria-selected='true']::after { content: ''; position: absolute; height: 2px; left: 0; right: 0; bottom: -1px; border-radius: 9px; background: var(--gold); }
+      .spell-panel { padding-top: 14px; }
+      .field-label { margin: 0 0 8px; color: var(--soft); text-transform: uppercase; font-weight: 650; font-size: 8px; letter-spacing: 1.7px; }
+      .letter-grid { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+      .letter-tile { display: flex; align-items: center; justify-content: center; min-width: 34px; height: 32px; padding: 0 8px; border-radius: 7px; border: 1px solid #9274bd59; background: var(--muted); color: var(--lavender); font-family: Georgia, serif; font-size: 18px; }
+      :root[data-theme='ivory'] .letter-tile { color: var(--purple); background: #f2eaf9; }
+      .letter-space { min-width: 6px; width: 6px; background: transparent !important; border-color: transparent; padding: 0; }
+      .breakdown-row { display: flex; gap: 15px; align-items: flex-start; padding: 9px 11px; border-radius: 8px; background: #6039d815; }
+      .breakdown-symbol { color: var(--gold); font-family: Georgia, serif; font-size: 19px; padding-top: 1px; }
+      .breakdown-copy { margin: 0; color: var(--body); font-size: 10px; line-height: 1.65; }
+      .breakdown-copy strong { color: var(--ink); font-weight: 600; }
+      .rating-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+      .rating-name { margin: 0; display: flex; align-items: center; gap: 5px; color: var(--soft); font-size: 9px; }
+      .rating-name .icon { width: 12px; height: 12px; }
+      .rating-value { display: block; margin-top: 8px; font-size: 11px; font-weight: 650; }
+      .rating-bar { display: flex; gap: 4px; margin-top: 7px; }
+      .rating-segment { height: 3px; flex: 1; background: var(--line); border-radius: 4px; }
+      .rating-segment.is-filled { background: var(--lavender); }
+      .rating-segment.is-filled.gold { background: var(--gold); }
+      :root[data-theme='ivory'] .rating-segment.is-filled { background: var(--purple); }
+      .card-footnote { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--soft); margin-top: 12px; font-size: 8px; }
+      .source-link { display: inline-flex; align-items: center; gap: 4px; text-decoration: underline; text-underline-offset: 3px; }
+      .source-link .icon { width: 10px; height: 10px; }
+      .pronunciation-panel { min-height: 135px; }
+      .syllable-list { display: flex; gap: 9px; margin-bottom: 14px; }
+      .syllable-tile { padding: 9px 15px; color: var(--lavender); background: var(--muted); border-radius: 9px; font-family: Georgia, serif; font-size: 23px; }
+      :root[data-theme='ivory'] .syllable-tile { color: var(--purple); }
+      .pronunciation-notes { margin: 0; color: var(--body); font-size: 10px; line-height: 1.8; }
+      .audio-note { display: flex; gap: 8px; align-items: center; margin-top: 14px; color: var(--soft); font-size: 9px; }
+      .audio-wave { display: flex; height: 22px; align-items: center; gap: 3px; }
+      .audio-wave span { width: 2px; border-radius: 99px; background: var(--gold); }
+      .floating-note { position: absolute; z-index: 4; right: -15px; bottom: 8px; width: 168px; padding: 13px 15px; border-radius: 12px; border: 1px solid #9d78ca5c; background: var(--muted); transform: rotate(3deg); box-shadow: 0 10px 28px #0e06172b; }
+      .floating-note .note-heading { display: flex; gap: 7px; align-items: center; color: var(--gold); font-size: 10px; font-weight: 650; }
+      .floating-note .icon { width: 14px; height: 14px; }
+      .note-description { margin: 5px 0 0; font-size: 9px; line-height: 1.6; color: var(--body); }
+      .hero-bottom { width: min(1276px, calc(100% - 128px)); margin: 6px auto 0; display: flex; align-items: center; gap: 22px; border-top: 1px solid var(--line); padding: 19px 0 4px; }
+      .hero-bottom-label { color: var(--soft); font-size: 9px; text-transform: uppercase; letter-spacing: 1.6px; white-space: nowrap; }
+      .sample-selector-list { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+      .sample-selector { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid transparent; border-radius: 9px; color: var(--body); background: transparent; font-size: 11px; }
+      .sample-selector[aria-pressed='true'] { color: var(--ink); background: var(--muted); border-color: var(--line); }
+      .sample-selector .icon { width: 14px; height: 14px; color: var(--gold); }
+      .sample-type { font-size: 9px; color: var(--soft); }
+      .concept-label { margin-left: auto; color: var(--soft); font-size: 9px; white-space: nowrap; }
+      .preview-status { width: min(1276px, calc(100% - 128px)); min-height: 18px; margin: 2px auto 15px; font-size: 10px; color: var(--gold); }
+      :root[data-theme='ivory'] .preview-status { color: var(--purple); }
+      .preview-footer { width: min(1276px, calc(100% - 128px)); display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 6px auto 0; padding: 15px 0 22px; color: var(--soft); font-size: 9px; }
+      .footer-link { color: var(--body); text-decoration: underline; text-underline-offset: 3px; }
+      .scroll-top { position: fixed; z-index: 30; right: 23px; bottom: 23px; display: inline-flex; align-items: center; gap: 7px; padding: 11px 14px; border: 1px solid var(--line); border-radius: 100px; color: var(--ink); background: var(--card); opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .3s, transform .3s; font-size: 11px; }
+      .scroll-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+      [hidden] { display: none !important; }
+      @media (min-width: 1550px) { .hero-scene { padding-top: 70px; } }
+      @media (max-width: 1200px) {
+        .header-content { width: calc(100% - 52px); gap: 22px; }
+        .site-navigation { gap: 14px; }
+        .brand-name { font-size: 20px; }
+        .nav-item { font-size: 11px; }
+        .hero-container { width: calc(100% - 88px); gap: 38px; }
+        .hero-bottom, .preview-status, .preview-footer { width: calc(100% - 88px); }
+        .hero-description { font-size: 14px; }
+        .spell-card { padding: 21px; }
+        .floating-note { right: -5px; }
+      }
+      @media (max-width: 900px) {
+        .site-header { height: 81px; }
+        .header-content { gap: 15px; }
+        .brand-mark { width: 51px; height: 51px; }
+        .site-navigation .nav-item:not(:first-child) { display: none; }
+        .hero-scene { padding-top: 28px; }
+        .hero-container { width: calc(100% - 64px); gap: 22px; grid-template-columns: 1fr 1fr; }
+        h1 { font-size: 44px; letter-spacing: -1.8px; }
+        .hero-description { font-size: 12px; }
+        .feature-row { gap: 10px; font-size: 9px; }
+        .feature-item { gap: 4px; }
+        .feature-item .icon { width: 12px; height: 12px; }
+        .hero-actions { gap: 10px; }
+        .primary-button { padding: 13px 14px; font-size: 11px; }
+        .secondary-button { font-size: 10px; }
+        .spell-stage { padding-left: 0; padding-right: 13px; }
+        .spell-title { font-size: 45px; }
+        .spell-card { padding: 19px; }
+        .floating-note { width: 145px; bottom: 0; }
+        .hero-bottom { align-items: flex-start; gap: 10px; }
+        .hero-bottom-label { padding-top: 10px; }
+        .concept-label { display: none; }
+        .sample-selector { padding: 8px; font-size: 10px; }
+      }
+      @media (max-width: 700px) {
+        .header-content { width: calc(100% - 36px); }
+        .site-header { height: 76px; }
+        .brand-link { gap: 9px; }
+        .brand-mark { width: 46px; height: 46px; }
+        .brand-name { font-size: 18px; }
+        .site-navigation { display: none; }
+        .theme-toggle { padding: 9px; }
+        .theme-toggle span { display: none; }
+        .hero-container { width: calc(100% - 48px); grid-template-columns: 1fr; gap: 40px; }
+        .hero-copy { padding-bottom: 0; }
+        .eyebrow { margin-bottom: 17px; font-size: 9px; letter-spacing: 1.8px; }
+        h1 { font-size: clamp(43px, 10.7vw, 64px); max-width: 520px; }
+        .hero-description { max-width: 470px; font-size: 14px; margin-top: 16px; }
+        .feature-row { font-size: 11px; gap: 20px; margin-bottom: 22px; }
+        .feature-item .icon { width: 15px; height: 15px; }
+        .primary-button { font-size: 13px; padding: 14px 19px; }
+        .secondary-button { font-size: 12px; }
+        .search-control { max-width: none; margin-top: 23px; }
+        .universe-row { margin-top: 14px; }
+        .spell-stage { width: min(450px, 100%); margin: auto; padding: 8px 12px 38px 0; }
+        .spell-card { padding: 23px; }
+        .stage-caption { left: 0; top: -11px; }
+        .spell-title { font-size: 53px; }
+        .floating-note { right: 0; width: 158px; }
+        .hero-watermark { width: 330px; top: 60px; right: -100px; }
+        .hero-bottom, .preview-status, .preview-footer { width: calc(100% - 48px); }
+        .hero-bottom { display: block; margin-top: 25px; }
+        .hero-bottom-label { display: block; margin-bottom: 12px; }
+        .sample-selector-list { gap: 3px; }
+        .sample-selector { padding: 9px 8px; }
+        .sample-type { display: none; }
+        .preview-footer { line-height: 1.8; align-items: flex-end; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation: none !important; transition: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <svg id="icon-sprite" class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <symbol id="icon-book" viewBox="0 0 24 24"><path d="M3 5c4-1 7 0 9 2 2-2 5-3 9-2v15c-4-1-7 0-9 2-2-2-5-3-9-2Z" /><path d="M12 7v15M6 9l3 1M15 10l3-1M6 13l3 1M15 14l3-1" /></symbol>
+      <symbol id="icon-spark" viewBox="0 0 24 24"><path d="m12 2 2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6Z" /></symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></symbol>
+      <symbol id="icon-world" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><path d="M3 12h18M5 6h14M5 18h14" /></symbol>
+      <symbol id="icon-audio" viewBox="0 0 24 24"><path d="m4 9 4 0 5-4v14l-5-4H4ZM16 8c2 2 2 6 0 8M19 5c4 4 4 10 0 14" /></symbol>
+      <symbol id="icon-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4Z" /></symbol>
+      <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5" /></symbol>
+      <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6" /></symbol>
+      <symbol id="icon-up" viewBox="0 0 24 24"><path d="M12 20V4m-6 6 6-6 6 6" /></symbol>
+      <symbol id="icon-letters" viewBox="0 0 24 24"><path d="m3 20 6-16 6 16M5 15h8M18 7h3l-3 5h3M17 17h5" /></symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z" /><path d="M12 8v5m0 3h.01" /></symbol>
+      <symbol id="icon-wand" viewBox="0 0 24 24"><path d="m4 20 13-13 3 3L7 23ZM13 11l3 3M4 3v4M2 5h4M20 1v4m-2-2h4" /></symbol>
+      <symbol id="icon-link" viewBox="0 0 24 24"><path d="M14 3h7v7M10 14 21 3M9 4H4v16h16v-5" /></symbol>
+    </svg>
+
+    <header id="site-header" class="site-header is-sticky">
+      <div id="header-content" class="header-content">
+        <a id="brand-link" class="brand-link" href="./interactive-preview.html" aria-label="Spelling-Spells landing concept">
+          <img id="brand-mark" class="brand-mark" src="./selected-logo-mark.svg" alt="" />
+          <span id="brand-name" class="brand-name">Spelling-Spells</span>
+        </a>
+        <nav id="site-navigation" class="site-navigation" aria-label="Concept Navigation">
+          <button id="navigation-browse" class="nav-item" type="button" data-view="browse" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#icon-book" /></svg>Browse spells</button>
+          <button id="navigation-worlds" class="nav-item" type="button" data-view="worlds"><svg class="icon" aria-hidden="true"><use href="#icon-world" /></svg>Worlds</button>
+          <button id="navigation-pronunciation" class="nav-item" type="button" data-view="pronunciation"><svg class="icon" aria-hidden="true"><use href="#icon-audio" /></svg>Pronunciation</button>
+          <button id="navigation-bookmarks" class="nav-item" type="button" data-view="bookmarks"><svg class="icon" aria-hidden="true"><use href="#icon-bookmark" /></svg>Saved</button>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to ivory theme"><svg class="icon" aria-hidden="true"><use href="#icon-sun" /></svg><span id="theme-label">Ivory mode</span></button>
+      </div>
+    </header>
+
+    <main id="landing-main" class="landing-main">
+      <section id="hero-scene" class="hero-scene" aria-labelledby="hero-headline">
+        <div id="hero-glow" class="hero-glow" aria-hidden="true"></div>
+        <svg id="hero-orbits" class="hero-orbits" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs><linearGradient id="orbit-gradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#D8C8F2" stop-opacity="0" /><stop offset=".4" stop-color="#D8C8F2" /><stop offset="1" stop-color="#FFC857" stop-opacity=".2" /></linearGradient></defs>
+          <g fill="none" stroke="url(#orbit-gradient)" stroke-width=".75"><ellipse cx="1100" cy="280" rx="500" ry="238" transform="rotate(-25 1100 280)" /><ellipse cx="1100" cy="280" rx="540" ry="266" transform="rotate(-25 1100 280)" /><path d="M23 598Q430 722 725 531T1440 388" /></g>
+          <g fill="#D8C8F2"><circle cx="73" cy="117" r="1.8" /><circle cx="550" cy="72" r="1.2" /><circle cx="1151" cy="49" r="1.5" /><circle cx="1301" cy="385" r="2" /><circle cx="1410" cy="205" r="1.4" /><circle cx="686" cy="512" r="1.5" /><circle cx="264" cy="610" r="1.4" /></g>
+          <g fill="#FFC857"><path d="m1323 137 2.5 8 8 2.5-8 2.5-2.5 8-2.5-8-8-2.5 8-2.5Z" /><path d="m590 423 1.5 5 5 1.5-5 1.5-1.5 5-1.5-5-5-1.5 5-1.5Z" /><circle cx="111" cy="477" r="2" /></g>
+        </svg>
+        <img id="hero-watermark" class="hero-watermark" src="./selected-logo-mark.svg" alt="" aria-hidden="true" />
+        <div id="hero-container" class="hero-container">
+          <div id="hero-copy" class="hero-copy">
+            <p id="hero-eyebrow" class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#icon-spark" /></svg>A field guide to fictional magic</p>
+            <h1 id="hero-headline">Every spell<br />has a story.<br /><span id="headline-accent" class="headline-accent">Learn its words.<svg id="headline-underline" class="headline-underline" viewBox="0 0 500 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11Q195 0 491 9M50 15Q250 8 456 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg></span></h1>
+            <p id="hero-description" class="hero-description">Famous incantations, invented languages, and little words with big stories. Discover how to spell them, say them, and understand the magic behind them.</p>
+            <div id="feature-row" class="feature-row" aria-label="Collection Features">
+              <span id="feature-spell" class="feature-item"><svg class="icon" aria-hidden="true"><use href="#icon-letters" /></svg>Spell it</span>
+              <span id="feature-say" class="feature-item"><svg class="icon" aria-hidden="true"><use href="#icon-audio" /></svg>Say it</span>
+              <span id="feature-understand" class="feature-item"><svg class="icon" aria-hidden="true"><use href="#icon-book" /></svg>Understand it</span>
+            </div>
+            <div id="hero-actions" class="hero-actions">
+              <button id="explore-button" class="primary-button" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-book" /></svg>Explore the spellbook<svg class="icon" aria-hidden="true"><use href="#icon-arrow" /></svg></button>
+              <button id="surprise-button" class="secondary-button" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-spark" /></svg>Find a spell for me</button>
+            </div>
+            <label id="search-control" class="search-control" for="search-input"><svg class="icon" aria-hidden="true"><use href="#icon-search" /></svg><input id="search-input" class="search-input" type="search" autocomplete="off" placeholder="Search a spell, meaning, or world…" /><span id="search-key" class="search-key" aria-hidden="true">/</span></label>
+            <div id="universe-row" class="universe-row" aria-label="Filter Sample Worlds">
+              <span id="universe-label" class="universe-label">Wander into</span>
+              <button id="world-all" class="universe-button" type="button" data-world="all" aria-pressed="true">All worlds</button>
+              <button id="world-wizarding" class="universe-button" type="button" data-world="wizarding" aria-pressed="false">Wizarding World</button>
+              <button id="world-skyrim" class="universe-button" type="button" data-world="skyrim" aria-pressed="false">Skyrim</button>
+              <button id="world-alagaesia" class="universe-button" type="button" data-world="alagaesia" aria-pressed="false">Alagaësia</button>
+            </div>
+          </div>
+
+          <div id="spell-stage" class="spell-stage">
+            <span id="stage-caption" class="stage-caption" aria-hidden="true">a little light to begin<svg viewBox="0 0 80 34"><path d="M2 1Q39 3 62 29M54 27l9 3-2-9" /></svg></span>
+            <svg id="stage-spark" class="stage-spark" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 1Q22 14 35 18Q22 22 18 35Q14 22 1 18Q14 14 18 1Z" /></svg>
+            <div id="back-page-first" class="back-page" aria-hidden="true"></div>
+            <div id="back-page-second" class="back-page second" aria-hidden="true"></div>
+            <article id="spell-card" class="spell-card" aria-labelledby="spell-title">
+              <div id="card-topline" class="card-topline">
+                <span id="record-label" class="record-label"><svg class="icon" aria-hidden="true"><use href="#icon-book" /></svg>Inside the spellbook</span>
+                <button id="bookmark-button" class="bookmark-button" type="button" aria-label="Save Lumos in this concept preview" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#icon-bookmark" /></svg></button>
+              </div>
+              <p id="spell-origin" class="spell-origin"><span class="source-dot" aria-hidden="true"></span><span id="spell-world">Harry Potter</span><span aria-hidden="true">·</span><span id="spell-kind">Wand-Lighting Charm</span></p>
+              <h2 id="spell-title" class="spell-title">Lumos</h2>
+              <div id="pronunciation-row" class="pronunciation-row"><span id="pronunciation-value" class="pronunciation-value">LOO-mos</span><button id="listen-button" class="listen-button" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-audio" /></svg>Say it</button></div>
+              <p id="spell-definition" class="spell-definition">A charm that brings light to the tip of a wand. A small word for finding your way in the dark.</p>
+              <div id="record-tabs" class="record-tabs" role="tablist" aria-label="Spell Learning View">
+                <button id="tab-spelling" class="record-tab" type="button" role="tab" aria-selected="true" aria-controls="panel-spelling" tabindex="0">How to spell it</button>
+                <button id="tab-pronunciation" class="record-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-pronunciation" tabindex="-1">Pronunciation</button>
+              </div>
+              <div id="panel-spelling" class="spell-panel" role="tabpanel" aria-labelledby="tab-spelling">
+                <p id="spelling-field-label" class="field-label">Every letter matters</p>
+                <div id="letter-grid" class="letter-grid" aria-label="Lumos spelled L U M O S"></div>
+                <div id="breakdown-row" class="breakdown-row"><span id="breakdown-symbol" class="breakdown-symbol" aria-hidden="true">✦</span><p id="breakdown-copy" class="breakdown-copy"><strong>Suggested etymology.</strong><br />Related to Latin <em>lumen</em>, meaning light.</p></div>
+              </div>
+              <div id="panel-pronunciation" class="spell-panel pronunciation-panel" role="tabpanel" aria-labelledby="tab-pronunciation" hidden>
+                <p id="pronunciation-field-label" class="field-label">Break it into sounds</p>
+                <div id="syllable-list" class="syllable-list"></div>
+                <p id="pronunciation-notes" class="pronunciation-notes">A readable sound guide, with stress on the first syllable.</p>
+                <div id="audio-note" class="audio-note"><span id="audio-wave" class="audio-wave" aria-hidden="true"><span style="height:7px"></span><span style="height:15px"></span><span style="height:22px"></span><span style="height:12px"></span><span style="height:18px"></span><span style="height:8px"></span><span style="height:14px"></span></span>Pronunciation UI concept · no audio recording</div>
+              </div>
+              <div id="rating-row" class="rating-row" aria-label="Illustrative Editorial Ratings">
+                <div id="rating-danger" class="rating-item"><p id="rating-danger-name" class="rating-name"><svg class="icon" aria-hidden="true"><use href="#icon-shield" /></svg>Danger</p><span id="rating-danger-value" class="rating-value">Low</span><div id="rating-danger-bar" class="rating-bar" aria-hidden="true"></div></div>
+                <div id="rating-utility" class="rating-item"><p id="rating-utility-name" class="rating-name"><svg class="icon" aria-hidden="true"><use href="#icon-spark" /></svg>Utility</p><span id="rating-utility-value" class="rating-value">High</span><div id="rating-utility-bar" class="rating-bar" aria-hidden="true"></div></div>
+                <div id="rating-skill" class="rating-item"><p id="rating-skill-name" class="rating-name"><svg class="icon" aria-hidden="true"><use href="#icon-wand" /></svg>Skill</p><span id="rating-skill-value" class="rating-value">Beginner</span><div id="rating-skill-bar" class="rating-bar" aria-hidden="true"></div></div>
+              </div>
+              <div id="card-footnote" class="card-footnote"><span id="rating-footnote">Fictional effect · ratings are editorial</span><a id="spell-source" class="source-link" href="https://www.harrypotter.com/fact-file/spells/the-wand-lighting-charm" target="_blank" rel="noreferrer">Source<svg class="icon" aria-hidden="true"><use href="#icon-link" /></svg></a></div>
+            </article>
+            <aside id="floating-note" class="floating-note"><span id="note-heading" class="note-heading"><svg class="icon" aria-hidden="true"><use href="#icon-spark" /></svg>More than a magic word</span><p id="note-description" class="note-description">Its meaning, its language, its story — all on one page.</p></aside>
+          </div>
+        </div>
+        <div id="hero-bottom" class="hero-bottom">
+          <span id="hero-bottom-label" class="hero-bottom-label">Open a sample page</span>
+          <div id="sample-selector-list" class="sample-selector-list" aria-label="Sample Spell Records"></div>
+          <span id="concept-label" class="concept-label">Hero concept · Night / Ivory</span>
+        </div>
+      </section>
+      <p id="preview-status" class="preview-status" role="status" aria-live="polite"></p>
+    </main>
+
+    <footer id="preview-footer" class="preview-footer"><span id="footer-copyright">© <span id="current-year">2026</span> Spelling-Spells · Editable design concept</span><a id="footer-piratechs" class="footer-link" href="https://piratechs.com/" target="_blank" rel="noreferrer">Made by Piratechs</a></footer>
+    <button id="scroll-top" class="scroll-top" type="button" aria-label="Scroll to top"><svg class="icon" aria-hidden="true"><use href="#icon-up" /></svg>Top</button>
+
+    <script>
+      const sticky = true;
+      const spells = [
+        {
+          id: `lumos`,
+          name: `Lumos`,
+          kind: `Wand-Lighting Charm`,
+          world: `wizarding`,
+          worldName: `Harry Potter`,
+          pronunciation: `LOO-mos`,
+          syllables: [`LU`, `MOS`],
+          rootHeading: `Suggested etymology.`,
+          source: `https://www.harrypotter.com/fact-file/spells/the-wand-lighting-charm`,
+          notes: `LOO-mos is an editorial sound aid, with stress on the first syllable. Nox extinguishes the wand's light.`,
+          definition: `A charm that lights the tip of a wand. A small word for finding your way in the dark.`,
+          roots: `Related to Latin <em>lumen</em>, meaning light. <a class="source-link" href="https://www.harrypotter.com/features/the-etymology-of-harry-potter-spells" target="_blank" rel="noreferrer">Etymology note</a>`,
+          ratings: { danger: [`Low`, 1], utility: [`High`, 5], skill: [`Beginner`, 1] },
+        },
+        {
+          id: `fus-ro-dah`,
+          name: `Fus Ro Dah`,
+          kind: `Dragon shout`,
+          world: `skyrim`,
+          worldName: `The Elder Scrolls V: Skyrim`,
+          pronunciation: `Fus · Ro · Dah`,
+          syllables: [`FUS`, `RO`, `DAH`],
+          rootHeading: `A language made for a world.`,
+          source: `https://elderscrolls.bethesda.net/en-AU/news/1rL4bCScN6RYXaXQb4ownj/how-bethesda-game-studios-made-skyrims-dragon-language`,
+          notes: `Three single-syllable words. Use the game's audio as the pronunciation reference; this concept does not include recordings.`,
+          definition: `Unrelenting Force: a dragon shout that pushes objects and enemies away with a blast of force.`,
+          roots: `Three words from Skyrim's fictional dragon language. The shout is called <strong>Unrelenting Force</strong>.`,
+          ratings: { danger: [`High`, 4], utility: [`High`, 4], skill: [`Advanced`, 4] },
+        },
+        {
+          id: `brisingr`,
+          name: `Brisingr`,
+          kind: `Ancient Language`,
+          world: `alagaesia`,
+          worldName: `The Inheritance Cycle`,
+          pronunciation: `BRISS-ing-gur`,
+          syllables: [`BRISS`, `ing`, `gur`],
+          rootHeading: `Fire in the Ancient Language.`,
+          source: `https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/`,
+          notes: `BRISS-ing-gur follows Christopher Paolini's pronunciation guide. Stress falls on the first syllable.`,
+          definition: `The Ancient Language word for fire in Eragon's world, used as a magical command.`,
+          roots: `Means <strong>fire</strong> in the fictional Ancient Language, with Old Norse inspiration. <a class="source-link" href="https://www.paolini.net/faq/" target="_blank" rel="noreferrer">Author's language note</a>`,
+          ratings: { danger: [`High`, 4], utility: [`High`, 4], skill: [`Intermediate`, 3] },
+        },
+      ];
+      const savedSpells = new Set();
+      const reducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`);
+      const byId = (id) => document.getElementById(id);
+      let selectedId = `lumos`;
+      let activeWorld = `all`;
+      let activeView = `browse`;
+      const setStatus = (message) => { byId(`preview-status`).textContent = message; };
+      const setLearningView = (view, focus = false) => {
+        [`spelling`, `pronunciation`].forEach((name) => {
+          const active = name === view;
+          const tab = byId(`tab-${name}`);
+          tab.setAttribute(`aria-selected`, String(active));
+          tab.tabIndex = active ? 0 : -1;
+          byId(`panel-${name}`).hidden = !active;
+          if (active && focus) tab.focus();
+        });
+      };
+      const updateBookmark = () => {
+        const saved = savedSpells.has(selectedId);
+        const spell = spells.find((item) => item.id === selectedId);
+        byId(`bookmark-button`).setAttribute(`aria-pressed`, String(saved));
+        byId(`bookmark-button`).setAttribute(`aria-label`, `${saved ? `Unsave` : `Save`} ${spell?.name} in this concept preview`);
+      };
+      const selectSpell = (id) => {
+        const spell = spells.find((item) => item.id === id);
+        if (!spell) return;
+        selectedId = id;
+        byId(`spell-title`).textContent = spell.name;
+        byId(`spell-kind`).textContent = spell.kind;
+        byId(`spell-world`).textContent = spell.worldName;
+        byId(`spell-source`).href = spell.source;
+        byId(`spell-definition`).textContent = spell.definition;
+        byId(`pronunciation-value`).textContent = spell.pronunciation;
+        byId(`pronunciation-notes`).textContent = spell.notes;
+        byId(`breakdown-copy`).innerHTML = `<strong>${spell.rootHeading}</strong><br />${spell.roots}`;
+        byId(`stage-caption`).firstChild.textContent = id === `lumos` ? `a little light to begin` : id === `fus-ro-dah` ? `three words. a world of force.` : `a word with a spark`;
+        const tiles = [...spell.name.toUpperCase()].map((letter, index) => {
+          const tile = document.createElement(`span`);
+          tile.id = `letter-${id}-${index}`;
+          tile.className = letter === ` ` ? `letter-tile letter-space` : `letter-tile`;
+          tile.textContent = letter;
+          tile.setAttribute(`aria-hidden`, `true`);
+          return tile;
+        });
+        byId(`letter-grid`).replaceChildren(...tiles);
+        byId(`letter-grid`).setAttribute(`aria-label`, `${spell.name} spelled ${[...spell.name.toUpperCase()].join(` `)}`);
+        byId(`syllable-list`).replaceChildren(...spell.syllables.map((syllable, index) => {
+          const tile = document.createElement(`span`);
+          tile.id = `syllable-${id}-${index}`;
+          tile.className = `syllable-tile`;
+          tile.textContent = syllable;
+          return tile;
+        }));
+        Object.entries(spell.ratings).forEach(([key, value]) => {
+          byId(`rating-${key}-value`).textContent = value[0];
+          byId(`rating-${key}-bar`).replaceChildren(...Array.from({ length: 5 }, (_, index) => {
+            const segment = document.createElement(`span`);
+            segment.id = `rating-${id}-${key}-${index}`;
+            segment.className = `rating-segment${index < value[1] ? ` is-filled${key === `utility` ? ` gold` : ``}` : ``}`;
+            return segment;
+          }));
+        });
+        document.querySelectorAll(`.sample-selector`).forEach((button) => button.setAttribute(`aria-pressed`, String(button.dataset.spell === id)));
+        updateBookmark();
+      };
+      const renderSamples = () => {
+        const query = byId(`search-input`).value.trim().toLowerCase();
+        const entries = spells.filter((spell) => {
+          const matchesWorld = activeWorld === `all` || spell.world === activeWorld;
+          const matchesQuery = `${spell.name} ${spell.kind} ${spell.worldName} ${spell.definition}`.toLowerCase().includes(query);
+          const matchesSaved = activeView !== `bookmarks` || savedSpells.has(spell.id);
+          return matchesWorld && matchesQuery && matchesSaved;
+        });
+        byId(`sample-selector-list`).replaceChildren(...entries.map((spell) => {
+          const button = document.createElement(`button`);
+          button.id = `sample-${spell.id}`;
+          button.className = `sample-selector`;
+          button.type = `button`;
+          button.dataset.spell = spell.id;
+          button.setAttribute(`aria-pressed`, String(spell.id === selectedId));
+          button.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#icon-${spell.id === `lumos` ? `spark` : spell.id === `fus-ro-dah` ? `world` : `wand`}" /></svg><span>${spell.name}</span><span class="sample-type">${spell.kind}</span>`;
+          button.addEventListener(`click`, () => { selectSpell(spell.id); setStatus(`${spell.name} · sample record opened`); });
+          return button;
+        }));
+        if (!entries.length) {
+          setStatus(activeView === `bookmarks` ? `No saved sample spells yet. Save a page with the bookmark icon.` : `No match in these three sample records. Try Lumos, Fus Ro Dah, or Brisingr.`);
+        } else if (query || activeWorld !== `all` || activeView === `bookmarks`) {
+          if (!entries.some((spell) => spell.id === selectedId)) selectSpell(entries[0].id);
+          setStatus(`${entries.length} sample ${entries.length === 1 ? `record` : `records`} in this view`);
+        } else setStatus(``);
+      };
+      document.querySelectorAll(`.universe-button`).forEach((button) => button.addEventListener(`click`, () => {
+        activeWorld = button.dataset.world;
+        document.querySelectorAll(`.universe-button`).forEach((item) => item.setAttribute(`aria-pressed`, String(item === button)));
+        renderSamples();
+      }));
+      document.querySelectorAll(`.nav-item`).forEach((button) => button.addEventListener(`click`, () => {
+        activeView = button.dataset.view;
+        document.querySelectorAll(`.nav-item`).forEach((item) => item === button ? item.setAttribute(`aria-current`, `page`) : item.removeAttribute(`aria-current`));
+        if (activeView === `pronunciation`) setLearningView(`pronunciation`);
+        if (activeView === `worlds`) {
+          byId(`world-wizarding`).focus();
+          setStatus(`Choose a world below the search to explore the sample pages.`);
+        } else renderSamples();
+      }));
+      byId(`theme-toggle`).addEventListener(`click`, () => {
+        const ivory = document.documentElement.dataset.theme !== `ivory`;
+        document.documentElement.dataset.theme = ivory ? `ivory` : `night`;
+        byId(`theme-label`).textContent = ivory ? `Night mode` : `Ivory mode`;
+        byId(`theme-toggle`).setAttribute(`aria-label`, `Switch to ${ivory ? `night` : `ivory`} theme`);
+      });
+      byId(`search-input`).addEventListener(`input`, renderSamples);
+      byId(`tab-spelling`).addEventListener(`click`, () => setLearningView(`spelling`));
+      byId(`tab-pronunciation`).addEventListener(`click`, () => setLearningView(`pronunciation`));
+      byId(`listen-button`).addEventListener(`click`, () => { setLearningView(`pronunciation`); setStatus(`Sound guide opened · this concept has no recorded audio`); });
+      byId(`record-tabs`).addEventListener(`keydown`, (event) => {
+        if (event.key === `ArrowRight` || event.key === `ArrowLeft`) {
+          event.preventDefault();
+          setLearningView(byId(`tab-spelling`).getAttribute(`aria-selected`) === `true` ? `pronunciation` : `spelling`, true);
+        }
+      });
+      byId(`bookmark-button`).addEventListener(`click`, () => {
+        if (savedSpells.has(selectedId)) savedSpells.delete(selectedId); else savedSpells.add(selectedId);
+        updateBookmark();
+        const name = spells.find((spell) => spell.id === selectedId)?.name;
+        if (activeView === `bookmarks`) renderSamples();
+        else setStatus(`${name} ${savedSpells.has(selectedId) ? `saved` : `removed`} in this preview session`);
+      });
+      byId(`explore-button`).addEventListener(`click`, () => { byId(`search-input`).focus(); setStatus(`Explore three sample spell records by name, meaning, or world.`); });
+      byId(`surprise-button`).addEventListener(`click`, () => {
+        const index = spells.findIndex((spell) => spell.id === selectedId);
+        selectSpell(spells[(index + 1) % spells.length].id);
+        setStatus(`A new sample page has been opened for you.`);
+      });
+      document.addEventListener(`keydown`, (event) => {
+        const editing = event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement;
+        if (event.key === `/` && !editing) { event.preventDefault(); byId(`search-input`).focus(); }
+      });
+      byId(`site-header`).classList.toggle(`is-sticky`, sticky);
+      const updateScroll = () => {
+        byId(`site-header`).classList.toggle(`is-scrolled`, window.scrollY > 18);
+        byId(`scroll-top`).classList.toggle(`is-visible`, window.scrollY > byId(`hero-scene`).offsetHeight * .55);
+      };
+      window.addEventListener(`scroll`, updateScroll, { passive: true });
+      byId(`scroll-top`).addEventListener(`click`, () => window.scrollTo({ top: 0, behavior: reducedMotion.matches ? `auto` : `smooth` }));
+      byId(`current-year`).textContent = new Date().getFullYear();
+      renderSamples();
+      selectSpell(selectedId);
+    </script>
+  </body>
+</html>

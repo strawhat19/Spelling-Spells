@@ -1,0 +1,28 @@
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+  root: { flex: 1 },
+  content: { flexGrow: 1 },
+  iconButton: { padding: 10, borderRadius: 99 },
+  header: { zIndex: 10, borderBottomWidth: 1 },
+  headerRow: { gap: 8, padding: 12, flexDirection: `row`, alignItems: `center` },
+  brand: { flex: 1, gap: 8, flexDirection: `row`, alignItems: `center` },
+  brandName: { fontSize: 19, fontWeight: `700`, letterSpacing: -.6 },
+  nav: { gap: 10, padding: 14, flexDirection: `row`, flexWrap: `wrap` },
+  navLink: { gap: 6, padding: 9, flexDirection: `row`, alignItems: `center` },
+  navText: { fontSize: 13, fontWeight: `600` },
+  notice: { gap: 12, margin: 18, padding: 16, borderRadius: 14, flexDirection: `row`, alignItems: `center` },
+  noticeText: { flex: 1, fontSize: 13, lineHeight: 21 },
+  footer: { gap: 20, padding: 24, marginTop: 48, borderTopWidth: 1 },
+  footerBrand: { gap: 9, flexDirection: `row`, alignItems: `center` },
+  footerTitle: { fontSize: 20, fontWeight: `700` },
+  footerCopy: { maxWidth: 380, fontSize: 13, lineHeight: 22 },
+  footerLinks: { gap: 14, flexDirection: `row`, flexWrap: `wrap` },
+  footerLink: { paddingVertical: 6, fontSize: 13 },
+  footerBottom: { gap: 12, alignItems: `center`, paddingTop: 10 },
+  copyright: { fontSize: 12, textAlign: `center`, lineHeight: 20 },
+  partner: { fontSize: 13, fontWeight: `700` },
+  topButton: { right: 18, position: `absolute`, borderWidth: 1, borderRadius: 99 },
+  topButtonContent: { gap: 6, padding: 13, flexDirection: `row`, alignItems: `center` },
+  topButtonText: { fontSize: 12, fontWeight: `600` },
+});

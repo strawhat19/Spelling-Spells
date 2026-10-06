@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 320" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — Fitted Ivory Tips</title>
+  <desc id="desc">Ivory filled quadrilaterals follow the A leg sides and horizontal foot, with a clean purple rim and horizontal upper cut. The chosen left v9 composition keeps its curved book at translate zero minus fourteen. The narrower mirrored lower spell notes move eight units up, closer to the exact original upper page lines. The purple A, leg-parallel external wands, gold spark, and selected palette are preserved. Transparent surrounding canvas. The editable wordmark reads Spelling-Spells.</desc>
+  <g transform="translate(36 32)">
+    <g id="book" transform="translate(0 -14)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path id="original-upper-page-lines" d="M47 196Q77 190 105 202M151 202Q179 190 209 196"/>
+        <path id="left-lower-spell-note" d="M60 208C65 204 70 204 75 208S85 212 90 208"/>
+        <path id="right-lower-spell-note" d="M196 208C191 204 186 204 181 208S171 212 166 208"/>
+      </g>
+    </g>
+    <g id="left-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M55.2 166.6L98.4 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M55.2 166.6L59.325 156.403M98.4 59.8L94.275 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="right-leg-parallel-wand" fill="none" stroke-linecap="round">
+      <path d="M200.8 166.6L157.6 59.8" stroke="#6039D8" stroke-width="10"/>
+      <path d="M200.8 166.6L196.675 156.403M157.6 59.8L161.725 69.997" stroke="#FFF9EA" stroke-width="6"/>
+    </g>
+    <g id="letter-a" transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <g id="fitted-a-leg-tips" fill="#FFF9EA">
+        <path d="M61 202H92L87 217H55Z"/>
+        <path d="M211 202H180L185 217H217Z"/>
+      </g>
+    </g>
+    <path id="centered-spark" fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+  </g>
+  <text x="338" y="164" fill="#20134D" font-family="Avenir Next, Arial, sans-serif" font-size="64" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+</svg>

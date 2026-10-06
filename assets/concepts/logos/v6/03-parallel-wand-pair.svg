@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 320" role="img" aria-labelledby="title desc">
+  <title id="title">Spelling-Spells — Parallel Wand Pair</title>
+  <desc id="desc">Two upright parallel wands frame the A. Symmetrical spacing creates a calm silhouette. Original purple and gold palette, lavender spellbook, and exact Spelling-Spells wordmark. Transparent canvas.</desc>
+  <g transform="translate(36 32)"><g transform="translate(0 -6)">
+      <path fill="#D8C8F2" stroke="#6039D8" stroke-width="10" stroke-linejoin="round" d="M24 178Q76 156 128 181Q180 156 232 178V234Q180 216 128 241Q76 216 24 234Z"/>
+      <path fill="none" stroke="#FFC857" stroke-width="11" stroke-linecap="round" d="M128 182V234"/>
+      <g fill="none" stroke="#6039D8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/>
+        <g transform="translate(256 0) scale(-1 1)"><path d="M54 188C58 184 62 185 65 189C68 193 71 187 73 185C77 180 80 184 77 189C75 193 82 191 85 187C89 183 93 186 98 188"/>
+      <path d="M58 200C62 196 66 197 69 201C72 205 76 198 79 198C83 197 81 204 85 201C88 197 92 198 94 200"/>
+      <path d="M62 212C66 208 70 213 74 212C78 211 82 208 86 212C88 214 89 213 90 211"/></g>
+      </g>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M57 65L57 167" stroke="#6039D8" stroke-width="10"/>
+      <path d="M57 65L57.000 76.000M57 167L57.000 156.000" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g fill="none" stroke-linecap="round">
+      <path d="M199 65L199 167" stroke="#6039D8" stroke-width="10"/>
+      <path d="M199 65L199.000 76.000M199 167L199.000 156.000" stroke="#FFF9EA" stroke-width="6"/>
+    </g><g transform="translate(46.4 34) scale(.6)">
+      <path fill="#6039D8" fill-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/>
+      <defs><clipPath id="book-spark-v6-parallel-6039D8" clipPathUnits="userSpaceOnUse"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 221 120 43Q136 8 152 43L224 221H181L166 181H106L91 221ZM119 148H153L136 101Z"/></clipPath></defs>
+      <g clip-path="url(#book-spark-v6-parallel-6039D8)">
+        <path fill="#20134D" d="M56 200 98 211 95 218 53 208Z"/>
+        <path fill="#20134D" d="M174 211 216 200 219 208 180 218Z"/>
+        <path fill="#FFF9EA" d="M53 208 92 218 91 221H48Z"/>
+        <path fill="#FFF9EA" d="M180 218 219 208 224 221H181Z"/>
+      </g>
+    </g>
+    <path fill="#FFC857" d="M128 7Q132 23 148 27Q132 31 128 47Q124 31 108 27Q124 23 128 7Z"/>
+</g>
+  <text x="338" y="164" fill="#20134D" font-family="Avenir Next, Arial, sans-serif" font-size="64" font-weight="750" letter-spacing="-2">Spelling-Spells</text>
+</svg>

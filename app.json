@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Spelling Spells",
+    "slug": "spelling-spells",
+    "scheme": "spellingspells",
+    "version": "1.0.0",
+    "orientation": "default",
+    "userInterfaceStyle": "automatic",
+    "platforms": ["web", "ios", "android"],
+    "plugins": ["expo-router"],
+    "icon": "./public/icons/icon-512.png",
+    "web": {
+      "output": "static",
+      "bundler": "metro"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.piratechs.spellingspells"
+    },
+    "android": {
+      "package": "com.piratechs.spellingspells"
+    }
+  }
+}
