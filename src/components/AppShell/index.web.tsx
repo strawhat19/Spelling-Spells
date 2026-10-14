@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import Icon from '../Icon';
+import PageMetadata from '../PageMetadata';
 import Header from '../Header/index.web';
 import Footer from '../Footer/index.web';
 import { useAppShell } from './useAppShell';
@@ -15,6 +16,10 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
 
   return (
     <div id='app-shell' data-theme={theme} className={`app-shell theme-${theme} ${pathname === `/` ? `is-home` : ``}`}>
+      <PageMetadata
+        title='Every Spell Has a Story'
+        description='Explore the spelling, pronunciation, origins and effects of famous fictional spells from stories and games.'
+      />
       <a id='skip-to-content' className='skip-to-content' href='#main-content'>Skip to Content</a>
       <Header sticky={sticky} scrolled={scrolled} />
       {error || themeError ? (
