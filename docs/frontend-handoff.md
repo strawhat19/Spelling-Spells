@@ -30,8 +30,8 @@ The production service worker now caches only explicit public pages and assets a
 2. Enable the actual Google and email providers, confirm allowed origins and platform flows, configure a trusted Owner UID bootstrap, and implement server-owned roles and restrictive rules. Never use the frontend role as authority.
 3. Implement private profile, account-scoped saves, submissions and review adapters with bounded queries. Preserve local bookmarks and draft data; never upload automatically without a deliberate user action.
 4. Add analytics collection only after provider setup and disclosures. Provider traffic reports require an authenticated server-only boundary; a mounted tracker is not internal report access. No analytics SDK, report token, traffic ingestion or paid analytics add-on is installed by this milestone.
-5. Set the verified public origin in `expo.extra.siteUrl` only when hosting is confirmed. Until then web sharing uses its actual browser origin and native sharing sends a spell note.
-6. The production Expo export is now authorized and has passed. Obtain separate permission for TypeScript, platform and browser acceptance checks. After repository publication access is resolved, deploy to the selected Vercel project and verify exact commit, routes, offline behavior, metadata, account gates and device saves. The domain, Stripe and AdSense remain separate later milestones.
+5. The current public host is `https://spelling-spells.vercel.app`; the custom domain is not connected. Web sharing uses its actual browser origin. Native sharing still sends a spell note until an explicit canonical origin is configured in `expo.extra.siteUrl`.
+6. The production Expo export and Vercel deployment have passed. Obtain separate permission for TypeScript, platform and browser acceptance checks, including offline behavior, metadata presentation, account gates and device saves. HTTP route checks are not interaction tests. The domain, Stripe and AdSense remain separate later milestones.
 
 ## Validation and publication status
 
@@ -39,6 +39,13 @@ Source has been independently reviewed. On 2026-10-14, the user authorized repos
 
 Tests, lint, standalone type checks, dev servers, browser interaction checks and native UI/runtime checks have not been run. Production static rendering passed; no connected-service or browser interaction pass is implied.
 
-`vercel.json` specifies the existing `npm run export:web` build, `npm ci` installation, `dist` output and clean URLs. Read-only Vercel discovery confirms the intended `piratechs` team; no existing project matching “spell” was found. No Vercel project was created because the requested sequence is repository publication first, then deployment.
+`vercel.json` specifies the existing `npm run export:web` build, `npm ci` installation, `dist` output and clean URLs. The `spelling-spells` project was created in the authorized Piratechs Vercel team. No custom domain, credentials, paid add-ons or security settings were changed.
 
-Changes are local commits on `codex/frontend-launch`. Native push lacked an authenticated credential; the GitHub connection rejected branch/tree writes with `403 Resource not accessible by integration`. No remote branch, pull request, deployment or external-service configuration has been created. Resolve repository Contents write permission before publication; do not bypass that denial through another route.
+The initial GitHub integration permission blocker was resolved through the user's connector installation. Published commits follow the repository's versioned style:
+
+- [v0.0.0.1-SpellingSpellsAIGuidance](https://github.com/strawhat19/Spelling-Spells/commit/3ae88135c0eed6c49d07b84168061c2220a489b8): unchanged upstream guidance plus the separate portable extension and project scope.
+- [v0.0.0.2-SpellingSpellsFrontend](https://github.com/strawhat19/Spelling-Spells/commit/1d325cf160a9c68c52bc122b96114bd79230539f): the reviewed frontend and deployment configuration, with the same source tree as the successful local export.
+
+After explicit approval to publish to `main`, it was fast-forwarded without force or overwriting concurrent work. [PR #1](https://github.com/strawhat19/Spelling-Spells/pull/1) is merged. The Git integration automatically created a production deployment from `main` at `1d325cf160a9c68c52bc122b96114bd79230539f`; [Vercel reports READY](https://vercel.com/piratechs/spelling-spells/2CGPn3arwFC6NGN9X3QsWGEsaU9q), and its canonical alias is [spelling-spells.vercel.app](https://spelling-spells.vercel.app). Unauthenticated HTTP requests to `/`, `/spell/lumos`, `/profile` and `/privacy` returned 200 with app HTML on 2026-10-14. This documents the verified frontend release; later documentation-only commits do not imply additional runtime validation.
+
+No connected-service launch is claimed. Google/email authentication, trusted Owner bootstrap, cloud synchronization, submission moderation and internal analytics still require their deferred service setup and verification.
