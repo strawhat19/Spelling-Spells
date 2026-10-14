@@ -4,7 +4,7 @@
 .user-menu-trigger { padding: 0; border: 1px solid var(--line); background: transparent; color: var(--gold); border-radius: 50%; display: flex; }
 .user-menu-avatar { width: 37px; height: 37px; border-radius: 50%; display: grid; place-items: center; object-fit: cover; background: var(--muted); font-weight: 700; font-size: 14px; }
 .user-menu-loading { width: 37px; height: 37px; border-radius: 50%; background: var(--muted); }
-.user-menu-popover { position: absolute; right: 0; top: calc(100% + 14px); min-width: 220px; padding: 12px; border: 1px solid var(--line); border-radius: 15px; background: var(--card); box-shadow: 0 20px 40px #0003; }
+.user-menu-popover { z-index: 1; position: absolute; right: 0; top: calc(100% + 14px); width: 240px; max-width: calc(100vw - 32px); max-height: calc(100dvh - var(--header-height) - 28px); overflow-y: auto; overscroll-behavior: contain; padding: 12px; border: 1px solid var(--line); border-radius: 15px; color: var(--ink); background: var(--card, #24193e); box-shadow: 0 20px 40px #0006; }
 .user-menu-name { font-size: 12px; font-weight: 650; margin: 4px 8px 12px; overflow-wrap: anywhere; }
 .user-menu-popover nav { display: grid; gap: 4px; }
 .user-menu-popover a, .user-menu-popover > button { width: 100%; display: flex; align-items: center; gap: 11px; font-size: 12px; padding: 11px 9px; border: 0; border-radius: 8px; color: var(--body); background: none; text-align: left; }

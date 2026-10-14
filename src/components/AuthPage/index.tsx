@@ -3,6 +3,7 @@ import BrandLogo from '../BrandLogo';
 import styles from './styles.native';
 import { useRouter } from 'expo-router';
 import PageMetadata from '../PageMetadata';
+import GoogleBrandMark from '../GoogleBrandMark';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { Text, View, Pressable, TextInput } from 'react-native';
 import { useAuthPage, type AuthPageProps } from './useAuthPage';
@@ -24,14 +25,36 @@ const AuthPage = (props: AuthPageProps) => {
       </View>
       <View style={[styles.form, { borderColor: palette.border, backgroundColor: palette.surface }]}>
         <Text accessibilityRole='header' style={[styles.formTitle, { color: palette.text }]}>{page.formTitle}</Text>
-        <Pressable nativeID='auth-google-button' disabled accessibilityRole='button' accessibilityState={{ disabled: true }} style={[styles.button, styles.disabled, { borderColor: palette.border }]}><Text style={[styles.buttonText, { color: palette.text }]}>G   Continue with Google</Text></Pressable>
-        {page.isSignUp ? <><Text style={[styles.label, { color: palette.muted }]}>Display name</Text><TextInput nativeID='auth-name' editable={false} accessibilityLabel='Display name unavailable' placeholder='Available after account setup' placeholderTextColor={palette.muted} style={[styles.input, { color: palette.muted, borderColor: palette.border }]} /></> : null}
+        <View nativeID='auth-switch-prompt' style={styles.switchPrompt}>
+          <Text style={[styles.switchCopy, { color: palette.muted }]}>{page.isSignUp ? `Already have an account?` : `New to the archive?`}</Text>
+          <Pressable
+            nativeID='auth-switch-mode'
+            accessibilityRole='link'
+            onPress={() => router.push(page.isSignUp ? `/signin` : `/signup`)}
+            style={[styles.button, { borderColor: palette.primary, backgroundColor: palette.panel }]}
+          >
+            <Icon name='user' size={17} color={palette.primary} />
+            <Text style={[styles.buttonText, { color: palette.primary }]}>{page.isSignUp ? `Sign in instead` : `Sign up instead`}</Text>
+            <Icon name='arrow-right' size={16} color={palette.primary} />
+          </Pressable>
+        </View>
+        <Pressable
+          disabled
+          nativeID='auth-google-button'
+          accessibilityRole='button'
+          accessibilityState={{ disabled: true }}
+          style={[styles.button, styles.googleButton]}
+          accessibilityHint='Google sign-in is unavailable until account services are connected.'
+        >
+          <GoogleBrandMark />
+          <Text nativeID='auth-google-label' style={styles.googleLabel}>Continue with Google</Text>
+        </Pressable>
+        {page.isSignUp ? <><Text style={[styles.label, { color: palette.muted }]}>Display name</Text><TextInput nativeID='auth-name' editable={false} accessibilityLabel='Display name unavailable' placeholder='Available after account setup' placeholderTextColor={palette.muted} style={[styles.input, { color: palette.muted, borderColor: palette.border, backgroundColor: palette.panel }]} /></> : null}
         <Text style={[styles.label, { color: palette.muted }]}>Email address</Text>
-        <TextInput nativeID='auth-email' editable={false} accessibilityLabel='Email address unavailable' placeholder='you@example.com' placeholderTextColor={palette.muted} style={[styles.input, { color: palette.muted, borderColor: palette.border }]} />
+        <TextInput nativeID='auth-email' editable={false} accessibilityLabel='Email address unavailable' placeholder='you@example.com' placeholderTextColor={palette.muted} style={[styles.input, { color: palette.muted, borderColor: palette.border, backgroundColor: palette.panel }]} />
         <Text style={[styles.label, { color: palette.muted }]}>Password</Text>
-        <TextInput nativeID='auth-password' editable={false} secureTextEntry accessibilityLabel='Password unavailable' placeholder='Available after account setup' placeholderTextColor={palette.muted} style={[styles.input, { color: palette.muted, borderColor: palette.border }]} />
+        <TextInput nativeID='auth-password' editable={false} secureTextEntry accessibilityLabel='Password unavailable' placeholder='Available after account setup' placeholderTextColor={palette.muted} style={[styles.input, { color: palette.muted, borderColor: palette.border, backgroundColor: palette.panel }]} />
         <Pressable nativeID='auth-email-button' disabled accessibilityRole='button' accessibilityState={{ disabled: true }} style={[styles.button, styles.disabled, { backgroundColor: palette.gold }]}><Text style={[styles.buttonText, { color: `#20134d` }]}>{page.isSignUp ? `Create account` : `Sign in`}</Text><Icon name='arrow-right' color='#20134d' size={17} /></Pressable>
-        <Pressable nativeID='auth-switch-mode' accessibilityRole='link' onPress={() => router.push(page.isSignUp ? `/signin` : `/signup`)} style={styles.link}><Text style={[styles.copy, { color: palette.primary }]}>{page.isSignUp ? `Already have an account? Sign in` : `New here? Create an account`}</Text></Pressable>
       </View>
       <Pressable nativeID='auth-browse-library' accessibilityRole='link' onPress={() => router.push(`/spells`)} style={styles.link}><Icon name='book' color={palette.gold} size={18} /><Text style={[styles.buttonText, { color: palette.gold }]}>Explore without an account</Text></Pressable>
       <Text style={[styles.small, { color: palette.muted }]}>Your saved spells remain on this device. No account or agreement is created here.</Text>

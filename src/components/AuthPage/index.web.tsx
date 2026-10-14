@@ -2,6 +2,7 @@ import Icon from '../Icon';
 import AppLink from '../AppLink';
 import BrandLogo from '../BrandLogo';
 import PageMetadata from '../PageMetadata';
+import GoogleBrandMark from '../GoogleBrandMark';
 import { useAuthPage, type AuthPageProps } from './useAuthPage';
 import './styles.scss';
 
@@ -28,11 +29,35 @@ const AuthPage = (props: AuthPageProps) => {
       </div>
       <div id='auth-form-panel' className='auth-form-panel'>
         <AppLink id='auth-back-to-library' href='/spells' className='auth-back'><Icon name='arrow-left' size={16} /> Back to the archive</AppLink>
-        <div className='auth-form-heading'><span className='auth-eyebrow'>A LITTLE MAGIC, JUST FOR YOU</span><h2>{page.formTitle}</h2><p>{page.isSignUp ? `Already have an account?` : `New to the archive?`} <AppLink href={page.isSignUp ? `/signin` : `/signup`}>{page.isSignUp ? `Sign in` : `Create an account`}</AppLink></p></div>
+        <div className='auth-form-heading'>
+          <span className='auth-eyebrow'>A LITTLE MAGIC, JUST FOR YOU</span>
+          <h2>{page.formTitle}</h2>
+          <div id='auth-switch-prompt' className='auth-switch-prompt'>
+            <p>{page.isSignUp ? `Already have an account?` : `New to the archive?`}</p>
+            <AppLink
+              id='auth-switch-mode'
+              className='auth-switch-button'
+              href={page.isSignUp ? `/signin` : `/signup`}
+            >
+              <Icon name='user' size={17} />
+              {page.isSignUp ? `Sign in instead` : `Sign up instead`}
+              <Icon name='arrow-right' size={16} />
+            </AppLink>
+          </div>
+        </div>
         <div id='auth-connection-notice' className='auth-connection-notice' role='status'><Icon name='shield' size={20} /><div><strong>{page.loading ? `Checking account availability` : `Account connection coming next`}</strong><p>Sign-in is not connected in this frontend preview. The fields below are disabled, and no credentials are collected.</p></div></div>
         {page.account ? <AppLink id='auth-open-profile' href='/profile' className='primary-button'><Icon name='profile' size={17} /> Open your profile</AppLink> : null}
         <form id={`auth-form-${page.mode}`} className='auth-form' aria-describedby='auth-connection-notice' onSubmit={(event) => event.preventDefault()}>
-          <button id='auth-google-button' type='button' className='auth-google-button' disabled><span aria-hidden='true' className='auth-google-mark'>G</span> Continue with Google<Icon name='arrow-right' size={15} /></button>
+          <button
+            disabled
+            type='button'
+            id='auth-google-button'
+            className='auth-google-button'
+            aria-describedby='auth-connection-notice'
+          >
+            <GoogleBrandMark />
+            <span id='auth-google-label' className='auth-google-label'>Continue with Google</span>
+          </button>
           <div className='auth-divider'><span />or with email<span /></div>
           <fieldset disabled>
             {page.isSignUp ? <label htmlFor='auth-name'>Display name<input id='auth-name' type='text' placeholder='How should we call you?' autoComplete='off' /></label> : null}

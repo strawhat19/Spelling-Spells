@@ -32,6 +32,7 @@ html { scroll-behavior: smooth; background: #17102b; }
 html[data-theme='ivory'] { background: #fff9ea; }
 body { margin: 0; color: var(--ink); background: var(--page); font-family: 'Avenir Next', 'Segoe UI', Arial, sans-serif; }
 button, input, select, textarea { font: inherit; }
+select option, select optgroup { color: var(--ink); background: var(--card); }
 button, a, input, select { -webkit-tap-highlight-color: transparent; }
 button, a { touch-action: manipulation; }
 button { cursor: pointer; }

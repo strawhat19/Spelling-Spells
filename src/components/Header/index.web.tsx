@@ -14,7 +14,7 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
   const { pathname, menuOpen, setMenuOpen, headerRef } = useHeader();
 
   return (
-    <header ref={headerRef} id='site-header' className={`site-header ${sticky ? `is-sticky` : ``} ${scrolled ? `is-scrolled` : ``}`}>
+    <header ref={headerRef} id='site-header' className={`site-header ${sticky ? `is-sticky` : ``} ${scrolled ? `is-scrolled` : ``} ${menuOpen ? `is-menu-open` : ``}`}>
       <div id='site-header-inner' className='site-header-inner'>
         <AppLink id='header-brand' href='/' className='header-brand' aria-label='Spelling Spells Home'>
           <BrandLogo size={70} />

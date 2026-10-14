@@ -1,7 +1,8 @@
 .site-header { z-index: 30; position: relative; color: var(--ink); background: transparent; border-bottom: 1px solid transparent; transition: background .3s ease, border-color .3s ease, box-shadow .3s ease; }
 .site-header.is-sticky { top: 0; position: sticky; }
-.site-header.is-scrolled { background: #17102be6; border-bottom-color: var(--line); box-shadow: 0 8px 30px #00000015; -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
-[data-theme='ivory'] .site-header.is-scrolled { background: #fff9eae6; }
+.site-header.is-scrolled { background: #17102bf5; border-bottom-color: var(--line); box-shadow: 0 8px 30px #00000015; -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+[data-theme='ivory'] .site-header.is-scrolled { background: #fff9eaf5; }
+.site-header.is-menu-open, [data-theme='ivory'] .site-header.is-menu-open { background: var(--page, #17102b); }
 .site-header-inner { gap: 24px; display: flex; align-items: center; justify-content: space-between; width: min(1440px, calc(100% - 80px)); min-height: var(--header-height); margin-inline: auto; }
 .header-brand { gap: 13px; display: inline-flex; align-items: center; white-space: nowrap; }
 .header-wordmark { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(25px, 2.4vw, 36px); letter-spacing: -1px; }
@@ -18,7 +19,7 @@
 [data-theme='ivory'] .header-theme-toggle { color: var(--purple); }
 .header-theme-toggle:hover { transform: rotate(12deg); }
 .header-menu-toggle { display: none; color: var(--body); }
-.mobile-navigation { display: grid; gap: 7px; padding: 8px 24px 20px; background: var(--page); border-bottom: 1px solid var(--line); }
+.mobile-navigation { display: grid; gap: 7px; padding: 8px 24px 20px; max-height: calc(100dvh - var(--header-height)); overflow-y: auto; overscroll-behavior: contain; background: var(--page, #17102b); border-bottom: 1px solid var(--line); }
 .mobile-nav-link { gap: 12px; display: flex; align-items: center; padding: 12px; border-radius: 9px; background: var(--muted); }
 @media (max-width: 1120px) { .site-header-inner { width: calc(100% - 48px); gap: 16px; } .header-wordmark { font-size: 27px; } .header-brand .brand-logo-mark { width: 60px; height: 60px; } .header-navigation { gap: 18px; } }
 @media (max-width: 950px) { .header-navigation { display: none; } .header-menu-toggle { display: grid; } }
@@ -26,3 +27,5 @@
 
 .mobile-theme-toggle { display: none; color: var(--ink); border: 0; text-align: left; }
 @media (max-width: 420px) { .header-saved-link, .header-theme-toggle { display: none; } .mobile-theme-toggle { display: flex; } .header-wordmark { font-size: 20px; } .header-brand .brand-logo-mark { width: 40px; height: 40px; } }
+@media (prefers-reduced-transparency: reduce) { .app-shell .site-header.is-scrolled { background: var(--page); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .app-shell .site-header.is-scrolled { background: var(--page); } }

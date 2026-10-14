@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from 'react';
-import { ScrollViewStyleReset } from 'expo-router/html';
 
 const RootHtml = ({ children }: PropsWithChildren) => (
   <html lang='en' data-theme='night'>
@@ -13,7 +12,6 @@ const RootHtml = ({ children }: PropsWithChildren) => (
       <link rel='icon' href='/favicon.svg' type='image/svg+xml' />
       <link rel='manifest' href='/manifest.webmanifest' />
       <link rel='apple-touch-icon' href='/icons/icon-192.png' />
-      <ScrollViewStyleReset />
     </head>
     <body>{children}</body>
   </html>
