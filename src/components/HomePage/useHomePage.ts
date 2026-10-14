@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { getSpellPath } from '../../shared/catalog/routes';
 import { useSpells } from '../../shared/spellsContext/useSpells';
 
 export const useHomePage = () => {
@@ -12,7 +13,7 @@ export const useHomePage = () => {
   const surprise = () => {
     if (!collection.spells.length) return;
     const spell = collection.spells[Math.floor(Math.random() * collection.spells.length)];
-    router.push({ pathname: `/spell`, params: { id: spell.id } });
+    router.push(getSpellPath(spell));
   };
   return { ...collection, query, curated, featured, surprise, setQuery, visitSearch };
 };

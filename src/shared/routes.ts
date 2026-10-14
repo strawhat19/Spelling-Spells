@@ -2,6 +2,7 @@ export const navigation = [
   { href: `/spells`, icon: `book`, label: `Spell Index` },
   { href: `/worlds`, icon: `globe`, label: `Worlds` },
   { href: `/pronunciation`, icon: `audio`, label: `Pronunciation` },
+  { href: `/submit`, icon: `edit`, label: `Contribute` },
 ];
 
 export const footerNavigation = [
@@ -12,8 +13,38 @@ export const footerNavigation = [
 ];
 
 export const routeAliases = {
+  '/login': `/signin`,
+  '/sign-in': `/signin`,
+  '/register': `/signup`,
+  '/sign-up': `/signup`,
   '/about-us': `/about`,
   '/contact-us': `/contact`,
   '/privacy-policy': `/privacy`,
   '/terms-of-service': `/terms`,
+};
+
+export type AccountRoute = {
+  href: string;
+  icon: string;
+  label: string;
+  access: 'account' | 'owner';
+  section: 'account' | 'admin';
+};
+
+export const accountNavigation: AccountRoute[] = [
+  { href: `/profile`, icon: `user`, label: `Profile`, access: `account`, section: `account` },
+  { href: `/profile/connections`, icon: `link`, label: `Connections`, access: `account`, section: `account` },
+  { href: `/submissions`, icon: `edit`, label: `My Submissions`, access: `account`, section: `account` },
+  { href: `/dashboard`, icon: `dashboard`, label: `Dashboard`, access: `owner`, section: `admin` },
+  { href: `/analytics`, icon: `chart`, label: `Analytics`, access: `owner`, section: `admin` },
+  { href: `/review`, icon: `shield`, label: `Review Submissions`, access: `owner`, section: `admin` },
+];
+
+export const getAccountRoute = (pathname: string) => accountNavigation.find((route) => route.href === pathname);
+
+export const safeReturnPath = (value: string | string[] | undefined): string => {
+  const path = Array.isArray(value) ? value[0] : value;
+  if (!path || !path.startsWith(`/`) || path.startsWith(`//`) || /[\\\s]/.test(path)) return `/profile`;
+  const allowed = [`/`, `/saved`, `/submit`, ...navigation.map((route) => route.href), ...accountNavigation.map((route) => route.href)];
+  return allowed.includes(path) ? path : `/profile`;
 };

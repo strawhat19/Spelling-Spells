@@ -1,0 +1,26 @@
+.submission-review { display: grid; gap: 24px; }
+.submission-access-state { display: flex; gap: 22px; padding: 28px; border-radius: 18px; border: 1px solid var(--line); background: var(--card); }
+.submission-access-emblem { display: grid; place-items: center; width: 66px; height: 66px; flex-shrink: 0; color: var(--gold); background: var(--muted); border: 1px solid var(--line); border-radius: 17px; }
+.submission-state-label { color: var(--soft); font-size: 10px; text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; }
+.submission-access-state h2 { font: 500 27px Georgia, serif; margin: 10px 0; }
+.submission-access-state p { max-width: 650px; font-size: 13px; color: var(--body); line-height: 1.8; }
+.submission-access-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.submission-access-actions a { font-size: 12px; padding: 11px 17px; }
+.submission-workflow-preview { border: 1px solid var(--line); border-radius: 18px; padding: 28px; min-width: 0; }
+.submission-table-header { display: flex; justify-content: space-between; gap: 15px; align-items: center; }
+.submission-table-header h2 { font: 500 26px Georgia, serif; margin: 10px 0; }
+.submission-unavailable { display: inline-flex; gap: 7px; align-items: center; padding: 8px 12px; background: var(--muted); border-radius: 20px; font-size: 10px; color: var(--soft); white-space: nowrap; }
+.submission-workflow-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 23px; margin: 28px 0; }
+.submission-workflow-steps > div { padding-right: 12px; }
+.submission-workflow-icon { color: var(--lavender); }
+.submission-workflow-steps h3 { font-size: 13px; font-weight: 650; margin: 13px 0 8px; }
+.submission-workflow-steps p { font-size: 12px; color: var(--soft); line-height: 1.8; }
+.submission-table-shell { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; }
+.submission-table-columns { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 12px; padding: 15px 20px; color: var(--body); background: var(--muted); font-size: 11px; }
+.submission-table-empty { padding: 34px 20px; text-align: center; color: var(--soft); }
+.submission-table-empty h3 { font-size: 14px; font-weight: 600; color: var(--ink); margin: 15px 0 8px; }
+.submission-table-empty p { max-width: 390px; margin: auto; font-size: 12px; line-height: 1.8; }
+.submission-review-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; margin-top: 22px; }
+.submission-review-footer > p { font-size: 11px; line-height: 1.8; color: var(--soft); max-width: 420px; }
+.submission-review-footer > a { font-size: 12px; padding: 11px 16px; }
+@media (max-width: 600px) { .submission-access-state { padding: 22px; flex-direction: column; gap: 15px; } .submission-workflow-preview { padding: 21px; } .submission-table-header { flex-wrap: wrap; } .submission-workflow-steps { gap: 16px; grid-template-columns: 1fr; } .submission-workflow-steps > div { display: grid; grid-template-columns: 25px 1fr; column-gap: 12px; } .submission-workflow-steps h3 { margin: 3px 0 0; } .submission-workflow-steps p { grid-column: 2; margin-top: 6px; } .submission-table-columns { grid-template-columns: 2fr 1fr; } .submission-table-columns span:nth-child(2), .submission-table-columns span:nth-child(4) { display: none; } }

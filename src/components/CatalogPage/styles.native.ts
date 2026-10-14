@@ -1,6 +1,14 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  shelf: { gap: 20, padding: 22, borderWidth: 1, borderRadius: 18 },
+  shelfStats: { gap: 22, flexDirection: `row` },
+  shelfStat: { flex: 1, gap: 8 },
+  statValue: { fontSize: 31, fontFamily: `Georgia` },
+  statLabel: { fontSize: 12 },
+  storageNote: { gap: 9, paddingTop: 17, borderTopWidth: 1 },
+  storageBadge: { fontSize: 10, fontWeight: `700`, letterSpacing: 1.3 },
+  storageCopy: { fontSize: 12, lineHeight: 21 },
   page: { gap: 22, padding: 24 },
   eyebrow: { fontSize: 10, fontWeight: `700`, letterSpacing: 2 },
   title: { fontSize: 37, fontFamily: `Georgia`, letterSpacing: -.7 },

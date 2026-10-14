@@ -1,0 +1,24 @@
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+  page: { gap: 25, padding: 22 },
+  navigation: { padding: 10, borderWidth: 1, borderRadius: 12 },
+  links: { gap: 6, flexDirection: `row`, flexWrap: `wrap` },
+  navLink: { gap: 9, padding: 11, width: `48%`, borderRadius: 8, flexDirection: `row`, alignItems: `center` },
+  navText: { fontSize: 11, flexShrink: 1 },
+  bottom: { gap: 8, paddingTop: 9, borderTopWidth: 1, marginTop: 8, flexDirection: `row`, alignItems: `center` },
+  identity: { flex: 1, gap: 9, flexDirection: `row`, alignItems: `center` },
+  avatar: { width: 28, height: 28, borderRadius: 14, overflow: `hidden`, alignItems: `center`, justifyContent: `center` },
+  avatarImage: { width: 28, height: 28 },
+  collapse: { padding: 11 },
+  heading: { gap: 12 },
+  eyebrow: { fontSize: 9, letterSpacing: 1.8, fontWeight: `700` },
+  title: { fontSize: 37, lineHeight: 43, fontFamily: `Georgia` },
+  description: { fontSize: 13, lineHeight: 23 },
+  gate: { gap: 18, padding: 25, borderWidth: 1, borderRadius: 16 },
+  gateTitle: { fontSize: 29, lineHeight: 34, fontFamily: `Georgia` },
+  small: { fontSize: 11, lineHeight: 20 },
+  actions: { gap: 10, flexDirection: `row`, flexWrap: `wrap` },
+  action: { gap: 8, padding: 13, borderRadius: 9, flexDirection: `row`, alignItems: `center` },
+  actionText: { fontSize: 12, fontWeight: `700` },
+});

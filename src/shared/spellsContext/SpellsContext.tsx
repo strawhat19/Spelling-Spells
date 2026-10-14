@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { StorageMode } from '../../types/types';
 import type { Spell, World } from '../models/Spell';
 import type { PreferenceSnapshot } from '../models/Preferences';
 import { spellsAPI, preferencesAPI } from '../../api';
@@ -10,6 +11,7 @@ export type SpellsContextValue = {
   savedIds: string[];
   historyIds: string[];
   ready: boolean;
+  storageMode: StorageMode | null;
   error: string | null;
   toggleSaved: (id: string) => Promise<void>;
   isSaved: (id: string) => boolean;
@@ -23,6 +25,7 @@ export const SpellsContext = createContext<SpellsContextValue | null>(null);
 export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const hydrated = useRef(false);
   const [ready, setReady] = useState(false);
+  const [storageMode, setStorageMode] = useState<StorageMode | null>(null);
   const [spells, setSpells] = useState<Spell[]>([]);
   const [worlds, setWorlds] = useState<World[]>([]);
   const [savedIds, setSavedIds] = useState<string[]>([]);
@@ -30,6 +33,7 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const [error, setError] = useState<string | null>(null);
 
   const applyPreferences = useCallback((snapshot: PreferenceSnapshot) => {
+    setStorageMode(snapshot.mode);
     setSavedIds(snapshot.preferences.savedIds);
     setHistoryIds(snapshot.preferences.historyIds);
     if (snapshot.error) setError(snapshot.error);
@@ -93,6 +97,7 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
     savedIds,
     clearSaved,
     historyIds,
+    storageMode,
     toggleSaved,
     recordViewed,
     dismissError,
@@ -105,6 +110,7 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
     savedIds,
     clearSaved,
     historyIds,
+    storageMode,
     toggleSaved,
     recordViewed,
     dismissError,

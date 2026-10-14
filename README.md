@@ -29,11 +29,11 @@ The starter catalog contains **nine source-linked records across Harry Potter, S
 
 ## Local data
 
-There is no backend, sign-in service, or cloud synchronization. Public browsing and saving spells work without an account.
+There is no connected backend, sign-in service, or cloud synchronization. Public browsing and saving spells work without an account. The frontend now includes disconnected Google/email sign-in, profile, Owner dashboard/analytics, and submission/review layouts. Disabled credentials and unavailable metrics are intentional; these screens do not create accounts or grant access. See [the frontend handoff](docs/frontend-handoff.md) for exact source scope and connection gates.
 
 `src/shared/config.ts` contains the single `useLocalStorage = true` switch. Web uses **localStorage**; iOS and Android use **AsyncStorage**. Saved IDs and recently viewed IDs use `spelling-spells:preferences:v1`, and the selected theme uses `spelling-spells:theme:v1`. Preferences are versioned and separate from the immutable source catalog.
 
-Changing the switch to false selects session memory; it does not connect a backend. Unreadable or malformed persisted preferences are preserved rather than overwritten. The app reports storage failures, and affected changes can remain in memory for that session. Clearing browser/app data removes the device's saved preferences. The Saved page can clear bookmarks.
+Changing the switch to false selects session memory; it does not connect a backend. Unreadable or malformed persisted preferences are preserved rather than overwritten. The app reports storage failures, and affected changes can remain in memory for that session. Clearing browser/app data removes the device's saved preferences. The Saved page can clear bookmarks after confirmation. A separate contribution draft can be deliberately saved on this device; it is never submitted or uploaded in this version. Unsaved draft edits are kept in memory across internal navigation.
 
 The typed asynchronous facades under `src/api/` describe catalog, preference, theme, and health/status operations. They are local services rather than HTTP endpoints. Models, contexts, persistence, and curated data stay under `src/shared/`; thin files under `app/` use Expo Router.
 
@@ -51,8 +51,8 @@ Sass files are imported directly by the web components rather than chained throu
 
 The editable logo is `public/brand/logo-mark.svg`; the original v10 artwork and earlier concept rounds remain intact. PWA/app icons are exports of that mark. `public/visuals/hero-night-background.png` was produced with the built-in image-generation tool from the chosen mockup, preserving the illustrated night scene while removing its baked-in interface. See `public/visuals/IMAGEGEN-PROMPTS.md` for the prompt and provenance.
 
-Spell-source links live with the seed records under `src/shared/data/`. The design round's [source notes](assets/concepts/mockups/v1/README.md) explain the initial Lumos, Fus Ro Dah, and Brisingr examples. Franchise names identify source works; this is an independent archive with no affiliation claim.
+Spell-source links live with the seed records under `src/shared/catalog/`. The design round's [source notes](assets/concepts/mockups/v1/README.md) explain the initial Lumos, Fus Ro Dah, and Brisingr examples. Franchise names identify source works; this is an independent archive with no affiliation claim.
 
 ## Review status
 
-Dependencies were installed. Tests, builds, type-check commands, dev-server runs, and browser/UI checks were not run, following `AGENTS.md`. Nothing was committed, pushed, or deployed. Review the files and verify locally before committing.
+The original dependency lockfile is preserved and no new runtime dependency was added for the frontend milestone. The authorized production command `npm run export:web` completed successfully on 2026-10-14 and generated 39 static routes. Tests, type-check commands, dev-server runs, browser interaction checks and native runtime checks have not been run; the production export does not imply those passes. Source changes are committed locally on `codex/frontend-launch`; GitHub integration write access is currently blocked, so nothing from this milestone is pushed or deployed. `vercel.json` prepares the requested `.vercel.app` deployment with Expo static export, the `dist` output directory and clean URLs. See [development scope](docs/development-scope.md) and [frontend handoff](docs/frontend-handoff.md) for the imported guidance, explicit service limitations, and next steps.

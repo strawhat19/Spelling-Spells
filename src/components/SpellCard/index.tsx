@@ -1,8 +1,9 @@
 import Icon from '../Icon';
 import styles from './styles.native';
 import { useRouter } from 'expo-router';
-import type { Spell } from '../../shared/models/Spell';
 import { Text, View, Pressable } from 'react-native';
+import type { Spell } from '../../shared/models/Spell';
+import { getSpellPath } from '../../shared/catalog/routes';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { useSpells } from '../../shared/spellsContext/useSpells';
 
@@ -58,7 +59,7 @@ const SpellCard = ({ spell, compact = false, featured = false }: Props) => {
       </View>
       <View style={styles.footer}>
         <Text style={[styles.category, { color: palette.muted }]}>{spell.category} · {spell.language}</Text>
-        <Pressable nativeID={`open-spell-${spell.id}`} accessibilityRole="link" onPress={() => router.push({ pathname: `/spell`, params: { id: spell.id } })} style={styles.open}>
+        <Pressable nativeID={`open-spell-${spell.id}`} accessibilityRole="link" onPress={() => router.push(getSpellPath(spell))} style={styles.open}>
           <Text style={[styles.openText, { color: palette.gold }]}>Open spell</Text>
           <Icon name="arrow-right" size={15} color={palette.gold} />
         </Pressable>

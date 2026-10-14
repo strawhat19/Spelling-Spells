@@ -1,0 +1,26 @@
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+  stack: { gap: 18 },
+  notice: { gap: 14, padding: 22, borderWidth: 1, borderRadius: 13 },
+  card: { gap: 23, padding: 20, borderWidth: 1, borderRadius: 13 },
+  copy: { fontSize: 12, lineHeight: 22 },
+  small: { fontSize: 10, lineHeight: 19 },
+  cardTitle: { fontSize: 14, fontWeight: `600`, lineHeight: 22 },
+  button: { gap: 8, alignSelf: `flex-start`, flexDirection: `row`, alignItems: `center`, padding: 12, borderRadius: 8 },
+  buttonText: { fontSize: 11, fontWeight: `600` },
+  switch: { gap: 5, flexDirection: `row`, flexWrap: `wrap` },
+  switchButton: { gap: 7, paddingVertical: 11, paddingHorizontal: 13, borderRadius: 8, flexDirection: `row`, alignItems: `center` },
+  metric: { gap: 14, padding: 20, borderWidth: 1, borderRadius: 12, flexDirection: `row`, alignItems: `center` },
+  metricCopy: { flex: 1, gap: 6 },
+  metricValue: { fontSize: 31 },
+  reportKpis: { gap: 12, flexDirection: `row` },
+  reportKpi: { flex: 1, gap: 7 },
+  empty: { gap: 17, padding: 23, borderWidth: 1, borderStyle: `dashed`, borderRadius: 11, alignItems: `center` },
+  emptyTitle: { fontSize: 24, lineHeight: 29, fontFamily: `Georgia`, textAlign: `center` },
+  emptyCopy: { fontSize: 11, lineHeight: 21, textAlign: `center` },
+  sectionTitle: { fontSize: 28, lineHeight: 34, fontFamily: `Georgia`, marginTop: 10 },
+  setupCard: { gap: 16, padding: 19, borderWidth: 1, borderRadius: 10, flexDirection: `row` },
+  setupNumber: { fontSize: 25, fontFamily: `Georgia` },
+  status: { fontSize: 9, marginTop: 7 },
+});

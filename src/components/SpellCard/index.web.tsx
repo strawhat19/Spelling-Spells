@@ -2,16 +2,17 @@ import './styles.scss';
 import { Icon } from '../Icon';
 import { AppLink } from '../AppLink';
 import type { Spell } from '../../shared/models/Spell';
+import { getSpellPath } from '../../shared/catalog/routes';
 import { useSpells } from '../../shared/spellsContext/useSpells';
 
 type SpellCardProps = { spell: Spell; compact?: boolean; featured?: boolean };
 
 export const SpellCard = ({ spell, compact = false, featured = false }: SpellCardProps) => {
-  const { worlds, isSaved, toggleSaved } = useSpells();
+  const { ready, worlds, isSaved, toggleSaved } = useSpells();
   const saved = isSaved(spell.id);
   const world = worlds.find((item) => item.id === spell.worldId);
   const prefix = `spell-card-${featured ? `hero` : compact ? `curated` : `catalog`}-${spell.id}`;
-  const destination = `/spell?id=${encodeURIComponent(spell.id)}`;
+  const destination = getSpellPath(spell);
 
   return (
     <article
@@ -23,6 +24,7 @@ export const SpellCard = ({ spell, compact = false, featured = false }: SpellCar
         <span className="spell-card-label" id={`${prefix}-label`}><Icon name={featured ? `book` : spell.accent} size={15} />{featured ? `Inside the spellbook` : spell.category}</span>
         <button
           type="button"
+          disabled={!ready}
           aria-pressed={saved}
           id={`${prefix}-save`}
           className={`spell-card-save${saved ? ` is-saved` : ``}`}

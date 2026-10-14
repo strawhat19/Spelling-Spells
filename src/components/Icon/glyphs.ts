@@ -1,4 +1,16 @@
 export const glyphs: Record<string, string> = {
+  refresh: `M20 7v5h-5M4 17v-5h5M6 6a8 8 0 0 1 14 6M18 18A8 8 0 0 1 4 12`,
+  download: `M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5`,
+  calendar: `M5 5h14v16H5V5ZM5 10h14M8 2v6M16 2v6`,
+  user: `M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8M4 21v-2a8 8 0 0 1 16 0v2`,
+  edit: `M15 5l4 4M3 21l5-1L21 7a2 2 0 0 0-4-4L4 16l-1 5Z`,
+  chart: `M3 3v18h18M7 16v-5M12 16V7M17 16v-9`,
+  link: `M10 13a5 5 0 0 0 7 0l4-4a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-4 4a5 5 0 0 0 7 7l2-2`,
+  dashboard: `M3 3h7v7H3V3ZM14 3h7v7h-7V3ZM3 14h7v7H3v-7ZM14 14h7v7h-7v-7Z`,
+  logout: `M9 4H3v16h6M9 12h12m-4-4 4 4-4 4`,
+  mail: `M3 5h18v14H3V5Zm0 0 9 7 9-7`,
+  lock: `M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5V10Zm7 4v3`,
+  trash: `M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7`,
   close: `M6 6l12 12M18 6 6 18`,
   menu: `M4 6h16M4 12h16M4 18h16`,
   check: `M5 12l4 4L19 6`,
@@ -26,6 +38,11 @@ export const glyphs: Record<string, string> = {
 };
 
 const aliases: Record<string, string> = {
+  profile: `user`,
+  connection: `link`,
+  collapse: `back`,
+  expand: `arrow`,
+  'log-out': `logout`,
   light: `sun`,
   sound: `audio`,
   world: `globe`,

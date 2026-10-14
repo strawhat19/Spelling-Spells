@@ -23,3 +23,6 @@
 @media (max-width: 1120px) { .site-header-inner { width: calc(100% - 48px); gap: 16px; } .header-wordmark { font-size: 27px; } .header-brand .brand-logo-mark { width: 60px; height: 60px; } .header-navigation { gap: 18px; } }
 @media (max-width: 950px) { .header-navigation { display: none; } .header-menu-toggle { display: grid; } }
 @media (max-width: 580px) { .site-header-inner { width: calc(100% - 28px); gap: 9px; } .header-brand { gap: 7px; } .header-wordmark { font-size: 22px; letter-spacing: -.6px; } .header-brand .brand-logo-mark { width: 45px; height: 45px; } .header-actions { gap: 8px; } .header-saved-link span { display: none; } .header-theme-toggle, .header-menu-toggle { width: 35px; height: 35px; } }
+
+.mobile-theme-toggle { display: none; color: var(--ink); border: 0; text-align: left; }
+@media (max-width: 420px) { .header-saved-link, .header-theme-toggle { display: none; } .mobile-theme-toggle { display: flex; } .header-wordmark { font-size: 20px; } .header-brand .brand-logo-mark { width: 40px; height: 40px; } }

@@ -1,0 +1,26 @@
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+  page: { padding: 22, gap: 18 },
+  kicker: { fontSize: 10, fontWeight: `700`, letterSpacing: 1.5 },
+  title: { fontSize: 35, lineHeight: 40, fontFamily: `serif` },
+  body: { fontSize: 14, lineHeight: 24 },
+  notice: { padding: 15, gap: 10, flexDirection: `row`, alignItems: `center`, borderRadius: 13 },
+  noticeText: { flex: 1, fontSize: 12, lineHeight: 20 },
+  form: { gap: 20, padding: 20, borderWidth: 1, borderRadius: 19 },
+  row: { flexDirection: `row`, gap: 9 },
+  segment: { padding: 12, borderWidth: 1, borderRadius: 9, flex: 1, alignItems: `center` },
+  field: { gap: 8 },
+  label: { fontSize: 13, fontWeight: `600` },
+  input: { minHeight: 48, borderWidth: 1, borderRadius: 9, padding: 12, fontSize: 14 },
+  textarea: { minHeight: 115, textAlignVertical: `top` },
+  hint: { fontSize: 11, lineHeight: 19 },
+  actions: { flexDirection: `row`, flexWrap: `wrap`, gap: 10 },
+  button: { flexDirection: `row`, gap: 8, padding: 13, borderRadius: 10, alignItems: `center` },
+  buttonText: { color: `#20134D`, fontSize: 12, fontWeight: `700` },
+  feedback: { fontSize: 12, lineHeight: 20 },
+  preview: { padding: 22, gap: 15, borderWidth: 1, borderRadius: 18 },
+  previewTitle: { fontSize: 32, fontFamily: `serif` },
+  sourceLink: { fontSize: 13, fontWeight: `600`, paddingVertical: 8 },
+  clear: { padding: 10, flexDirection: `row`, alignItems: `center`, gap: 8 },
+});

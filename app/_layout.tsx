@@ -1,4 +1,6 @@
 import { Slot } from 'expo-router';
+import { AuthProvider } from '../src/shared/authContext';
+import { AccountNavigationProvider } from '../src/components/AccountLayout/navigation';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppShell from '../src/components/AppShell';
@@ -8,13 +10,15 @@ import { SpellsProvider } from '../src/shared/spellsContext/SpellsContext';
 
 const RootLayout = () => (
   <SafeAreaProvider>
+    <AuthProvider>
     <ThemeProvider>
       <SpellsProvider>
         <StatusBar style='auto' />
         <PwaRegistration />
-        <AppShell><Slot /></AppShell>
+        <AccountNavigationProvider><AppShell><Slot /></AppShell></AccountNavigationProvider>
       </SpellsProvider>
     </ThemeProvider>
+    </AuthProvider>
   </SafeAreaProvider>
 );
 

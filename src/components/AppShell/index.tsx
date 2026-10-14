@@ -1,4 +1,5 @@
 import Icon from '../Icon';
+import UserMenu from '../UserMenu';
 import styles from './styles.native';
 import BrandLogo from '../BrandLogo';
 import { useRouter, usePathname } from 'expo-router';
@@ -13,6 +14,7 @@ const navigation = [
   { href: `/worlds`, label: `Worlds`, icon: `globe` },
   { href: `/pronunciation`, label: `Pronunciation`, icon: `wand` },
   { href: `/saved`, label: `Saved`, icon: `bookmark` },
+  { href: `/submit`, label: `Contribute`, icon: `edit` },
 ] as const;
 
 const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: boolean }>) => {
@@ -68,8 +70,9 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           style={styles.brand}
         >
           <BrandLogo size={48} />
-          <Text style={[styles.brandName, { color: palette.text }]}>Spelling Spells</Text>
+          <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.brandName, { color: palette.text }]}>Spelling Spells</Text>
         </Pressable>
+        <UserMenu />
         <Pressable
           nativeID="header-theme-toggle"
           accessibilityRole="button"

@@ -1,17 +1,22 @@
 import Icon from '../Icon';
+import { useState } from 'react';
 import SpellCard from '../SpellCard';
 import styles from './styles.native';
 import { useRouter } from 'expo-router';
+import { getPublicPageUrl } from '../PageMetadata/urls';
 import { useSpellDetailPage } from './useSpellDetailPage';
+import { getSpellPath } from '../../shared/catalog/routes';
 import { useTheme } from '../../shared/themeContext/useTheme';
-import { Text, View, Alert, Linking, Pressable } from 'react-native';
+import { Text, View, Alert, Share, Linking, Pressable } from 'react-native';
 
 const SpellDetailPage = () => {
   const router = useRouter();
   const { palette } = useTheme();
-  const { spell, world, ready, related, isSaved, toggleSaved } = useSpellDetailPage();
+  const { spell, world, ready, related, isSaved, toggleSaved, storageMode } = useSpellDetailPage();
 
-  if (!ready || !spell) return (
+  const [sharing, setSharing] = useState(false);
+
+  if (!spell) return (
     <View nativeID="spell-detail-empty" style={[styles.page, styles.empty]}>
       <Icon name="book" size={32} color={palette.gold} />
       <Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>{ready ? `This page is missing.` : `Opening the spell record…`}</Text>
@@ -22,6 +27,21 @@ const SpellDetailPage = () => {
   );
 
   const saved = isSaved(spell.id);
+  const shareSpell = async () => {
+    if (sharing) return;
+    setSharing(true);
+    const url = getPublicPageUrl(getSpellPath(spell));
+    try {
+      await Share.share({
+        title: `${spell.name} · Spelling Spells`,
+        message: `${spell.name} · ${spell.pronunciation}\n${spell.definition}\nFrom ${spell.sourceTitle}${url ? `\n${url}` : ``}`,
+      });
+    } catch {
+      Alert.alert(`Couldn’t Open Sharing`, `Please try again. No sharing result was confirmed.`);
+    } finally {
+      setSharing(false);
+    }
+  };
   const sectionStyle = [styles.section, { backgroundColor: palette.surface, borderColor: palette.border }];
   const ratings = [
     { name: `Danger`, value: spell.danger, note: `Editorial estimate of potential harm within the fictional setting.` },
@@ -38,9 +58,11 @@ const SpellDetailPage = () => {
       <View style={styles.badges}>
         {[spell.language, spell.category, spell.kind].map((label, index) => <View key={index} nativeID={`spell-tag-${spell.id}-${index}`} style={[styles.badge, { borderColor: palette.border, backgroundColor: palette.panel }]}><Text style={[styles.badgeText, { color: palette.lavender }]}>{label}</Text></View>)}
       </View>
-      <Pressable nativeID={`detail-save-${spell.id}`} accessibilityRole="button" accessibilityState={{ selected: saved }} onPress={() => void toggleSaved(spell.id)} style={[styles.save, { backgroundColor: palette.panel, borderColor: palette.border }]}>
-        <Icon name="bookmark" size={19} color={palette.gold} /><Text style={[styles.saveText, { color: palette.gold }]}>{saved ? `Saved to your grimoire` : `Save to your grimoire`}</Text>
+      <Pressable nativeID={`detail-save-${spell.id}`} accessibilityRole="button" accessibilityState={{ selected: saved, disabled: !ready }} disabled={!ready} onPress={() => void toggleSaved(spell.id)} style={[styles.save, { backgroundColor: palette.panel, borderColor: palette.border }]}>
+        <Icon name="bookmark" size={19} color={palette.gold} /><Text style={[styles.saveText, { color: palette.gold }]}>{!ready ? `Loading saved spells…` : saved ? storageMode === `session` ? `Saved for this session` : `Saved on this device` : `Save to your shelf`}</Text>
       </Pressable>
+
+      <Pressable nativeID={`detail-share-${spell.id}`} accessibilityRole="button" disabled={sharing} onPress={() => void shareSpell()} style={styles.link}><Icon name="external-link" size={17} color={palette.gold} /><Text style={[styles.linkText, { color: palette.gold }]}>{sharing ? `Opening sharing…` : `Share this spell`}</Text></Pressable>
 
       <View nativeID="spell-spelling-section" style={sectionStyle}>
         <View style={styles.sectionHeading}><Icon name="book" size={20} color={palette.gold} /><Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>How to spell it</Text></View>

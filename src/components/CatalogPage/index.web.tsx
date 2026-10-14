@@ -2,25 +2,87 @@ import './styles.scss';
 import { Icon } from '../Icon';
 import { AppLink } from '../AppLink';
 import { SpellCard } from '../SpellCard';
-import { useCatalogPage } from './useCatalogPage';
+import PageMetadata from '../PageMetadata';
+import { useEffect, useRef, useState } from 'react';
+import { useCatalogPage, type CatalogSort } from './useCatalogPage';
 
 const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
-  const { ready, error, query, skill, world, worlds, results, category, categories, savedFilter, setQuery, setSkill, setWorld, setCategory, clearSaved, clearFilters, setSavedFilter } = useCatalogPage(savedOnly);
-  const filtered = Boolean(query || skill || world || category || (!savedOnly && savedFilter));
+  const {
+    sort, ready, error, query, skill, world, worlds, results, category, filtered,
+    categories, savedCount, shelfWorlds, storageMode, unavailableCount,
+    savedFilter, setSort, setQuery, setSkill, setWorld, setCategory,
+    clearSaved, clearFilters, setSavedFilter,
+  } = useCatalogPage(savedOnly);
+  const clearTrigger = useRef<HTMLButtonElement>(null);
+  const cancelClear = useRef<HTMLButtonElement>(null);
+  const [confirmClear, setConfirmClear] = useState(false);
+  const [clearing, setClearing] = useState(false);
+  const visibleWorlds = savedOnly ? shelfWorlds : worlds;
+  const sessionOnly = storageMode === `session`;
+
+  useEffect(() => {
+    if (confirmClear) cancelClear.current?.focus();
+  }, [confirmClear]);
+
+  const closeClear = () => {
+    setConfirmClear(false);
+    clearTrigger.current?.focus();
+  };
+  const removeAll = async () => {
+    setClearing(true);
+    try {
+      await clearSaved();
+      setConfirmClear(false);
+    } finally {
+      setClearing(false);
+    }
+  };
 
   return (
-    <section id={savedOnly ? `saved-page` : `catalog-page`} className="ss-catalog" aria-labelledby="catalog-title">
-      <div id="catalog-page-heading" className="ss-catalog-heading"><p className="ss-catalog-eyebrow"><Icon name={savedOnly ? `bookmark` : `book`} size={16} />{savedOnly ? `Your own little spellbook` : `Words from extraordinary worlds`}</p><h1 id="catalog-title">{savedOnly ? `Your saved spells.` : `Find your next magic word.`}</h1><p>{savedOnly ? `Your favorites stay on this device. A collection to come back to, one spell at a time.` : `Browse incantations, invented languages, and the stories behind them. Search by name, meaning, language, or world.`}</p></div>
+    <section id={savedOnly ? `saved-page` : `catalog-page`} className={`ss-catalog${savedOnly ? ` ss-catalog--shelf` : ``}`} aria-labelledby="catalog-title">
+      <PageMetadata
+        noIndex={savedOnly}
+        canonicalPath={savedOnly ? `/saved` : `/spells`}
+        title={savedOnly ? `Your saved spells` : `The spell index`}
+        description={savedOnly ? `A personal shelf of bookmarked fictional spells, stored on this device. Search and revisit your favorite words, worlds, and stories.` : `Find fictional spells by name, story world, language, purpose, and skill. Read exact spellings, pronunciation guides, and sourced word origins.`}
+      />
+      <div id="catalog-page-heading" className="ss-catalog-heading">
+        <div className="ss-catalog-heading-copy">
+          <p className="ss-catalog-eyebrow"><Icon name={savedOnly ? `bookmark` : `book`} size={16} />{savedOnly ? `A shelf of your own` : `Words from extraordinary worlds`}</p>
+          <h1 id="catalog-title">{savedOnly ? `Your personal spellbook.` : `Find your next magic word.`}</h1>
+          <p>{savedOnly ? `The words you want to keep close. Revisit a favorite, find a forgotten incantation, or make room for your next discovery.` : `Browse incantations, invented languages, and the stories behind them. Search by name, meaning, language, or world.`}</p>
+        </div>
+        {savedOnly && <div id="saved-shelf-emblem" className="ss-catalog-shelf-emblem" aria-hidden="true"><Icon name="book" size={44} /><span>YOUR FIELD NOTES</span><i /><Icon name="spark" size={13} /></div>}
+      </div>
+
+      {savedOnly && <div id="saved-shelf-overview" className="ss-catalog-shelf-overview">
+        <div id="saved-shelf-count" className="ss-catalog-shelf-stat"><Icon name="bookmark" size={19} /><div><strong>{ready ? savedCount : `…`}</strong><span>Saved {savedCount === 1 ? `spell` : `spells`}</span></div></div>
+        <div id="saved-shelf-world-count" className="ss-catalog-shelf-stat"><Icon name="world" size={20} /><div><strong>{ready ? shelfWorlds.length : `…`}</strong><span>Story {shelfWorlds.length === 1 ? `world` : `worlds`}</span></div></div>
+        <div id="saved-shelf-storage" className="ss-catalog-storage-note"><span className={`ss-catalog-device-badge${sessionOnly ? ` is-session` : ``}`}><Icon name="shield" size={13} />{!ready ? `Opening your shelf` : sessionOnly ? `This Session Only` : storageMode ? `On This Device` : `Storage Unavailable`}</span><p>{sessionOnly ? `These changes may disappear when you leave. Account sync is not available.` : ready && !storageMode ? `Device storage could not be opened. Account sync is not available.` : `Saved in this browser or app, not an account. Cross-device sync is not available yet.`}</p></div>
+      </div>}
+
       <div id="catalog-filter-bar" className="ss-catalog-filters">
-        <label id="catalog-search-label" className="ss-catalog-search" htmlFor="catalog-search"><Icon name="search" size={18} /><span className="ss-visually-hidden">Search the spellbook</span><input id="catalog-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="A spell, a meaning, a world…" />{query && <button id="catalog-clear-search" type="button" aria-label="Clear search" onClick={() => setQuery(``)}><Icon name="close" size={16} /></button>}</label>
-        <label id="catalog-world-filter-label" className="ss-catalog-select-label" htmlFor="catalog-world-filter"><span>World</span><select id="catalog-world-filter" value={world} onChange={(event) => setWorld(event.target.value)}><option value="">All worlds</option>{worlds.map((item) => <option key={item.id} id={`catalog-world-option-${item.id}`} value={item.id}>{item.name}</option>)}</select></label>
-        <label id="catalog-category-filter-label" className="ss-catalog-select-label" htmlFor="catalog-category-filter"><span>Use</span><select id="catalog-category-filter" value={category} onChange={(event) => setCategory(event.target.value)}><option value="">All uses</option>{categories.map((item, index) => <option key={item} id={`catalog-category-option-${index}`} value={item}>{item}</option>)}</select></label>
+        <label id="catalog-search-label" className="ss-catalog-search" htmlFor="catalog-search"><Icon name="search" size={18} /><span className="ss-visually-hidden">{savedOnly ? `Search your saved spells` : `Search the spellbook`}</span><input id="catalog-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={savedOnly ? `Find a spell on your shelf…` : `A spell, a meaning, a world…`} />{query && <button id="catalog-clear-search" type="button" aria-label="Clear search" onClick={() => setQuery(``)}><Icon name="close" size={16} /></button>}</label>
+        <label id="catalog-world-filter-label" className="ss-catalog-select-label" htmlFor="catalog-world-filter"><span>World</span><select id="catalog-world-filter" value={world} onChange={(event) => setWorld(event.target.value)}><option value="">All worlds</option>{world && !visibleWorlds.some((item) => item.id === world) && <option value={world}>{worlds.find((item) => item.id === world)?.name ?? `Selected world`} · no saved spells</option>}{visibleWorlds.map((item) => <option key={item.id} id={`catalog-world-option-${item.id}`} value={item.id}>{item.name}</option>)}</select></label>
+        <label id="catalog-category-filter-label" className="ss-catalog-select-label" htmlFor="catalog-category-filter"><span>Use</span><select id="catalog-category-filter" value={category} onChange={(event) => setCategory(event.target.value)}><option value="">All uses</option>{category && !categories.includes(category) && <option value={category}>{category} · no saved spells</option>}{categories.map((item, index) => <option key={item} id={`catalog-category-option-${index}`} value={item}>{item}</option>)}</select></label>
         <label id="catalog-skill-filter-label" className="ss-catalog-select-label" htmlFor="catalog-skill-filter"><span>Skill</span><select id="catalog-skill-filter" value={skill} onChange={(event) => setSkill(event.target.value)}><option value="">All levels</option>{[`Beginner`, `Intermediate`, `Advanced`].map((item) => <option key={item} id={`catalog-skill-option-${item.toLowerCase()}`} value={item}>{item}</option>)}</select></label>
       </div>
-      <div id="catalog-results-toolbar" className="ss-catalog-toolbar"><p id="catalog-result-count" role="status">{ready ? `${results.length} ${results.length === 1 ? `spell` : `spells`}${filtered ? ` found` : ` in this collection`}` : `Opening the spellbook…`}</p><div className="ss-catalog-toolbar-actions">{!savedOnly && <label id="catalog-saved-filter-label" className="ss-catalog-saved-filter" htmlFor="catalog-saved-filter"><input id="catalog-saved-filter" type="checkbox" checked={savedFilter} onChange={(event) => setSavedFilter(event.target.checked)} /><Icon name="bookmark" size={15} />Saved only</label>}{filtered && <button id="catalog-reset-filters" type="button" onClick={clearFilters}><Icon name="close" size={14} />Clear filters</button>}{savedOnly && results.length > 0 && <button id="catalog-clear-saved" type="button" onClick={() => void clearSaved()}><Icon name="bookmark" size={14} />Clear saved spells</button>}</div></div>
+      <div id="catalog-results-toolbar" className="ss-catalog-toolbar">
+        <p id="catalog-result-count" role="status">{ready ? `${results.length} ${results.length === 1 ? `spell` : `spells`}${filtered ? ` found` : savedOnly ? ` on your shelf` : ` in the archive`}` : `Opening the spellbook…`}</p>
+        <div className="ss-catalog-toolbar-actions">
+          <label id="catalog-sort-label" className="ss-catalog-sort" htmlFor="catalog-sort"><span>Sort</span><select id="catalog-sort" value={sort} onChange={(event) => setSort(event.target.value as CatalogSort)}>{savedOnly ? <option value="recent">Recently saved</option> : <option value="catalog">Archive order</option>}<option value="name">Name, A–Z</option><option value="world">Story world</option></select></label>
+          {!savedOnly && <label id="catalog-saved-filter-label" className="ss-catalog-saved-filter" htmlFor="catalog-saved-filter"><input id="catalog-saved-filter" type="checkbox" checked={savedFilter} onChange={(event) => setSavedFilter(event.target.checked)} /><Icon name="bookmark" size={15} />Saved only</label>}
+          {filtered && <button id="catalog-reset-filters" type="button" onClick={clearFilters}><Icon name="close" size={14} />Clear filters</button>}
+          {savedOnly && savedCount > 0 && <button ref={clearTrigger} id="catalog-clear-saved" type="button" aria-expanded={confirmClear} aria-controls="saved-clear-confirmation" onClick={() => setConfirmClear(true)}><Icon name="close" size={14} />Clear shelf</button>}
+        </div>
+      </div>
+
+      {confirmClear && <div id="saved-clear-confirmation" className="ss-catalog-clear-confirmation" role="group" aria-labelledby="saved-clear-heading" onKeyDown={(event) => { if (event.key === `Escape` && !clearing) closeClear(); }}><div><h2 id="saved-clear-heading">Clear your saved shelf?</h2><p>This removes all {savedCount} {savedCount === 1 ? `bookmark` : `bookmarks`}, not just filtered results. The spell archive and reading history stay available.</p></div><div className="ss-catalog-clear-actions"><button ref={cancelClear} id="saved-clear-cancel" type="button" disabled={clearing} onClick={closeClear}>Keep my spells</button><button id="saved-clear-confirm" type="button" disabled={clearing} onClick={() => void removeAll()}><Icon name="close" size={14} />{clearing ? `Clearing…` : `Clear all bookmarks`}</button></div></div>}
       {error && <p id="catalog-storage-warning" className="ss-catalog-warning" role="status"><Icon name="shield" size={17} />{error}</p>}
-      {!ready ? <div id="catalog-skeleton-grid" className="ss-catalog-grid" aria-hidden="true">{Array.from({ length: 6 }, (_, index) => <div key={index} id={`catalog-skeleton-${index}`} className="ss-catalog-skeleton"><span /><span /><span /></div>)}</div> : results.length ? <div id="catalog-spell-grid" className="ss-catalog-grid">{results.map((spell) => <SpellCard key={spell.id} spell={spell} />)}</div> : <div id="catalog-empty-state" className="ss-catalog-empty"><Icon name={savedOnly ? `bookmark` : `search`} size={37} /><h2>{savedOnly && !filtered ? `A blank page, for now.` : `No spells on this page.`}</h2><p>{savedOnly && !filtered ? `Tap the bookmark on any spell to start your personal collection.` : `Try another spelling, story world, or filter. Your next discovery might be one word away.`}</p>{filtered ? <button id="catalog-empty-reset" type="button" onClick={clearFilters}><Icon name="close" size={16} />Clear filters</button> : <AppLink id="catalog-empty-browse" href="/spells"><Icon name="book" size={16} />Explore the spellbook<Icon name="arrow" size={16} /></AppLink>}</div>}
-      <p id="catalog-editorial-note" className="ss-catalog-editorial"><Icon name="book" size={15} />All effects belong to fictional worlds. Danger, utility, and skill levels are editorial guides, with linked sources inside each entry.</p>
+      {savedOnly && ready && unavailableCount > 0 && <p id="saved-unavailable-records" className="ss-catalog-warning"><Icon name="book" size={17} />{unavailableCount} saved {unavailableCount === 1 ? `entry isn’t` : `entries aren’t`} in this catalog. {unavailableCount === 1 ? `Its bookmark is` : `Their bookmarks are`} preserved until you clear the shelf.</p>}
+      {!ready ? <div id="catalog-skeleton-grid" className="ss-catalog-grid" aria-hidden="true">{Array.from({ length: 6 }, (_, index) => <div key={index} id={`catalog-skeleton-${index}`} className="ss-catalog-skeleton"><span /><span /><span /></div>)}</div> : results.length ? <div id="catalog-spell-grid" className="ss-catalog-grid">{results.map((spell) => <SpellCard key={spell.id} spell={spell} />)}</div> : <div id="catalog-empty-state" className="ss-catalog-empty"><Icon name={savedOnly && !savedCount ? `bookmark` : `search`} size={37} /><h2>{savedOnly && !savedCount ? `A blank page, for now.` : savedOnly ? `No matches on your shelf.` : `No spells on this page.`}</h2><p>{savedOnly && !savedCount ? `Choose a spell that catches your eye and tap its bookmark. It will be waiting right here, on this device.` : savedOnly ? `Try another word or clear your filters. Your saved bookmarks have not been changed.` : `Try another spelling, story world, or filter. Your next discovery might be one word away.`}</p>{filtered && !(savedOnly && !savedCount) ? <button id="catalog-empty-reset" type="button" onClick={clearFilters}><Icon name="close" size={16} />Clear filters</button> : <AppLink id="catalog-empty-browse" href="/spells"><Icon name="book" size={16} />Explore the spellbook<Icon name="arrow" size={16} /></AppLink>}</div>}
+      {savedOnly && savedCount > 0 && <div id="saved-shelf-discover" className="ss-catalog-discover"><span><Icon name="spark" size={17} />There’s room for another discovery.</span><AppLink id="saved-shelf-browse" href="/spells">Find your next spell<Icon name="arrow" size={16} /></AppLink></div>}
+      <p id="catalog-editorial-note" className="ss-catalog-editorial"><Icon name="book" size={15} />{savedOnly ? `Use a spell’s bookmark to remove it from your shelf. Clearing browser or app data can remove local bookmarks.` : `All effects belong to fictional worlds. Danger, utility, and skill levels are editorial guides, with linked sources inside each entry.`}</p>
     </section>
   );
 };
