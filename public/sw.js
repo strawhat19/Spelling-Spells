@@ -1,4 +1,4 @@
-const CACHE = `spelling-spells-public-v2`;
+const CACHE = `spelling-spells-public-v3`;
 const CORE = [
   `/`,
   `/favicon.svg`,
@@ -9,6 +9,7 @@ const CORE = [
   `/visuals/hero-night-background.png`,
 ];
 const publicPages = new Set([
+  `/help`, `/guidelines`, `/data-privacy`,
   `/`, `/spells`, `/worlds`, `/pronunciation`, `/about`, `/about-us`,
   `/contact`, `/contact-us`, `/terms`, `/terms-of-service`, `/privacy`, `/privacy-policy`,
 ]);

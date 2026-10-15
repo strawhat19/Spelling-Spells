@@ -5,6 +5,7 @@ import type { PageMetadataProps } from './types';
 const PageMetadata = ({ title, description, canonicalPath, noIndex = false }: PageMetadataProps) => {
   const pageTitle = `${title} · Spelling Spells`;
   const publicUrl = canonicalPath ? getPublicPageUrl(canonicalPath) : undefined;
+  const imageUrl = getPublicPageUrl(`/icons/icon-512.png`);
   return (
     <Head>
       <title>{pageTitle}</title>
@@ -14,6 +15,9 @@ const PageMetadata = ({ title, description, canonicalPath, noIndex = false }: Pa
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content="Spelling Spells" />
+      {imageUrl && <meta property='og:image' content={imageUrl} />}
+      {imageUrl && <meta property='og:image:alt' content='Spelling Spells archive emblem' />}
+      {imageUrl && <meta name='twitter:image' content={imageUrl} />}
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={description} />

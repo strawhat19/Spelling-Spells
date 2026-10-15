@@ -1,4 +1,4 @@
-export type InfoKind = `about` | `terms` | `contact` | `privacy` | `not-found`;
+export type InfoKind = `about` | `terms` | `contact` | `privacy` | `help` | `guidelines` | `data-privacy` | `not-found`;
 
 export const informationPages = {
   about: {
@@ -43,7 +43,7 @@ export const informationPages = {
     icon: `shield`,
     kicker: `Privacy policy`,
     title: `Your spellbook stays close to home.`,
-    intro: `Spelling Spells can be browsed without an account. Device bookmarks and private account collections are separate. Account controls are enabled only when their Firebase service is configured; when unavailable, disabled controls do not collect credentials. Third-party analytics collection is not enabled in this rollout.`,
+    intro: `Spelling Spells can be browsed without an account. Device bookmarks and private account collections are separate. Account services are currently held disconnected, even if configuration values are present; when unavailable, disabled controls do not collect credentials. Third-party analytics collection is not enabled in this rollout.`,
     sections: [
       { title: `What the app keeps`, body: `The app stores saved spell IDs, recently viewed spell IDs, your theme preference, and account-navigation display preferences on the current browser or device. If you choose Save Draft, your contribution text is stored on that device too; it is not sent to an editor. Unsaved draft edits can remain in memory while the app is open. Catalog content is bundled with the app. Search and filter choices are not sent to a Spelling Spells backend.` },
       { title: `Where that data lives`, body: `On the web, guest preferences use localStorage; mobile uses device storage. Browsers and operating systems control when that storage may be cleared. Signing in does not automatically upload guest bookmarks, history or contribution drafts. The explicit import action copies supported device bookmarks into the private account collection without deleting the originals.` },
@@ -53,6 +53,46 @@ export const informationPages = {
       { title: `Links and hosting`, body: `Opening a source or Piratechs link sends you to an external website with its own privacy practices. The service hosting this website may process ordinary connection information, such as an IP address and request logs, to serve the page.` },
       { title: `Your choices`, body: `The Saved page identifies whether its actions affect this device or the signed-in account. You can remove individual bookmarks or confirm clearing that collection; the public archive and local viewing history are not deleted. Clearing browser/app storage removes local preferences, not cloud data. Contribution drafts can be cleared on the Contribute page. For account-data deletion requests, use the Contact page; this release does not provide a one-click account deletion action.` },
       { title: `Questions`, body: `For privacy questions about Spelling Spells, visit the Contact page and follow the Piratechs contact link.` },
+    ],
+  },
+  help: {
+    icon: `book`,
+    kicker: `A field guide to the archive`,
+    title: `Find your way around the spellbook.`,
+    intro: `Explore stories through their words. You can browse the archive and keep a device spellbook without creating an account.`,
+    sections: [
+      { title: `Find a spell`, body: `Open Spell Index to search the catalog by name and explore its filters. Each spell has a dedicated page with spelling, a pronunciation guide, its fictional effects and source links. The catalog is curated, not a complete index of every fantasy world.` },
+      { title: `Keep a device spellbook`, body: `Use a spell card’s bookmark action to save it on this browser or device. Open Saved spells to revisit or remove bookmarks. Clearing device storage can remove them. These bookmarks are not a cloud backup.` },
+      { title: `Read pronunciation with context`, body: `Pronunciation guides are editorial reading aids unless an entry identifies a creator’s source. If your browser offers speech, the computer voice may pronounce fantasy words differently. No microphone recording is needed.` },
+      { title: `Accounts are not connected yet`, body: `Google and email/password controls are unavailable in this release. There is no account creation, cross-device sync or Owner dashboard data yet. Do not enter credentials into a disconnected control.` },
+      { title: `Prepare a contribution`, body: `The Contribute page lets you prepare and explicitly save a device-only draft. It does not send a submission to an editor. Read Editorial Guidelines for source, attribution and safety expectations before preparing a suggestion.` },
+      { title: `Get support`, body: `Use Contact for the Piratechs contact route. Include the page address, device/browser and a description of what happened. Never include passwords, verification codes, private keys or payment-card information.` },
+    ],
+  },
+  guidelines: {
+    icon: `shield`,
+    kicker: `Editorial guidelines`,
+    title: `Good sources make better spellbooks.`,
+    intro: `These guidelines explain how suggestions should be prepared for future review. Online submission and publication are not connected in this release.`,
+    sections: [
+      { title: `Keep the source close`, body: `Name the story, game, book or adaptation. Prefer an original work or an official creator/publisher reference. Include a precise HTTPS link and distinguish different editions or adaptations when their wording differs.` },
+      { title: `Write in your own words`, body: `Summarize an entry rather than copying a wiki, book passage, script or another author’s explanation. Credit references. Do not submit copyrighted artwork, audio, long quotations or material you do not have permission to share.` },
+      { title: `Separate fact from interpretation`, body: `Identify creator-confirmed pronunciation and origins separately from editorial suggestions. Do not present a guessed translation, computer voice or fan theory as an official source.` },
+      { title: `Fictional danger is not real-world advice`, body: `Danger and skill labels describe fictional narrative effects. They are not instructions, health advice or proof of supernatural effects. Do not include actionable harm, dangerous rituals or medical claims.` },
+      { title: `Respect people and cultures`, body: `Keep personal information, harassment, impersonation and spam out of suggestions. Describe beliefs and traditions respectfully and with context. Additional languages and cultural material require suitable sources and review; they are not part of the current publishing workflow.` },
+      { title: `Review before publication`, body: `Future review should check source, spelling, originality, context and duplicate entries. A submitted suggestion will not guarantee publication. The current device draft has not been received or reviewed by a person.` },
+    ],
+  },
+  'data-privacy': {
+    icon: `shield`,
+    kicker: `Your data and choices`,
+    title: `Know what stays, and what you can remove.`,
+    intro: `Account services are currently disconnected. This page describes the working device controls and the account-deletion work still required before a connected mobile release.`,
+    sections: [
+      { title: `Bookmarks on this device`, body: `Open Saved spells to remove individual bookmarks or use its confirmed clear action. That action affects the collection identified on the page, not other devices. Viewing history and theme preferences are separate.` },
+      { title: `Contribution drafts`, body: `Use the clear action on Contribute to remove its saved draft. A device draft has not been sent to the team. Browser/app storage controls can remove local preferences, but clearing local storage is not a request to delete future cloud data.` },
+      { title: `Future account deletion`, body: `This release cannot create or delete a connected account. A future connected release needs an authenticated deletion flow covering the Firebase identity and the associated private app records, plus clear handling of any retained public contributions. Signing out alone will not delete an account.` },
+      { title: `Ask a privacy question`, body: `Use the Contact page and the Piratechs contact route. State that the question concerns Spelling Spells and describe the data involved. Do not send a password, verification code or private credential. No deletion request is submitted by viewing this page.` },
     ],
   },
   'not-found': {

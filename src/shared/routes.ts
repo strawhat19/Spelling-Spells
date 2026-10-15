@@ -7,6 +7,8 @@ export const navigation = [
 
 export const footerNavigation = [
   { href: `/about`, label: `About` },
+  { href: `/help`, label: `Help` },
+  { href: `/guidelines`, label: `Editorial Guidelines` },
   { href: `/terms`, label: `Terms` },
   { href: `/contact`, label: `Contact` },
   { href: `/privacy`, label: `Privacy Policy` },
@@ -36,7 +38,9 @@ export const accountNavigation: AccountRoute[] = [
   { href: `/profile/connections`, icon: `link`, label: `Connections`, access: `account`, section: `account` },
   { href: `/submissions`, icon: `edit`, label: `My Submissions`, access: `account`, section: `account` },
   { href: `/dashboard`, icon: `dashboard`, label: `Dashboard`, access: `owner`, section: `admin` },
+  { href: `/users`, icon: `user`, label: `Users`, access: `owner`, section: `admin` },
   { href: `/analytics`, icon: `chart`, label: `Analytics`, access: `owner`, section: `admin` },
+  { href: `/feedback`, icon: `edit`, label: `Feedback`, access: `owner`, section: `admin` },
   { href: `/review`, icon: `shield`, label: `Review Submissions`, access: `owner`, section: `admin` },
 ];
 

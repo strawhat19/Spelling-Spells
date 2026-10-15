@@ -1,5 +1,6 @@
 import { informationPages, type InfoKind } from './content';
 import Icon from '../Icon';
+import PageMetadata from '../PageMetadata';
 import styles from './styles.native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '../../shared/themeContext/useTheme';
@@ -12,6 +13,7 @@ const InfoPage = ({ kind }: { kind: InfoKind }) => {
 
   return (
     <View nativeID={`information-page-${kind}`} style={styles.page}>
+      <PageMetadata title={content.kicker} description={content.intro} noIndex={kind === `not-found`} canonicalPath={kind === `not-found` ? undefined : `/${kind}`} />
       <Text style={[styles.eyebrow, { color: palette.gold }]}>SPELLING SPELLS</Text>
       <Text nativeID={`information-title-${kind}`} accessibilityRole="header" style={[styles.title, { color: palette.text }]}>{content.title}</Text>
       <Text style={[styles.intro, { color: palette.muted }]}>{content.intro}</Text>
@@ -21,6 +23,7 @@ const InfoPage = ({ kind }: { kind: InfoKind }) => {
       ) : (
         <Pressable nativeID={`information-browse-${kind}`} accessibilityRole="link" onPress={() => router.push(`/spells`)} style={styles.action}><Text style={[styles.actionText, { color: palette.gold }]}>Explore the spell library</Text><Icon name="arrow-right" size={17} color={palette.gold} /></Pressable>
       )}
+      {([`help`, `guidelines`, `data-privacy`, `privacy`, `contact`] as const).filter((route) => route !== kind).map((route) => <Pressable key={route} nativeID={`info-${kind}-link-${route}`} accessibilityRole='link' onPress={() => router.push(`/${route}`)} style={styles.action}><Icon name='book' size={16} color={palette.gold} /><Text style={[styles.actionText, { color: palette.gold }]}>{route === `data-privacy` ? `Your Data` : route === `guidelines` ? `Editorial Guidelines` : route[0].toUpperCase() + route.slice(1)}</Text></Pressable>)}
     </View>
   );
 };

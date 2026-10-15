@@ -19,6 +19,9 @@
     },
     "android": {
       "package": "com.piratechs.spellingspells"
+    },
+    "extra": {
+      "siteUrl": "https://spelling-spells.vercel.app"
     }
   }
 }

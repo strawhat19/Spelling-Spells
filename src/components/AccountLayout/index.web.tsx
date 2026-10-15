@@ -7,7 +7,8 @@ import './styles.scss';
 const AccountLayout = ({ title, children, description, section = `account`, eyebrow = `YOUR CORNER OF THE ARCHIVE` }: AccountLayoutProps) => {
   const page = useAccountLayout();
   const dashboard = page.adminLinks.find((item) => item.href === `/dashboard`);
-  const childrenLinks = page.adminLinks.filter((item) => item.href !== `/dashboard` && item.href !== `/review`);
+  const childrenLinks = page.adminLinks.filter((item) => item.href !== `/dashboard` && item.href !== `/review` && item.href !== `/feedback`);
+  const feedback = page.adminLinks.find((item) => item.href === `/feedback`);
   const review = page.adminLinks.find((item) => item.href === `/review`);
   const current = (href: string) => page.pathname === href;
   return (
@@ -23,11 +24,12 @@ const AccountLayout = ({ title, children, description, section = `account`, eyeb
           {dashboard ? <nav id='admin-navigation' className='account-sidebar-group' aria-label='Owner administration'>
             <h2 className='account-sidebar-heading'>ADMIN</h2>
             <div className='account-sidebar-parent'>
-              <AppLink id='account-nav-dashboard' href={dashboard.href} title={dashboard.label} aria-label={dashboard.label} aria-current={current(dashboard.href) ? `page` : undefined} className={`account-sidebar-link ${current(`/dashboard`) || current(`/analytics`) ? `is-active` : ``}`}><Icon name={dashboard.icon} size={16} /><span>{dashboard.label}</span></AppLink>
+              <AppLink id='account-nav-dashboard' href={dashboard.href} title={dashboard.label} aria-label={dashboard.label} aria-current={current(dashboard.href) ? `page` : undefined} className={`account-sidebar-link ${current(`/dashboard`) || childrenLinks.some((item) => current(item.href)) ? `is-active` : ``}`}><Icon name={dashboard.icon} size={16} /><span>{dashboard.label}</span></AppLink>
               <button id='account-toggle-desktop-dashboard' type='button' className='account-submenu-toggle account-desktop-control' aria-controls='account-desktop-dashboard-children' aria-label='Toggle dashboard pages' aria-expanded={page.desktopDashboard} onClick={() => page.toggleDashboard(false)}><Icon name={page.desktopDashboard ? `up` : `down`} size={13} /></button>
               <button id='account-toggle-mobile-dashboard' type='button' className='account-submenu-toggle account-mobile-control' aria-controls='account-mobile-dashboard-children' aria-label='Toggle dashboard pages' aria-expanded={page.mobileDashboard} onClick={() => page.toggleDashboard(true)}><Icon name={page.mobileDashboard ? `up` : `down`} size={13} /></button>
             </div>
             {([false, true] as const).map((mobile) => <div key={String(mobile)} id={`account-${mobile ? `mobile` : `desktop`}-dashboard-children`} className={`account-sidebar-children ${mobile ? `account-mobile-control` : `account-desktop-control`} ${(mobile ? page.mobileDashboard : page.desktopDashboard) || (!mobile && page.collapsed) ? `is-open` : ``}`} aria-hidden={!((mobile ? page.mobileDashboard : page.desktopDashboard) || (!mobile && page.collapsed))}><div>{childrenLinks.map((item) => <AppLink key={item.href} href={item.href} id={`account-${mobile ? `mobile` : `desktop`}-child-${item.icon}`} title={item.label} aria-label={item.label} tabIndex={(mobile ? page.mobileDashboard : page.desktopDashboard) || (!mobile && page.collapsed) ? 0 : -1} aria-current={current(item.href) ? `page` : undefined} className={`account-sidebar-link ${current(item.href) ? `is-active` : ``}`}><Icon name={item.icon} size={15} /><span>{item.label}</span></AppLink>)}</div></div>)}
+            {feedback ? <AppLink id='account-nav-feedback' href={feedback.href} aria-current={current(feedback.href) ? `page` : undefined} className={`account-sidebar-link ${current(feedback.href) ? `is-active` : ``}`}><Icon name={feedback.icon} size={16} /><span>{feedback.label}</span></AppLink> : null}
             {review ? <AppLink id='account-nav-review' href={review.href} title={review.label} aria-label={review.label} aria-current={current(review.href) ? `page` : undefined} className={`account-sidebar-link ${current(review.href) ? `is-active` : ``}`}><Icon name={review.icon} size={16} /><span>{review.label}</span></AppLink> : null}
           </nav> : null}
           <div className='account-sidebar-footnote'><Icon name='shield' size={14} /><span>{page.account ? `Private account workspace` : `Account services not connected`}</span></div>

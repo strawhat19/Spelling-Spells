@@ -61,6 +61,7 @@ const ProfilePage = (props: ProfilePageProps) => {
         <Text style={[styles.copy, { color: page.palette.muted }]}>Account No. {page.account?.number}</Text>
         <Text nativeID='profile-role' style={[styles.copy, { color: page.palette.muted }]}>Access: {page.account?.roleVerified ? page.account.role : `Unverified`} (read only)</Text>
         <Text style={[styles.copy, { color: page.palette.muted }]}>Profile: Private</Text>
+        <Pressable nativeID='profile-data-choices' accessibilityRole='link' onPress={() => router.push(`/data-privacy`)} style={secondaryStyle}><Icon name='shield' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>Your data and choices</Text></Pressable>
         <Pressable nativeID='profile-open-connections' accessibilityRole='link' onPress={() => router.push(`/profile/connections`)} style={secondaryStyle}><Icon name='link' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>Private connections</Text></Pressable>
         <Pressable nativeID='profile-open-spellbook' accessibilityRole='link' onPress={() => router.push(`/saved`)} style={secondaryStyle}><Icon name='bookmark' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>Your spellbook</Text></Pressable>
       </View>

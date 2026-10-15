@@ -65,6 +65,7 @@ const ProfilePage = (props: ProfilePageProps) => {
           <dl><div><dt>No.</dt><dd>{page.account?.number}</dd></div><div><dt>Access</dt><dd>{page.account?.roleVerified ? page.account.role : `Unverified`}</dd></div><div><dt>Profile</dt><dd>Private</dd></div><div><dt>Email</dt><dd>{page.identity?.emailVerified ? `Verified` : `Unverified`}</dd></div></dl>
           <AppLink id='profile-open-connections' href='/profile/connections' className='profile-metadata-link'><Icon name='link' size={15} /> Private connections<Icon name='arrow-right' size={14} /></AppLink>
           <AppLink id='profile-open-spellbook' href='/saved' className='profile-metadata-link'><Icon name='bookmark' size={15} /> Your spellbook<Icon name='arrow-right' size={14} /></AppLink>
+          <AppLink id='profile-data-choices' href='/data-privacy' className='profile-metadata-link'><Icon name='shield' size={15} /> Your data and choices<Icon name='arrow-right' size={14} /></AppLink>
           <div className='profile-device-settings'><Icon name='moon' size={19} /><h3>Make yourself at home.</h3><p>Theme is saved on this device, independently of your account.</p><button id='profile-toggle-theme' type='button' onClick={() => void page.toggleTheme()}><Icon name={page.theme === `night` ? `sun` : `moon`} size={15} /> Use {page.theme === `night` ? `Ivory` : `Midnight`} theme</button></div>
         </aside>
       </div>
