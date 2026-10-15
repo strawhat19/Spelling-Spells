@@ -1,3 +1,4 @@
+import DeviceProfile from '../DeviceProfile';
 import Icon from '../Icon';
 import styles from './styles.native';
 import { useRouter } from 'expo-router';
@@ -19,6 +20,7 @@ const ProfilePage = (props: ProfilePageProps) => {
   </View> : null;
 
   return <AccountLayout title={page.title} description={page.description}>
+    {!page.allowed && page.view === `profile` ? <DeviceProfile /> : null}
     {!page.allowed ? page.showRecovery ? <View nativeID='profile-connection-recovery' style={cardStyle}>
       <Icon name='shield' size={24} color={page.palette.gold} />
       <Text accessibilityRole='header' style={[styles.title, { color: page.palette.text }]}>{page.loading ? `Connecting your private account` : `Private account unavailable`}</Text>

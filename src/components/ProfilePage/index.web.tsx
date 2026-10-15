@@ -1,3 +1,4 @@
+import DeviceProfile from '../DeviceProfile';
 import Icon from '../Icon';
 import AppLink from '../AppLink';
 import AccountLayout from '../AccountLayout';
@@ -14,6 +15,7 @@ const ProfilePage = (props: ProfilePageProps) => {
   </div> : null;
 
   return <AccountLayout title={page.title} description={page.description}>
+    {!page.allowed && page.view === `profile` ? <DeviceProfile /> : null}
     {!page.allowed ? page.showRecovery ? <section id='profile-connection-recovery' className='profile-settings'>
       <div className='profile-status-note' role={page.loading ? `status` : `alert`}><Icon name='shield' size={20} /><div><strong>{page.loading ? `Connecting your private account` : `Private account unavailable`}</strong><p>{page.loading ? `Waiting for the server to confirm your private account. You can sign out without waiting.` : page.message ?? `Your identity is signed in, but the private account could not be loaded. Retry the connection or sign out before changing accounts.`}</p></div></div>
       <div className='profile-inline-actions'>

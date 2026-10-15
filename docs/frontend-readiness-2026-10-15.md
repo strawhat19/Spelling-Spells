@@ -45,3 +45,7 @@ Source reference: Domains Database AccountSidebar web/native, ProfileSettings we
 Review branch: frontend/firebase-readiness-2026-10-15. The first checkpoint was committed as 077d731a8126545eb7b97dd5176704540ec7445f (v0.0.0.7-SpellingSpellsFrontendReadiness), and its automatic Vercel branch deployment reported success. Main remains outside this task. The follow-up keeps the same branch and no-connections constraint. No manually initiated test/build/UI/native check has been performed; automatic branch CI is separate from app-behavior verification.
 
 Remaining parity limits: no actual user records, role-management actions, measured provider reports, live charts, Firebase connection or account creation. Existing native Google authentication is still unsupported. Frontend layout readiness is not a completed connected system or store/ad approval.
+
+## Device-local profile follow-up
+
+The profile page now offers a separate device nickname and reading note without sign-in, plus the existing persisted theme control. Explicit Save and confirmed Clear use the existing guarded platform storage adapter (localStorage on web, AsyncStorage on native). Names are bounded to 80 characters and notes to 500; errors are visible and corrupt stored values are preserved rather than overwritten. No account, role, password, upload, cloud migration or analytics access is created. Existing device bookmarks and saved contribution drafts already persist independently. Contribution drafts are not submitted or published. Manual checks were not run.

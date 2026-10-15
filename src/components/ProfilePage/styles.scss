@@ -64,3 +64,6 @@
 [data-theme='ivory'] .profile-connection-status--connected { color: #256c4e; }
 @media (max-width: 650px) { .profile-form-footer { align-items: flex-start; flex-direction: column; } .profile-form-actions { width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .profile-settings *, .profile-connections * { transition: none !important; animation: none !important; } }
+
+#device-profile { margin-bottom: 24px; }
+#device-profile textarea { width: 100%; min-height: 100px; padding: 12px; color: inherit; background: transparent; border: 1px solid currentColor; border-radius: 8px; font: inherit; resize: vertical; }
