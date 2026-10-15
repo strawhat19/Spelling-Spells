@@ -62,3 +62,7 @@ Implementation must connect each control through view → shared context/service
 For each requested module, report Source: Complete/Incomplete, Connection: Connected/Setup Needed/Unavailable, and Validation: User Review Pending/Checks Performed with actual evidence. Do not call a module Connected merely because its files exist. If cloud access is missing, complete the reviewable boundary and honest connection UI, name the precise prerequisite, and continue independent source work.
 
 Give the user a review map for sign-in/profile persistence, Subscriber defaults and role rejection, account-switch cleanup, private connection save/verification/sync, live dashboard updates, submenu persistence/root-route aliases, feature role/minimum-tier gates and all four consumers, form save/private review, announcement publication/account read state, analytics country flags/device/page/source rows, range/null/export behavior and missing-plan errors. These are behaviors to review; do not run tests, builds, UI checks, commits or live changes unless authorized under AGENTS.md. Authorized deployment still checks actual cloud scope and existing stricter policies before applying changes.
+
+## Disconnected Frontend Preparation
+
+When the request excludes backend connections, use [Disconnected Account Frontend](skills/disconnected-account-frontend/SKILL.md) and its adoption prompt instead of the connected-account prompt. Deliver reviewable pages and explicit unavailable states; record live-service prerequisites separately.

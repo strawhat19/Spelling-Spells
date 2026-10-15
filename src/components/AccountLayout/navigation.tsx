@@ -2,18 +2,21 @@ import { useAuth } from '../../shared/authContext';
 import { createContext, useContext, useEffect, useRef, useState, type PropsWithChildren } from 'react';
 import { readStoredPreference, writeStoredPreference, queueStorageOperation } from '../../shared/common/storage';
 
-const defaults = { collapsed: false, desktopDashboard: true, mobileDashboard: true };
+const defaults = { collapsed: false, desktopDashboard: true, mobileDashboard: true, desktopFeedback: true, mobileFeedback: true };
 type NavigationPreferences = typeof defaults;
 type NavigationContextValue = NavigationPreferences & {
   error: string | null;
   toggleCollapsed: () => void;
   toggleDashboard: (mobile: boolean) => void;
+  toggleFeedback: (mobile: boolean) => void;
 };
 const NavigationContext = createContext<NavigationContextValue | null>(null);
 const isPreference = (value: unknown): value is NavigationPreferences => {
   if (!value || typeof value !== `object`) return false;
   const candidate = value as NavigationPreferences;
-  return typeof candidate.collapsed === `boolean` && typeof candidate.desktopDashboard === `boolean` && typeof candidate.mobileDashboard === `boolean`;
+  return typeof candidate.collapsed === `boolean` && typeof candidate.desktopDashboard === `boolean` && typeof candidate.mobileDashboard === `boolean`
+    && (candidate.desktopFeedback === undefined || typeof candidate.desktopFeedback === `boolean`)
+    && (candidate.mobileFeedback === undefined || typeof candidate.mobileFeedback === `boolean`);
 };
 
 export const AccountNavigationProvider = ({ children }: PropsWithChildren) => {
@@ -30,7 +33,7 @@ export const AccountNavigationProvider = ({ children }: PropsWithChildren) => {
     setError(null);
     void readStoredPreference(key, `Account navigation`, isPreference, defaults).then((saved) => {
       if (generation.current !== current) return;
-      setState({ scope, preferences: saved.value });
+      setState({ scope, preferences: { ...defaults, ...saved.value } });
       setError(saved.error);
     });
     return () => { generation.current += 1; };
@@ -49,6 +52,7 @@ export const AccountNavigationProvider = ({ children }: PropsWithChildren) => {
     ...preferences,
     error,
     toggleCollapsed: () => update({ ...preferences, collapsed: !preferences.collapsed }),
+    toggleFeedback: (mobile) => update({ ...preferences, [mobile ? `mobileFeedback` : `desktopFeedback`]: !(mobile ? preferences.mobileFeedback : preferences.desktopFeedback) }),
     toggleDashboard: (mobile) => update({ ...preferences, [mobile ? `mobileDashboard` : `desktopDashboard`]: !(mobile ? preferences.mobileDashboard : preferences.desktopDashboard) }),
   }}>{children}</NavigationContext.Provider>;
 };

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useAuth } from '../../shared/authContext';
 import { usePathname } from 'expo-router';
 import { useAccountNavigation } from './navigation';
@@ -18,5 +19,7 @@ export const useAccountLayout = () => {
   const navigation = useAccountNavigation();
   const accountLinks = accountNavigation.filter((route) => route.section === `account`);
   const adminLinks = canAccessOwner(auth.account) ? accountNavigation.filter((route) => route.section === `admin`) : [];
-  return { ...auth, ...navigation, pathname, adminLinks, accountLinks, avatarUrl: getAccountAvatar(auth.account) };
+  const avatar = getAccountAvatar(auth.account);
+  const [failedAvatar, setFailedAvatar] = useState<string | null>(null);
+  return { ...auth, ...navigation, pathname, adminLinks, accountLinks, avatarUrl: avatar === failedAvatar ? null : avatar, onAvatarError: () => setFailedAvatar(avatar) };
 };

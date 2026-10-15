@@ -30,3 +30,18 @@ No test, typecheck, build, emulator, browser or native commands were run for thi
 ## Review reference
 
 Referenced Domains Database's current `src/shared/routes.ts` through the GitHub connector: top-level Users/Feedback routes and account/admin separation. Existing Spelling Spells account layout and imported generic guidance already follow the same family; no unrelated Domain Database business model, credentials or registrar integration was copied. Remote base checked as `29f5b94cd6831adaa2722ab4b2f8f3acdf12505b`; this workspace's equivalent local base is `909de95` with source tree `6e3da0509ab04dbab3b77d429b88bdac3fa78e1e`.
+
+## Shared account-layout follow-up
+
+The user expanded the request to repeat the established BengaliBlush / Domains Database account/dashboard patterns across four apps, preserving each theme and keeping every new backend disconnected. This Spelling Spells follow-up adds:
+
+- Native ACCOUNT/ADMIN groups, Dashboard and Feedback submenus, persisted submenu choices and bottom identity controls. Existing older navigation preferences keep their defaults during loading. Web Feedback now owns the existing Review Submissions child. No menu grants an Owner role.
+- Sidebar avatar error fallback to the existing initial; web requests omit referrer details.
+- Traffic and Health dimension controls, 7/30/90-day layout selection and Chart/List presentation on web/native. These controls change only the layout, never fetch a report, initialize analytics or fabricate a chart. Refresh/export remain unavailable. Keyboard arrow/Home/End selection is provided for web dimension controls.
+- The complete shared Bengali-derived ai/ pack and AGENTS.md are synchronized with the generic disconnected-account-frontend workflow, adoption prompt and rule 26. No project identity or actual setup values were added to ai/.
+
+Source reference: Domains Database AccountSidebar web/native, ProfileSettings web and TrafficAnalytics web at the current main source inspected 2026-10-15; the generic pack retains BengaliBlush 7c26b242 licensing and references. The requested reverse-engineer-anything skill source was not available in the checked repositories/catalog/tools; this work uses source inspection and does not claim that skill was run.
+
+Review branch: frontend/firebase-readiness-2026-10-15. The first checkpoint was committed as 077d731a8126545eb7b97dd5176704540ec7445f (v0.0.0.7-SpellingSpellsFrontendReadiness), and its automatic Vercel branch deployment reported success. Main remains outside this task. The follow-up keeps the same branch and no-connections constraint. No manually initiated test/build/UI/native check has been performed; automatic branch CI is separate from app-behavior verification.
+
+Remaining parity limits: no actual user records, role-management actions, measured provider reports, live charts, Firebase connection or account creation. Existing native Google authentication is still unsupported. Frontend layout readiness is not a completed connected system or store/ad approval.

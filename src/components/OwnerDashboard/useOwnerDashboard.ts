@@ -35,18 +35,34 @@ export const reportContent = {
     detail: `Runtime requests, errors, and latency need a protected reporting service. No runtime measurements are available.`,
     source: `Runtime provider`,
     metrics: [`Requests`, `Errors`, `Latency`],
-    dimensions: [`Requests`, `Latency`, `Routes`, `Statuses`],
+    dimensions: [`Compute`, `Memory`, `Requests`, `Latency`, `Routes`, `Statuses`, `Cache`],
   },
 };
 
 export const useOwnerDashboard = ({ view = `overview` }: OwnerDashboardProps) => {
   const auth = useAuth();
-  const [report, setReport] = useState<ReportKind>(`traffic`);
+  const [report, setReportState] = useState<ReportKind>(`traffic`);
+  const [dimension, setDimension] = useState(`Overview`);
+  const [period, setPeriod] = useState<7 | 30 | 90>(30);
+  const [presentation, setPresentation] = useState<`chart` | `list`>(`chart`);
+  const setReport = (next: ReportKind) => {
+    setReportState(next);
+    setDimension(reportContent[next].dimensions[0]);
+  };
+  const selectDimension = (next: string) => {
+    if (reportContent[report].dimensions.includes(next)) setDimension(next);
+  };
   return {
     ...auth,
     view,
     report,
     setReport,
+    period,
+    setPeriod,
+    dimension,
+    presentation,
+    setPresentation,
+    selectDimension,
     content: reportContent[report],
     owner: !auth.loading && canAccessOwner(auth.account),
     title: view === `analytics` ? `Archive analytics` : `The archive, at a glance.`,
