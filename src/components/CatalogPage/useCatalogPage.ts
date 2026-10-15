@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSpells } from '../../shared/spellsContext/useSpells';
+import { getSavedCollectionPresentation } from './savedCollectionPresentation';
 
 export type CatalogSort = `catalog` | `recent` | `name` | `world`;
 
@@ -16,6 +17,41 @@ export const useCatalogPage = (savedOnly = false) => {
   const [category, setCategory] = useState(firstValue(parameters.category));
   const [savedFilter, setSavedFilter] = useState(savedOnly);
   const [sort, setSort] = useState<CatalogSort>(savedOnly ? `recent` : `catalog`);
+  const scopeRef = useRef({ key: collection.saveScopeKey, revision: 0 });
+  const mountedRef = useRef(true);
+  const pendingRef = useRef<string | null>(null);
+  const [clearScope, setClearScope] = useState<string | null>(null);
+  const [action, setAction] = useState<{ scope: string; kind: `clear` | `import` } | null>(null);
+  const [actionError, setActionError] = useState<{ scope: string; message: string } | null>(null);
+  if (scopeRef.current.key !== collection.saveScopeKey) {
+    scopeRef.current = { key: collection.saveScopeKey, revision: scopeRef.current.revision + 1 };
+    pendingRef.current = null;
+  }
+  const currentScope = () => mountedRef.current ? `${scopeRef.current.key}:${scopeRef.current.revision}` : ``;
+  const scopeKey = currentScope();
+  const presentation = getSavedCollectionPresentation(collection);
+  const clearing = action?.scope === scopeKey && action.kind === `clear`;
+  const importing = action?.scope === scopeKey && action.kind === `import`;
+  const actionBusy = collection.saveBusy || clearing || importing;
+  const confirmClear = clearScope === scopeKey;
+  const savedResolved = collection.ready && (collection.saveScope === `account`
+    ? collection.saveStatus === `live` && (collection.savedReady || collection.saveBusy)
+    : collection.savedReady);
+  const usesSaved = savedOnly || savedFilter;
+  const resultsResolved = collection.ready && (!usesSaved || savedResolved);
+  const snapshotVisible = collection.ready && usesSaved && collection.saveScope === `account` && collection.savedIds.length > 0;
+  const resultsVisible = resultsResolved || snapshotVisible;
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => { mountedRef.current = false; pendingRef.current = null; };
+  }, []);
+
+  useEffect(() => {
+    setClearScope(null);
+    setAction(null);
+    setActionError(null);
+  }, [scopeKey, savedOnly]);
 
   useEffect(() => {
     setQuery(firstValue(parameters.q));
@@ -64,12 +100,49 @@ export const useCatalogPage = (savedOnly = false) => {
     setSavedFilter(savedOnly);
   };
 
+  const requestClear = () => {
+    if (collection.savedReady && !actionBusy) setClearScope(scopeKey);
+  };
+  const closeClear = () => {
+    if (!actionBusy) setClearScope(null);
+  };
+  const runShelfAction = async (kind: `clear` | `import`) => {
+    const scope = scopeKey;
+    if (currentScope() !== scope || !collection.savedReady || actionBusy || pendingRef.current === scope) return;
+    if (kind === `clear` && clearScope !== scope) return;
+    if (kind === `import` && (confirmClear || collection.saveScope !== `account`)) return;
+    pendingRef.current = scope;
+    setAction({ scope, kind });
+    setActionError(null);
+    try {
+      const confirmed = await (kind === `clear` ? collection.clearSaved() : collection.importDeviceSaved());
+      if (currentScope() !== scope) return;
+      if (confirmed && kind === `clear`) setClearScope(null);
+      if (!confirmed) setActionError({ scope, message: `The ${kind === `clear` ? `clear` : `import`} was not confirmed. Review the collection status before trying again.` });
+    } catch {
+      if (currentScope() === scope) setActionError({ scope, message: `The ${kind === `clear` ? `clear` : `import`} could not be confirmed. Please try again when your collection is available.` });
+    } finally {
+      if (pendingRef.current === scope) pendingRef.current = null;
+      if (currentScope() === scope) setAction(null);
+    }
+  };
+
   return {
     ...collection,
     sort,
     query,
     skill,
     world,
+    clearing,
+    importing,
+    actionBusy,
+    closeClear,
+    confirmClear,
+    presentation,
+    requestClear,
+    savedResolved,
+    resultsVisible,
+    resultsResolved,
     results,
     setSort,
     category,
@@ -83,6 +156,9 @@ export const useCatalogPage = (savedOnly = false) => {
     setCategory,
     clearFilters,
     setSavedFilter,
+    removeAll: () => runShelfAction(`clear`),
+    importBookmarks: () => runShelfAction(`import`),
+    error: collection.error ?? (actionError?.scope === scopeKey ? actionError.message : null),
     savedCount: collection.savedIds.length,
     unavailableCount: collection.savedIds.length - savedSpells.length,
     filtered: Boolean(query.trim() || skill || world || category || (!savedOnly && savedFilter)),

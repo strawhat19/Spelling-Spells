@@ -10,12 +10,12 @@
 .profile-status-note strong { font-size: 12px; display: block; margin-bottom: 5px; }
 .profile-field { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 15px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: start; }
 .profile-field > label, .profile-field > span { color: var(--soft); font-size: 11px; padding-top: 13px; }
-.profile-field input, .profile-field textarea { width: 100%; min-height: 42px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--muted); color: var(--ink); font: inherit; font-size: 12px; resize: vertical; opacity: .6; }
+.profile-field input, .profile-field textarea { width: 100%; min-height: 42px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--muted); color: var(--ink); font: inherit; font-size: 12px; resize: vertical; opacity: 1; }
 .profile-field small { display: block; font-size: 9px; color: var(--soft); line-height: 1.7; margin-top: 7px; }
 .profile-privacy-value { padding-top: 10px; display: flex; gap: 10px; color: var(--lavender); font-size: 12px; }
 .profile-privacy-value small { margin-top: 4px; }
 .profile-form-footer { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding-top: 24px; font-size: 10px; color: var(--soft); }
-.profile-form-footer button { font-size: 11px; padding: 12px 17px; border-radius: 9px; cursor: not-allowed; }
+.profile-form-footer button { font-size: 11px; padding: 12px 17px; border-radius: 9px; cursor: pointer; }
 .profile-form-footer button:hover { transform: none; }
 .profile-metadata { padding: 20px; border: 1px solid var(--line); background: var(--card); border-radius: 12px; position: sticky; top: calc(var(--header-offset, var(--header-height)) + 20px); max-height: calc(100dvh - var(--header-offset, var(--header-height)) - 40px); overflow-y: auto; }
 .profile-metadata h2 { margin: 0 0 22px; font-size: 14px; font-weight: 600; }
@@ -43,3 +43,24 @@
 @media (max-width: 1100px) { .profile-layout { grid-template-columns: 1fr; } .profile-metadata { position: static; max-height: none; } }
 @media (max-width: 700px) { .profile-connection-card { flex-wrap: wrap; gap: 15px; padding: 20px; } .profile-connection-card > div { flex: 1; } .profile-connection-status { width: 100%; margin-left: 0; } }
 @media (max-width: 480px) { .profile-settings { padding: 20px; } .profile-field { grid-template-columns: 65px minmax(0, 1fr); gap: 12px; } .profile-field input, .profile-field textarea { font-size: 16px; } .profile-device-note { flex-wrap: wrap; } .profile-device-note a { width: 100%; margin-left: 34px; } .profile-identity h2 { font-size: 24px; } }
+
+.profile-field input:focus-visible { outline: 2px solid var(--lavender); outline-offset: 2px; }
+.profile-field input[readonly] { color: var(--soft); }
+.profile-field input[aria-invalid='true'] { border-color: #e89393; }
+.profile-field .profile-field-error, .profile-feedback--error { color: #f2a9a9; }
+.profile-feedback { padding: 14px 16px; border: 1px solid var(--line); border-radius: 9px; background: var(--card); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+.profile-feedback--notice { color: var(--lavender); }
+.profile-form-actions, .profile-inline-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.profile-form-actions { justify-content: flex-end; }
+.profile-inline-actions { margin-top: 14px; }
+.profile-inline-actions button, .profile-discard-button { display: inline-flex; align-items: center; gap: 7px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--muted); color: var(--lavender); font-size: 10px; }
+.profile-settings button:disabled { opacity: .55; cursor: not-allowed; }
+.profile-verification p { color: var(--body); font-size: 12px; line-height: 1.8; }
+.profile-status-note > svg, .profile-privacy-value > svg { flex-shrink: 0; }
+.profile-connection-copy { min-width: 0; }
+.profile-connection-status--connected { color: #88c7a8; }
+.profile-connection-status--connected i { background: currentColor; }
+[data-theme='ivory'] .profile-field .profile-field-error, [data-theme='ivory'] .profile-feedback--error { color: #a32332; }
+[data-theme='ivory'] .profile-connection-status--connected { color: #256c4e; }
+@media (max-width: 650px) { .profile-form-footer { align-items: flex-start; flex-direction: column; } .profile-form-actions { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .profile-settings *, .profile-connections * { transition: none !important; animation: none !important; } }

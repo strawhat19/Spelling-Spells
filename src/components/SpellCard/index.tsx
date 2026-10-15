@@ -6,12 +6,15 @@ import type { Spell } from '../../shared/models/Spell';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { getSpellPath } from '../../shared/catalog/routes';
 import { useSpells } from '../../shared/spellsContext/useSpells';
+import { getSavedCollectionPresentation } from '../CatalogPage/savedCollectionPresentation';
 
 type Props = { spell: Spell; compact?: boolean; featured?: boolean };
 
 const SpellCard = ({ spell, compact = false, featured = false }: Props) => {
   const router = useRouter();
-  const { isSaved, toggleSaved, worlds, ready } = useSpells();
+  const collection = useSpells();
+  const { worlds, isSaved, savedReady, toggleSaved } = collection;
+  const presentation = getSavedCollectionPresentation(collection);
   const saved = isSaved(spell.id);
   const world = worlds.find(item => item.id === spell.worldId);
 
@@ -50,11 +53,11 @@ const SpellCard = ({ spell, compact = false, featured = false }: Props) => {
         <Pressable
           nativeID={`save-spell-${spell.id}`}
           accessibilityRole="button"
-          accessibilityLabel={`${saved ? `Unsave` : `Save`} ${spell.name}`}
-          accessibilityState={{ selected: saved, disabled: !ready }}
-          disabled={!ready}
+          accessibilityLabel={savedReady ? `${saved ? `Remove` : `Save`} ${spell.name} ${saved ? `from` : `to`} ${presentation.destination}` : `${presentation.blockedLabel}: ${spell.name}`}
+          accessibilityState={{ selected: saved, disabled: !savedReady }}
+          disabled={!savedReady}
           onPress={() => void toggleSaved(spell.id)}
-          style={[styles.save, saved && styles.saveActive, !ready && styles.saveDisabled]}
+          style={[styles.save, saved && styles.saveActive, !savedReady && styles.saveDisabled]}
         >
           <Icon name="bookmark" size={18} color={saved ? `#FFF9EA` : parchment.accent} />
         </Pressable>

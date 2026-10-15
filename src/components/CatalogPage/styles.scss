@@ -17,6 +17,7 @@
   &-toolbar p { margin: 0; }
   &-toolbar-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; }
   &-toolbar button { display: flex; align-items: center; gap: 6px; padding: 0; background: transparent; border: 0; color: var(--body, #c8bcda); font-size: 10px; cursor: pointer; }
+  &-toolbar button:disabled { opacity: .5; cursor: not-allowed; }
   &-saved-filter { display: flex; align-items: center; gap: 7px; cursor: pointer; }
   &-saved-filter input { accent-color: #6039d8; }
   &-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -52,6 +53,12 @@
   &-shelf-stat span { display: block; font-size: 10px; color: var(--soft, #b8aacd); margin-top: 7px; }
   &-storage-note { padding-left: 25px; border-left: 1px solid var(--line, #514065); }
   &-storage-note p { font-size: 10px; line-height: 1.8; color: var(--soft, #b8aacd); margin: 9px 0 0; max-width: 320px; }
+  &-import { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; border: 1px solid var(--line, #514065); border-radius: 13px; padding: 20px; margin-bottom: 23px; background: var(--card, #211536); }
+  &-import h2 { margin: 0; font: 21px Georgia, serif; }
+  &-import p { max-width: 650px; margin: 9px 0 0; color: var(--body, #c8bcda); font-size: 11px; line-height: 1.8; }
+  &-import button, &-retry { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line, #514065); border-radius: 8px; padding: 11px; color: var(--lavender, #d8c8f2); background: var(--muted, #2d2043); font-size: 11px; cursor: pointer; }
+  &-import button:disabled { opacity: .5; cursor: not-allowed; }
+  &-retry { margin-bottom: 20px; }
   &-device-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 9px; letter-spacing: .4px; font-weight: 600; color: var(--lavender, #d8c8f2); }
   &-device-badge.is-session { color: #ffc857; }
   &-sort { display: inline-flex; gap: 8px; align-items: center; }

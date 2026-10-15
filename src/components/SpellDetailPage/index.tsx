@@ -7,12 +7,15 @@ import { getPublicPageUrl } from '../PageMetadata/urls';
 import { useSpellDetailPage } from './useSpellDetailPage';
 import { getSpellPath } from '../../shared/catalog/routes';
 import { useTheme } from '../../shared/themeContext/useTheme';
+import { getSavedCollectionPresentation } from '../CatalogPage/savedCollectionPresentation';
 import { Text, View, Alert, Share, Linking, Pressable } from 'react-native';
 
 const SpellDetailPage = () => {
   const router = useRouter();
   const { palette } = useTheme();
-  const { spell, world, ready, related, isSaved, toggleSaved, storageMode } = useSpellDetailPage();
+  const collection = useSpellDetailPage();
+  const { spell, world, ready, error, related, isSaved, savedReady, saveMessage, toggleSaved } = collection;
+  const presentation = getSavedCollectionPresentation(collection);
 
   const [sharing, setSharing] = useState(false);
 
@@ -20,7 +23,7 @@ const SpellDetailPage = () => {
     <View nativeID="spell-detail-empty" style={[styles.page, styles.empty]}>
       <Icon name="book" size={32} color={palette.gold} />
       <Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>{ready ? `This page is missing.` : `Opening the spell record…`}</Text>
-      <Text style={[styles.copy, { color: palette.muted }]}>{ready ? `We couldn’t find that spell. There are more words waiting in the archive.` : `Loading the archive and your saved collection.`}</Text>
+      <Text style={[styles.copy, { color: palette.muted }]}>{ready ? `We couldn’t find that spell. There are more words waiting in the archive.` : `Loading the public archive.`}</Text>
       {!ready && <View nativeID="spell-detail-skeleton" style={[styles.section, { minHeight: 240, backgroundColor: palette.surface, borderColor: palette.border }]}>{[70, 90, 60].map((width, index) => <View key={index} nativeID={`detail-skeleton-line-${index}`} style={{ height: index === 0 ? 32 : 15, width: `${width}%`, borderRadius: 6, backgroundColor: palette.panel }} />)}</View>}
       <Pressable nativeID="missing-spell-library-link" accessibilityRole="link" onPress={() => router.push(`/spells`)} style={styles.link}><Text style={[styles.linkText, { color: palette.gold }]}>Back to the library</Text><Icon name="arrow-right" size={16} color={palette.gold} /></Pressable>
     </View>
@@ -58,9 +61,10 @@ const SpellDetailPage = () => {
       <View style={styles.badges}>
         {[spell.language, spell.category, spell.kind].map((label, index) => <View key={index} nativeID={`spell-tag-${spell.id}-${index}`} style={[styles.badge, { borderColor: palette.border, backgroundColor: palette.panel }]}><Text style={[styles.badgeText, { color: palette.lavender }]}>{label}</Text></View>)}
       </View>
-      <Pressable nativeID={`detail-save-${spell.id}`} accessibilityRole="button" accessibilityState={{ selected: saved, disabled: !ready }} disabled={!ready} onPress={() => void toggleSaved(spell.id)} style={[styles.save, { backgroundColor: palette.panel, borderColor: palette.border }]}>
-        <Icon name="bookmark" size={19} color={palette.gold} /><Text style={[styles.saveText, { color: palette.gold }]}>{!ready ? `Loading saved spells…` : saved ? storageMode === `session` ? `Saved for this session` : `Saved on this device` : `Save to your shelf`}</Text>
+      <Pressable nativeID={`detail-save-${spell.id}`} accessibilityRole="button" accessibilityState={{ selected: saved, disabled: !savedReady }} disabled={!savedReady} onPress={() => void toggleSaved(spell.id)} style={[styles.save, { opacity: savedReady ? 1 : .5, backgroundColor: palette.panel, borderColor: palette.border }]}>
+        <Icon name="bookmark" size={19} color={palette.gold} /><Text style={[styles.saveText, { color: palette.gold }]}>{presentation.saveLabel(saved)}</Text>
       </Pressable>
+      {(error || saveMessage || !savedReady || presentation.session) && <Text nativeID={`detail-save-feedback-${spell.id}`} accessibilityLiveRegion="polite" style={[styles.copy, { color: error ? palette.error : palette.muted }]}>{error || presentation.description}</Text>}
 
       <Pressable nativeID={`detail-share-${spell.id}`} accessibilityRole="button" disabled={sharing} onPress={() => void shareSpell()} style={styles.link}><Icon name="external-link" size={17} color={palette.gold} /><Text style={[styles.linkText, { color: palette.gold }]}>{sharing ? `Opening sharing…` : `Share this spell`}</Text></Pressable>
 

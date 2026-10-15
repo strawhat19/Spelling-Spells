@@ -7,10 +7,13 @@ import { useSpellShare } from './useSpellShare.web';
 import { useSpellDetailPage } from './useSpellDetailPage';
 import { getSpellPath } from '../../shared/catalog/routes';
 import { useReaderAid } from '../PronunciationPage/useReaderAid.web';
+import { getSavedCollectionPresentation } from '../CatalogPage/savedCollectionPresentation';
 
 const SpellDetailPage = () => {
   const reader = useReaderAid();
-  const { ready, spell, world, related, spells, isSaved, toggleSaved, storageMode } = useSpellDetailPage();
+  const collection = useSpellDetailPage();
+  const { ready, error, spell, world, related, spells, isSaved, savedReady, saveMessage, toggleSaved } = collection;
+  const presentation = getSavedCollectionPresentation(collection);
   const sharing = useSpellShare(spell);
   if (!ready && !spell) return <section id="spell-detail-loading" className="ss-detail ss-detail-loading" role="status"><Icon name="book" size={30} /><h1>Opening this page…</h1></section>;
   if (!spell) return <section id="spell-detail-not-found" className="ss-detail ss-detail-missing"><PageMetadata title="Spell not found" description="This spell could not be found in the archive. Browse the public spell index to keep exploring." noIndex /><Icon name="search" size={36} /><h1>This spell is not in the book.</h1><p>Its page may have moved, or the link may be incomplete.</p><AppLink href="/spells" id="spell-detail-missing-browse"><Icon name="book" size={17} />Browse the spellbook<Icon name="arrow" size={16} /></AppLink></section>;
@@ -29,9 +32,10 @@ const SpellDetailPage = () => {
         <AppLink id={`${prefix}-back`} href="/spells"><Icon name="chevron-left" size={16} />Back to the spellbook</AppLink>
         <div id={`${prefix}-actions`} className="ss-detail-actions">
           <button id={`${prefix}-share`} type="button" disabled={sharing.busy} onClick={() => void sharing.share()}><Icon name="external-link" size={16} />{sharing.busy ? `Opening…` : `Share spell`}</button>
-          <button id={`${prefix}-save`} type="button" disabled={!ready} className={saved ? `is-saved` : ``} aria-pressed={saved} onClick={() => void toggleSaved(spell.id)}><Icon name="bookmark" size={16} />{!ready ? `Loading saved spells…` : saved ? storageMode === `session` ? `Saved for this session` : `Saved on this device` : `Save this spell`}</button>
+          <button id={`${prefix}-save`} type="button" disabled={!savedReady} className={saved ? `is-saved` : ``} aria-pressed={saved} onClick={() => void toggleSaved(spell.id)}><Icon name="bookmark" size={16} />{presentation.saveLabel(saved)}</button>
         </div>
       </div>
+      {(error || saveMessage || !savedReady || presentation.session) && <div id={`${prefix}-save-feedback`} className="ss-detail-share-feedback"><p role="status">{error || presentation.description}</p></div>}
       {sharing.message && <div id={`${prefix}-share-feedback`} className="ss-detail-share-feedback"><p role="status">{sharing.message}</p>{sharing.manualUrl && <label htmlFor={`${prefix}-share-url`}><span>Spell page link</span><input id={`${prefix}-share-url`} type="url" readOnly value={sharing.manualUrl} onFocus={(event) => event.currentTarget.select()} /></label>}</div>}
       <header id={`${prefix}-heading`} className="ss-detail-heading"><p className="ss-detail-eyebrow"><Icon name={spell.accent} size={16} />{world?.name ?? spell.sourceTitle}<span>·</span>{spell.kind}</p><h1 id={`${prefix}-title`}>{spell.name}</h1><p className="ss-detail-definition">{spell.definition}</p><div className="ss-detail-tags"><span><Icon name="book" size={13} />{spell.medium}</span><span>{spell.language}</span><span>{spell.category}</span>{spell.aliases.map((alias, index) => <span key={alias} id={`${prefix}-alias-${index}`}>Also: {alias}</span>)}</div></header>
       <div id={`${prefix}-layout`} className="ss-detail-layout"><div className="ss-detail-main">

@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  disabled: { opacity: .5 },
+  panelTitle: { fontSize: 22, fontFamily: `Georgia` },
   shelf: { gap: 20, padding: 22, borderWidth: 1, borderRadius: 18 },
   shelfStats: { gap: 22, flexDirection: `row` },
   shelfStat: { flex: 1, gap: 8 },

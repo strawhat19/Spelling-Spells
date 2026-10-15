@@ -5,7 +5,12 @@ import type { AuthSnapshot, AuthResult, EmailSignIn, EmailSignUp } from '../auth
 export type AuthContextValue = AuthSnapshot & {
   loading: boolean;
   signOut: () => Promise<AuthResult>;
+  sendVerification: () => Promise<AuthResult>;
+  refreshIdentity: () => Promise<AuthResult>;
+  retryHydration: () => Promise<AuthResult>;
+  resetPassword: (email: string) => Promise<AuthResult>;
   signInWithGoogle: () => Promise<AuthResult>;
+  updateProfile: (input: { displayName: string; avatarUrl: string | null }) => Promise<AuthResult>;
   signInWithEmail: (input: EmailSignIn) => Promise<AuthResult>;
   signUpWithEmail: (input: EmailSignUp) => Promise<AuthResult>;
 };
@@ -18,7 +23,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => authAPI.subscribe((next) => {
     setSnapshot(next);
-    setLoading(false);
+    setLoading(next.status === `loading`);
   }), []);
 
   return (
@@ -26,6 +31,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       ...snapshot,
       loading,
       signOut: authAPI.signOut,
+      sendVerification: authAPI.sendVerification,
+      refreshIdentity: authAPI.refreshIdentity,
+      retryHydration: authAPI.retryHydration,
+      resetPassword: authAPI.resetPassword,
+      updateProfile: authAPI.updateProfile,
       signInWithGoogle: authAPI.signInWithGoogle,
       signInWithEmail: authAPI.signInWithEmail,
       signUpWithEmail: authAPI.signUpWithEmail,

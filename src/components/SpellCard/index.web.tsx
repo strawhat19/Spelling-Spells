@@ -4,11 +4,14 @@ import { AppLink } from '../AppLink';
 import type { Spell } from '../../shared/models/Spell';
 import { getSpellPath } from '../../shared/catalog/routes';
 import { useSpells } from '../../shared/spellsContext/useSpells';
+import { getSavedCollectionPresentation } from '../CatalogPage/savedCollectionPresentation';
 
 type SpellCardProps = { spell: Spell; compact?: boolean; featured?: boolean };
 
 export const SpellCard = ({ spell, compact = false, featured = false }: SpellCardProps) => {
-  const { ready, worlds, isSaved, toggleSaved } = useSpells();
+  const collection = useSpells();
+  const { worlds, isSaved, savedReady, toggleSaved } = collection;
+  const presentation = getSavedCollectionPresentation(collection);
   const saved = isSaved(spell.id);
   const world = worlds.find((item) => item.id === spell.worldId);
   const prefix = `spell-card-${featured ? `hero` : compact ? `curated` : `catalog`}-${spell.id}`;
@@ -24,11 +27,12 @@ export const SpellCard = ({ spell, compact = false, featured = false }: SpellCar
         <span className="spell-card-label" id={`${prefix}-label`}><Icon name={featured ? `book` : spell.accent} size={15} />{featured ? `Inside the spellbook` : spell.category}</span>
         <button
           type="button"
-          disabled={!ready}
+          disabled={!savedReady}
           aria-pressed={saved}
           id={`${prefix}-save`}
           className={`spell-card-save${saved ? ` is-saved` : ``}`}
-          aria-label={`${saved ? `Unsave` : `Save`} ${spell.name}`}
+          title={presentation.saveLabel(saved)}
+          aria-label={savedReady ? `${saved ? `Remove` : `Save`} ${spell.name} ${saved ? `from` : `to`} ${presentation.destination}` : `${presentation.blockedLabel}: ${spell.name}`}
           onClick={() => void toggleSaved(spell.id)}
         ><Icon name="bookmark" size={17} /></button>
       </div>

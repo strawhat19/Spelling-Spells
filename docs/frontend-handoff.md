@@ -1,6 +1,10 @@
 # Frontend Handoff
 
-## Scope delivered in source
+## Latest safe release checkpoint
+
+On 2026-10-15 the user requested the latest frontend be deployed, then paused. Account services, profile edits and private-shelf adapters now exist in source, with restrictive rules and tests, but `accountConnectionReleased = false` prevents any Firebase initialization regardless of environment values. TypeScript, 23 scoped tests and the 39-route export passed. Connected accounts, rules deployment, Owner bootstrap and analytics remain unavailable. See [the current account rollout](backend-connection-plan.md) for the authoritative connection status and remaining gates. The sections below record the earlier frontend milestones; their test/dependency statements describe those stages, not the latest checkpoint.
+
+## Original scope delivered in source
 
 This is a frontend-preparation milestone, not a connected-service launch. The existing Expo Router / React Native / TypeScript / Sass architecture, Midnight Archive design, v10 logo, bundled catalog and local preference format remain in place.
 
