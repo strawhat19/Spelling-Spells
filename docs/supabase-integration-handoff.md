@@ -1,4 +1,4 @@
-# Supabase integration source checkpoint
+# Supabase integration handoff
 
 Prepared on `integration/supabase-accounts` from main `064bc626637e2d1e25c95d71e45241bd358befa3` (2026-10-16). This branch replaces the inactive Firebase adapters with Supabase; the generic `ai/` pack is unchanged.
 
@@ -11,7 +11,7 @@ Prepared on `integration/supabase-accounts` from main `064bc626637e2d1e25c95d71e
 
 ## Observed cloud state
 
-Read-only connected tools confirmed project `qtfajiuilwdtywkklbjq`, Piratechs organization `frqaxsbukfkwzsoaokmw`, Free, `us-east-1`, `ACTIVE_HEALTHY`, PostgreSQL 17.11. Public tables and migration history were empty, `auth.users` contained zero users, and `supabase_realtime` contained no tables. Security advisors returned no findings against that empty database. An enabled default publishable key exists (ID `fb4cfffa-70fe-4064-ac31-f9824932bde3`); its value was not written into the workspace or frontend configuration. Those observations do not validate the proposed migration.
+Read-only connected tools confirmed project `qtfajiuilwdtywkklbjq`, Piratechs organization `frqaxsbukfkwzsoaokmw`, Free, `us-east-1`, `ACTIVE_HEALTHY`, PostgreSQL 17.11. Initial inspection found no application tables, migrations, Auth users or published Realtime tables. The user later approved the exact reviewed migration; its successful application and postflight are recorded below. An enabled default publishable key exists (ID `fb4cfffa-70fe-4064-ac31-f9824932bde3`). With specific user approval, its existing value and the public project URL were written only to this task clone's ignored `.env.local`, then supplied in chat at the user's request. No secret or service-role credential was accessed or committed.
 
 Vercel project `prj_Rkxn2SjuJtRsjHh4BiYyNs2qEJ0O`, team `team_2hW8Z1s5cxdaS56fE1tnAMI9` (`piratechs`), was serving READY deployment `dpl_5sQwWw1WcmcMngcuKT8j4RkpC7RY` from main `064bc626`, Node 24.x.
 
@@ -30,17 +30,17 @@ Reproduce with `npm run test:web:unconfigured` after creating an unconfigured ex
 The native browser-control helper failed to start (`cannot locate required Windows platform directory`, HRESULT `0x80070003`), so these checks used isolated headless Chrome. The first sandboxed attempt was blocked from localhost; the scoped authorized run succeeded. An initial smoke assertion expected the wrong dashboard wording; it was corrected after inspecting the actual rendered page, then the complete suite passed. These were local tooling/test issues, not claims about connected sign-in.
 Migration SHA-256 for action-time approval: `ACF4B82734FF8C0B3EF81DED71ABCF10CE56B76F8088A1B94B53D570D9B06733`.
 
-No SQL validation query, local database migration, cloud mutation or authenticated end-to-end flow has run. The local SQL suite is guarded and unexecuted. Native runtime behavior remains unverified.
+The live migration and read-only metadata/advisor checks have now run with specific approval. No local database migration, fixture-based authorization suite or authenticated end-to-end flow has run. The local SQL suite is guarded and unexecuted. Native runtime behavior remains unverified.
 The retired `tests/firebase` suite tested the previous backend and was removed with those adapters. Its historical passes do not cover Supabase. The remaining release scenarios require an isolated local database or explicitly authorized target; the code/browser results above are complete:
 
 1. Install the locked dependencies; run `npx tsc --noEmit` and `npm run export:web` under the pinned Node 24.21.0 runtime. Confirm static callback/recovery routes and no secret material in the export.
 2. Apply the migration to a fresh local Supabase database and run the SQL security scenarios in `supabase/tests/`. Confirm guest/Subscriber/Owner allow-deny cases, role spoof attempts, identity-switch assertions, stale-clear conflict rollback and additive import.
-3. Review grants, exposed schema/functions, RLS and security advisors before approving the live migration. No frontend credential can bypass those rules.
+3. Repeat grants, exposed schema/functions, RLS and advisor review after any separately approved future security change. Installed metadata and advisor results are recorded below; no frontend credential can bypass these rules. Data API exposed-schema settings remain unverified through the available connector.
 4. In the user's explicitly named browser, test signup/confirmation/resend, password sign-in/reset, OAuth callback/cancel/error, profile reload, and account switching/sign-out during pending work. Production test-account creation and email sends require an explicitly approved test identity.
 5. With two authenticated sessions, verify save/remove/import/clear convergence, websocket reconnect and expired sessions; verify a second account cannot read another account's data or privileged directory. Check role/status revocation with the separately approved trusted action.
 6. Recheck guest bookmarks/history/theme/device profile/drafts and import originals. Test native email session behavior separately; native Google is intentionally unsupported until a callback is approved.
 
-The exact migration, configuration and verified-owner approval sequence is in [Supabase setup](supabase-setup.md). Credentials, OAuth grants, auth/security changes, role elevation and production deployment remain pending. No Google sign-in, email delivery or realtime cloud sync has been demonstrated live.
+The exact migration, configuration and verified-owner approval sequence is in [Supabase setup](supabase-setup.md). The schema rollout and task-local public configuration are complete. Production deployment, OAuth grants, auth/security changes and role elevation remain pending. No Google sign-in, email delivery or realtime cloud sync has been demonstrated live.
 
 ## Production deployment request
 
@@ -48,10 +48,32 @@ Fresh read-only inspection after the deployment request confirmed that remote `m
 
 The only required app environment names are `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Their **Production presence is unknown**, because the one permitted retry of `GET /v10/projects/{idOrName}/env` with `decrypt=false`, exact project `prj_Rkxn2SjuJtRsjHh4BiYyNs2qEJ0O` and team `team_2hW8Z1s5cxdaS56fE1tnAMI9`, was denied again: HTTP 403, "You don't have permission to list the project environment variable." No values were read and no write or alternative route was attempted.
 
-Supabase `qtfajiuilwdtywkklbjq` still has no migrations, public tables, Auth users or published Realtime tables. The prepared migration remains unapplied. Production deployment is held because enabling auth against this empty backend would not provide working sign-in/sync, while environment presence and provider settings cannot be established.
+The database migration is now installed, as recorded below. Production deployment remains held while Vercel environment presence and Supabase provider/security settings cannot be established. No new production deployment, merge or branch push has been made.
 
-The deployment request authorizes the production code release and the required public frontend configuration once access and working prerequisites are established. It does **not** authorize the persistent database/RLS/Realtime migration, provider/security settings, new secret credentials or Owner elevation. Those still require their exact scoped action-time approval. No new production deployment, merge or branch push has been made. Source may be committed locally as release preparation; the actual commit identifier is recorded in the task outcome.
+The deployment request authorizes the production code release and required public frontend configuration once access and working prerequisites are established. The user subsequently authorized the exact database/RLS/Realtime migration separately; that operation completed successfully. Provider/security settings, new secret credentials and Owner elevation still require exact scoped action-time approval. Source integration is committed locally as `62cd985d3e70d4979ac1cc53e451297922ef5926` (`v0.0.0.10-SpellingSpellsSupabaseIntegration`) on `integration/supabase-accounts`.
 
 Local SQL validation is also unexecuted. A read-only Docker version check failed because the `docker_engine` named pipe does not exist/the Docker daemon is not running. No service was started and no local database or fixtures were created.
 
 Fresh release checks under the production deployment request also passed: Node 24.21.0 TypeScript, 46-route static export, and all 12 isolated Chrome 155.0.8059.80 checks. Both callback/recovery HTML files exist. The export scan found no secret keys or service-role JWTs. Ignored evidence is saved in `test-results/release-checks.json` and `test-results/unconfigured-browser/`. These results cover the unconfigured build and do not establish live authentication, RLS, email delivery or Realtime.
+
+## Approved database rollout
+
+After the user approved the exact pending migration, preflight reconfirmed the intended healthy project, empty application schema/history and zero Auth users. The reviewed SQL hash matched `ACF4B82734FF8C0B3EF81DED71ABCF10CE56B76F8088A1B94B53D570D9B06733`. Supabase `apply_migration`, name `account_integration`, returned `success: true`; the operation was not retried.
+
+Supabase recorded history version `20261016193413`, name `account_integration`. The originally reviewed local file `20261016133406_account_integration.sql` was renamed to `supabase/migrations/20261016193413_account_integration.sql` to match the installed history. The SQL hash is unchanged; no history repair or second DDL application was performed.
+
+Independent read-only postflight confirmed:
+
+- Exactly the three expected public and three private tables, with RLS enabled on all six; four policies match the reviewed source.
+- Authenticated SELECT on `accounts`, `profiles` and `saved_spells`; profile UPDATE permits only `display_name` and `avatar_url`. No anonymous/PUBLIC table grants, browser authority writes, or private-table grants.
+- All implementation functions have a fixed empty search path. Privileged implementations are private; public wrappers are `SECURITY INVOKER`. Neither `anon` nor `PUBLIC` can execute these functions. `authenticated` has only the intended helper/RPC execution grants; the private lock and trigger helpers have none.
+- Realtime publication contains exactly `public.accounts`, `public.profiles` and `public.saved_spells`.
+- Zero Auth users, app accounts, Owners and audit rows; the internal counter has one initial row and the published catalog contains nine IDs. No test user, email, role grant, credential or provider/security setting was created.
+
+Advisor results after rollout were informational only:
+
+- Security: the three private tables have RLS and no policies. This is the intended browser-deny design, alongside no table grants. [RLS policy notice](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy).
+- Performance: `saved_spells_spell_id_fkey` has no covering index. The referenced catalog is nine immutable IDs and no catalog deletion path exists; consider a separately reviewed index migration as the catalog grows. No additional DDL was applied. [Foreign-key index guidance](https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys).
+- Performance: `saved_spells_active_account_idx` has not been used in the empty new application. Retain it for the intended active-shelf query; reassess with actual workload. [Unused-index notice](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index).
+
+These are metadata checks, not authenticated authorization, OAuth, email-delivery or two-session Realtime tests. Supabase Auth/provider settings and Data API exposed-schema configuration could not be established through an available read-only connector operation. Keep `app_private` unexposed. Vercel environment inspection remains denied; Production environment presence is unknown. Production remains on the previous main commit until the deployment prerequisites are resolved.
