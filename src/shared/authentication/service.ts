@@ -183,7 +183,7 @@ const start = (): SupabaseClient => {
 };
 
 type CredentialResult = { user: User | null; message?: string };
-const runCredentialFlow = (authenticate: (client: SupabaseClient) => Promise<CredentialResult>): Promise<AuthResult> => {
+const runCredentialFlow = (authenticate: (client: SupabaseClient, assertCurrent: () => void) => Promise<CredentialResult>): Promise<AuthResult> => {
   const session = ++sessionRevision;
   const pendingLogout = signOutPending;
   eventRevision += 1;
@@ -191,11 +191,12 @@ const runCredentialFlow = (authenticate: (client: SupabaseClient) => Promise<Cre
   recoverySession = false;
   resetAccount();
   if (supabaseConfigured) publish({ account: null, identity: null, source: null, phase: `identity`, status: `loading`, message: null });
+  const assertCurrent = (): void => { if (session !== sessionRevision || signingOut) throw identityChanged(); };
   const credential = credentialQueue.then(async () => {
     if (pendingLogout) await pendingLogout;
     if (session !== sessionRevision) throw identityChanged();
     const client = start();
-    const result = await authenticate(client);
+    const result = await authenticate(client, assertCurrent);
     if (session !== sessionRevision) {
       await client.auth.signOut({ scope: `local` });
       throw identityChanged();
@@ -339,8 +340,12 @@ export const authenticationService = {
     void operation.finally(() => { if (signOutPending === operation) signOutPending = null; });
     return operation;
   },
-  signInWithGoogle: (): Promise<AuthResult> => runCredentialFlow(async (client) => {
-    await signInWithPlatformGoogle(client);
+  signInWithGoogle: (): Promise<AuthResult> => runCredentialFlow(async (client, assertCurrent) => {
+    const identityUid = currentUser?.id ?? null;
+    await signInWithPlatformGoogle(client, () => {
+      assertCurrent();
+      if ((currentUser?.id ?? null) !== identityUid) throw identityChanged();
+    });
     return { user: null, message: `Continue with Google in this browser.` };
   }),
   signInWithEmail: (input: EmailSignIn): Promise<AuthResult> => runCredentialFlow(async (client) => {

@@ -28,6 +28,6 @@ export const signupConfirmationMessage = `If this address can receive an account
 export const readAuthRedirect = (): { code: string | null; error: string | null } | null => null;
 export const clearAuthRedirect = (): void => undefined;
 
-export const signInWithPlatformGoogle = async (_client: SupabaseClient): Promise<void> => {
+export const signInWithPlatformGoogle = async (_client: SupabaseClient, _assertCurrent?: () => void): Promise<void> => {
   throw Object.assign(new Error(`Native Google sign-in has not been configured.`), { code: `app/unsupported-platform` });
 };

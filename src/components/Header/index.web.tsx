@@ -34,7 +34,6 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
           ))}
         </nav>
         <div id='header-actions' className='header-actions'>
-          <UserMenu />
           <AppLink id='header-saved-link' href='/saved' className='header-saved-link' aria-label={`Saved Spells, ${savedIds.length} saved`}>
             <Icon name='bookmark' size={21} /><span>Saved</span>
             {savedIds.length > 0 ? <span className='saved-count'>{savedIds.length}</span> : null}
@@ -49,6 +48,7 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
           >
             <Icon name={theme === `night` ? `sun` : `moon`} size={21} />
           </button>
+          <UserMenu />
           <button
             type='button'
             id='header-menu-toggle'

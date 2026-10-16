@@ -1,7 +1,20 @@
 import type { AuthResult } from '../authentication/types';
 
-export const getErrorCode = (error: unknown): string =>
-  error && typeof error === `object` && `code` in error && typeof error.code === `string` ? error.code : ``;
+export const googleSignInUnavailableMessage = `Google sign-in is not available yet. Use email and password, or try again later.`;
+export const googleSignInCheckFailedMessage = `Google sign-in could not be checked. Check your connection and try again, or use email and password.`;
+
+export const getErrorCode = (error: unknown): string => {
+  if (!error || typeof error !== `object`) return ``;
+  const details = error as { code?: unknown; error_code?: unknown };
+  return typeof details.code === `string` ? details.code : typeof details.error_code === `string` ? details.error_code : ``;
+};
+
+const providerIsUnavailable = (error: unknown): boolean => {
+  if (!error || typeof error !== `object`) return false;
+  const details = error as { msg?: unknown; message?: unknown; error_description?: unknown };
+  const message = [details.msg, details.message, details.error_description].filter((value) => typeof value === `string`).join(` `);
+  return /unsupported provider|provider.{0,60}(?:not enabled|disabled|not configured)/i.test(message);
+};
 
 export const authFailure = (error: unknown): Extract<AuthResult, { ok: false }> => {
   const code = getErrorCode(error);
@@ -10,6 +23,9 @@ export const authFailure = (error: unknown): Extract<AuthResult, { ok: false }> 
   if ([`access_denied`, `app/superseded`].includes(code)) return { ok: false, code: `cancelled`, message: `The account action was cancelled. Please try again when you are ready.` };
   if ([`42501`, `PGRST301`, `user_banned`, `app/inactive`, `app/identity-changed`].includes(code)) {
     return { ok: false, code: `denied`, message: code === `app/inactive` ? `This account is inactive. Contact the site owner.` : `This account action is not permitted. Sign in again or contact the site owner.` };
+  }
+  if ([`unsupported_provider`, `provider_disabled`, `provider_not_enabled`, `oauth_provider_disabled`, `app/google-unavailable`].includes(code) || providerIsUnavailable(error)) {
+    return { ok: false, code: `unsupported`, message: googleSignInUnavailableMessage };
   }
   const messages: Record<string, string> = {
     'invalid_credentials': `The email or password was not accepted.`,
@@ -25,7 +41,9 @@ export const authFailure = (error: unknown): Extract<AuthResult, { ok: false }> 
     'validation_failed': `Check the email address and account details, then try again.`,
     'signup_disabled': `Account creation is not enabled. Contact the site owner.`,
     'email_provider_disabled': `Email sign-in is not enabled. Contact the site owner.`,
-    'provider_disabled': `This sign-in provider is not enabled. Contact the site owner.`,
+    'oauth_provider_error': `Google sign-in could not be started. Use email and password, or try again later.`,
+    'app/provider-check-failed': googleSignInCheckFailedMessage,
+    'app/oauth-redirect-invalid': `Google sign-in could not be started safely. Use email and password, or try again later.`,
     'over_email_send_rate_limit': `Too many email requests. Please wait before requesting another email.`,
     'over_request_rate_limit': `Too many attempts. Please wait before trying again.`,
     'request_timeout': `The account service took too long. Please retry.`,

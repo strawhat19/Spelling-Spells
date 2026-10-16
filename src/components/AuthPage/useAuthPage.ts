@@ -15,6 +15,7 @@ type FormState = {
   email: string;
   password: string;
   displayName: string;
+  confirmationEmail: string | null;
   feedback: Feedback;
   busy: AuthAction | null;
   errors: Partial<Record<AuthField, string>>;
@@ -28,6 +29,7 @@ const emptyForm = (scope: string): FormState => ({
   busy: null,
   feedback: null,
   displayName: ``,
+  confirmationEmail: null,
 });
 
 const validEmail = (value: string) => value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -62,7 +64,9 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
   const signedIn = auth.status === `signed-in` && canAccessAccount(auth.account);
   const unavailable = auth.status === `unavailable`;
   const loading = auth.loading || auth.status === `loading`;
-  const editable = auth.status === `signed-out` && !loading && !form.busy && !signingOut;
+  const ready = auth.status === `signed-out` && !loading && !form.busy && !signingOut;
+  const confirmationPending = Boolean(form.confirmationEmail) && !signedIn;
+  const editable = ready && !confirmationPending;
 
   useEffect(() => {
     mounted.current = true;
@@ -125,10 +129,13 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
       const result = await task();
       if (!current()) return;
       if (result.ok) {
-        if (shouldRedirect && result.account && canAccessAccount(result.account) && result.account.authUid === identityRef.current) {
+        if (shouldRedirect && result.account && canAccessAccount(result.account)) {
           redirect.current = { mode, target: returnTo, accountId: result.account.id, identityUid: result.account.authUid };
         }
-        update({ feedback: { tone: `notice`, message: result.message ?? success } });
+        update({
+          feedback: { tone: `notice`, message: result.message ?? success },
+          ...(action === `email` && isSignUp ? { confirmationEmail: result.account ? null : form.email.trim() } : {}),
+        });
       } else {
         redirect.current = null;
         const nonfatal = result.code === `cancelled` || result.code === `unsupported`;
@@ -223,10 +230,13 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     isSignUp,
     returnTo,
     editable,
+    confirmationPending,
+    canResendConfirmation: ready && validEmail(form.confirmationEmail ?? form.email.trim()),
+    changeConfirmationEmail: () => { if (ready) patch({ confirmationEmail: null, feedback: null, password: `` }); },
     setField,
     unavailable,
     requestReset,
-    resendConfirmation: () => run(`verify`, () => auth.resendVerification(form.email.trim()), `If confirmation can be resent, check your inbox and spam folder.`),
+    resendConfirmation: () => run(`verify`, () => auth.resendVerification(form.confirmationEmail ?? form.email.trim()), `If confirmation can be resent, check your inbox and spam folder.`),
     submitEmail,
     signInWithGoogle,
     googleAvailable: Platform.OS === `web`,
@@ -235,7 +245,10 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     refreshVerification: () => run(`refresh`, auth.refreshIdentity, `Verification status refreshed. Your current status is shown above.`),
     switchHref: `${isSignUp ? `/signin` : `/signup`}?returnTo=${encodeURIComponent(returnTo)}`,
     title: isSignUp ? `Begin your next chapter.` : `Welcome back, word wanderer.`,
-    formTitle: isSignUp ? `Create your account` : `Sign in to your grimoire`,
+    formTitle: confirmationPending ? `Check your email` : isSignUp ? `Create your account` : `Sign in to your grimoire`,
+    confirmationInstructions: Platform.OS === `web`
+      ? `This signup needs email confirmation. Open the newest confirmation link in this browser to finish signing in.`
+      : `This signup needs email confirmation. Open the newest confirmation link in your browser, then return here to sign in.`,
     subtitle: isSignUp
       ? `A place for your favorite spells, new discoveries, and a little everyday wonder.`
       : `Every spell you love. Every world you wander. A little magic, all in one place.`,

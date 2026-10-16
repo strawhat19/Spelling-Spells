@@ -15,6 +15,7 @@
     "ios": "expo start --ios",
     "android": "expo start --android",
     "export:web": "expo export --platform web",
+    "test:web:auth": "node tests/browser/auth-flow-smoke.cjs",
     "test:web:unconfigured": "node tests/browser/unconfigured-smoke.cjs"
   },
   "dependencies": {

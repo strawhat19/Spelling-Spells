@@ -3,6 +3,9 @@
 -- approval naming project qtfajiuilwdtywkklbjq and the verified candidate Auth UUID.
 -- Replace the placeholder from a fresh read of auth.users after the owner signs in.
 -- A matching email alone is not authorization to execute this script.
+-- If Confirm email is disabled, email_confirmed_at is assigned implicitly and is
+-- not proof of mailbox ownership. Independently verify the candidate's identity
+-- before approving this UUID; this script cannot establish that proof.
 begin;
 do $$
 declare
