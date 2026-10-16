@@ -2,6 +2,7 @@ import Icon from '../Icon';
 import UserMenu from '../UserMenu';
 import AppLink from '../AppLink';
 import BrandLogo from '../BrandLogo';
+import NotificationMenu from '../NotificationMenu';
 import { useHeader } from './useHeader';
 import { navigation } from '../../shared/routes';
 import { useTheme } from '../../shared/themeContext/useTheme';
@@ -38,17 +39,20 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
             <Icon name='bookmark' size={21} /><span>Saved</span>
             {savedIds.length > 0 ? <span className='saved-count'>{savedIds.length}</span> : null}
           </AppLink>
-          <button
-            type='button'
-            id='header-theme-toggle'
-            onClick={toggleTheme}
-            className='header-theme-toggle'
-            aria-label={`Switch to ${theme === `night` ? `Ivory` : `Night`} Mode`}
-            title={`Switch to ${theme === `night` ? `Ivory` : `Night`} Mode`}
-          >
-            <Icon name={theme === `night` ? `sun` : `moon`} size={21} />
-          </button>
-          <UserMenu />
+          <NotificationMenu />
+          <div id='header-account-actions' className='header-account-actions'>
+            <button
+              type='button'
+              id='header-theme-toggle'
+              onClick={toggleTheme}
+              className='header-theme-toggle'
+              aria-label={`Switch to ${theme === `night` ? `Ivory` : `Night`} Mode`}
+              title={`Switch to ${theme === `night` ? `Ivory` : `Night`} Mode`}
+            >
+              <Icon name={theme === `night` ? `sun` : `moon`} size={21} />
+            </button>
+            <UserMenu />
+          </div>
           <button
             type='button'
             id='header-menu-toggle'

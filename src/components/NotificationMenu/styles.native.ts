@@ -1,0 +1,27 @@
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+  overlay: { flex: 1 },
+  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: `#08031525` },
+  scroll: { flexGrow: 0, flexShrink: 1 },
+  content: { gap: 13, padding: 22 },
+  panel: { position: `absolute`, overflow: `hidden`, borderWidth: 1, borderRadius: 16, elevation: 12, shadowColor: `#080315`, shadowOffset: { width: 0, height: 15 }, shadowOpacity: .25, shadowRadius: 22 },
+  trigger: { width: 44, height: 44, flexShrink: 0, borderWidth: 1, borderRadius: 9, alignItems: `center`, justifyContent: `center` },
+  badge: { top: -5, right: -5, height: 18, minWidth: 18, position: `absolute`, paddingHorizontal: 3, borderWidth: 2, borderRadius: 99, alignItems: `center`, justifyContent: `center` },
+  badgeText: { color: `#20134d`, fontSize: 9, lineHeight: 11, fontWeight: `700` },
+  heading: { gap: 16, flexDirection: `row`, alignItems: `center`, justifyContent: `space-between` },
+  headingCopy: { gap: 7 },
+  eyebrow: { fontSize: 8, letterSpacing: 1.3 },
+  title: { fontSize: 32, lineHeight: 37, fontFamily: `Georgia` },
+  close: { width: 32, height: 32, borderWidth: 1, borderRadius: 7, alignItems: `center`, justifyContent: `center` },
+  toolbar: { gap: 8, borderBottomWidth: 1, paddingBottom: 12, flexDirection: `row`, flexWrap: `wrap`, alignItems: `center` },
+  count: { flex: 1, fontSize: 10, lineHeight: 18 },
+  action: { gap: 5, minHeight: 32, paddingVertical: 5, paddingHorizontal: 3, flexDirection: `row`, alignItems: `center` },
+  actionText: { fontSize: 10, lineHeight: 17 },
+  small: { fontSize: 9, lineHeight: 17 },
+  copy: { fontSize: 11, lineHeight: 20 },
+  empty: { gap: 12, paddingVertical: 27, alignItems: `center` },
+  emptyTitle: { fontSize: 21, lineHeight: 28, fontFamily: `Georgia`, textAlign: `center` },
+  footer: { gap: 4, borderTopWidth: 1, paddingTop: 14 },
+  viewAll: { gap: 12, minHeight: 36, paddingTop: 10, flexDirection: `row`, alignItems: `center`, justifyContent: `space-between` },
+});

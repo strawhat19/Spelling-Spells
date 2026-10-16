@@ -5,7 +5,7 @@ import { ownerRecordsService, type OwnerRecordView, type OwnerRecordsSnapshot } 
 
 const views = {
   users: {
-    icon: `user`, title: `Archive accounts`, path: `/users`,
+    icon: `user`, title: `Accounts`, path: `/users`,
     description: `An Owner-only place for account status, with private data kept private.`,
     columns: [`No.`, `Name`, `Email`, `Role`, `Status`, `Actions`],
     boundary: `Role assignment, suspension and account deletion require trusted server operations. Profile edits cannot grant privileges.`,

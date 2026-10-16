@@ -47,7 +47,7 @@ export const canAccessCapability = (account: Account | null, capability: `accoun
 // The private account schema does not yet expose a trusted plan.
 export const getAccountPlanLabel = (_account: Account | null): string => `Plan Unavailable`;
 
-export const getAccountAvatar = (account: Account | null): string | null => {
+export const getAccountAvatar = (account: Pick<Account, `avatarUrl`> | null): string | null => {
   if (!account?.avatarUrl) return null;
   try {
     const url = new URL(account.avatarUrl);

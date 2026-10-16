@@ -1,4 +1,9 @@
 export const glyphs: Record<string, string> = {
+  plus: `M12 5v14M5 12h14`,
+  'check-all': `M2 12l4 4L16 6M10 16l3 3L23 9`,
+  save: `M5 3h12l4 4v14H3V3h2Zm2 0v6h10V3M7 21v-8h10v8`,
+  bell: `M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4`,
+  settings: `M10 2h4l.7 3 2 .9 2.8-.9 2 3.5-2.1 2.1v2.8l2.1 2.1-2 3.5-2.8-.9-2 .9-.7 3h-4l-.7-3-2-.9-2.8.9-2-3.5 2.1-2.1v-2.8L2.5 8.5l2-3.5 2.8.9 2-.9.7-3ZM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z`,
   refresh: `M20 7v5h-5M4 17v-5h5M6 6a8 8 0 0 1 14 6M18 18A8 8 0 0 1 4 12`,
   download: `M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5`,
   calendar: `M5 5h14v16H5V5ZM5 10h14M8 2v6M16 2v6`,

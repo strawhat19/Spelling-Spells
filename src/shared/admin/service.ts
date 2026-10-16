@@ -1,5 +1,5 @@
 import type { AccountRole } from '../authentication/types';
-import { canAccessOwner } from '../authentication/types';
+import { canAccessOwner, getAccountAvatar } from '../authentication/types';
 import { authenticationService, requireCurrentAccount } from '../authentication/service';
 
 export type OwnerRecordView = `users` | `feedback`;
@@ -10,6 +10,7 @@ export type OwnerAccountRecord = {
   active: boolean;
   role: AccountRole;
   displayName: string;
+  avatarUrl: string | null;
 };
 export type OwnerRecordsSnapshot = {
   message: string;
@@ -51,6 +52,7 @@ const readDirectoryRecord = (value: unknown, profileValue: unknown): OwnerAccoun
     number: Number(row.number),
     role: row.role as AccountRole,
     displayName: profile.display_name,
+    avatarUrl: getAccountAvatar({ avatarUrl: typeof profile.avatar_url === `string` ? profile.avatar_url : null }),
   };
 };
 
@@ -141,7 +143,7 @@ export const ownerRecordsService = {
           assertCurrent();
           if (result.error || !result.data) throw new Error(`Directory read failed.`);
           const rows = result.data.slice(0, ownerDirectoryPageSize);
-          const profiles = rows.length ? await client.from(`profiles`).select(`account_id,display_name`).in(`account_id`, rows.map((row) => row.id)).limit(ownerDirectoryPageSize).abortSignal(controller.signal) : { data: [], error: null };
+          const profiles = rows.length ? await client.from(`profiles`).select(`account_id,display_name,avatar_url`).in(`account_id`, rows.map((row) => row.id)).limit(ownerDirectoryPageSize).abortSignal(controller.signal) : { data: [], error: null };
           assertCurrent();
           if (profiles.error || !profiles.data) throw new Error(`Profile read failed.`);
           const profileMap = new Map<string, unknown>(profiles.data.map((profile) => [profile.account_id, profile] as [string, unknown]));

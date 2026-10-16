@@ -26,11 +26,11 @@ These paths identify source evidence, not a claim that the references were execu
 - Measure the natural logo and wordmark right edge from the shell's left edge, including the existing leading inset. Use that width for the rail and footer. Observe resizing and brand/header changes.
 - Keep Profile as the sole top-level ACCOUNT link. Connections, My Submissions and saved spells remain reachable through Profile and their existing routes.
 - Show ADMIN and its children only for an active, role-verified, email-verified Owner. Central account-layout gates cover direct admin page URLs as well as the sidebar. Existing services and Supabase policies continue enforcing their own access rules.
-- Include the account name/email, role pill and plan pill in the circular avatar popup for every signed-in role, with Owner-only Dashboard and Sign Out last. Support navigation dismissal, outside dismissal, Escape/back dismissal and failed-photo fallback.
+- Include the account name/email and role pill in the circular avatar popup for every signed-in role, with a plan pill only for non-Owners, Owner-only Dashboard and Sign Out last. Support navigation dismissal, outside dismissal, Escape/back dismissal and failed-photo fallback.
 - Reuse the compact Profile rows and 240 px Account Details card, including account tools and the existing device theme control.
 - Arrange the dashboard overview as Traffic, Health, catalog distribution charts and linked counts. Catalog distributions describe the bundled spell records; they are not live traffic or an activity history. Account summaries describe the loaded, bounded account page.
 
-The account schema does not currently contain a trusted plan. `getAccountPlanLabel` therefore returns **Plan Unavailable** in both the popup and Account Details. No default paid or Free entitlement is inferred from a role, signup metadata, browser state or the reference apps. A future confirmed plan adapter must replace this unavailable state before the app can show an actual plan.
+The account schema does not currently contain a trusted plan. `getAccountPlanLabel` therefore returns **Plan Unavailable** in the non-Owner popup pill and Account Details. Owners omit the popup plan pill. No default paid or Free entitlement is inferred from a role, signup metadata, browser state or the reference apps. A future confirmed plan adapter must replace this unavailable state before the app can show an actual plan.
 
 Traffic, runtime reporting and contribution services retain their existing availability states. This task changes source layout and generic adoption instructions; it does not provision providers, publish pricing, grant roles, migrate a database or deploy. Existing package/lockfile edits belong to earlier work and are preserved.
 

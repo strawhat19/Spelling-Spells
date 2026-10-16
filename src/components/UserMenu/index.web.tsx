@@ -18,6 +18,12 @@ const UserMenu = () => {
 
   useEffect(() => { setOpen(false); setError(``); }, [pathname, account?.id]);
   useEffect(() => {
+    const closeOtherMenu = (event: Event) => { if ((event as CustomEvent).detail !== `account`) setOpen(false); };
+    window.addEventListener(`spelling-spells:header-popover-open`, closeOtherMenu);
+    return () => window.removeEventListener(`spelling-spells:header-popover-open`, closeOtherMenu);
+  }, []);
+  useEffect(() => { if (open) window.dispatchEvent(new CustomEvent(`spelling-spells:header-popover-open`, { detail: `account` })); }, [open]);
+  useEffect(() => {
     if (!open) return;
     const outside = (event: PointerEvent) => { if (!root.current?.contains(event.target as Node)) setOpen(false); };
     const escape = (event: KeyboardEvent) => { if (event.key === `Escape`) { setOpen(false); trigger.current?.focus(); } };
@@ -47,11 +53,11 @@ const UserMenu = () => {
       {photo ? <img className='user-menu-avatar' src={photo} alt='' referrerPolicy='no-referrer' onError={() => setFailedPhoto(photo)} /> : <span className='user-menu-avatar'>{initial}</span>}
     </button>
     {open ? <div id='header-account-popover' className='user-menu-popover' role='dialog' aria-label='Your Account'>
-      <div id='user-menu-identity' className='user-menu-identity'>
+      <div id='user-menu-identity' className={`user-menu-identity${account.role === `Owner` ? ` is-owner` : ``}`}>
         <p className='user-menu-name' title={account.displayName}>{account.displayName}</p>
         <span id='user-menu-role' className='user-menu-pill user-menu-role'><Icon name='shield' size={10} />{account.roleVerified ? account.role : `Role Unavailable`}</span>
         <p className='user-menu-email' title={account.email}>{account.email}</p>
-        <span id='user-menu-plan' className='user-menu-pill user-menu-plan'><Icon name='spark' size={10} />{getAccountPlanLabel(account)}</span>
+        {account.role !== `Owner` ? <span id='user-menu-plan' className='user-menu-pill user-menu-plan'><Icon name='spark' size={10} />{getAccountPlanLabel(account)}</span> : null}
       </div>
       <nav aria-label='Account Navigation' onClick={() => setOpen(false)}><AppLink id='user-menu-profile' href='/profile'><Icon name='user' size={17} />Profile</AppLink>{canAccessOwner(account) ? <AppLink id='user-menu-dashboard' href='/dashboard'><Icon name='dashboard' size={17} />Dashboard</AppLink> : null}</nav>
       <button id='user-menu-signout' type='button' disabled={busy} onClick={() => void logout()}><Icon name='logout' size={17} />{busy ? `Signing Out…` : `Sign Out`}</button>

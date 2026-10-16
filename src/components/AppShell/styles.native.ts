@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   root: { flex: 1 },
   content: { flexGrow: 1 },
+  themeButton: { marginLeft: -2 },
   iconButton: { padding: 10, borderRadius: 99 },
   header: { zIndex: 10, borderBottomWidth: 1 },
   headerRow: { gap: 8, padding: 12, flexDirection: `row`, alignItems: `center` },

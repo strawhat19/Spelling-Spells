@@ -55,10 +55,7 @@ const OwnerDashboard = (props: OwnerDashboardProps) => {
   const { palette } = useTheme();
   return <AccountLayout section='admin' title={page.title} eyebrow={`Admin · ${page.title}`}>
     {page.owner ? <View nativeID='dashboard-workspace' style={styles.stack}>
-      {page.view === `analytics` ? <>
-        <View nativeID='dashboard-report-switch' style={[styles.reportSwitch, { borderColor: palette.border, backgroundColor: palette.panel }]}>{([`traffic`, `health`] as const).map((kind) => <Pressable key={kind} nativeID={`dashboard-select-${kind}`} accessibilityRole='button' accessibilityState={{ selected: page.report === kind }} onPress={() => page.setReport(kind)} style={[styles.switchButton, { backgroundColor: page.report === kind ? palette.surface : `transparent` }]}><Icon name={reportContent[kind].icon} color={palette.gold} size={15} /><Text style={[styles.buttonText, { color: palette.text }]}>{reportContent[kind].title}</Text></Pressable>)}</View>
-        <ReportPanel page={page} kind={page.report} />
-      </> : <>
+      {page.view !== `overview` ? <ReportPanel page={page} kind={page.report} /> : <>
         <ReportPanel compact page={page} kind='traffic' />
         <ReportPanel compact page={page} kind='health' />
         <CatalogCharts page={page} />

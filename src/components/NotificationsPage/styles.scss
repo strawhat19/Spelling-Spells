@@ -1,0 +1,34 @@
+.notifications-page { width: min(1180px, calc(100% - 96px)); margin: 50px auto 80px; }
+.notifications-page-heading { display: flex; align-items: center; justify-content: space-between; gap: 32px; margin-bottom: 38px; }
+.notifications-page-heading-copy { max-width: 650px; }
+.notifications-page-eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--lavender); font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+.notifications-page-heading h1 { margin: 20px 0 16px; color: var(--ink); font: 500 clamp(38px, 5vw, 60px)/1.1 Georgia, serif; letter-spacing: -1.4px; }
+.notifications-page-heading h1 em { color: var(--lavender); }
+.notifications-page-heading p { margin: 0; color: var(--body); font-size: 13px; line-height: 1.9; }
+.notifications-page-emblem { display: grid; width: 132px; height: 132px; flex: none; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--lavender); box-shadow: 0 0 0 14px var(--muted); }
+.notifications-page-updates { border: 1px solid var(--line); border-radius: 16px; padding: 26px; background: var(--card); }
+.notifications-page-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.notifications-page-counts h2 { margin: 0 0 7px; color: var(--ink); font: 500 26px/1.2 Georgia, serif; }
+.notifications-page-counts p { margin: 0; color: var(--soft); font-size: 11px; }
+.notifications-page-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.notifications-page-actions button { display: inline-flex; min-height: 38px; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--line); border-radius: 7px; padding: 9px 12px; background: var(--muted); color: var(--ink); font-size: 11px; transition: border-color .2s ease, background-color .2s ease; }
+.notifications-page-actions button > svg { color: var(--lavender); }
+.notifications-page-actions button:hover:not(:disabled) { border-color: var(--lavender); }
+.notifications-page-actions button:disabled { cursor: not-allowed; opacity: .5; }
+.notifications-page-message { margin: 16px 0 0; color: var(--soft); font-size: 11px; line-height: 1.8; }
+.notifications-page-message.is-error { color: #ff9dab; }
+[data-theme='ivory'] .notifications-page-message.is-error { color: #a92d4b; }
+.notifications-page-empty { display: grid; justify-items: center; gap: 13px; padding: 50px 20px; text-align: center; color: var(--lavender); }
+.notifications-page-empty h3 { margin: 0; color: var(--ink); font: 500 26px/1.2 Georgia, serif; }
+.notifications-page-empty p { margin: 0; color: var(--soft); font-size: 12px; line-height: 1.8; }
+.notifications-page-loading { display: grid; gap: 20px; padding: 25px 0; }
+.notifications-page-skeleton { display: grid; gap: 10px; padding: 8px 0; }
+.notifications-page-skeleton span { display: block; height: 12px; border-radius: 5px; background: var(--muted); animation: notifications-page-pulse 1.2s ease-in-out infinite alternate; }
+.notifications-page-skeleton span:first-child { width: 45%; height: 24px; }
+.notifications-page-skeleton span:last-child { width: 70%; }
+.notifications-page-footer { display: grid; gap: 5px; margin-top: 15px; border-top: 1px solid var(--line); padding-top: 18px; color: var(--soft); font-size: 10px; line-height: 1.8; }
+.notifications-page-footer p { margin: 0; }
+@keyframes notifications-page-pulse { to { opacity: .4; } }
+@media (max-width: 700px) { .notifications-page { width: calc(100% - 40px); margin-top: 35px; } .notifications-page-heading { gap: 20px; } .notifications-page-emblem { width: 80px; height: 80px; box-shadow: 0 0 0 8px var(--muted); } .notifications-page-emblem svg { width: 32px; height: 32px; } .notifications-page-updates { padding: 20px; } }
+@media (max-width: 480px) { .notifications-page-emblem { display: none; } .notifications-page-updates { padding: 17px; } .notifications-page-actions button { font-size: 10px; } }
+@media (prefers-reduced-motion: reduce) { .notifications-page-skeleton span { animation: none; } .notifications-page-actions button { transition: none; } }

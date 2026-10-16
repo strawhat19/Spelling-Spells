@@ -63,10 +63,7 @@ const OwnerDashboard = (props: OwnerDashboardProps) => {
   const page = useOwnerDashboard(props);
   return <AccountLayout section='admin' title={page.title} eyebrow={`Admin · ${page.title}`}>
     {page.owner ? <div id='dashboard-workspace' className='owner-dashboard'>
-      {page.view === `analytics` ? <>
-        <div id='dashboard-report-switch' className='dashboard-control-group dashboard-report-switch' aria-label='Analytics Report'>{([`traffic`, `health`] as const).map((kind) => <button key={kind} id={`dashboard-select-${kind}`} type='button' aria-pressed={page.report === kind} className={page.report === kind ? `is-active` : ``} onClick={() => page.setReport(kind)}><Icon name={reportContent[kind].icon} size={15} />{reportContent[kind].title}</button>)}</div>
-        <ReportPanel page={page} kind={page.report} />
-      </> : <>
+      {page.view !== `overview` ? <ReportPanel page={page} kind={page.report} /> : <>
         <ReportPanel compact page={page} kind='traffic' />
         <ReportPanel compact page={page} kind='health' />
         <CatalogCharts page={page} />

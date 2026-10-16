@@ -13,6 +13,7 @@
 .header-nav-link:hover, .header-nav-link.is-active { color: var(--gold); }
 [data-theme='ivory'] .header-nav-link:hover, [data-theme='ivory'] .header-nav-link.is-active { color: var(--purple); }
 .header-actions { gap: 19px; display: flex; align-items: center; flex-shrink: 0; }
+.header-account-actions { gap: 6px; display: flex; align-items: center; }
 .header-actions .user-menu-trigger { width: 44px; height: 44px; align-items: center; justify-content: center; }
 .header-actions .header-signin-link { min-width: 44px; min-height: 44px; justify-content: center; }
 .header-actions .user-menu-loading { width: 44px; height: 44px; }
@@ -25,8 +26,8 @@
 .mobile-navigation { display: grid; gap: 7px; padding: 8px 24px 20px; max-height: calc(100dvh - var(--header-height)); overflow-y: auto; overscroll-behavior: contain; background: var(--page, #17102b); border-bottom: 1px solid var(--line); }
 .mobile-nav-link { gap: 12px; display: flex; align-items: center; padding: 12px; border-radius: 9px; background: var(--muted); }
 @media (max-width: 1120px) { .site-header-inner { width: calc(100% - 48px); gap: 16px; } .header-wordmark { font-size: 27px; } .header-brand .brand-logo-mark { width: 60px; height: 60px; } .header-navigation { gap: 18px; } }
-@media (max-width: 950px) { .header-navigation { display: none; } .header-menu-toggle { display: grid; } }
-@media (max-width: 580px) { .site-header-inner { width: calc(100% - 28px); gap: 9px; } .header-brand { gap: 7px; } .header-wordmark { overflow: hidden; text-overflow: ellipsis; font-size: 22px; letter-spacing: -.6px; } .header-brand .brand-logo-mark { width: 45px; height: 45px; } .header-actions { gap: 8px; } .header-saved-link span { display: none; } }
+@media (max-width: 1050px) { .header-navigation { display: none; } .header-menu-toggle { display: grid; } }
+@media (max-width: 580px) { .site-header-inner { width: calc(100% - 28px); gap: 9px; } .header-brand { gap: 7px; } .header-wordmark { overflow: hidden; text-overflow: ellipsis; font-size: 22px; letter-spacing: -.6px; } .header-brand .brand-logo-mark { width: 45px; height: 45px; } .header-actions { gap: 8px; } .header-saved-link { display: none; } }
 
 .mobile-theme-toggle { display: none; color: var(--ink); border: 0; text-align: left; }
 .app-shell.is-account { --header-height: 64px; }

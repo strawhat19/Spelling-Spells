@@ -4,5 +4,8 @@
   "buildCommand": "npm run export:web",
   "installCommand": "npm ci",
   "outputDirectory": "dist",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/notifications/:slug", "destination": "/notification-details" }
+  ]
 }

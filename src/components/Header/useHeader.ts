@@ -8,6 +8,12 @@ export const useHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => setMenuOpen(false), [pathname]);
+  useEffect(() => {
+    const closeNavigation = (event: Event) => { if ((event as CustomEvent).detail !== `navigation`) setMenuOpen(false); };
+    window.addEventListener(`spelling-spells:header-popover-open`, closeNavigation);
+    return () => window.removeEventListener(`spelling-spells:header-popover-open`, closeNavigation);
+  }, []);
+  useEffect(() => { if (menuOpen) window.dispatchEvent(new CustomEvent(`spelling-spells:header-popover-open`, { detail: `navigation` })); }, [menuOpen]);
 
   useEffect(() => {
     if (!menuOpen) return;

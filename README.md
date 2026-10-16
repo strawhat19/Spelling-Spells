@@ -31,7 +31,7 @@ The starter catalog contains **nine source-linked records across Harry Potter, S
 
 The Supabase integration source supports Google web and email/password sign-in, private profiles, an Owner-only directory and account spellbook sync. It activates only with the approved project URL and a publishable key; missing configuration keeps credentials disabled and guest browsing available. **This source checkpoint has not been deployed or validated end to end.** TypeScript and the 46-route static export passed; live schema, auth settings, credentials and owner bootstrap remain approval-gated. See [Supabase setup](docs/supabase-setup.md) and [the current integration handoff](docs/supabase-integration-handoff.md).
 
-Guest bookmarks remain in their original storage. Signing in opens a separate account collection. The Saved page offers an explicit additive import that keeps the device originals. Confirmed server snapshots, active realtime updates and unavailable/cached states are distinguished. Feedback, online contribution review, analytics and native Google sign-in remain unavailable.
+Guest bookmarks remain in their original storage. Signing in opens a separate account collection. The Saved page offers an explicit additive import that keeps the device originals. Confirmed server snapshots, active realtime updates and unavailable/cached states are distinguished. Feedback, online contribution review, protected analytics reports and native Google sign-in remain unavailable.
 `src/shared/config.ts` contains the single `useLocalStorage = true` switch. Web uses **localStorage**; iOS and Android use **AsyncStorage**. Saved IDs and recently viewed IDs use `spelling-spells:preferences:v1`, and the selected theme uses `spelling-spells:theme:v1`. Preferences are versioned and separate from the immutable source catalog.
 
 Changing the switch to false selects session memory; it does not connect a backend. Unreadable or malformed persisted preferences are preserved rather than overwritten. The app reports storage failures, and affected changes can remain in memory for that session. Clearing browser/app data removes the device's saved preferences. The Saved page can clear bookmarks after confirmation. A separate contribution draft can be deliberately saved on this device; it is never submitted or uploaded in this version. Unsaved draft edits are kept in memory across internal navigation.
@@ -48,6 +48,18 @@ The configured static web export writes `dist/`. Serve it from an HTTPS host wit
 
 Sass files are imported directly by the web components rather than chained through Sass `@use` paths, matching [Expo's partial Sass support](https://docs.expo.dev/versions/v57.0.0/config/metro/). Native views use React Native style objects. Supabase SDK initialization is scoped to the dedicated approved project. The static callback and recovery pages bypass the public offline-page cache.
 
+## Vercel Web Analytics
+
+The web shell mounts `@vercel/analytics/react` once through `src/components/WebAnalytics/index.web.tsx`. Expo Router supplies the current pathname and route pattern for initial page views and client-side navigation. Query strings and fragments are removed before transmission; authentication callback and password-reset pages are excluded. No custom account identifiers, profile fields, saved collections or contribution text are sent. The native fallback imports no analytics SDK.
+
+Web Analytics was enabled on 2026-10-16 for the Piratechs `spelling-spells` Vercel project (`prj_Rkxn2SjuJtRsjHh4BiYyNs2qEJ0O`), confirmed by the Vercel CLI response. Collection still requires a deployment containing this change; source integration and project enablement do not prove live ingestion. The existing Owner analytics page still needs its separate protected reporting service; adding the collection SDK does not connect those reports. See [Vercel setup](https://vercel.com/docs/analytics/quickstart) and [privacy details](https://vercel.com/docs/analytics/privacy-policy).
+
+This change was source-reviewed without tests, builds or browser/native UI checks. No deployment is included in this task.
+
+## Notifications
+
+The header bell, public `/notifications` list/details and Owner-only Dashboard → Notifications manager use the existing Supabase project. Active announcements are public; account read status is private and syncs through Supabase, while guest read status stays on the device. The notification migration is installed without sample content. See [the notification workflow and connection evidence](docs/notifications-system.md) for scope, source references, limits and static-host routing. This addition has not been built, tested, reviewed in a browser/native app or deployed.
+
 ## Supabase checks
 
 After an approved unconfigured web export, `npm run test:web:unconfigured` runs the saved smoke checks in an isolated headless installation of Google Chrome. It uses temporary browser storage, blocks external requests and writes ignored reports/screenshots under `test-results/unconfigured-browser/`. Chrome must already be installed. This checks guest behavior and missing-configuration boundaries; it does not prove authenticated sign-in or cloud syncing.
@@ -59,10 +71,14 @@ The editable logo is `public/brand/logo-mark.svg`; the original v10 artwork and 
 
 Spell-source links live with the seed records under `src/shared/catalog/`. The design round's [source notes](assets/concepts/mockups/v1/README.md) explain the initial Lumos, Fus Ro Dah, and Brisingr examples. Franchise names identify source works; this is an independent archive with no affiliation claim.
 
+## License
+
+Original project code and documentation are licensed under the [MIT License](LICENSE), copyright 2026 strawhat19. Vendored dependencies and third-party assets retain their own licenses and notices. Fictional worlds, characters, spell names, source material and trademarks remain the property of their respective rights holders; this license grants only rights held by the project authors and does not imply affiliation or endorsement.
+
 ## Review status
 
 The original frontend and usability releases passed a 39-route production export and focused cloud-browser checks of scrolling, a 400px responsive viewport, Night/Ivory surfaces, auth navigation, Google branding and parchment controls.
 
 For the 2026-10-15 account-source checkpoint, independent source review, TypeScript and 23 scoped tests passed: Firestore emulator allow/deny paths, initialization boundaries, account lifecycle races and a fail-closed release hold. The final 39-route production export also passed with deliberately populated fake Firebase configuration and an emulator flag; neither can activate accounts while the hold is in place. Real connected account flows and native runtime behavior have not been validated. No production test users were created.
 
-The public frontend is hosted at [spelling-spells.vercel.app](https://spelling-spells.vercel.app) in the Piratechs Vercel team, using Git-connected `main`, Expo static export, the `dist` output and clean URLs. The user requested deploying the latest safe frontend, then pausing. The production deployment still uses the prior disconnected frontend. Supabase sign-in, Owner access and cloud saves are prepared on the integration branch; submission moderation and analytics remain outside this connection stage. See [development scope](docs/development-scope.md), [frontend history](docs/frontend-handoff.md) and [account release gates](docs/backend-connection-plan.md). A source/build pass is not proof of a live connected-service launch.
+The public frontend is hosted at [spelling-spells.vercel.app](https://spelling-spells.vercel.app) in the Piratechs Vercel team, using Git-connected `main`, Expo static export, the `dist` output and clean URLs. The user requested deploying the latest safe frontend, then pausing. The production deployment still uses the prior disconnected frontend. Supabase sign-in, Owner access and cloud saves are prepared on the integration branch; submission moderation and protected analytics reports remain outside this connection stage. See [development scope](docs/development-scope.md), [frontend history](docs/frontend-handoff.md) and [account release gates](docs/backend-connection-plan.md). A source/build pass is not proof of a live connected-service launch.

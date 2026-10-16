@@ -1,4 +1,5 @@
 import Icon from '../Icon';
+import NotificationMenu from '../NotificationMenu';
 import UserMenu from '../UserMenu';
 import styles from './styles.native';
 import BrandLogo from '../BrandLogo';
@@ -90,13 +91,14 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
             <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.brandName, { color: palette.text }]}>Spelling Spells</Text>
           </View>
         </Pressable>
+        <NotificationMenu />
         <UserMenu />
         <Pressable
           nativeID="header-theme-toggle"
           accessibilityRole="button"
           accessibilityLabel={`Switch to ${theme === `night` ? `light` : `dark`} mode`}
           onPress={() => void toggleTheme()}
-          style={[styles.iconButton, { backgroundColor: palette.panel }]}
+          style={[styles.iconButton, styles.themeButton, { backgroundColor: palette.panel }]}
         >
           <Icon name={theme === `night` ? `sun` : `moon`} size={20} color={palette.gold} />
         </Pressable>

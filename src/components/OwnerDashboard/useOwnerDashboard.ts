@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSpells } from '../../shared/spellsContext';
 import { useOwnerRecords } from '../OwnerRecords/useOwnerRecords';
 
-export type OwnerDashboardProps = { view?: `overview` | `analytics` };
+export type OwnerDashboardProps = { view?: `health` | `overview` | `analytics` };
 export type ReportKind = `traffic` | `health`;
 
 export const reportContent = {
@@ -54,14 +54,11 @@ export const useOwnerDashboard = ({ view = `overview` }: OwnerDashboardProps) =>
     { id: `accounts`, icon: `user`, href: `/users`, label: `Accounts on Page`, value: records?.length ?? null, detail: `Newest 50 accounts; not a global total` },
     { id: `active`, icon: `shield`, href: `/users`, label: `Active on Page`, value: records?.filter((record) => record.active).length ?? null, detail: `Active status within the loaded page` },
   ];
-  const [report, setReportState] = useState<ReportKind>(`traffic`);
-  const [dimension, setDimension] = useState(`Overview`);
-  const [period, setPeriod] = useState<7 | 30 | 90>(30);
+  const report: ReportKind = view === `health` ? `health` : `traffic`;
+  const [selectedDimension, setDimension] = useState<string>(reportContent[report].dimensions[0]);
+  const dimension = reportContent[report].dimensions.includes(selectedDimension) ? selectedDimension : reportContent[report].dimensions[0];
+  const [period, setPeriod] = useState<7 | 30 | 90>(7);
   const [presentation, setPresentation] = useState<`chart` | `list`>(`chart`);
-  const setReport = (next: ReportKind) => {
-    setReportState(next);
-    setDimension(reportContent[next].dimensions[0]);
-  };
   const selectDimension = (next: string) => {
     if (reportContent[report].dimensions.includes(next)) setDimension(next);
   };
@@ -73,7 +70,6 @@ export const useOwnerDashboard = ({ view = `overview` }: OwnerDashboardProps) =>
     report,
     period,
     metrics,
-    setReport,
     setPeriod,
     dimension,
     etymologies,
@@ -83,7 +79,7 @@ export const useOwnerDashboard = ({ view = `overview` }: OwnerDashboardProps) =>
     selectDimension,
     setPresentation,
     content: reportContent[report],
-    title: view === `analytics` ? `Analytics` : `Dashboard`,
+    title: view === `overview` ? `Dashboard` : view === `health` ? `Health` : `Analytics`,
     catalogError: !catalog.spells.length ? catalog.error : null,
     catalogCoverage: `Bundled spell catalog · Distribution by record, not visitor activity`,
   };

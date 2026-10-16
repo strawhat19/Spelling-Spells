@@ -2,6 +2,7 @@ import Icon from '../Icon';
 import Header from '../Header/index.web';
 import Footer from '../Footer/index.web';
 import PageMetadata from '../PageMetadata';
+import WebAnalytics from '../WebAnalytics';
 import { useAppShell } from './useAppShell';
 import type { PropsWithChildren } from 'react';
 import { getAccountRoute } from '../../shared/routes';
@@ -31,6 +32,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
       ) : null}
       <main id='main-content' className='app-main'>{children}</main>
       <Footer />
+      <WebAnalytics />
       <button
         type='button'
         id='scroll-to-top'

@@ -1,0 +1,12 @@
+.notification-card { display: grid; min-width: 0; grid-template-columns: 36px minmax(0, 1fr) 15px; align-items: start; gap: 13px; border-bottom: 1px solid var(--line); padding: 20px 0; }
+.notification-card:last-child { border-bottom: 0; }
+.notification-card-icon { display: grid; width: 36px; height: 36px; flex: none; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--muted); color: var(--lavender); }
+.notification-card-copy { min-width: 0; }
+.notification-card-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; color: var(--ink); font: 500 22px/1.25 Georgia, serif; letter-spacing: -.3px; overflow-wrap: anywhere; transition: color .2s ease; }
+.notification-card-body { display: -webkit-box; overflow: hidden; margin: 0; color: var(--soft); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; white-space: pre-line; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.notification-card-unread-dot { width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--lavender); }
+.notification-card-arrow { margin-top: 4px; color: var(--lavender); transition: transform .2s ease; }
+.notification-card:is(:hover, :focus-visible) .notification-card-title { color: var(--lavender); }
+.notification-card:is(:hover, :focus-visible) .notification-card-arrow { transform: translate(2px, -2px); }
+.notification-card:focus-visible { border-radius: 7px; outline: 2px solid var(--lavender); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .notification-card-title, .notification-card-arrow { transition: none; } }

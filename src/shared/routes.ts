@@ -19,6 +19,8 @@ export const routeAliases = {
   '/sign-in': `/signin`,
   '/register': `/signup`,
   '/sign-up': `/signup`,
+  '/alerts': `/notifications`,
+  '/notification': `/notifications`,
   '/about-us': `/about`,
   '/contact-us': `/contact`,
   '/privacy-policy': `/privacy`,
@@ -40,6 +42,8 @@ export const accountNavigation: AccountRoute[] = [
   { href: `/submissions`, icon: `edit`, label: `My Submissions`, parent: `/profile`, access: `account`, section: `account` },
   { href: `/dashboard`, icon: `dashboard`, label: `Dashboard`, access: `owner`, section: `admin` },
   { href: `/users`, icon: `user`, label: `Users`, access: `owner`, section: `admin` },
+  { href: `/admin/notifications`, icon: `bell`, label: `Notifications`, access: `owner`, section: `admin` },
+  { href: `/health`, icon: `shield`, label: `Health`, access: `owner`, section: `admin` },
   { href: `/analytics`, icon: `chart`, label: `Analytics`, access: `owner`, section: `admin` },
   { href: `/feedback`, icon: `edit`, label: `Feedback`, access: `owner`, section: `admin` },
   { href: `/review`, icon: `shield`, label: `Review Submissions`, access: `owner`, section: `admin` },
@@ -50,6 +54,6 @@ export const getAccountRoute = (pathname: string) => accountNavigation.find((rou
 export const safeReturnPath = (value: string | string[] | undefined): string => {
   const path = Array.isArray(value) ? value[0] : value;
   if (!path || !path.startsWith(`/`) || path.startsWith(`//`) || /[\\\s]/.test(path)) return `/profile`;
-  const allowed = [`/`, `/saved`, `/submit`, ...navigation.map((route) => route.href), ...accountNavigation.map((route) => route.href)];
+  const allowed = [`/`, `/saved`, `/submit`, `/notifications`, ...navigation.map((route) => route.href), ...accountNavigation.map((route) => route.href)];
   return allowed.includes(path) ? path : `/profile`;
 };

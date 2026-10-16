@@ -91,7 +91,7 @@ const UserMenu = () => {
               </View>
               <View nativeID='account-menu-email-row' style={styles.identityRow}>
                 <Text numberOfLines={1} nativeID='account-menu-email' style={[styles.email, { color: palette.muted }]}>{account?.email}</Text>
-                <View nativeID='account-menu-plan-pill' style={[styles.pill, { borderColor: palette.primary, backgroundColor: palette.panel }]}><Icon name='check' size={10} color={palette.primary} /><Text numberOfLines={1} accessibilityLabel={`Plan: ${getAccountPlanLabel(account)}`} style={[styles.pillText, { color: palette.primary }]}>{getAccountPlanLabel(account)}</Text></View>
+                {account?.role !== `Owner` ? <View nativeID='account-menu-plan-pill' style={[styles.pill, { borderColor: palette.primary, backgroundColor: palette.panel }]}><Icon name='check' size={10} color={palette.primary} /><Text numberOfLines={1} accessibilityLabel={`Plan: ${getAccountPlanLabel(account)}`} style={[styles.pillText, { color: palette.primary }]}>{getAccountPlanLabel(account)}</Text></View> : null}
               </View>
             </View>
             <Pressable ref={profileLink} nativeID='account-menu-profile' accessibilityRole='link' onPress={() => navigate(`/profile`)} style={styles.item}><Icon name='user' size={16} color={palette.primary} /><Text style={[styles.itemText, { color: palette.text }]}>{`Profile`}</Text></Pressable>
