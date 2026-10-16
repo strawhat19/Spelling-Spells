@@ -14,17 +14,18 @@
     "web": "expo start --web",
     "ios": "expo start --ios",
     "android": "expo start --android",
-    "export:web": "expo export --platform web"
+    "export:web": "expo export --platform web",
+    "test:web:unconfigured": "node tests/browser/unconfigured-smoke.cjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
+    "@supabase/supabase-js": "2.118.0",
     "expo": "~57.0.0",
     "expo-constants": "~57.0.2",
     "expo-crypto": "~57.0.3",
     "expo-linking": "~57.0.1",
     "expo-router": "~57.0.2",
     "expo-status-bar": "~57.0.0",
-    "firebase": "13.0.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
@@ -32,12 +33,13 @@
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "4.25.2",
     "react-native-svg": "15.15.4",
+    "react-native-url-polyfill": "4.0.0",
     "react-native-web": "~0.21.0",
     "react-native-worklets": "0.10.1"
   },
   "devDependencies": {
-    "@firebase/rules-unit-testing": "6.0.0",
     "@types/react": "~19.2.0",
+    "playwright": "1.64.1",
     "sass": "^1.89.0",
     "typescript": "~5.9.2"
   }

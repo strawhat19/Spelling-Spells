@@ -20,6 +20,7 @@ export const useCatalogPage = (savedOnly = false) => {
   const scopeRef = useRef({ key: collection.saveScopeKey, revision: 0 });
   const mountedRef = useRef(true);
   const pendingRef = useRef<string | null>(null);
+  const clearRequest = useRef<{ scope: string; version: number | null; run: () => Promise<boolean> } | null>(null);
   const [clearScope, setClearScope] = useState<string | null>(null);
   const [action, setAction] = useState<{ scope: string; kind: `clear` | `import` } | null>(null);
   const [actionError, setActionError] = useState<{ scope: string; message: string } | null>(null);
@@ -33,9 +34,9 @@ export const useCatalogPage = (savedOnly = false) => {
   const clearing = action?.scope === scopeKey && action.kind === `clear`;
   const importing = action?.scope === scopeKey && action.kind === `import`;
   const actionBusy = collection.saveBusy || clearing || importing;
-  const confirmClear = clearScope === scopeKey;
+  const confirmClear = clearScope === scopeKey && clearRequest.current?.version === collection.saveVersion;
   const savedResolved = collection.ready && (collection.saveScope === `account`
-    ? collection.saveStatus === `live` && (collection.savedReady || collection.saveBusy)
+    ? (collection.saveStatus === `live` || collection.saveStatus === `server`) && (collection.savedReady || collection.saveBusy)
     : collection.savedReady);
   const usesSaved = savedOnly || savedFilter;
   const resultsResolved = collection.ready && (!usesSaved || savedResolved);
@@ -49,9 +50,19 @@ export const useCatalogPage = (savedOnly = false) => {
 
   useEffect(() => {
     setClearScope(null);
+    clearRequest.current = null;
     setAction(null);
     setActionError(null);
   }, [scopeKey, savedOnly]);
+
+  useEffect(() => {
+    if (!clearRequest.current || actionBusy) return;
+    if (clearRequest.current.version !== collection.saveVersion || !collection.savedReady) {
+      clearRequest.current = null;
+      setClearScope(null);
+      setActionError({ scope: scopeKey, message: `Your saved shelf changed or needs a fresh connection. Review it before clearing.` });
+    }
+  }, [scopeKey, actionBusy, collection.saveVersion, collection.savedReady]);
 
   useEffect(() => {
     setQuery(firstValue(parameters.q));
@@ -101,23 +112,28 @@ export const useCatalogPage = (savedOnly = false) => {
   };
 
   const requestClear = () => {
-    if (collection.savedReady && !actionBusy) setClearScope(scopeKey);
+    if (!collection.savedReady || actionBusy) return;
+    clearRequest.current = { scope: scopeKey, version: collection.saveVersion, run: collection.clearSaved };
+    setClearScope(scopeKey);
   };
   const closeClear = () => {
-    if (!actionBusy) setClearScope(null);
+    if (!actionBusy) { clearRequest.current = null; setClearScope(null); }
   };
   const runShelfAction = async (kind: `clear` | `import`) => {
     const scope = scopeKey;
     if (currentScope() !== scope || !collection.savedReady || actionBusy || pendingRef.current === scope) return;
-    if (kind === `clear` && clearScope !== scope) return;
+    const reviewedClear = clearRequest.current;
+    if (kind === `clear` && (!confirmClear || reviewedClear?.scope !== scope || reviewedClear.version !== collection.saveVersion)) return;
     if (kind === `import` && (confirmClear || collection.saveScope !== `account`)) return;
+    const run = kind === `clear` ? reviewedClear?.run : collection.importDeviceSaved;
+    if (!run) return;
     pendingRef.current = scope;
     setAction({ scope, kind });
     setActionError(null);
     try {
-      const confirmed = await (kind === `clear` ? collection.clearSaved() : collection.importDeviceSaved());
+      const confirmed = await run();
       if (currentScope() !== scope) return;
-      if (confirmed && kind === `clear`) setClearScope(null);
+      if (confirmed && kind === `clear`) { clearRequest.current = null; setClearScope(null); }
       if (!confirmed) setActionError({ scope, message: `The ${kind === `clear` ? `clear` : `import`} was not confirmed. Review the collection status before trying again.` });
     } catch {
       if (currentScope() === scope) setActionError({ scope, message: `The ${kind === `clear` ? `clear` : `import`} could not be confirmed. Please try again when your collection is available.` });

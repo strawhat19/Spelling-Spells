@@ -1,4 +1,3 @@
-import { Timestamp } from 'firebase/firestore';
 import type { Account, AccountRole, AuthIdentity, ProfileUpdate } from '../../authentication/types';
 
 export type UserRecord = {
@@ -8,11 +7,11 @@ export type UserRecord = {
   active: boolean;
   role: AccountRole;
   privacy: `private`;
-  displayName: string;
-  firebase_uid: string;
-  avatarUrl: string | null;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  auth_uid: string;
+  display_name: string;
+  created_at: string;
+  updated_at: string;
+  avatar_url: string | null;
 };
 
 const roles = new Set<AccountRole>([`Owner`, `Admin`, `Member`, `Developer`, `Subscriber`]);
@@ -37,24 +36,25 @@ export const readAccount = (id: string, value: unknown, identity: AuthIdentity):
   const data = value as Partial<UserRecord>;
   const match = accountId.exec(id);
   if (
-    !match || data.id !== id || data.firebase_uid !== identity.firebaseUid ||
+    !match || data.id !== id || data.auth_uid !== identity.authUid ||
     !Number.isSafeInteger(data.number) || data.number !== Number(match[1]) ||
     typeof data.email !== `string` || !data.email || data.email.length > 320 ||
     typeof data.active !== `boolean` || !roles.has(data.role as AccountRole) ||
-    data.privacy !== `private` || typeof data.displayName !== `string` ||
-    (data.avatarUrl !== null && typeof data.avatarUrl !== `string`) ||
-    !(data.createdAt instanceof Timestamp) || !(data.updatedAt instanceof Timestamp)
+    data.privacy !== `private` || typeof data.display_name !== `string` ||
+    (data.avatar_url !== null && typeof data.avatar_url !== `string`) ||
+    typeof data.created_at !== `string` || !Number.isFinite(Date.parse(data.created_at)) ||
+    typeof data.updated_at !== `string` || !Number.isFinite(Date.parse(data.updated_at))
   ) throw new Error(`The private account record has an unsupported format. Contact the site owner.`);
-  const profile = normalizeProfile({ displayName: data.displayName, avatarUrl: data.avatarUrl });
+  const profile = normalizeProfile({ displayName: data.display_name, avatarUrl: data.avatar_url });
   return {
     id,
     ...profile,
     roleVerified: true,
     role: data.role as AccountRole,
-    email: data.email,
+    email: identity.email,
     active: data.active,
     number: data.number as number,
-    firebaseUid: identity.firebaseUid,
+    authUid: identity.authUid,
     emailVerified: identity.emailVerified,
   };
 };

@@ -5,7 +5,7 @@ import type { Spell, World } from '../models/Spell';
 import type { PreferenceSnapshot } from '../models/Preferences';
 import { spellsAPI, preferencesAPI } from '../../api';
 import { canAccessAccount } from '../authentication/types';
-import { savedSpellsService, type SavedSpellsSnapshot, type SavedSpellsResult } from '../firebase/savedSpells';
+import { savedSpellsService, type SavedSpellsSnapshot, type SavedSpellsResult } from '../supabase/savedSpells';
 import { createContext, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 export type SpellsContextValue = {
@@ -16,6 +16,7 @@ export type SpellsContextValue = {
   savedIds: string[];
   historyIds: string[];
   savedReady: boolean;
+  saveVersion: number | null;
   saveBusy: boolean;
   saveScopeKey: string;
   deviceSavedCount: number;
@@ -50,7 +51,7 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const [storageMode, setStorageMode] = useState<StorageMode | null>(null);
   const [operation, setOperation] = useState<{ scope: string; busy: boolean; error: string | null } | null>(null);
   const [cloud, setCloud] = useState<{ scope: string; snapshot: SavedSpellsSnapshot } | null>(null);
-  const identity = auth.identity?.firebaseUid ?? auth.account?.firebaseUid;
+  const identity = auth.identity?.authUid ?? auth.account?.authUid;
   const saveScope = identity ? `account` : `device`;
   const saveScopeKey = identity ? `account:${identity}` : `device`;
   const lifecycleKey = `${saveScopeKey}:${auth.account?.id ?? auth.status}:${auth.account?.active ?? false}`;
@@ -61,8 +62,9 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const saveStatus = saveScope === `device` ? `device` : snapshot?.status ?? (auth.status === `error` ? `error` : `loading`);
   const savedReady = ready && !auth.loading && !saveBusy && (saveScope === `device`
     ? hydrated.current
-    : canAccessAccount(auth.account) && snapshot?.status === `live` && snapshot.source === `server` && !snapshot.truncated);
+    : canAccessAccount(auth.account) && (snapshot?.status === `live` || snapshot?.status === `server`) && snapshot.source === `server` && !snapshot.truncated);
   const savedIds = saveScope === `account` ? snapshot?.savedIds ?? [] : deviceIds;
+  const saveVersion = snapshot?.version ?? null;
   const saveMessage = saveScope === `account` ? snapshot?.message ?? auth.message : null;
   const error = operation?.scope === saveScopeKey && operation.error
     ? operation.error : saveScope === `device` ? localError : snapshot?.status === `error` ? snapshot.message : null;
@@ -141,8 +143,8 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
     if (!savedReady) return false;
     if (saveScope === `device`) return mutatePreferences(() => preferencesAPI.clearSaved());
     const account = auth.account;
-    return account ? mutateCloud(() => savedSpellsService.clearSaved(account)) : false;
-  }, [savedReady, saveScope, auth.account, mutateCloud, mutatePreferences]);
+    return account && snapshot ? mutateCloud(() => savedSpellsService.clearSaved(account, snapshot)) : false;
+  }, [savedReady, saveScope, auth.account, snapshot, mutateCloud, mutatePreferences]);
 
   const toggleSaved = useCallback(async (id: string): Promise<void> => {
     if (!savedReady) return;
@@ -164,11 +166,11 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const dismissError = useCallback(() => { setLocalError(null); setOperation(null); }, []);
   const value = useMemo<SpellsContextValue>(() => ({
     ready, error, spells, worlds, isSaved, savedIds, saveBusy, saveScope, savedReady,
-    clearSaved, historyIds, saveStatus, storageMode, saveMessage, saveScopeKey,
+    clearSaved, historyIds, saveStatus, saveVersion, storageMode, saveMessage, saveScopeKey,
     toggleSaved, recordViewed, dismissError, refreshSaved, importDeviceSaved,
     deviceSavedCount: deviceIds.length,
   }), [ready, error, spells, worlds, isSaved, savedIds, saveBusy, saveScope, savedReady,
-    clearSaved, historyIds, saveStatus, storageMode, saveMessage, saveScopeKey,
+    clearSaved, historyIds, saveStatus, saveVersion, storageMode, saveMessage, saveScopeKey,
     toggleSaved, recordViewed, dismissError, refreshSaved, importDeviceSaved, deviceIds.length]);
   return <SpellsContext.Provider value={value}>{children}</SpellsContext.Provider>;
 };

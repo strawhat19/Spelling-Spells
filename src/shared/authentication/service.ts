@@ -1,62 +1,54 @@
-import type { Auth, User, UserCredential } from 'firebase/auth';
-import type { FirebaseRuntime } from '../firebase/client';
+import { authFailure } from '../supabase/errors';
+import { getSupabaseClient, createRecoveryClient } from '../supabase/client';
+import { normalizeProfile } from '../models/users/User';
+import type { User, SupabaseClient } from '@supabase/supabase-js';
+import { supabaseConfigured, supabaseConfigurationMessage } from '../supabase/config';
+import { ensurePrivateAccount, identityFromUser, readPrivateAccount } from '../supabase/accounts';
 import type { Account, AuthResult, AuthSnapshot, EmailSignIn, EmailSignUp, ProfileUpdate } from './types';
-import { authFailure, getErrorCode } from '../firebase/errors';
-import { firebaseConfigured } from '../firebase/config';
-import { getFirebaseRuntime } from '../firebase/client';
-import { normalizeProfile, readAccount } from '../models/users/User';
-import { signInWithPlatformGoogle } from '../firebase/authPlatform';
-import { ensurePrivateAccount, identityFromUser, readPrivateAccount } from '../firebase/accounts';
-import { doc, onSnapshot, runTransaction, serverTimestamp } from 'firebase/firestore';
-import {
-  reload,
-  getIdToken,
-  onIdTokenChanged,
-  sendEmailVerification,
-  sendPasswordResetEmail,
-  signOut as firebaseSignOut,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  updateProfile as updateFirebaseProfile,
-} from 'firebase/auth';
+import { clearAuthRedirect, getAuthRedirectUrl, readAuthRedirect, passwordRecoveryAvailable, signupConfirmationMessage, signInWithPlatformGoogle } from '../supabase/authPlatform';
 
-export const authConnectionMessage = `Account services are not connected yet. Sign-in, account creation, and cloud sync are unavailable. You can still explore the archive and keep a collection on this device.`;
+export const authConnectionMessage = supabaseConfigurationMessage ?? `Account services need Supabase configuration.`;
 
 const initialSnapshot = (): AuthSnapshot => ({
   account: null,
   identity: null,
   source: null,
-  phase: firebaseConfigured ? `identity` : null,
-  status: firebaseConfigured ? `loading` : `unavailable`,
-  message: firebaseConfigured ? null : authConnectionMessage,
+  recovery: false,
+  phase: supabaseConfigured ? `identity` : null,
+  status: supabaseConfigured ? `loading` : `unavailable`,
+  message: supabaseConfigured ? null : authConnectionMessage,
 });
 
 let snapshot = initialSnapshot();
 let revision = 0;
+let eventRevision = 0;
 let observerRevision = 0;
 let sessionRevision = 0;
-let observeIdentity = true;
 let started = false;
 let signingOut = false;
+let observeIdentity = true;
+let recoverySession = false;
+let currentUser: User | null = null;
 let identityKey: string | null = null;
+let hydration: Promise<AuthResult> | null = null;
+let redirectPending: Promise<AuthResult> | null = null;
+let signOutPending: Promise<AuthResult> | null = null;
 let unsubscribeIdentity: (() => void) | null = null;
 let unsubscribeAccount: (() => void) | null = null;
-let hydration: Promise<AuthResult> | null = null;
 let credentialQueue: Promise<unknown> = Promise.resolve();
-let signOutPending: Promise<AuthResult> | null = null;
 const listeners = new Set<(value: AuthSnapshot) => void>();
 
-const publish = (next: AuthSnapshot): void => {
-  snapshot = next;
-  listeners.forEach((listener) => listener({ ...next }));
+const publish = (next: Omit<AuthSnapshot, `recovery`>): void => {
+  snapshot = { ...next, recovery: recoverySession };
+  listeners.forEach((listener) => listener({ ...snapshot }));
 };
 
 const resetAccount = (): number => {
   revision += 1;
   unsubscribeAccount?.();
   unsubscribeAccount = null;
-  hydration = null;
   identityKey = null;
+  hydration = null;
   return revision;
 };
 
@@ -66,57 +58,76 @@ const activeAccount = (account: Account): Account => {
   return account;
 };
 
+const signedOut = (message: string | null = null): void => {
+  resetAccount();
+  currentUser = null;
+  recoverySession = false;
+  publish({ account: null, identity: null, source: null, phase: null, status: `signed-out`, message });
+};
+
+const attempt = async (operation: () => Promise<AuthResult>): Promise<AuthResult> => {
+  try { return await operation(); } catch (error) { return authFailure(error); }
+};
+
 const hydrate = (user: User, force = false): Promise<AuthResult> => {
-  if (signingOut || !observeIdentity || getFirebaseRuntime().auth.currentUser !== user) return Promise.resolve(authFailure(identityChanged()));
-  const key = `${user.uid}:${user.email ?? ``}:${user.emailVerified}`;
+  if (signingOut || !observeIdentity || currentUser?.id !== user.id) return Promise.resolve(authFailure(identityChanged()));
+  const key = `${user.id}:${user.email ?? ``}:${user.email_confirmed_at ?? ``}`;
   if (!force && identityKey === key) {
     if (hydration) return hydration;
     if (snapshot.status === `signed-in` && snapshot.account) return Promise.resolve({ ok: true, account: snapshot.account });
   }
   const current = resetAccount();
-  identityKey = key;
+  const session = sessionRevision;
   const identity = identityFromUser(user);
+  const client = getSupabaseClient();
+  identityKey = key;
   publish({ identity, account: null, source: null, status: `loading`, phase: `account`, message: null });
+  const isCurrent = (): boolean => current === revision && session === sessionRevision && currentUser?.id === user.id && !signingOut && observeIdentity;
+  const assertCurrent = (): void => { if (!isCurrent()) throw identityChanged(); };
   const operation = (async (): Promise<AuthResult> => {
     try {
-      const { auth, database } = getFirebaseRuntime();
-      const isCurrent = (): boolean => current === revision && auth.currentUser?.uid === user.uid && !signingOut;
-      const id = await ensurePrivateAccount(database, user, {
-        revision: current,
-        assertCurrent: () => { if (!isCurrent()) throw identityChanged(); },
-      });
-      if (!isCurrent()) throw identityChanged();
-      const account = activeAccount(await readPrivateAccount(database, user, id));
-      if (!isCurrent()) throw identityChanged();
-      let firstEvent = true;
-      unsubscribeAccount = onSnapshot(doc(database, `users`, id), { includeMetadataChanges: true }, (document) => {
-        if (!isCurrent()) return;
-        // The initial memory snapshot can immediately follow the confirmed server read above.
-        if (firstEvent && document.metadata.fromCache && !document.metadata.hasPendingWrites) {
-          firstEvent = false;
-          return;
-        }
-        firstEvent = false;
-        if (document.metadata.fromCache || document.metadata.hasPendingWrites) {
-          publish({ identity, account: null, source: `cache`, status: `loading`, phase: `account`, message: `Waiting for the server to confirm your private account.` });
-          return;
-        }
+      const id = await ensurePrivateAccount(client, user, assertCurrent);
+      assertCurrent();
+      const account = activeAccount(await readPrivateAccount(client, user, id));
+      assertCurrent();
+      let refreshRevision = 0;
+      const refresh = async (): Promise<void> => {
+        const request = ++refreshRevision;
         try {
-          const next = activeAccount(readAccount(id, document.exists() ? document.data() : null, identityFromUser(user)));
-          publish({ account: next, identity: identityFromUser(user), source: `server`, status: `signed-in`, phase: null, message: null });
+          const next = activeAccount(await readPrivateAccount(client, user, id));
+          if (!isCurrent() || request !== refreshRevision) return;
+          const previous = snapshot.account;
+          if (previous && (previous.role !== next.role || previous.emailVerified !== next.emailVerified)) {
+            // Invalidate work authorized with the previous capability before publishing the new one.
+            void hydrate(user, true);
+            return;
+          }
+          publish({ account: next, identity, source: `server`, status: `signed-in`, phase: null, message: null });
         } catch (error) {
-          publish({ identity, account: null, source: `server`, status: `error`, phase: null, message: authFailure(error).message });
+          if (!isCurrent() || request !== refreshRevision) return;
+          resetAccount();
+          publish({ identity, account: null, source: null, status: `error`, phase: null, message: authFailure(error).message });
         }
-      }, (error) => {
-        if (!isCurrent()) return;
-        unsubscribeAccount = null;
-        publish({ identity, account: null, source: null, status: `error`, phase: null, message: authFailure(error).message });
-      });
+      };
+      const channel = client.channel(`account:${user.id}:${current}`)
+        .on(`postgres_changes`, { event: `INSERT`, schema: `public`, table: `accounts`, filter: `auth_uid=eq.${user.id}` }, () => { void refresh(); })
+        .on(`postgres_changes`, { event: `UPDATE`, schema: `public`, table: `accounts`, filter: `auth_uid=eq.${user.id}` }, () => { void refresh(); })
+        .on(`postgres_changes`, { event: `INSERT`, schema: `public`, table: `profiles`, filter: `account_id=eq.${id}` }, () => { void refresh(); })
+        .on(`postgres_changes`, { event: `UPDATE`, schema: `public`, table: `profiles`, filter: `account_id=eq.${id}` }, () => { void refresh(); })
+        .subscribe((status) => {
+          if (!isCurrent()) return;
+          if (status === `SUBSCRIBED`) void refresh();
+          else if ([`CLOSED`, `TIMED_OUT`, `CHANNEL_ERROR`].includes(status)) {
+            resetAccount();
+            publish({ identity, account: null, source: null, status: `error`, phase: null, message: authFailure({ code: `app/realtime-unavailable` }).message });
+          }
+        });
+      unsubscribeAccount = () => { void client.removeChannel(channel); };
       publish({ account, identity, source: `server`, status: `signed-in`, phase: null, message: null });
       return { ok: true, account };
     } catch (error) {
       const failure = authFailure(error);
-      if (current === revision) publish({ identity, account: null, source: null, status: `error`, phase: null, message: failure.message });
+      if (isCurrent()) publish({ identity, account: null, source: null, status: `error`, phase: null, message: failure.message });
       return failure;
     }
   })();
@@ -125,82 +136,117 @@ const hydrate = (user: User, force = false): Promise<AuthResult> => {
   return operation;
 };
 
-const signedOut = (): void => {
-  resetAccount();
-  publish({ account: null, identity: null, source: null, phase: null, status: `signed-out`, message: null });
+const verifiedIdentity = async (client: SupabaseClient, expected?: string): Promise<User> => {
+  const session = sessionRevision;
+  const { data, error } = await client.auth.getUser();
+  if (error) throw error;
+  if (!data.user || signingOut || session !== sessionRevision || currentUser?.id !== data.user.id || (expected && data.user.id !== expected)) throw identityChanged();
+  return data.user;
 };
 
-const start = (): FirebaseRuntime => {
-  const runtime = getFirebaseRuntime();
-  if (started) return runtime;
+const start = (): SupabaseClient => {
+  const client = getSupabaseClient();
+  if (started) return client;
   started = true;
   const observer = ++observerRevision;
-  unsubscribeIdentity = onIdTokenChanged(runtime.auth, (user) => {
-    if (signingOut || observer !== observerRevision || runtime.auth.currentUser !== user) return;
-    if (user && observeIdentity) void hydrate(user);
-    else if (user) return;
-    else signedOut();
-  }, (error) => {
+  const { data } = client.auth.onAuthStateChange((event, session) => {
     if (observer !== observerRevision) return;
-    resetAccount();
-    publish({ account: null, identity: null, source: null, phase: null, status: `error`, message: authFailure(error).message });
+    const previousId = currentUser?.id;
+    currentUser = session?.user ?? null;
+    if (event === `PASSWORD_RECOVERY`) recoverySession = true;
+    if (signingOut || !observeIdentity) return;
+    if (previousId && previousId !== currentUser?.id) {
+      sessionRevision += 1;
+      resetAccount();
+      recoverySession = event === `PASSWORD_RECOVERY`;
+      publish({ account: null, source: null, phase: `identity`, status: `loading`, identity: currentUser ? identityFromUser(currentUser) : null, message: null });
+    }
+    const change = ++eventRevision;
+    const currentSession = sessionRevision;
+    const expected = currentUser?.id;
+    // Supabase auth callbacks hold an internal lock; defer all SDK calls until it is released.
+    setTimeout(() => {
+      if (observer !== observerRevision || change !== eventRevision || currentSession !== sessionRevision || signingOut || !observeIdentity) return;
+      if (!expected) { signedOut(); return; }
+      void verifiedIdentity(client, expected).then((user) => {
+        if (observer === observerRevision && change === eventRevision && currentSession === sessionRevision) void hydrate(user);
+      }).catch((error) => {
+        if (observer !== observerRevision || change !== eventRevision || currentSession !== sessionRevision) return;
+        resetAccount();
+        publish({ account: null, source: null, phase: null, status: `error`, identity: currentUser ? identityFromUser(currentUser) : null, message: authFailure(error).message });
+      });
+    }, 0);
   });
-  return runtime;
+  unsubscribeIdentity = () => data.subscription.unsubscribe();
+  if (readAuthRedirect()?.code || readAuthRedirect()?.error) setTimeout(() => { void completeAuthRedirect(); }, 0);
+  return client;
 };
 
-const attempt = async (operation: () => Promise<AuthResult>): Promise<AuthResult> => {
-  try { return await operation(); } catch (error) { return authFailure(error); }
-};
-
-const runCredentialFlow = (
-  authenticate: (auth: Auth) => Promise<UserCredential>,
-  finish: (user: User, assertCurrent: () => void) => Promise<AuthResult> = (user) => hydrate(user),
-): Promise<AuthResult> => {
-  const currentSession = ++sessionRevision;
+type CredentialResult = { user: User | null; message?: string };
+const runCredentialFlow = (authenticate: (client: SupabaseClient) => Promise<CredentialResult>): Promise<AuthResult> => {
+  const session = ++sessionRevision;
+  const pendingLogout = signOutPending;
+  eventRevision += 1;
   observeIdentity = false;
+  recoverySession = false;
   resetAccount();
-  if (firebaseConfigured) publish({ account: null, identity: null, source: null, phase: `identity`, status: `loading`, message: null });
+  if (supabaseConfigured) publish({ account: null, identity: null, source: null, phase: `identity`, status: `loading`, message: null });
   const credential = credentialQueue.then(async () => {
-    if (signOutPending) await signOutPending;
-    if (currentSession !== sessionRevision) throw identityChanged();
-    const { auth } = start();
-    const result = await authenticate(auth);
-    if (currentSession !== sessionRevision) {
-      // Local logout cannot cancel an SDK request already sent. Clear its late result
-      // before allowing the next credential request to begin, and never hydrate it.
-      await firebaseSignOut(auth);
+    if (pendingLogout) await pendingLogout;
+    if (session !== sessionRevision) throw identityChanged();
+    const client = start();
+    const result = await authenticate(client);
+    if (session !== sessionRevision) {
+      await client.auth.signOut({ scope: `local` });
       throw identityChanged();
     }
-    return result.user;
+    if (result.user) currentUser = result.user;
+    return result;
   });
   credentialQueue = credential.catch(() => undefined);
   return attempt(async () => {
-    let user: User;
-    try { user = await credential; } catch (error) {
-      if (currentSession === sessionRevision && firebaseConfigured) {
-        const identity = getFirebaseRuntime().auth.currentUser;
-        publish({ account: null, identity: identity ? identityFromUser(identity) : null, source: null, phase: null, status: identity ? `error` : `signed-out`, message: authFailure(error).message });
+    try {
+      const result = await credential;
+      if (session !== sessionRevision || signingOut) throw identityChanged();
+      observeIdentity = true;
+      if (!result.user) {
+        signedOut(result.message ?? null);
+        return { ok: true, account: null, message: result.message };
+      }
+      const user = await verifiedIdentity(getSupabaseClient(), result.user.id);
+      if (session !== sessionRevision) throw identityChanged();
+      return hydrate(user);
+    } catch (error) {
+      if (session === sessionRevision && !signingOut && supabaseConfigured) {
+        observeIdentity = true;
+        publish({ account: null, source: null, phase: null, status: currentUser ? `error` : `signed-out`, identity: currentUser ? identityFromUser(currentUser) : null, message: authFailure(error).message });
       }
       throw error;
     }
-    const assertCurrent = (): void => {
-      if (signingOut || currentSession !== sessionRevision || getFirebaseRuntime().auth.currentUser !== user) throw identityChanged();
-    };
-    assertCurrent();
-    observeIdentity = true;
-    publish({ account: null, identity: identityFromUser(user), source: null, phase: `account`, status: `loading`, message: null });
-    const result = await finish(user, assertCurrent);
-    assertCurrent();
-    return result;
   });
 };
 
-const requireIdentity = async (): Promise<User> => {
-  const currentSession = sessionRevision;
-  const { auth } = start();
-  await auth.authStateReady();
-  if (signingOut || !observeIdentity || currentSession !== sessionRevision || !auth.currentUser) throw identityChanged();
-  return auth.currentUser;
+export const completeAuthRedirect = (): Promise<AuthResult> => {
+  if (redirectPending) return redirectPending;
+  const redirect = readAuthRedirect();
+  if (!supabaseConfigured) {
+    if (redirect?.code || redirect?.error) clearAuthRedirect();
+    return Promise.resolve({ ok: false, code: `connection-required`, message: authConnectionMessage });
+  }
+  if (!redirect?.code && !redirect?.error) return Promise.resolve({ ok: true, account: snapshot.account });
+  clearAuthRedirect();
+  if (redirect.error) {
+    const failure = authFailure({ code: redirect.error });
+    signedOut(failure.message);
+    redirectPending = Promise.resolve(failure);
+  } else {
+    redirectPending = runCredentialFlow(async (client) => {
+      const { data, error } = await client.auth.exchangeCodeForSession(redirect.code!);
+      if (error) throw error;
+      return { user: data.user };
+    });
+  }
+  return redirectPending;
 };
 
 const validEmail = (email: string): string => {
@@ -209,46 +255,47 @@ const validEmail = (email: string): string => {
   return value;
 };
 
-export const requireCurrentAccount = (expected?: Account, expectedRevision?: number): { account: Account; runtime: FirebaseRuntime; revision: number } => {
-  const runtime = start();
+const validPassword = (password: string): string => {
+  if (password.length < 12 || password.length > 128) throw new Error(`Choose a password between 12 and 128 characters.`);
+  return password;
+};
+
+export const requireCurrentAccount = (expected?: Account, expectedRevision?: number): { account: Account; client: SupabaseClient; revision: number } => {
+  const client = start();
   const account = snapshot.account;
-  if ((expectedRevision !== undefined && expectedRevision !== revision) || signingOut || snapshot.status !== `signed-in` || !account?.active || !account.roleVerified ||
-    runtime.auth.currentUser?.uid !== account.firebaseUid ||
-    (expected && (expected.id !== account.id || expected.firebaseUid !== account.firebaseUid))) throw identityChanged();
-  return { runtime, account, revision };
+  if ((expectedRevision !== undefined && expectedRevision !== revision) || signingOut || !observeIdentity || snapshot.status !== `signed-in` || !account?.active || !account.roleVerified ||
+    currentUser?.id !== account.authUid ||
+    (expected && (expected.id !== account.id || expected.authUid !== account.authUid))) throw identityChanged();
+  return { client, account, revision };
 };
 
 const updateAccountProfile = (input: ProfileUpdate): Promise<AuthResult> => attempt(async () => {
   const profile = normalizeProfile(input);
-  const { account, runtime } = requireCurrentAccount();
+  const { client, account, revision: current } = requireCurrentAccount();
   if (profile.displayName === account.displayName && profile.avatarUrl === account.avatarUrl) return { ok: true, account };
-  const user = runtime.auth.currentUser;
-  if (!user) throw identityChanged();
-  const current = revision;
-  const reference = doc(runtime.database, `users`, account.id);
-  await runTransaction(runtime.database, async (transaction) => {
-    requireCurrentAccount(account, current);
-    const document = await transaction.get(reference);
-    requireCurrentAccount(account, current);
-    const existing = activeAccount(readAccount(account.id, document.exists() ? document.data() : null, identityFromUser(user)));
-    if (profile.displayName !== existing.displayName || profile.avatarUrl !== existing.avatarUrl) {
-      transaction.update(reference, { ...profile, updatedAt: serverTimestamp() });
-    }
-  });
-  if (current !== revision || runtime.auth.currentUser?.uid !== user.uid) throw identityChanged();
-  const updated = activeAccount(await readPrivateAccount(runtime.database, user, account.id));
-  if (current !== revision || runtime.auth.currentUser?.uid !== user.uid) throw identityChanged();
+  const user = await verifiedIdentity(client, account.authUid);
+  requireCurrentAccount(account, current);
+  const { data, error } = await client.from(`profiles`)
+    .update({ avatar_url: profile.avatarUrl, display_name: profile.displayName })
+    .eq(`account_id`, account.id).select(`account_id`).single();
+  requireCurrentAccount(account, current);
+  if (error) throw error;
+  if (data?.account_id !== account.id) throw new Error(`The profile save could not be confirmed.`);
+  const updated = activeAccount(await readPrivateAccount(client, user, account.id));
+  requireCurrentAccount(account, current);
+  if (updated.role !== account.role || updated.emailVerified !== account.emailVerified) return hydrate(user, true);
   publish({ account: updated, identity: identityFromUser(user), source: `server`, status: `signed-in`, phase: null, message: null });
   return { ok: true, account: updated };
 });
 
 export const authenticationService = {
-  getSnapshot: (): AuthSnapshot => ({ ...snapshot }),
+  completeAuthRedirect,
   updateProfile: updateAccountProfile,
+  getSnapshot: (): AuthSnapshot => ({ ...snapshot }),
   subscribe: (listener: (value: AuthSnapshot) => void): (() => void) => {
     listeners.add(listener);
     listener({ ...snapshot });
-    if (firebaseConfigured) {
+    if (supabaseConfigured) {
       try { start(); } catch (error) {
         publish({ account: null, identity: null, source: null, phase: null, status: `error`, message: authFailure(error).message });
       }
@@ -267,14 +314,18 @@ export const authenticationService = {
   signOut: (): Promise<AuthResult> => {
     if (signOutPending) return signOutPending;
     sessionRevision += 1;
+    eventRevision += 1;
     observeIdentity = false;
     signingOut = true;
     resetAccount();
     publish({ account: null, identity: snapshot.identity, source: null, phase: `identity`, status: `loading`, message: null });
     const operation = (async (): Promise<AuthResult> => {
       try {
-        await firebaseSignOut(start().auth);
+        await credentialQueue;
+        const { error } = await start().auth.signOut({ scope: `local` });
+        if (error) throw error;
         signingOut = false;
+        observeIdentity = true;
         signedOut();
         return { ok: true, account: null };
       } catch (error) {
@@ -288,68 +339,88 @@ export const authenticationService = {
     void operation.finally(() => { if (signOutPending === operation) signOutPending = null; });
     return operation;
   },
-  signInWithGoogle: (): Promise<AuthResult> => runCredentialFlow(signInWithPlatformGoogle),
-  signInWithEmail: (input: EmailSignIn): Promise<AuthResult> => runCredentialFlow(async (auth) => {
+  signInWithGoogle: (): Promise<AuthResult> => runCredentialFlow(async (client) => {
+    await signInWithPlatformGoogle(client);
+    return { user: null, message: `Continue with Google in this browser.` };
+  }),
+  signInWithEmail: (input: EmailSignIn): Promise<AuthResult> => runCredentialFlow(async (client) => {
     const email = validEmail(input.email);
     if (!input.password || input.password.length > 128) throw new Error(`Enter your password, no longer than 128 characters.`);
-    return signInWithEmailAndPassword(auth, email, input.password);
+    const { data, error } = await client.auth.signInWithPassword({ email, password: input.password });
+    if (error) throw error;
+    return { user: data.user };
   }),
-  signUpWithEmail: (input: EmailSignUp): Promise<AuthResult> => runCredentialFlow(async (auth) => {
+  signUpWithEmail: (input: EmailSignUp): Promise<AuthResult> => runCredentialFlow(async (client) => {
     const email = validEmail(input.email);
-    normalizeProfile({ displayName: input.displayName, avatarUrl: null });
-    if (input.password.length < 12 || input.password.length > 128) throw new Error(`Choose a password between 12 and 128 characters.`);
-    return createUserWithEmailAndPassword(auth, email, input.password);
-  }, async (user, assertCurrent) => {
     const profile = normalizeProfile({ displayName: input.displayName, avatarUrl: null });
-    let verificationError: unknown = null;
-    assertCurrent();
-    try { await updateFirebaseProfile(user, { displayName: profile.displayName }); } catch { /* The private profile below remains authoritative. */ }
-    assertCurrent();
-    try { await sendEmailVerification(user); } catch (error) { verificationError = error; }
-    assertCurrent();
-    const result = await hydrate(user);
-    assertCurrent();
-    if (!result.ok) return result;
-    const savedProfile = await updateAccountProfile(profile);
-    assertCurrent();
-    if (!savedProfile.ok) return { ...savedProfile, message: `Your sign-in was created, but the profile could not be saved. ${savedProfile.message}` };
-    if (verificationError) return { ...authFailure(verificationError), message: `Your account was created, but the verification email could not be sent. Use Resend Verification in your profile.` };
-    return savedProfile;
+    const { data, error } = await client.auth.signUp({
+      email,
+      password: validPassword(input.password),
+      options: { emailRedirectTo: getAuthRedirectUrl(), data: { display_name: profile.displayName } },
+    });
+    if (error) throw error;
+    return { user: data.session?.user ?? null, message: signupConfirmationMessage };
   }),
   resetPassword: (email: string): Promise<AuthResult> => attempt(async () => {
-    const address = validEmail(email);
-    try { await sendPasswordResetEmail(start().auth, address); } catch (error) {
-      // Keep the same response when email-enumeration protection is not enabled yet.
-      if (getErrorCode(error) !== `auth/user-not-found`) throw error;
-    }
+    if (!passwordRecoveryAvailable) return { ok: false, code: `unsupported`, message: `Request and complete password recovery on the Spelling Spells website. Native recovery links have not been configured.` };
+    const { error } = await start().auth.resetPasswordForEmail(validEmail(email), { redirectTo: getAuthRedirectUrl() });
+    if (error) throw error;
+    return { ok: true, account: snapshot.account };
+  }),
+  resendVerification: (email: string): Promise<AuthResult> => attempt(async () => {
+    const { error } = await start().auth.resend({ type: `signup`, email: validEmail(email), options: { emailRedirectTo: getAuthRedirectUrl() } });
+    if (error) throw error;
     return { ok: true, account: snapshot.account };
   }),
   sendVerification: (): Promise<AuthResult> => attempt(async () => {
-    const currentSession = sessionRevision;
-    const user = await requireIdentity();
-    if (!user.emailVerified) await sendEmailVerification(user);
-    if (currentSession !== sessionRevision || getFirebaseRuntime().auth.currentUser !== user) throw identityChanged();
+    const user = await verifiedIdentity(start());
+    if (user.email_confirmed_at) return { ok: true, account: snapshot.account };
+    if (!user.email) throw new Error(`This account has no email address.`);
+    return authenticationService.resendVerification(user.email);
+  }),
+  updatePassword: (password: string): Promise<AuthResult> => attempt(async () => {
+    if (!recoverySession) throw Object.assign(new Error(`A recovery session is required.`), { code: `app/recovery-required` });
+    validPassword(password);
+    const session = sessionRevision;
+    const expectedUid = currentUser?.id;
+    const assertRecovery = (): void => {
+      if (!expectedUid || signingOut || !recoverySession || session !== sessionRevision || currentUser?.id !== expectedUid) throw identityChanged();
+    };
+    assertRecovery();
+    const { data: stored, error: sessionError } = await start().auth.getSession();
+    assertRecovery();
+    if (sessionError) throw sessionError;
+    if (!stored.session || stored.session.user.id !== expectedUid) throw identityChanged();
+    const accessToken = stored.session.access_token;
+    const refreshToken = stored.session.refresh_token;
+    const isolated = createRecoveryClient();
+    const { data: verified, error: identityError } = await isolated.auth.getUser(accessToken);
+    assertRecovery();
+    if (identityError) throw identityError;
+    if (verified.user?.id !== expectedUid) throw identityChanged();
+    const { data: seeded, error: seedError } = await isolated.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+    assertRecovery();
+    if (seedError) throw seedError;
+    if (seeded.user?.id !== expectedUid || seeded.session?.user.id !== expectedUid) throw identityChanged();
+    const { data, error } = await isolated.auth.updateUser({ password });
+    if (error) throw error;
+    if (data.user?.id !== expectedUid) throw identityChanged();
+    assertRecovery();
+    recoverySession = false;
+    publish({ ...snapshot, message: null });
     return { ok: true, account: snapshot.account };
   }),
-  refreshIdentity: (): Promise<AuthResult> => attempt(async () => {
-    const currentSession = sessionRevision;
-    const user = await requireIdentity();
-    await reload(user);
-    if (currentSession !== sessionRevision || getFirebaseRuntime().auth.currentUser !== user) throw identityChanged();
-    await getIdToken(user, true);
-    if (currentSession !== sessionRevision || getFirebaseRuntime().auth.currentUser !== user) throw identityChanged();
-    return hydrate(user, true);
-  }),
+  refreshIdentity: (): Promise<AuthResult> => attempt(async () => hydrate(await verifiedIdentity(start()), true)),
   retryHydration: (): Promise<AuthResult> => attempt(async () => {
-    const currentSession = sessionRevision;
-    const { auth } = start();
-    await auth.authStateReady();
-    if (signingOut || currentSession !== sessionRevision) throw identityChanged();
-    if (!auth.currentUser) {
-      signedOut();
-      return { ok: true, account: null };
-    }
-    if (!observeIdentity) throw identityChanged();
-    return hydrate(auth.currentUser, true);
+    if (signingOut) throw identityChanged();
+    const client = start();
+    const session = sessionRevision;
+    const { data, error } = await client.auth.getSession();
+    if (error) throw error;
+    if (session !== sessionRevision || signingOut) throw identityChanged();
+    observeIdentity = true;
+    if (!data.session) { signedOut(); return { ok: true, account: null }; }
+    currentUser = data.session.user;
+    return hydrate(await verifiedIdentity(client, data.session.user.id), true);
   }),
 };

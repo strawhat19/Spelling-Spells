@@ -94,6 +94,7 @@ const AuthPage = (props: AuthPageProps) => {
               <button id='auth-email-button' type='submit' className='primary-button'><Icon name='spark' size={17} />{page.busy === `email` ? `Connecting…` : page.isSignUp ? `Create account` : `Sign in`}<Icon name='arrow-right' size={16} /></button>
             </fieldset>
             {!page.isSignUp ? <button id='auth-password-reset' type='button' className='auth-reset-button' disabled={!page.editable} onClick={() => void page.requestReset()}><Icon name='mail' size={15} />{page.busy === `reset` ? `Requesting reset…` : `Send a password reset email`}</button> : null}
+          {page.isSignUp && !page.identity ? <button id='auth-resend-confirmation' type='button' className='auth-reset-button' disabled={!page.editable || !page.email.trim()} onClick={() => void page.resendConfirmation()}><Icon name='mail' size={15} />Resend confirmation email</button> : null}
           </form>
         )}
         {page.feedback ? <p id='auth-feedback' className={`auth-feedback auth-feedback--${page.feedback.tone}`} role={page.feedback.tone === `error` ? `alert` : `status`}>{page.feedback.message}</p> : null}

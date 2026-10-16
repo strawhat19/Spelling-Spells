@@ -31,7 +31,7 @@ export const useProfilePage = ({ view = `profile` }: ProfilePageProps) => {
   const auth = useAuth();
   const theme = useTheme();
   const confirmedScope = useRef<{ identityUid: string; accountId: string } | null>(null);
-  const identityUid = auth.identity?.firebaseUid ?? null;
+  const identityUid = auth.identity?.authUid ?? null;
   if (confirmedScope.current?.identityUid !== identityUid || auth.status === `error` || auth.status === `signed-out`) confirmedScope.current = null;
   if (identityUid && canAccessAccount(auth.account)) confirmedScope.current = { identityUid, accountId: auth.account.id };
   // A pending write temporarily hides account authority, not this identity's unsaved draft.

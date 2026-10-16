@@ -1,3 +1,5 @@
+> Superseded for the active backend integration by [Supabase setup](supabase-setup.md) and [the 2026-10-16 source handoff](supabase-integration-handoff.md). Firebase-specific setup and validation below describe the earlier disconnected checkpoint; do not deploy them for the Supabase rollout.
+
 # Connected Account Rollout
 
 Status on 2026-10-15: the user requested publishing the latest safe frontend, then pausing this project. The first account stage is implemented but deliberately disconnected. `accountConnectionReleased = false` in `src/shared/firebase/config.ts` prevents Firebase initialization even when environment values are present. Releasing accounts requires a reviewed source change, not merely environment configuration. No Firestore rules or production environment configuration has been deployed by this rollout.

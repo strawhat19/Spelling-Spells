@@ -11,7 +11,7 @@ export const useAccountGate = (ownerOnly: boolean) => {
   const auth = useAuth();
   const alive = useRef(true);
   const sequence = useRef(0);
-  const scopeKey = `${auth.identity?.firebaseUid ?? `guest`}:${ownerOnly ? `owner` : `account`}`;
+  const scopeKey = `${auth.identity?.authUid ?? `guest`}:${ownerOnly ? `owner` : `account`}`;
   const current = useRef({ key: scopeKey, revision: 0 });
   const locks = useRef<Record<RecoveryKind, RecoveryAttempt | null>>({ retry: null, signout: null });
   if (current.current.key !== scopeKey) current.current = { key: scopeKey, revision: current.current.revision + 1 };

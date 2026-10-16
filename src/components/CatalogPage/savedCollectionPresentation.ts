@@ -19,6 +19,9 @@ export const getSavedCollectionPresentation = (collection: SavedCollectionState)
     badge = `Save Confirmation Pending`;
     blockedLabel = `Waiting for save confirmation…`;
     description = `A change is awaiting confirmation. The account view may be incomplete; more changes are paused.`;
+  } else if (account && collection.saveStatus === `server`) {
+    badge = `Server Snapshot`;
+    description = `Your private account bookmarks were confirmed by the server. Live updates have not connected. Saving checks the server again; device bookmarks stay separate unless you import them.`;
   } else if (account && collection.saveStatus === `cached`) {
     badge = `Unconfirmed Account View`;
     blockedLabel = `Account view not confirmed`;

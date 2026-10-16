@@ -1,3 +1,5 @@
+> Superseded for the active backend integration by [Supabase setup](supabase-setup.md) and [the 2026-10-16 source handoff](supabase-integration-handoff.md). Firebase-specific setup and validation below describe the earlier disconnected checkpoint; do not deploy them for the Supabase rollout.
+
 # Spelling Spells Launch Scope
 
 ## Current authorization and constraints

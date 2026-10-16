@@ -13,3 +13,11 @@
 .owner-records-table table { border-collapse: collapse; width: 100%; min-width: 540px; }
 .owner-records-table th { text-align: left; padding: 13px 18px; font-size: 10px; background: var(--muted); }
 .owner-records-table td { padding: 28px 18px; font-size: 11px; color: var(--soft); line-height: 1.8; }
+.owner-records-table td { overflow-wrap: anywhere; }
+.owner-records-card .rowStatus.is-active .statusDot { background: #38a778; }
+.owner-records-card .rowStatus.is-active .statusText { color: #38a778; }
+.owner-records-card .rowStatus.is-inactive .statusDot { background: var(--soft); }
+.owner-records-card .actionsCell { white-space: nowrap; }
+.owner-records-button { display: inline-flex; gap: 8px; align-items: center; min-height: 40px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; color: var(--gold); background: var(--muted); font-size: 11px; }
+.owner-records-button:disabled { cursor: not-allowed; opacity: .5; }
+.owner-records-page { color: var(--soft); font-size: 11px; }

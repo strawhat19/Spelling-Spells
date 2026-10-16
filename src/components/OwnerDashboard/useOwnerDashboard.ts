@@ -1,22 +1,8 @@
 import { useState } from 'react';
-import { useAuth } from '../../shared/authContext';
-import { canAccessOwner } from '../../shared/authentication/types';
+import { useOwnerRecords } from '../OwnerRecords/useOwnerRecords';
 
 export type OwnerDashboardProps = { view?: `overview` | `analytics` };
 export type ReportKind = `traffic` | `health`;
-
-export const dashboardMetrics = [
-  { id: `visitors`, label: `Visitors`, icon: `globe`, value: null, detail: `Website audience` },
-  { id: `views`, label: `Page views`, icon: `book`, value: null, detail: `Archive exploration` },
-  { id: `contributions`, label: `Submissions`, icon: `edit`, value: null, detail: `Confirmed contributions` },
-];
-
-export const setupRequirements = [
-  { id: `authentication`, title: `Verified sign-in`, copy: `Connect Google and email authentication.`, icon: `user` },
-  { id: `owner`, title: `Trusted Owner access`, copy: `Assign Owner privileges through a trusted server.`, icon: `shield` },
-  { id: `records`, title: `Private account data`, copy: `Connect account-scoped storage and access rules.`, icon: `bookmark` },
-  { id: `reporting`, title: `Protected reporting`, copy: `Connect authorized analytics and runtime sources.`, icon: `chart` },
-];
 
 export const reportContent = {
   traffic: {
@@ -40,7 +26,21 @@ export const reportContent = {
 };
 
 export const useOwnerDashboard = ({ view = `overview` }: OwnerDashboardProps) => {
-  const auth = useAuth();
+  const auth = useOwnerRecords(`users`, view === `overview`);
+  const owner = auth.permitted;
+  const ready = owner && auth.snapshot?.state === `ready`;
+  const records = ready ? auth.snapshot?.records ?? null : null;
+  const metrics = [
+    { id: `accounts`, label: `Accounts on this page`, icon: `user`, value: records?.length ?? null, status: ready ? `Server confirmed` : `Unavailable`, detail: `Newest 50 accounts; not a global total` },
+    { id: `active`, label: `Active on this page`, icon: `shield`, value: records?.filter((record) => record.active).length ?? null, status: ready ? `Server confirmed` : `Unavailable`, detail: `Status within the loaded account page` },
+    { id: `session`, label: `Current session`, icon: `user`, value: owner ? auth.account?.role ?? null : null, status: owner ? `Verified email` : `Unavailable`, detail: `Current account's trusted role` },
+  ];
+  const setupRequirements = [
+    { id: `authentication`, title: `Current sign-in`, copy: `A confirmed Supabase session and private account are required.`, icon: `user`, status: auth.status === `signed-in` && auth.source === `server` ? `Session confirmed` : `Sign-in required` },
+    { id: `owner`, title: `Trusted Owner access`, copy: `Privileges come from the protected account record.`, icon: `shield`, status: owner ? `Owner confirmed` : `Owner required` },
+    { id: `records`, title: `Private account data`, copy: `Directory reads enforce Owner access through row-level security.`, icon: `bookmark`, status: ready ? `Page loaded` : auth.snapshot?.state === `error` ? `Read failed` : `Awaiting confirmed read` },
+    { id: `reporting`, title: `Protected reporting`, copy: `Traffic, runtime and submission reports need separate services.`, icon: `chart`, status: `Unavailable` },
+  ];
   const [report, setReportState] = useState<ReportKind>(`traffic`);
   const [dimension, setDimension] = useState(`Overview`);
   const [period, setPeriod] = useState<7 | 30 | 90>(30);
@@ -54,6 +54,9 @@ export const useOwnerDashboard = ({ view = `overview` }: OwnerDashboardProps) =>
   };
   return {
     ...auth,
+    owner,
+    metrics,
+    setupRequirements,
     view,
     report,
     setReport,
@@ -64,7 +67,7 @@ export const useOwnerDashboard = ({ view = `overview` }: OwnerDashboardProps) =>
     setPresentation,
     selectDimension,
     content: reportContent[report],
-    owner: !auth.loading && canAccessOwner(auth.account),
+    accountSource: view === `analytics` ? `Reporting unavailable` : ready ? `Account page loaded` : owner ? `Account page pending` : `Owner access required`,
     title: view === `analytics` ? `Archive analytics` : `The archive, at a glance.`,
   };
 };

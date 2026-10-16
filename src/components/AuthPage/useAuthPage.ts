@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../shared/authContext';
 import { safeReturnPath } from '../../shared/routes';
+import { rememberAuthDestination } from '../../shared/authentication/returnPath';
 import { useLocalSearchParams, useRouter, type Href } from 'expo-router';
 import { canAccessAccount, type AuthResult } from '../../shared/authentication/types';
 
@@ -37,7 +38,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
   const isSignUp = mode === `signup`;
   const { returnTo: requestedReturn } = useLocalSearchParams<{ returnTo?: string | string[] }>();
   const returnTo = safeReturnPath(requestedReturn);
-  const scope = `${mode}:${auth.identity?.firebaseUid ?? `guest`}`;
+  const scope = `${mode}:${auth.identity?.authUid ?? `guest`}`;
   const scopeRef = useRef(scope);
   const mounted = useRef(true);
   const operation = useRef(0);
@@ -48,12 +49,12 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
   const [signingOut, setSigningOut] = useState(false);
   const transition = useRef<{ attempt: number; scope: string; mode: string; identityUid: string | null } | null>(null);
   const redirect = useRef<{ target: string; mode: string; accountId: string; identityUid: string } | null>(null);
-  const identityRef = useRef(auth.identity?.firebaseUid ?? null);
+  const identityRef = useRef(auth.identity?.authUid ?? null);
   const [state, setState] = useState<FormState>(() => emptyForm(scope));
   scopeRef.current = scope;
   modeRef.current = mode;
   if (sessionRevision.current.key !== scope) sessionRevision.current = { key: scope, value: sessionRevision.current.value + 1 };
-  identityRef.current = auth.identity?.firebaseUid ?? null;
+  identityRef.current = auth.identity?.authUid ?? null;
   const activeTransition = transition.current;
   if (activeTransition?.mode === mode && !activeTransition.identityUid && identityRef.current) activeTransition.identityUid = identityRef.current;
   const ownTransition = activeTransition?.mode === mode && activeTransition.identityUid === identityRef.current;
@@ -86,10 +87,10 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
   useEffect(() => {
     const destination = redirect.current;
     if (!destination || destination.mode !== mode || loading || !signedIn || form.busy ||
-      destination.accountId !== auth.account?.id || destination.identityUid !== auth.identity?.firebaseUid) return;
+      destination.accountId !== auth.account?.id || destination.identityUid !== auth.identity?.authUid) return;
     redirect.current = null;
     router.replace(destination.target as Href);
-  }, [mode, loading, signedIn, form.busy, auth.account?.id, auth.identity?.firebaseUid, router]);
+  }, [mode, loading, signedIn, form.busy, auth.account?.id, auth.identity?.authUid, router]);
 
   const patch = (update: Partial<FormState>) => setState((previous) => ({
     ...(previous.scope === scope ? previous : emptyForm(scope)),
@@ -124,14 +125,14 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
       const result = await task();
       if (!current()) return;
       if (result.ok) {
-        if (shouldRedirect && result.account && canAccessAccount(result.account) && result.account.firebaseUid === identityRef.current) {
-          redirect.current = { mode, target: returnTo, accountId: result.account.id, identityUid: result.account.firebaseUid };
+        if (shouldRedirect && result.account && canAccessAccount(result.account) && result.account.authUid === identityRef.current) {
+          redirect.current = { mode, target: returnTo, accountId: result.account.id, identityUid: result.account.authUid };
         }
-        update({ feedback: { tone: `notice`, message: success } });
+        update({ feedback: { tone: `notice`, message: result.message ?? success } });
       } else {
         redirect.current = null;
         const nonfatal = result.code === `cancelled` || result.code === `unsupported`;
-        update({ feedback: { tone: nonfatal ? `notice` : `error`, message: action === `reset` ? `The reset request could not be completed. Please try again later.` : result.message } });
+        update({ feedback: { tone: nonfatal ? `notice` : `error`, message: action === `reset` && result.code !== `unsupported` ? `The reset request could not be completed. Please try again later.` : result.message } });
       }
     } catch {
       if (!current()) return;
@@ -207,6 +208,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
 
   const signInWithGoogle = async () => {
     if (!editable || Platform.OS !== `web`) return;
+    rememberAuthDestination(returnTo);
     await run(`google`, auth.signInWithGoogle, `Finishing your private account connection…`, true);
   };
 
@@ -224,6 +226,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     setField,
     unavailable,
     requestReset,
+    resendConfirmation: () => run(`verify`, () => auth.resendVerification(form.email.trim()), `If confirmation can be resent, check your inbox and spam folder.`),
     submitEmail,
     signInWithGoogle,
     googleAvailable: Platform.OS === `web`,
