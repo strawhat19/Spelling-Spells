@@ -1,0 +1,38 @@
+-- NOT a migration and NOT an automatic deployment step.
+-- Run only as the trusted project database administrator AFTER specific action-time
+-- approval naming project qtfajiuilwdtywkklbjq and the verified candidate Auth UUID.
+-- Replace the placeholder from a fresh read of auth.users after the owner signs in.
+-- A matching email alone is not authorization to execute this script.
+-- If Confirm email is disabled, email_confirmed_at is assigned implicitly and is
+-- not proof of mailbox ownership. Independently verify the candidate's identity
+-- before approving this UUID; this script cannot establish that proof.
+begin;
+do $$
+declare
+  candidate_uid uuid := '<VERIFIED_AUTH_USER_UUID>'::uuid;
+  candidate public.accounts%rowtype;
+begin
+  lock table public.accounts in share row exclusive mode;
+  if not exists (
+    select 1 from auth.users
+    where id = candidate_uid and lower(email) = 'rakib987@gmail.com'
+      and email_confirmed_at is not null and not coalesce(is_anonymous, false)
+  ) then raise exception 'The explicitly approved candidate must have the confirmed owner email.'; end if;
+  select * into candidate from public.accounts where auth_uid = candidate_uid for update;
+  if not found or not candidate.active then raise exception 'The candidate must have a hydrated active app account.'; end if;
+  if candidate.role = 'Owner' then raise exception 'This candidate is already Owner; no change was applied.'; end if;
+  if exists (select 1 from public.accounts where role = 'Owner' and active) then
+    raise exception 'Initial bootstrap is unavailable because an active Owner exists. Use a separately reviewed role-management procedure.';
+  end if;
+
+  update public.accounts set role = 'Owner' where id = candidate.id;
+  insert into app_private.role_change_audit (
+    actor_auth_uid, target_auth_uid, previous_role, next_role,
+    previous_active, next_active, reason
+  ) values (
+    null, candidate_uid, candidate.role, 'Owner',
+    candidate.active, candidate.active, 'Initial Owner bootstrap after explicit action-time approval of the verified Auth UUID'
+  );
+end;
+$$;
+commit;

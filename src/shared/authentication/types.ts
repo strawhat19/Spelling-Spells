@@ -7,7 +7,7 @@ export type Account = {
   number: number;
   active: boolean;
   role: AccountRole;
-  firebaseUid: string;
+  authUid: string;
   displayName: string;
   roleVerified: boolean;
   emailVerified: boolean;
@@ -16,11 +16,12 @@ export type Account = {
 
 export type AuthIdentity = {
   email: string;
-  firebaseUid: string;
+  authUid: string;
   emailVerified: boolean;
 };
 
 export type AuthSnapshot = {
+  recovery: boolean;
   status: AuthStatus;
   account: Account | null;
   message: string | null;
@@ -33,7 +34,7 @@ export type EmailSignIn = { email: string; password: string };
 export type EmailSignUp = EmailSignIn & { displayName: string };
 export type ProfileUpdate = { displayName: string; avatarUrl: string | null };
 export type AuthResult =
-  | { ok: true; account: Account | null }
+  | { ok: true; account: Account | null; message?: string }
   | { ok: false; code: `connection-required` | `cancelled` | `unsupported` | `denied` | `error`; message: string };
 
 export const canAccessAccount = (account: Account | null): account is Account => Boolean(account?.active && account.roleVerified);

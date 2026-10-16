@@ -3,6 +3,9 @@
 .dashboard-preview-notice strong { font-size: 11px; font-weight: 650; }
 .dashboard-preview-notice p { color: var(--body); font-size: 10px; line-height: 1.8; margin: 5px 0 0; }
 .dashboard-preview-notice > a { display: inline-flex; align-items: center; gap: 7px; margin-left: auto; white-space: nowrap; font-size: 11px; color: var(--ink); padding: 10px 13px; border-radius: 8px; border: 1px solid var(--line); }
+.dashboard-preview-notice > div > a { display: inline-flex; align-items: center; gap: 7px; margin-top: 10px; color: var(--gold); font-size: 11px; }
+.dashboard-account-reload { display: inline-flex; align-items: center; gap: 7px; margin-left: auto; min-height: 40px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 8px; color: var(--gold); background: var(--muted); font-size: 11px; }
+.dashboard-account-reload:disabled { cursor: not-allowed; opacity: .5; }
 .dashboard-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
 .dashboard-view-switch { display: flex; gap: 3px; padding: 3px; border: 1px solid var(--line); border-radius: 9px; background: var(--muted); }
 .dashboard-view-switch a { display: inline-flex; align-items: center; gap: 7px; padding: 9px 12px; border-radius: 6px; color: var(--soft); font-size: 10px; }

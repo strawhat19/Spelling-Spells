@@ -32,7 +32,7 @@ const AuthPage = (props: AuthPageProps) => {
         <div className='auth-form-heading'>
           <span className='auth-eyebrow'>A LITTLE MAGIC, JUST FOR YOU</span>
           <h2>{page.formTitle}</h2>
-          <div id='auth-switch-prompt' className='auth-switch-prompt'>
+          {!page.confirmationPending ? <div id='auth-switch-prompt' className='auth-switch-prompt'>
             <p>{page.isSignUp ? `Already have an account?` : `New to the archive?`}</p>
             <AppLink
               id='auth-switch-mode'
@@ -43,7 +43,7 @@ const AuthPage = (props: AuthPageProps) => {
               {page.isSignUp ? `Sign in instead` : `Sign up instead`}
               <Icon name='arrow-right' size={16} />
             </AppLink>
-          </div>
+          </div> : null}
         </div>
         {page.loading || page.unavailable || page.status === `error` || page.signedIn ? (
           <div id='auth-connection-notice' className='auth-connection-notice' role={page.status === `error` ? `alert` : `status`}>
@@ -65,7 +65,16 @@ const AuthPage = (props: AuthPageProps) => {
             <button id='auth-refresh-verification' type='button' disabled={Boolean(page.busy) || page.loading} onClick={() => void page.refreshVerification()}><Icon name='refresh' size={15} />{page.busy === `refresh` ? `Refreshing…` : `I verified my email`}</button>
           </div></div>
         </div> : null}
-        {page.signedIn ? page.busy ? <p className='auth-feedback' role='status'>Finishing your account request…</p> : <AppLink id='auth-open-profile' href={page.returnTo} className='primary-button'><Icon name='profile' size={17} /> Continue to your account</AppLink> : (
+        {page.signedIn ? page.busy ? <p className='auth-feedback' role='status'>Finishing your account request…</p> : <AppLink id='auth-open-profile' href={page.returnTo} className='primary-button'><Icon name='profile' size={17} /> Continue to your account</AppLink> : page.confirmationPending ? (
+          <div id='auth-signup-confirmation' className='auth-form'>
+            <div className='auth-connection-notice' role='status'>
+              <Icon name='mail' size={20} />
+              <div><strong>Email confirmation needed</strong><p>{page.confirmationInstructions} You are not signed in yet.</p></div>
+            </div>
+            <button id='auth-resend-confirmation' type='button' className='primary-button' disabled={!page.canResendConfirmation} onClick={() => void page.resendConfirmation()}><Icon name='mail' size={16} />{page.busy === `verify` ? `Requesting.` : `Resend confirmation email`}</button>
+            <button id='auth-change-confirmation-email' type='button' className='auth-reset-button' disabled={Boolean(page.busy) || page.loading} onClick={page.changeConfirmationEmail}><Icon name='edit' size={15} />Use another email</button>
+          </div>
+        ) : (
           <form id={`auth-form-${page.mode}`} className='auth-form' noValidate aria-busy={Boolean(page.busy) || page.loading} onSubmit={(event) => { event.preventDefault(); void page.submitEmail(); }}>
             <button
               type='button'
@@ -94,6 +103,7 @@ const AuthPage = (props: AuthPageProps) => {
               <button id='auth-email-button' type='submit' className='primary-button'><Icon name='spark' size={17} />{page.busy === `email` ? `Connecting…` : page.isSignUp ? `Create account` : `Sign in`}<Icon name='arrow-right' size={16} /></button>
             </fieldset>
             {!page.isSignUp ? <button id='auth-password-reset' type='button' className='auth-reset-button' disabled={!page.editable} onClick={() => void page.requestReset()}><Icon name='mail' size={15} />{page.busy === `reset` ? `Requesting reset…` : `Send a password reset email`}</button> : null}
+          {page.isSignUp && !page.identity ? <button id='auth-resend-confirmation' type='button' className='auth-reset-button' disabled={!page.editable || !page.email.trim()} onClick={() => void page.resendConfirmation()}><Icon name='mail' size={15} />Resend confirmation email</button> : null}
           </form>
         )}
         {page.feedback ? <p id='auth-feedback' className={`auth-feedback auth-feedback--${page.feedback.tone}`} role={page.feedback.tone === `error` ? `alert` : `status`}>{page.feedback.message}</p> : null}

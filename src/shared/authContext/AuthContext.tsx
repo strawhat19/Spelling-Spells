@@ -5,10 +5,13 @@ import type { AuthSnapshot, AuthResult, EmailSignIn, EmailSignUp } from '../auth
 export type AuthContextValue = AuthSnapshot & {
   loading: boolean;
   signOut: () => Promise<AuthResult>;
+  completeAuthRedirect: () => Promise<AuthResult>;
   sendVerification: () => Promise<AuthResult>;
   refreshIdentity: () => Promise<AuthResult>;
   retryHydration: () => Promise<AuthResult>;
   resetPassword: (email: string) => Promise<AuthResult>;
+  updatePassword: (password: string) => Promise<AuthResult>;
+  resendVerification: (email: string) => Promise<AuthResult>;
   signInWithGoogle: () => Promise<AuthResult>;
   updateProfile: (input: { displayName: string; avatarUrl: string | null }) => Promise<AuthResult>;
   signInWithEmail: (input: EmailSignIn) => Promise<AuthResult>;
@@ -31,10 +34,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       ...snapshot,
       loading,
       signOut: authAPI.signOut,
+      completeAuthRedirect: authAPI.completeAuthRedirect,
       sendVerification: authAPI.sendVerification,
       refreshIdentity: authAPI.refreshIdentity,
       retryHydration: authAPI.retryHydration,
       resetPassword: authAPI.resetPassword,
+      updatePassword: authAPI.updatePassword,
+      resendVerification: authAPI.resendVerification,
       updateProfile: authAPI.updateProfile,
       signInWithGoogle: authAPI.signInWithGoogle,
       signInWithEmail: authAPI.signInWithEmail,
