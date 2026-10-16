@@ -2,12 +2,16 @@ import Icon from '../Icon';
 import UserMenu from '../UserMenu';
 import styles from './styles.native';
 import BrandLogo from '../BrandLogo';
+import { useAuth } from '../../shared/authContext';
 import { useRouter, usePathname } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { getAccountRoute } from '../../shared/routes';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { useSpells } from '../../shared/spellsContext/useSpells';
-import { useRef, useState, useEffect, type PropsWithChildren } from 'react';
-import { Text, View, Alert, Linking, Animated, Pressable, ScrollView, AccessibilityInfo } from 'react-native';
+import { canAccessOwner } from '../../shared/authentication/types';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AccountShellContext, type AccountShellRail } from '../../shared/accountShellContext';
+import { useRef, useMemo, useState, useEffect, useCallback, type PropsWithChildren } from 'react';
+import { Text, View, Alert, Linking, Animated, Pressable, ScrollView, AccessibilityInfo, useWindowDimensions } from 'react-native';
 
 const navigation = [
   { href: `/spells`, label: `Spell Library`, icon: `book` },
@@ -20,8 +24,14 @@ const navigation = [
 const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: boolean }>) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { account } = useAuth();
   const insets = useSafeAreaInsets();
+  const { width, height } = useWindowDimensions();
   const scroll = useRef<ScrollView>(null);
+  const [brandWidth, setBrandWidth] = useState(220);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [viewportHeight, setViewportHeight] = useState(height);
+  const [rail, setRail] = useState<AccountShellRail | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showTop, setShowTop] = useState(false);
@@ -29,6 +39,11 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
   const topOpacity = useRef(new Animated.Value(0)).current;
   const { theme, palette, toggleTheme, error: themeError } = useTheme();
   const { error, dismissError } = useSpells();
+  const accountShell = Boolean(getAccountRoute(pathname));
+  const scope = `${pathname}:${account?.id ?? `guest`}:${canAccessOwner(account)}`;
+  const clearRail = useCallback((railScope: string) => setRail((current) => current?.scope === railScope ? null : current), []);
+  const shell = useMemo(() => ({ scope, sticky, brandWidth, headerHeight, viewportHeight, reducedMotion, setRail, clearRail }), [scope, sticky, brandWidth, headerHeight, viewportHeight, reducedMotion, clearRail]);
+  const activeRail = sticky && width > 650 && accountShell && rail?.scope === scope ? rail : null;
 
   useEffect(() => {
     AccessibilityInfo.isReduceMotionEnabled().then(setReducedMotion);
@@ -52,16 +67,17 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
   const header = (
     <View
       nativeID="spelling-header"
+      onLayout={(event) => setHeaderHeight(event.nativeEvent.layout.height)}
       style={[
         styles.header,
         {
           paddingTop: insets.top,
-          borderBottomColor: scrolled ? palette.border : `transparent`,
+          borderBottomColor: accountShell || scrolled ? palette.border : `transparent`,
           backgroundColor: scrolled ? `${palette.background}EB` : palette.background,
         },
       ]}
     >
-      <View nativeID="header-content" style={styles.headerRow}>
+      <View nativeID="header-content" style={[styles.headerRow, accountShell && styles.accountHeaderRow]}>
         <Pressable
           accessibilityRole="link"
           accessibilityLabel="Spelling Spells home"
@@ -69,8 +85,10 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           onPress={() => router.push(`/`)}
           style={styles.brand}
         >
-          <BrandLogo size={48} />
-          <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.brandName, { color: palette.text }]}>Spelling Spells</Text>
+          <View nativeID='header-brand-content' onLayout={(event) => setBrandWidth(event.nativeEvent.layout.width + event.nativeEvent.layout.x + styles.headerRow.padding)} style={styles.brandContent}>
+            <BrandLogo size={accountShell ? 36 : 48} />
+            <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.brandName, { color: palette.text }]}>Spelling Spells</Text>
+          </View>
         </Pressable>
         <UserMenu />
         <Pressable
@@ -114,7 +132,8 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
   );
 
   return (
-    <View nativeID="spelling-app-shell" style={[styles.root, { backgroundColor: palette.background }]}>
+    <AccountShellContext.Provider value={shell}>
+    <View nativeID="spelling-app-shell" onLayout={(event) => setViewportHeight(event.nativeEvent.layout.height)} style={[styles.root, { backgroundColor: palette.background }]}>
       {sticky && header}
       <ScrollView
         ref={scroll}
@@ -138,7 +157,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           </View>
         )}
         {children}
-        <View nativeID="spelling-footer" style={[styles.footer, { borderTopColor: palette.border, paddingBottom: insets.bottom + 26 }]}>
+        <View nativeID="spelling-footer" style={[styles.footer, { borderTopColor: palette.border, paddingBottom: insets.bottom + 26 }, activeRail && { marginLeft: activeRail.width }]}>
           <View style={styles.footerBrand}>
             <BrandLogo size={42} />
             <Text style={[styles.footerTitle, { color: palette.text }]}>Spelling Spells</Text>
@@ -159,6 +178,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           </View>
         </View>
       </ScrollView>
+      {activeRail ? <View nativeID='account-fixed-rail' style={[styles.accountRail, { top: headerHeight, width: activeRail.width, height: Math.max(0, viewportHeight - headerHeight) }]}>{activeRail.content}</View> : null}
       <Animated.View
         nativeID="scroll-top-container"
         pointerEvents={showTop ? `auto` : `none`}
@@ -171,11 +191,12 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           onPress={() => scroll.current?.scrollTo({ y: 0, animated: !reducedMotion })}
           style={styles.topButtonContent}
         >
-          <Icon name="arrow-up" size={16} color={palette.gold} />
+          <Icon name='chevron-up' size={16} color={palette.gold} />
           <Text style={[styles.topButtonText, { color: palette.text }]}>Top</Text>
         </Pressable>
       </Animated.View>
     </View>
+    </AccountShellContext.Provider>
   );
 };
 

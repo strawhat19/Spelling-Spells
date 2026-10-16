@@ -29,6 +29,12 @@
 @media (max-width: 580px) { .site-header-inner { width: calc(100% - 28px); gap: 9px; } .header-brand { gap: 7px; } .header-wordmark { overflow: hidden; text-overflow: ellipsis; font-size: 22px; letter-spacing: -.6px; } .header-brand .brand-logo-mark { width: 45px; height: 45px; } .header-actions { gap: 8px; } .header-saved-link span { display: none; } }
 
 .mobile-theme-toggle { display: none; color: var(--ink); border: 0; text-align: left; }
+.app-shell.is-account { --header-height: 64px; }
+.is-account .site-header { border-bottom-color: var(--line); }
+.is-account .site-header-inner { width: 100%; max-width: none; margin: 0; padding-inline: 18px clamp(18px, 2.4vw, 40px); }
+.is-account .header-wordmark { font-size: clamp(22px, 2.1vw, 30px); }
+.is-account .header-brand .brand-logo-mark { width: 40px; height: 40px; }
+@media (max-width: 650px) { .app-shell.is-account { --header-height: 56px; } .is-account .header-wordmark { font-size: 22px; } .is-account .site-header-inner { padding-inline: 14px; } .is-account .header-brand .brand-logo-mark { width: 36px; height: 36px; } }
 @media (max-width: 420px) { .header-saved-link { display: none; } .mobile-theme-toggle { display: flex; } .header-wordmark { font-size: 20px; } .header-brand .brand-logo-mark { width: 40px; height: 40px; } }
 @media (prefers-reduced-transparency: reduce) { .app-shell .site-header.is-scrolled { background: var(--page); -webkit-backdrop-filter: none; backdrop-filter: none; } }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .app-shell .site-header.is-scrolled { background: var(--page); } }

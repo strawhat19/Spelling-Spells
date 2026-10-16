@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../shared/authContext';
+import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../../shared/themeContext/useTheme';
-import { canAccessAccount, getAccountAvatar, type AuthResult } from '../../shared/authentication/types';
+import { canAccessAccount, getAccountAvatar, getAccountPlanLabel, type AuthResult } from '../../shared/authentication/types';
 
 export type ProfilePageProps = { view?: `profile` | `connections` };
 type ProfileAction = `save` | `verify` | `refresh` | `retry` | `signout`;
@@ -185,6 +185,7 @@ export const useProfilePage = ({ view = `profile` }: ProfilePageProps) => {
     avatarDraft,
     saveProfile,
     displayName,
+    planLabel: getAccountPlanLabel(auth.account),
     connectionRequirements,
     editable: allowed && !editor.busy && !signingOut,
     showRecovery: !allowed && (auth.status === `error` || Boolean(auth.identity)),

@@ -44,6 +44,9 @@ export const canAccessOwner = (account: Account | null): boolean =>
 export const canAccessCapability = (account: Account | null, capability: `account` | `owner`): boolean =>
   capability === `owner` ? canAccessOwner(account) : capability === `account` && canAccessAccount(account);
 
+// The private account schema does not yet expose a trusted plan.
+export const getAccountPlanLabel = (_account: Account | null): string => `Plan Unavailable`;
+
 export const getAccountAvatar = (account: Account | null): string | null => {
   if (!account?.avatarUrl) return null;
   try {

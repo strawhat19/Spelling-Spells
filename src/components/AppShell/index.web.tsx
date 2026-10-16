@@ -1,12 +1,13 @@
-import type { PropsWithChildren } from 'react';
 import Icon from '../Icon';
-import PageMetadata from '../PageMetadata';
-import { publicPageMetadata } from '../PageMetadata/publicRoutes';
 import Header from '../Header/index.web';
 import Footer from '../Footer/index.web';
+import PageMetadata from '../PageMetadata';
 import { useAppShell } from './useAppShell';
+import type { PropsWithChildren } from 'react';
+import { getAccountRoute } from '../../shared/routes';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { useSpells } from '../../shared/spellsContext/useSpells';
+import { publicPageMetadata } from '../PageMetadata/publicRoutes';
 import '../../styles/global.scss';
 import './styles.scss';
 
@@ -18,7 +19,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
   const metadata = publicPageMetadata[pathname];
 
   return (
-    <div id='app-shell' data-theme={theme} className={`app-shell theme-${theme} ${pathname === `/` ? `is-home` : ``}`}>
+    <div id='app-shell' data-theme={theme} className={`app-shell theme-${theme} ${getAccountRoute(pathname) ? `is-account` : ``} ${pathname === `/` ? `is-home` : ``}`}>
       {metadata ? <PageMetadata title={metadata.title} description={metadata.description} canonicalPath={pathname} /> : null}
       <a id='skip-to-content' className='skip-to-content' href='#main-content'>Skip to Content</a>
       <Header sticky={sticky} scrolled={scrolled} />
@@ -39,7 +40,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
         aria-hidden={!showScrollTop}
         className={`scroll-to-top ${showScrollTop ? `is-visible` : ``}`}
       >
-        <Icon name='arrow-up' size={21} />
+        <Icon name='chevron-up' size={21} />
       </button>
     </div>
   );

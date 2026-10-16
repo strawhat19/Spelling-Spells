@@ -1,15 +1,15 @@
-import DeviceProfile from '../DeviceProfile';
 import Icon from '../Icon';
 import styles from './styles.native';
 import { useRouter } from 'expo-router';
 import AccountLayout from '../AccountLayout';
 import AccountGate from '../AccountLayout/AccountGate';
-import { Image, Text, View, TextInput, Pressable } from 'react-native';
 import { useProfilePage, type ProfilePageProps } from './useProfilePage';
+import { Image, Text, View, TextInput, Pressable, useWindowDimensions } from 'react-native';
 
 const ProfilePage = (props: ProfilePageProps) => {
   const page = useProfilePage(props);
   const router = useRouter();
+  const { width } = useWindowDimensions();
   const busy = Boolean(page.busy) || page.loading || page.signingOut;
   const cardStyle = [styles.card, { borderColor: page.palette.border, backgroundColor: page.palette.surface }];
   const inputStyle = [styles.input, { color: page.palette.text, borderColor: page.palette.border, backgroundColor: page.palette.panel }];
@@ -20,7 +20,6 @@ const ProfilePage = (props: ProfilePageProps) => {
   </View> : null;
 
   return <AccountLayout title={page.title} description={page.description}>
-    {!page.allowed && page.view === `profile` ? <DeviceProfile /> : null}
     {!page.allowed ? page.showRecovery ? <View nativeID='profile-connection-recovery' style={cardStyle}>
       <Icon name='shield' size={24} color={page.palette.gold} />
       <Text accessibilityRole='header' style={[styles.title, { color: page.palette.text }]}>{page.loading ? `Connecting your private account` : `Private account unavailable`}</Text>
@@ -36,8 +35,8 @@ const ProfilePage = (props: ProfilePageProps) => {
         <Text style={[styles.copy, { color: page.palette.muted }]}>{item.detail}</Text>
         {item.id === `sync` ? <Pressable nativeID='connection-open-spellbook' accessibilityRole='link' onPress={() => router.push(`/saved`)} style={secondaryStyle}><Icon name='bookmark' size={16} color={page.palette.primary} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>{item.status}</Text></Pressable> : <Text nativeID={`connection-status-${item.id}`} style={[styles.small, { color: item.connected ? page.palette.primary : page.palette.muted }]}>{item.status}</Text>}
       </View>)}
-    </View> : <View nativeID='profile-details' style={styles.stack}>
-      <View nativeID='profile-settings' accessibilityState={{ busy }} style={cardStyle}>
+    </View> : <View nativeID='profile-details' style={[styles.stack, width > 1100 ? styles.columns : null]}>
+      <View nativeID='profile-settings' accessibilityState={{ busy }} style={[cardStyle, width > 1100 ? styles.settings : null]}>
         <View style={styles.identity}>
           <View style={[styles.avatar, { borderColor: page.palette.border, backgroundColor: page.palette.panel }]}>{page.avatarUrl ? <Image nativeID='profile-avatar-image' source={{ uri: page.avatarUrl }} accessibilityIgnoresInvertColors accessible={false} onError={page.onAvatarError} style={styles.avatarImage} /> : <Text style={[styles.avatarInitial, { color: page.palette.primary }]}>{page.avatarInitial}</Text>}</View>
           <View style={styles.identityCopy}><Text accessibilityRole='header' style={[styles.title, { color: page.palette.text }]}>{page.account?.displayName}</Text><Text style={[styles.small, { color: page.palette.muted }]}>Private account profile</Text></View>
@@ -58,19 +57,21 @@ const ProfilePage = (props: ProfilePageProps) => {
         <Pressable nativeID='profile-save' disabled={!page.editable || !page.dirty} accessibilityRole='button' accessibilityState={{ disabled: !page.editable || !page.dirty, busy: page.busy === `save` }} onPress={() => void page.saveProfile()} style={[styles.button, (!page.editable || !page.dirty) && styles.disabled, { backgroundColor: page.palette.gold }]}><Icon name='check' color='#20134d' size={17} /><Text style={[styles.buttonText, { color: `#20134d` }]}>{page.busy === `save` ? `Saving…` : `Save changes`}</Text></Pressable>
         {page.dirty ? <Pressable nativeID='profile-discard-changes' disabled={busy} accessibilityRole='button' accessibilityState={{ disabled: busy }} onPress={page.discardChanges} style={secondaryStyle}><Icon name='close' color={page.palette.primary} size={16} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>Discard changes</Text></Pressable> : null}
       </View>
-      <View nativeID='profile-metadata' style={cardStyle}>
-        <Text accessibilityRole='header' style={[styles.title, { color: page.palette.text }]}>Your account</Text>
+      <View nativeID='profile-metadata' style={[cardStyle, width > 1100 ? styles.metadata : null]}>
+        <Text accessibilityRole='header' style={[styles.metadataTitle, { color: page.palette.text }]}>Account Details</Text>
         <Text style={[styles.copy, { color: page.palette.muted }]}>Account No. {page.account?.number}</Text>
         <Text nativeID='profile-role' style={[styles.copy, { color: page.palette.muted }]}>Access: {page.account?.roleVerified ? page.account.role : `Unverified`} (read only)</Text>
+        <Text nativeID='profile-plan' style={[styles.copy, { color: page.palette.muted }]}>{page.planLabel}</Text>
         <Text style={[styles.copy, { color: page.palette.muted }]}>Profile: Private</Text>
         <Pressable nativeID='profile-data-choices' accessibilityRole='link' onPress={() => router.push(`/data-privacy`)} style={secondaryStyle}><Icon name='shield' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>Your data and choices</Text></Pressable>
         <Pressable nativeID='profile-open-connections' accessibilityRole='link' onPress={() => router.push(`/profile/connections`)} style={secondaryStyle}><Icon name='link' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>Private connections</Text></Pressable>
         <Pressable nativeID='profile-open-spellbook' accessibilityRole='link' onPress={() => router.push(`/saved`)} style={secondaryStyle}><Icon name='bookmark' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>Your spellbook</Text></Pressable>
-      </View>
-      <View nativeID='profile-device-settings' style={cardStyle}>
-        <Text accessibilityRole='header' style={[styles.title, { color: page.palette.text }]}>Make yourself at home.</Text>
-        <Text style={[styles.copy, { color: page.palette.muted }]}>Theme is saved on this device, independently of your account.</Text>
-        <Pressable nativeID='profile-toggle-theme' accessibilityRole='button' onPress={() => void page.toggleTheme()} style={secondaryStyle}><Icon name={page.theme === `night` ? `sun` : `moon`} color={page.palette.primary} size={18} /><Text style={[styles.buttonText, { color: page.palette.text }]}>Use {page.theme === `night` ? `Ivory` : `Midnight`} theme</Text></Pressable>
+        <Pressable nativeID='profile-open-submissions' accessibilityRole='link' onPress={() => router.push(`/submissions`)} style={secondaryStyle}><Icon name='edit' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>My submissions</Text></Pressable>
+        <View nativeID='profile-device-settings' style={[styles.deviceSettings, { borderTopColor: page.palette.border }]}>
+          <Text accessibilityRole='header' style={[styles.title, { color: page.palette.text }]}>Make yourself at home.</Text>
+          <Text style={[styles.copy, { color: page.palette.muted }]}>Theme is saved on this device, independently of your account.</Text>
+          <Pressable nativeID='profile-toggle-theme' accessibilityRole='button' onPress={() => void page.toggleTheme()} style={secondaryStyle}><Icon name={page.theme === `night` ? `sun` : `moon`} color={page.palette.primary} size={18} /><Text style={[styles.buttonText, { color: page.palette.text }]}>Use {page.theme === `night` ? `Ivory` : `Midnight`} theme</Text></Pressable>
+        </View>
       </View>
     </View>}
     {page.feedback ? <Text nativeID='profile-feedback' accessibilityRole={page.feedback.tone === `error` ? `alert` : undefined} accessibilityLiveRegion='polite' style={[styles.feedback, { color: page.feedback.tone === `error` ? page.palette.error : page.palette.text }]}>{page.feedback.message}</Text> : null}

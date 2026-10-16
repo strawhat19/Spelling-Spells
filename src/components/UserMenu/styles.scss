@@ -4,12 +4,20 @@
 .user-menu-trigger { padding: 0; border: 1px solid var(--line); background: transparent; color: var(--gold); border-radius: 50%; display: flex; }
 .user-menu-avatar { width: 37px; height: 37px; border-radius: 50%; display: grid; place-items: center; object-fit: cover; background: var(--muted); font-weight: 700; font-size: 14px; }
 .user-menu-loading { width: 37px; height: 37px; border-radius: 50%; background: var(--muted); }
-.user-menu-popover { z-index: 1; position: absolute; right: 0; top: calc(100% + 14px); width: 240px; max-width: calc(100vw - 32px); max-height: calc(100dvh - var(--header-height) - 28px); overflow-y: auto; overscroll-behavior: contain; padding: 12px; border: 1px solid var(--line); border-radius: 15px; color: var(--ink); background: var(--card, #24193e); box-shadow: 0 20px 40px #0006; }
-.user-menu-name { font-size: 12px; font-weight: 650; margin: 4px 8px 12px; overflow-wrap: anywhere; }
-.user-menu-popover nav { display: grid; gap: 4px; }
-.user-menu-popover a, .user-menu-popover > button { width: 100%; display: flex; align-items: center; gap: 11px; font-size: 12px; padding: 11px 9px; border: 0; border-radius: 8px; color: var(--body); background: none; text-align: left; }
+.user-menu-popover { z-index: 1; position: absolute; right: 0; top: calc(100% + 14px); width: 260px; max-width: calc(100vw - 36px); max-height: calc(100dvh - var(--header-offset, var(--header-height)) - 28px); overflow-y: auto; overscroll-behavior: contain; padding: 6px; border: 1px solid var(--line); border-radius: 14px; color: var(--ink); background: var(--card, #24193e); box-shadow: 0 20px 40px #0006; animation: account-menu-enter .18s ease-out; }
+.user-menu-identity { display: grid; grid-template-columns: minmax(0, 1fr) max-content; gap: 4px 8px; align-items: center; padding: 8px; margin-bottom: 4px; border-bottom: 1px solid var(--line); }
+.user-menu-name, .user-menu-email { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height: 1.4; margin: 0; }
+.user-menu-name { font-size: 11px; font-weight: 650; }
+.user-menu-email { color: var(--soft); font-size: 9px; }
+.user-menu-pill { display: inline-flex; gap: 4px; align-items: center; justify-self: end; white-space: nowrap; border: 1px solid var(--line); border-radius: 20px; background: var(--muted); color: var(--lavender); padding: 2px 6px; font-size: 8px; line-height: 1.5; }
+.user-menu-role { color: var(--gold); }
+[data-theme='ivory'] .user-menu-role { color: var(--purple); }
+.user-menu-popover nav { display: grid; gap: 2px; }
+.user-menu-popover a, .user-menu-popover > button { width: 100%; min-height: 34px; display: flex; align-items: center; gap: 8px; font-size: 11px; padding: 8px 9px; border: 0; border-radius: 8px; color: var(--ink); background: none; text-align: left; }
 .user-menu-popover a:hover, .user-menu-popover > button:hover { background: var(--muted); }
-.user-menu-popover > button { margin-top: 6px; border-top: 1px solid var(--line); border-radius: 0; }
+.user-menu-popover > button { margin-top: 4px; border-top: 1px solid var(--line); border-radius: 0; }
 .user-menu-error { font-size: 11px; line-height: 1.6; color: var(--gold); padding: 0 8px; }
 @media (max-width: 1120px) { .header-signin-link span { display: none; } .header-signin-link { padding: 9px; border-radius: 50%; } }
 @media (max-width: 580px) { .header-signin-link { padding: 8px; } .user-menu-avatar { width: 33px; height: 33px; } }
+@media (pointer: coarse) { .user-menu-popover a, .user-menu-popover > button { min-height: 44px; } }
+@keyframes account-menu-enter { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }

@@ -18,6 +18,10 @@ export const glyphs: Record<string, string> = {
   back: `M20 12H4m6-6-6 6 6 6`,
   up: `M12 20V4m-6 6 6-6 6 6`,
   down: `M12 4v16m-6-6 6 6 6-6`,
+  'chevron-up': `M6 15l6-6 6 6`,
+  'chevron-down': `M6 9l6 6 6-6`,
+  'chevron-left': `M15 6l-6 6 6 6`,
+  'chevron-right': `M9 6l6 6-6 6`,
   search: `M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13M16 16l5 5`,
   bookmark: `M6 3h12v18l-6-4-6 4V3Z`,
   shield: `M12 3 4 6v6c0 4 4 7 8 9 4-2 8-5 8-9V6l-8-3Z`,
@@ -40,8 +44,8 @@ export const glyphs: Record<string, string> = {
 const aliases: Record<string, string> = {
   profile: `user`,
   connection: `link`,
-  collapse: `back`,
-  expand: `arrow`,
+  collapse: `chevron-left`,
+  expand: `chevron-right`,
   'log-out': `logout`,
   light: `sun`,
   sound: `audio`,
@@ -52,8 +56,6 @@ const aliases: Record<string, string> = {
   'arrow-left': `back`,
   'arrow-down': `down`,
   'arrow-right': `arrow`,
-  'chevron-left': `back`,
-  'chevron-right': `arrow`,
   'external-link': `external`,
 };
 

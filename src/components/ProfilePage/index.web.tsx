@@ -1,4 +1,3 @@
-import DeviceProfile from '../DeviceProfile';
 import Icon from '../Icon';
 import AppLink from '../AppLink';
 import AccountLayout from '../AccountLayout';
@@ -15,7 +14,6 @@ const ProfilePage = (props: ProfilePageProps) => {
   </div> : null;
 
   return <AccountLayout title={page.title} description={page.description}>
-    {!page.allowed && page.view === `profile` ? <DeviceProfile /> : null}
     {!page.allowed ? page.showRecovery ? <section id='profile-connection-recovery' className='profile-settings'>
       <div className='profile-status-note' role={page.loading ? `status` : `alert`}><Icon name='shield' size={20} /><div><strong>{page.loading ? `Connecting your private account` : `Private account unavailable`}</strong><p>{page.loading ? `Waiting for the server to confirm your private account. You can sign out without waiting.` : page.message ?? `Your identity is signed in, but the private account could not be loaded. Retry the connection or sign out before changing accounts.`}</p></div></div>
       <div className='profile-inline-actions'>
@@ -63,10 +61,11 @@ const ProfilePage = (props: ProfilePageProps) => {
           </form>
         </section>
         <aside id='profile-metadata' className='profile-metadata'>
-          <h2>Your account</h2>
-          <dl><div><dt>No.</dt><dd>{page.account?.number}</dd></div><div><dt>Access</dt><dd>{page.account?.roleVerified ? page.account.role : `Unverified`}</dd></div><div><dt>Profile</dt><dd>Private</dd></div><div><dt>Email</dt><dd>{page.identity?.emailVerified ? `Verified` : `Unverified`}</dd></div></dl>
+          <h2>Account Details</h2>
+          <dl><div><dt>No.</dt><dd>{page.account?.number}</dd></div><div><dt>Role</dt><dd><span id='profile-role-pill' className='profile-account-pill'>{page.account?.roleVerified ? page.account.role : `Unverified`}</span></dd></div><div><dt>Plan</dt><dd><span id='profile-plan-pill' className='profile-account-pill'>{page.planLabel}</span></dd></div><div><dt>Profile</dt><dd>Private</dd></div><div><dt>Email</dt><dd>{page.identity?.emailVerified ? `Verified` : `Unverified`}</dd></div></dl>
           <AppLink id='profile-open-connections' href='/profile/connections' className='profile-metadata-link'><Icon name='link' size={15} /> Private connections<Icon name='arrow-right' size={14} /></AppLink>
           <AppLink id='profile-open-spellbook' href='/saved' className='profile-metadata-link'><Icon name='bookmark' size={15} /> Your spellbook<Icon name='arrow-right' size={14} /></AppLink>
+          <AppLink id='profile-open-submissions' href='/submissions' className='profile-metadata-link'><Icon name='edit' size={15} /> My submissions<Icon name='arrow-right' size={14} /></AppLink>
           <AppLink id='profile-data-choices' href='/data-privacy' className='profile-metadata-link'><Icon name='shield' size={15} /> Your data and choices<Icon name='arrow-right' size={14} /></AppLink>
           <div className='profile-device-settings'><Icon name='moon' size={19} /><h3>Make yourself at home.</h3><p>Theme is saved on this device, independently of your account.</p><button id='profile-toggle-theme' type='button' onClick={() => void page.toggleTheme()}><Icon name={page.theme === `night` ? `sun` : `moon`} size={15} /> Use {page.theme === `night` ? `Ivory` : `Midnight`} theme</button></div>
         </aside>

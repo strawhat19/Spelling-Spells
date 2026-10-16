@@ -2,7 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   stack: { gap: 18 },
-  card: { gap: 17, padding: 23, borderWidth: 1, borderRadius: 14 },
+  card: { gap: 17, padding: 20, borderWidth: 1, borderRadius: 12 },
+  settings: { flex: 1, minWidth: 0 },
+  metadata: { width: 240, flexShrink: 0 },
+  metadataTitle: { fontSize: 14, fontWeight: `600` },
+  columns: { gap: 28, alignItems: `flex-start`, flexDirection: `row` },
+  deviceSettings: { gap: 17, marginTop: 9, paddingTop: 20, borderTopWidth: 1 },
   title: { fontSize: 25, fontFamily: `Georgia` },
   copy: { fontSize: 13, lineHeight: 23 },
   small: { fontSize: 11, lineHeight: 20 },

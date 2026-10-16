@@ -14,6 +14,8 @@ Preserve the provider's anonymous visitor definition and any identity reset beha
 
 Private server routes validate method/body/query, verify Firebase ID tokens, resolve current active account/capability, select a fixed server-owned project/team scope, and then request provider data. Missing/expired identity is unauthenticated, denied capability is forbidden, missing setup is unavailable, and upstream/rate/plan/timeout failures remain distinguishable. Apply no-store/private response policy to protected reports and provider errors; authorize before reading any shared report cache. Never accept an arbitrary provider URL, Vercel project, owner, or bearer token from a report filter.
 
+The default report capability is active trusted Owner, matching the ADMIN menu and direct Analytics/Health/Dashboard routes. Admin or Developer labels alone do not permit provider access; apply a broader technical-report policy only when the user explicitly chooses it. Keep provider subscription/plan capability separate from the account's trusted plan pill and feature entitlements.
+
 Key short caches and in-flight deduplication by authorized project/environment, effective range, filters, dimension/metric and adapter version. Respect configured freshness and request budgets, cap concurrency, abort stale client work, and prevent old account/filter results from returning to the screen. Refresh must visibly fetch/revalidate according to its documented policy; it must not merely change a spinner. A stale previously confirmed report can remain visible with its original range/source/error label while a permitted retry runs.
 
 ## Traffic Query Map And Range Semantics

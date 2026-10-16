@@ -2,7 +2,7 @@ import { useAuth } from '../../shared/authContext';
 import { createContext, useContext, useEffect, useRef, useState, type PropsWithChildren } from 'react';
 import { readStoredPreference, writeStoredPreference, queueStorageOperation } from '../../shared/common/storage';
 
-const defaults = { collapsed: false, desktopDashboard: true, mobileDashboard: true, desktopFeedback: true, mobileFeedback: true };
+const defaults = { collapsed: false, desktopFeedback: false, mobileFeedback: false, desktopDashboard: true, mobileDashboard: true };
 type NavigationPreferences = typeof defaults;
 type NavigationContextValue = NavigationPreferences & {
   error: string | null;

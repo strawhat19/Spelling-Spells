@@ -1,42 +1,79 @@
+import './styles.scss';
 import Icon from '../Icon';
 import AppLink from '../AppLink';
 import AccountLayout from '../AccountLayout';
-import { useOwnerDashboard, type OwnerDashboardProps } from './useOwnerDashboard';
-import './styles.scss';
+import { reportContent, useOwnerDashboard, type ReportKind, type OwnerDashboardPage, type OwnerDashboardProps } from './useOwnerDashboard';
+
+const ReportPanel = ({ kind, page, compact = false }: { kind: ReportKind; page: OwnerDashboardPage; compact?: boolean }) => {
+  const content = reportContent[kind];
+  const panelId = `dashboard-report-${kind}`;
+  return <section id={panelId} className={`dashboard-report${compact ? ` is-compact` : ``}`} aria-labelledby={`${panelId}-title`}>
+    <header id={`${panelId}-heading`} className='dashboard-report-heading'>
+      <div id={`${panelId}-heading-copy`} className='dashboard-report-heading-copy'><Icon name={content.icon} size={19} /><h2 id={`${panelId}-title`}>{content.title}</h2></div>
+      <span id={`${panelId}-availability`} className='dashboard-availability'>Unavailable</span>
+    </header>
+    {!compact ? <>
+      <div id='analytics-filter-preview' className='dashboard-filter-preview'>
+        <div id='analytics-period-controls' className='dashboard-control-group' aria-label='Preview Reporting Period'>{([7, 30, 90] as const).map((days) => <button key={days} id={`analytics-period-${days}`} type='button' aria-pressed={page.period === days} className={page.period === days ? `is-active` : ``} onClick={() => page.setPeriod(days)}>{days} Days</button>)}</div>
+        <div id='analytics-presentation-controls' className='dashboard-control-group' aria-label='Report Presentation'>{([`chart`, `list`] as const).map((mode) => <button key={mode} id={`analytics-presentation-${mode}`} type='button' aria-pressed={page.presentation === mode} className={page.presentation === mode ? `is-active` : ``} onClick={() => page.setPresentation(mode)}><Icon name={mode === `chart` ? `chart` : `book`} size={14} />{mode === `chart` ? `Chart` : `List`}</button>)}</div>
+        <span id='analytics-filter-note' className='dashboard-filter-note'>Layout Preview · No Report Requested</span>
+      </div>
+      <div id='analytics-dimension-controls' className='dashboard-dimensions' role='toolbar' aria-label={`${content.title} Report Dimensions`}>
+        {content.dimensions.map((dimension, index) => <button key={dimension} id={`analytics-dimension-${index}`} type='button' aria-pressed={page.dimension === dimension} tabIndex={page.dimension === dimension ? 0 : -1} className={page.dimension === dimension ? `is-active` : ``} onClick={() => page.selectDimension(dimension)} onKeyDown={(event) => {
+          const last = content.dimensions.length - 1;
+          const next = event.key === `Home` ? 0 : event.key === `End` ? last : event.key === `ArrowRight` ? (index + 1) % (last + 1) : event.key === `ArrowLeft` ? (index + last) % (last + 1) : null;
+          if (next === null) return;
+          event.preventDefault();
+          page.selectDimension(content.dimensions[next]);
+          document.getElementById(`analytics-dimension-${next}`)?.focus();
+        }}>{dimension}</button>)}
+      </div>
+    </> : null}
+    <div id={`${panelId}-content`} className='dashboard-report-content'>
+      <dl id={`${panelId}-metrics`} className='dashboard-report-kpis'>{content.metrics.map((label, index) => <div key={label} id={`${panelId}-kpi-${index}`} className='dashboard-report-kpi'><dt id={`${panelId}-kpi-${index}-label`}>{label}</dt><dd id={`${panelId}-kpi-${index}-value`} aria-label='Unavailable'>—</dd></div>)}</dl>
+      <div id={`${panelId}-empty`} className='dashboard-empty-report'>
+        <Icon name={content.icon} size={25} /><div id={`${panelId}-empty-copy`} className='dashboard-empty-copy'><h3 id={`${panelId}-empty-title`}>{compact ? `${content.title} Unavailable` : `${page.dimension}: Report Unavailable`}</h3><p id={`${panelId}-empty-description`}>{content.detail}</p></div>
+        {!compact && page.presentation === `list` ? <div id={`${panelId}-empty-table`} className='dashboard-empty-table'><table id={`${panelId}-table`}><thead><tr><th scope='col'>{page.dimension === `Daily` ? `Date` : `Dimension`}</th><th scope='col'>Measurement</th></tr></thead><tbody><tr><td colSpan={2}>No report loaded. This is not a zero-record result.</td></tr></tbody></table></div> : null}
+      </div>
+    </div>
+    <footer id={`${panelId}-footer`} className='dashboard-report-footer'><span id={`${panelId}-source`}>{content.source} · Not Connected</span>{!compact ? <span id={`${panelId}-period`}>{page.period}-Day Preview · No Report Fetched</span> : null}</footer>
+  </section>;
+};
+
+const CatalogCharts = ({ page }: { page: OwnerDashboardPage }) => <>
+  {page.catalogError ? <p id='dashboard-catalog-error' className='dashboard-data-error' role='alert'>{page.catalogError}</p> : null}
+  <div id='dashboard-catalog-charts' className='dashboard-catalog-charts'>
+    <section id='dashboard-worlds' className='dashboard-chart-panel' aria-labelledby='dashboard-worlds-title'>
+      <header id='dashboard-worlds-heading' className='dashboard-chart-heading'><h2 id='dashboard-worlds-title'>Archive by World</h2><span id='dashboard-worlds-unit'>Spell(s)</span></header>
+      {page.catalogReady && page.worlds.length ? <dl id='dashboard-worlds-chart' className='dashboard-world-chart'>{page.worlds.map((world) => <div key={world.id} id={`dashboard-world-${world.id}`} className='dashboard-world-row'><dt id={`dashboard-world-${world.id}-label`}>{world.label}</dt><dd id={`dashboard-world-${world.id}-count`}><span id={`dashboard-world-${world.id}-track`} className='dashboard-world-track' aria-hidden='true'><span id={`dashboard-world-${world.id}-bar`} className='dashboard-world-bar' style={{ width: `${world.percent}%` }} /></span><strong id={`dashboard-world-${world.id}-value`}>{world.count}</strong></dd></div>)}</dl> : <p id='dashboard-worlds-empty' className='dashboard-chart-empty'>{!page.catalogReady ? `Catalog Unavailable` : `No Spells in the Catalog`}</p>}
+      <p id='dashboard-worlds-coverage' className='dashboard-chart-note'>{page.catalogCoverage}</p>
+    </section>
+    <section id='dashboard-etymology' className='dashboard-chart-panel' aria-labelledby='dashboard-etymology-title'>
+      <header id='dashboard-etymology-heading' className='dashboard-chart-heading'><h2 id='dashboard-etymology-title'>Etymology Status</h2><span id='dashboard-etymology-unit'>Catalog Distribution</span></header>
+      {page.catalogReady && page.totalSpells ? <div id='dashboard-etymology-chart' className='dashboard-distribution'>
+        <div id='dashboard-etymology-donut' className='dashboard-donut'><svg id='dashboard-etymology-rings' className='dashboard-donut-rings' viewBox='0 0 132 132' role='img' aria-label={`Etymology Distribution: ${page.etymologies.map((item) => `${item.label} ${item.count}`).join(`, `)}`}><circle className='dashboard-donut-track' cx='66' cy='66' r='52' />{page.etymologies.filter((item) => item.count > 0).map((item) => <circle key={item.id} id={`dashboard-etymology-segment-${item.id}`} className={`dashboard-donut-segment is-${item.id}`} cx='66' cy='66' r='52' strokeDasharray={`${item.percent / 100 * 326.726} 326.726`} strokeDashoffset={-item.offset / 100 * 326.726} />)}</svg><div id='dashboard-etymology-total' className='dashboard-donut-total'><strong>{page.totalSpells}</strong><span>Spell(s)</span></div></div>
+        <ul id='dashboard-etymology-legend' className='dashboard-chart-legend'>{page.etymologies.map((item) => <li key={item.id} id={`dashboard-etymology-${item.id}`}><span id={`dashboard-etymology-${item.id}-dot`} className={`dashboard-chart-dot is-${item.id}`} aria-hidden='true' /><span id={`dashboard-etymology-${item.id}-label`}>{item.label}</span><strong id={`dashboard-etymology-${item.id}-value`}>{item.count}</strong></li>)}</ul>
+      </div> : <p id='dashboard-etymology-empty' className='dashboard-chart-empty'>{!page.catalogReady ? `Catalog Unavailable` : `No Spells in the Catalog`}</p>}
+      <p id='dashboard-etymology-coverage' className='dashboard-chart-note'>Current catalog classifications · Dated activity history unavailable</p>
+    </section>
+  </div>
+</>;
 
 const OwnerDashboard = (props: OwnerDashboardProps) => {
   const page = useOwnerDashboard(props);
-  return <AccountLayout section='admin' title={page.title} eyebrow={page.owner ? `OWNER WORKSPACE` : `PUBLIC SETUP PREVIEW`} description='Your account directory and session, with reporting availability.'>
-    <div id='dashboard-workspace' className='owner-dashboard'>
-      {!page.owner ? <section id='dashboard-access-notice' className='dashboard-preview-notice' aria-label='Public setup preview'><Icon name='shield' size={21} /><div><strong>{page.loading ? `Checking account availability` : page.account ? `Owner access required` : `Sign in to view the private workspace`}</strong><p>Only an active, verified Owner can load the private account directory. Sign in with your approved Owner account.</p></div><AppLink id='dashboard-signin' href={`/signin?returnTo=${page.view === `analytics` ? `/analytics` : `/dashboard`}`}><Icon name='user' size={15} /> Sign in</AppLink></section> : <div id='dashboard-owner-notice' className='dashboard-preview-notice'><Icon name='shield' size={20} /><p>Owner session confirmed. The account summary reflects the newest loaded page. Traffic and runtime reporting remain unavailable.</p></div>}
-      <div className='dashboard-toolbar'><div className='dashboard-view-switch' aria-label='Workspace pages'><AppLink id='dashboard-overview-link' href='/dashboard' aria-current={page.view === `overview` ? `page` : undefined} className={page.view === `overview` ? `is-active` : ``}><Icon name='dashboard' size={15} /> Overview</AppLink><AppLink id='dashboard-analytics-link' href='/analytics' aria-current={page.view === `analytics` ? `page` : undefined} className={page.view === `analytics` ? `is-active` : ``}><Icon name='chart' size={15} /> Analytics</AppLink></div><span className='dashboard-source-status'><i /> {page.accountSource}</span></div>
-      {page.view === `overview` ? <div id='dashboard-summary' className='dashboard-summary'>{page.metrics.map((metric) => <article key={metric.id} id={`dashboard-metric-${metric.id}`} className='dashboard-metric'><div><span>{metric.label}</span><Icon name={metric.icon} size={17} /></div><strong aria-label={metric.value === null ? `Unavailable` : undefined}>{metric.value ?? `—`}</strong><p><span>{metric.status}</span>{metric.detail}</p></article>)}</div> : null}
-      {page.owner && page.view === `overview` ? <section id='dashboard-account-status' className='dashboard-preview-notice' aria-live='polite'><Icon name='user' size={20} /><div><p>{page.snapshot?.message ?? `Loading confirmed account records.`}</p><AppLink id='dashboard-users-link' href='/users'>Open account directory<Icon name='arrow-right' size={14} /></AppLink></div><button id='dashboard-accounts-reload' className='dashboard-account-reload' type='button' disabled={!page.snapshot || page.snapshot.state === `loading`} onClick={page.retry}><Icon name='refresh' size={14} />Reload accounts</button></section> : null}
-      <section id='dashboard-report' className='dashboard-report' aria-labelledby='dashboard-report-title'>
-        <header className='dashboard-report-heading'><div><span className='dashboard-report-icon'><Icon name={page.content.icon} size={20} /></span><h2 id='dashboard-report-title'>{page.content.title}</h2></div><div className='dashboard-report-actions'><button id='dashboard-report-refresh' type='button' disabled title='Reporting service is not connected'><Icon name='refresh' size={15} /><span>Refresh</span></button><button id='dashboard-report-export' type='button' disabled title='There is no report to export'><Icon name='download' size={15} /><span>Export</span></button></div></header>
-        <div className='dashboard-report-tabs' aria-label='Report category'><button id='dashboard-report-traffic' type='button' aria-pressed={page.report === `traffic`} className={page.report === `traffic` ? `is-active` : ``} onClick={() => page.setReport(`traffic`)}><Icon name='chart' size={14} /> Traffic</button><button id='dashboard-report-health' type='button' aria-pressed={page.report === `health`} className={page.report === `health` ? `is-active` : ``} onClick={() => page.setReport(`health`)}><Icon name='shield' size={14} /> Health</button><span>Source not connected</span></div>
-        <div id='analytics-filter-preview' className='dashboard-filter-preview'>
-          <div className='dashboard-control-group' aria-label='Preview reporting period'>{([7, 30, 90] as const).map((days) => <button key={days} id={`analytics-period-${days}`} type='button' aria-pressed={page.period === days} className={page.period === days ? `is-active` : ``} onClick={() => page.setPeriod(days)}>{days} Days</button>)}</div>
-          <div className='dashboard-control-group' aria-label='Report presentation'>{([`chart`, `list`] as const).map((mode) => <button key={mode} id={`analytics-presentation-${mode}`} type='button' aria-pressed={page.presentation === mode} className={page.presentation === mode ? `is-active` : ``} onClick={() => page.setPresentation(mode)}><Icon name={mode === `chart` ? `chart` : `book`} size={14} />{mode === `chart` ? `Chart` : `List`}</button>)}</div>
-          <span className='dashboard-filter-note'>Layout controls only. No report is requested.</span>
-        </div>
-        <div id='analytics-dimension-controls' className='dashboard-dimensions' role='toolbar' aria-label={`${page.content.title} report dimensions`}>
-          {page.content.dimensions.map((dimension, index) => <button key={dimension} id={`analytics-dimension-${index}`} type='button' aria-pressed={page.dimension === dimension} tabIndex={page.dimension === dimension ? 0 : -1} className={page.dimension === dimension ? `is-active` : ``} onClick={() => page.selectDimension(dimension)} onKeyDown={(event) => {
-            const last = page.content.dimensions.length - 1;
-            const next = event.key === `Home` ? 0 : event.key === `End` ? last : event.key === `ArrowRight` ? (index + 1) % (last + 1) : event.key === `ArrowLeft` ? (index + last) % (last + 1) : null;
-            if (next === null) return;
-            event.preventDefault();
-            page.selectDimension(page.content.dimensions[next]);
-            document.getElementById(`analytics-dimension-${next}`)?.focus();
-          }}>{dimension}</button>)}
-        </div>
-        <div className='dashboard-report-content'><div className='dashboard-report-kpis'>{page.content.metrics.map((label, index) => <div key={label} id={`report-kpi-${page.report}-${index}`}><span>{label}</span><strong aria-label='Unavailable'>—</strong><small>Not available</small></div>)}</div><div id='dashboard-empty-report' className='dashboard-empty-report'><div className='dashboard-empty-emblem'><Icon name={page.content.icon} size={27} /></div><h3>{page.dimension}: report unavailable</h3><p>{page.content.detail}</p>{page.presentation === `list` ? <div className='dashboard-empty-table' role='region' aria-label='Disconnected report list'><table><thead><tr><th scope='col'>{page.dimension === `Daily` ? `Date` : `Dimension`}</th><th scope='col'>Measurement</th></tr></thead><tbody><tr><td colSpan={2}>No report loaded. This is not a zero-record result.</td></tr></tbody></table></div> : <p className='dashboard-chart-explanation'>A chart will require verified measurements. No sample line or invented trend is drawn.</p>}<span><Icon name='shield' size={12} /> No sample metrics. No fabricated activity.</span></div></div>
-        <footer className='dashboard-report-footer'><span>{page.content.source}: not connected</span><span>{page.period}-day layout selected · No report fetched</span></footer>
-      </section>
-      {page.view === `analytics` ? <div id='analytics-breakdown-preview' className='dashboard-breakdowns'>{[{ id: `sources`, title: `Discovery sources`, icon: `globe`, copy: `Referrers, countries, and devices will use verified source data.` }, { id: `pages`, title: `Pages worth exploring`, icon: `book`, copy: `Page rankings need an authorized report with actual counts.` }].map((item) => <section key={item.id} id={`analytics-breakdown-${item.id}`}><div><Icon name={item.icon} size={18} /><h2>{item.title}</h2></div><p>{item.copy}</p><span>Report unavailable</span></section>)}</div> : <section id='dashboard-editorial-workspace' className='dashboard-editorial'><div><span className='dashboard-editorial-eyebrow'><Icon name='spark' size={14} /> WORDS WORTH KEEPING</span><h2>Every good archive<br />starts with a curious mind.</h2><p>Contribution intake and review are not connected. No submissions are counted or published by this workspace.</p><AppLink id='dashboard-contribute-link' href='/submit'><Icon name='edit' size={16} /> Explore the contribution form<Icon name='arrow-right' size={16} /></AppLink></div><div className='dashboard-editorial-mark' aria-hidden='true'><Icon name='book' size={110} /><span>CURATE WITH CARE</span></div></section>}
-      <section id='dashboard-setup' className='dashboard-setup'><header><div><span className='account-eyebrow'>BEHIND THE SCENES</span><h2>Account services and reporting.</h2></div><span>Current availability</span></header><div className='dashboard-setup-grid'>{page.setupRequirements.map((item, index) => <article key={item.id} id={`dashboard-setup-${item.id}`}><span className='dashboard-setup-number'>0{index + 1}</span><Icon name={item.icon} size={18} /><h3>{item.title}</h3><p>{item.copy}</p><span className='dashboard-setup-status'><i /> {item.status}</span></article>)}</div></section>
-      <p className='dashboard-bottom-note'><Icon name='shield' size={13} /> Role checks in this interface do not replace trusted server authorization. Private records load only for an authorized Owner; provider secrets stay server-side.</p>
-    </div>
+  return <AccountLayout section='admin' title={page.title} eyebrow={`Admin · ${page.title}`}>
+    {page.owner ? <div id='dashboard-workspace' className='owner-dashboard'>
+      {page.view === `analytics` ? <>
+        <div id='dashboard-report-switch' className='dashboard-control-group dashboard-report-switch' aria-label='Analytics Report'>{([`traffic`, `health`] as const).map((kind) => <button key={kind} id={`dashboard-select-${kind}`} type='button' aria-pressed={page.report === kind} className={page.report === kind ? `is-active` : ``} onClick={() => page.setReport(kind)}><Icon name={reportContent[kind].icon} size={15} />{reportContent[kind].title}</button>)}</div>
+        <ReportPanel page={page} kind={page.report} />
+      </> : <>
+        <ReportPanel compact page={page} kind='traffic' />
+        <ReportPanel compact page={page} kind='health' />
+        <CatalogCharts page={page} />
+        <div id='dashboard-summary' className='dashboard-counts'>{page.metrics.map((metric) => <AppLink key={metric.id} id={`dashboard-metric-${metric.id}`} className='dashboard-count' href={metric.href} title={metric.detail} aria-label={`${metric.label}: ${metric.value ?? `Unavailable`}. ${metric.detail}`}><Icon name={metric.icon} size={15} /><span id={`dashboard-metric-${metric.id}-label`}>{metric.label}</span><strong id={`dashboard-metric-${metric.id}-value`}>{metric.value ?? `—`}</strong><Icon name='arrow-right' size={13} /></AppLink>)}</div>
+        <div id='dashboard-account-status' className={`dashboard-account-status${page.snapshot?.state === `error` || page.snapshot?.state === `denied` ? ` is-error` : ``}`}><p id='dashboard-account-coverage' role={page.snapshot?.state === `error` || page.snapshot?.state === `denied` ? `alert` : `status`}>{page.snapshot?.message ?? `Loading the Private Account Directory`}</p><button id='dashboard-accounts-reload' type='button' disabled={!page.snapshot || page.snapshot.state === `loading`} onClick={page.retry}><Icon name='refresh' size={14} />Reload Accounts</button></div>
+      </>}
+    </div> : null}
   </AccountLayout>;
 };
 

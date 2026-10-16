@@ -10,7 +10,7 @@ Simple prompt after copying the files:
 
 > Set up the connected account system from ai/adoption.md in this project
 
-This includes private Profile/Connections, real Firebase/Firestore boundaries, the current shared sidebar and submenus, Owner feature controls with minimum-plan targeting, top-level admin pages, and Traffic/Health charts. Use [the full-system prompt](skills/app-system/system.md#one-adoption-prompt) when you also want the complete public/chat/pricing/blog starter.
+This includes private Profile/Connections, real Firebase/Firestore boundaries, and the [shared account layout](skills/admin/layout.md): full-width account header/canvas, a slim rail measured from the logo plus adjacent wordmark, persistent submenus, and avatar role/plan pills for every signed-in role. ADMIN, Dashboard and Feedback are active trusted Owner-only by default; all other roles see Profile only at top level, with supported private tools inside Profile. Owner feature controls, top-level admin pages and Traffic/Health charts reuse the destination's palette/fonts. Broader grants need an explicit user-selected policy. Use [the full-system prompt](skills/app-system/system.md#one-adoption-prompt) when you also want the complete public/chat/pricing/blog starter.
 
 Read applicable guides in this order:
 

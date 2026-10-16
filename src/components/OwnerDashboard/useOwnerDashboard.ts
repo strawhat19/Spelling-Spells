@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSpells } from '../../shared/spellsContext';
 import { useOwnerRecords } from '../OwnerRecords/useOwnerRecords';
 
 export type OwnerDashboardProps = { view?: `overview` | `analytics` };
@@ -6,40 +7,52 @@ export type ReportKind = `traffic` | `health`;
 
 export const reportContent = {
   traffic: {
-    title: `Traffic`,
     icon: `chart`,
-    label: `Understand the archive’s visitors`,
-    detail: `Visitor and page-view reports will appear here after an authorized analytics source is connected.`,
+    title: `Traffic`,
     source: `Web Analytics`,
-    metrics: [`Visitors`, `Page views`, `Top source`],
+    detail: `Visitor and page-view reports are unavailable until an authorized analytics source is connected.`,
+    metrics: [`Visitors`, `Page Views`, `Top Source`],
     dimensions: [`Overview`, `Daily`, `Countries`, `Sources`, `Pages`, `Devices`],
   },
   health: {
-    title: `Health`,
     icon: `shield`,
-    label: `A clear view of service health`,
-    detail: `Runtime requests, errors, and latency need a protected reporting service. No runtime measurements are available.`,
-    source: `Runtime provider`,
+    title: `Health`,
+    source: `Runtime Provider`,
+    detail: `Runtime requests, errors and latency are unavailable until a protected reporting service is connected.`,
     metrics: [`Requests`, `Errors`, `Latency`],
     dimensions: [`Compute`, `Memory`, `Requests`, `Latency`, `Routes`, `Statuses`, `Cache`],
   },
 };
 
 export const useOwnerDashboard = ({ view = `overview` }: OwnerDashboardProps) => {
+  const catalog = useSpells();
   const auth = useOwnerRecords(`users`, view === `overview`);
   const owner = auth.permitted;
   const ready = owner && auth.snapshot?.state === `ready`;
   const records = ready ? auth.snapshot?.records ?? null : null;
+  const catalogReady = catalog.ready && (!catalog.error || catalog.spells.length > 0);
+  const totalSpells = catalogReady ? catalog.spells.length : null;
+  const worldCounts = new Map<string, number>();
+  catalog.spells.forEach((spell) => worldCounts.set(spell.worldId, (worldCounts.get(spell.worldId) ?? 0) + 1));
+  const worlds = [...worldCounts].map(([id, count]) => ({
+    id,
+    count,
+    label: catalog.worlds.find((world) => world.id === id)?.name ?? id,
+    percent: totalSpells ? count / totalSpells * 100 : 0,
+  })).sort((left, right) => right.count - left.count || left.label.localeCompare(right.label));
+  let offset = 0;
+  const etymologies = ([`Confirmed`, `Suggested`, `Unconfirmed`] as const).map((label) => {
+    const count = catalog.spells.filter((spell) => spell.etymologyStatus === label).length;
+    const percent = totalSpells ? count / totalSpells * 100 : 0;
+    const segment = { label, count, percent, offset, id: label.toLowerCase() };
+    offset += percent;
+    return segment;
+  });
   const metrics = [
-    { id: `accounts`, label: `Accounts on this page`, icon: `user`, value: records?.length ?? null, status: ready ? `Server confirmed` : `Unavailable`, detail: `Newest 50 accounts; not a global total` },
-    { id: `active`, label: `Active on this page`, icon: `shield`, value: records?.filter((record) => record.active).length ?? null, status: ready ? `Server confirmed` : `Unavailable`, detail: `Status within the loaded account page` },
-    { id: `session`, label: `Current session`, icon: `user`, value: owner ? auth.account?.role ?? null : null, status: owner ? `Verified email` : `Unavailable`, detail: `Current account's trusted role` },
-  ];
-  const setupRequirements = [
-    { id: `authentication`, title: `Current sign-in`, copy: `A confirmed Supabase session and private account are required.`, icon: `user`, status: auth.status === `signed-in` && auth.source === `server` ? `Session confirmed` : `Sign-in required` },
-    { id: `owner`, title: `Trusted Owner access`, copy: `Privileges come from the protected account record.`, icon: `shield`, status: owner ? `Owner confirmed` : `Owner required` },
-    { id: `records`, title: `Private account data`, copy: `Directory reads enforce Owner access through row-level security.`, icon: `bookmark`, status: ready ? `Page loaded` : auth.snapshot?.state === `error` ? `Read failed` : `Awaiting confirmed read` },
-    { id: `reporting`, title: `Protected reporting`, copy: `Traffic, runtime and submission reports need separate services.`, icon: `chart`, status: `Unavailable` },
+    { id: `spells`, icon: `book`, href: `/spells`, label: `Spells`, value: totalSpells, detail: `Bundled catalog` },
+    { id: `worlds`, icon: `globe`, href: `/worlds`, label: `Worlds`, value: catalogReady ? worlds.length : null, detail: `Worlds represented in the catalog` },
+    { id: `accounts`, icon: `user`, href: `/users`, label: `Accounts on Page`, value: records?.length ?? null, detail: `Newest 50 accounts; not a global total` },
+    { id: `active`, icon: `shield`, href: `/users`, label: `Active on Page`, value: records?.filter((record) => record.active).length ?? null, detail: `Active status within the loaded page` },
   ];
   const [report, setReportState] = useState<ReportKind>(`traffic`);
   const [dimension, setDimension] = useState(`Overview`);
@@ -54,20 +67,26 @@ export const useOwnerDashboard = ({ view = `overview` }: OwnerDashboardProps) =>
   };
   return {
     ...auth,
-    owner,
-    metrics,
-    setupRequirements,
     view,
+    owner,
+    worlds,
     report,
-    setReport,
     period,
+    metrics,
+    setReport,
     setPeriod,
     dimension,
+    etymologies,
+    totalSpells,
     presentation,
-    setPresentation,
+    catalogReady,
     selectDimension,
+    setPresentation,
     content: reportContent[report],
-    accountSource: view === `analytics` ? `Reporting unavailable` : ready ? `Account page loaded` : owner ? `Account page pending` : `Owner access required`,
-    title: view === `analytics` ? `Archive analytics` : `The archive, at a glance.`,
+    title: view === `analytics` ? `Analytics` : `Dashboard`,
+    catalogError: !catalog.spells.length ? catalog.error : null,
+    catalogCoverage: `Bundled spell catalog · Distribution by record, not visitor activity`,
   };
 };
+
+export type OwnerDashboardPage = ReturnType<typeof useOwnerDashboard>;
