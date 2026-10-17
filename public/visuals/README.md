@@ -5,3 +5,5 @@
 Application text, spell cards, navigation, controls, and the exact chosen logo watermark are rendered separately. The background contains no functional interface.
 
 `IMAGEGEN-PROMPTS.md` records the prompt. The original mockup and prior logo rounds are preserved. No third-party franchise logos or character artwork are used.
+
+The [spell illustrations](spells/README.md) folder contains nine original AI-generated scenes used by the spell cards and detail pages, with separate prompts and provenance. They are illustrative interpretations of each fictional effect.

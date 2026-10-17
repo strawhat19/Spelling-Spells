@@ -2,6 +2,7 @@
 .header-signin-link::before { position: absolute; inset: 4px; border: 1px solid currentColor; border-right-color: transparent; border-bottom-color: transparent; border-radius: inherit; opacity: .45; transform: rotate(-35deg); pointer-events: none; content: ''; }
 .header-signin-link > .app-icon { position: relative; filter: drop-shadow(0 0 5px #ffc85735); }
 .header-signin-spark { position: absolute; top: 6px; right: 6px; display: flex; pointer-events: none; filter: drop-shadow(0 0 4px currentColor); }
+.header-signin-label { display: none; white-space: nowrap; font-size: 12px; font-weight: 650; }
 .header-signin-link:is(:hover, :focus-visible) { border-color: var(--gold); box-shadow: inset 0 0 15px #6039d83b, 0 0 20px #6039d847, 0 0 10px #ffc85720; transform: translateY(-1px); }
 [data-theme='ivory'] .header-signin-link { color: var(--purple); border-color: #6039d86b; background: radial-gradient(circle at 30% 20%, #ffc85730, transparent 60%), linear-gradient(145deg, #6039d81c, var(--muted)); box-shadow: inset 0 0 12px #6039d80c, 0 3px 14px #6039d81a; }
 [data-theme='ivory'] .header-signin-link:is(:hover, :focus-visible) { border-color: var(--purple); box-shadow: 0 0 20px #6039d82a; }
@@ -24,6 +25,14 @@
 .user-menu-popover a:hover, .user-menu-popover > button:hover { background: var(--muted); }
 .user-menu-popover > button { margin-top: 4px; border-top: 1px solid var(--line); border-radius: 0; }
 .user-menu-error { font-size: 11px; line-height: 1.6; color: var(--gold); padding: 0 8px; }
+@mixin header-signin-pill {
+  .header-signin-link { gap: 8px; width: auto; padding-inline: 14px; border-radius: 999px; }
+  .header-signin-link::before { right: auto; left: 6px; width: 36px; border-radius: 50%; }
+  .header-signin-spark { top: 6px; right: auto; left: 29px; }
+  .header-signin-label { display: inline; }
+}
+@container site-header (min-width: 1180px) { @include header-signin-pill; }
+@media (max-width: 1050px) { @container site-header (min-width: 640px) { @include header-signin-pill; } }
 @media (prefers-reduced-motion: reduce) { .header-signin-link, .user-menu-trigger { transition: none; } .header-signin-link:is(:hover, :focus-visible) { transform: none; } }
 @media (pointer: coarse) { .user-menu-popover a, .user-menu-popover > button { min-height: 44px; } }
 @keyframes account-menu-enter { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }

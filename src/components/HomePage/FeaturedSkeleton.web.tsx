@@ -15,6 +15,7 @@ const FeaturedSkeleton = () => <>
     <div id='home-featured-skeleton-definition' className='spell-card-definition ss-home-skeleton-lines'>
       <Skeleton height={13} /><Skeleton width='88%' height={13} />
     </div>
+    <div id='home-featured-skeleton-media' className='ss-home-skeleton-media'><Skeleton shape='block' height='100%' /></div>
     <div id='home-featured-skeleton-spelling' className='spell-card-spelling'>
       <div className='spell-card-field-label'><Skeleton width={140} height={10} /></div>
       <div id='home-featured-skeleton-letters' className='spell-card-letters'>

@@ -39,6 +39,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
   const [reducedMotion, setReducedMotion] = useState(false);
   const topOpacity = useRef(new Animated.Value(0)).current;
   const { theme, palette, toggleTheme, error: themeError } = useTheme();
+  const navigationAccent = theme === `night` ? palette.gold : palette.primary;
   const { error, savedIds, dismissError } = useSpells();
   const accountShell = Boolean(getAccountRoute(pathname));
   const scope = `${pathname}:${account?.id ?? `guest`}:${canAccessOwner(account)}`;
@@ -137,7 +138,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
               onPress={() => router.push(item.href)}
               style={styles.navLink}
             >
-              <Icon name={item.icon} size={17} color={pathname === item.href ? palette.gold : palette.muted} />
+              <Icon name={item.icon} size={17} color={navigationAccent} />
               <Text style={[styles.navText, { color: pathname === item.href ? palette.gold : palette.text }]}>{item.label}</Text>
             </Pressable>
           ))}

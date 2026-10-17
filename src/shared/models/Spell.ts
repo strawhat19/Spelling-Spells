@@ -5,6 +5,17 @@ import type {
   EtymologyStatus,
 } from '../../types/types';
 
+export type SpellMedia = {
+  id: string;
+  url: string;
+  alt: string;
+  type: `image` | `video`;
+  credit?: string;
+  poster?: string;
+  caption?: string;
+  sourceUrl?: string;
+};
+
 export type Spell = {
   id: string;
   number: number;
@@ -29,6 +40,7 @@ export type Spell = {
   accent: SpellAccent;
   counterspell?: string;
   aliases: string[];
+  media?: SpellMedia[];
   sources: { label: string; url: string }[];
 };
 

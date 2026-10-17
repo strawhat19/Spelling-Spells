@@ -34,7 +34,7 @@ const UserMenu = () => {
   }, [open]);
 
   if (loading) return <span id='header-account-loading' className='user-menu-loading' role='status'><span className='sr-only'>Loading Account</span><Skeleton shape='circle' width={44} height={44} /></span>;
-  if (!account) return <AppLink id='header-signin-link' href='/signin' title='Sign In · Enter the Spellbook' className='header-signin-link' aria-label='Sign In'><Icon name='user' size={20} /><span id='header-signin-spark' className='header-signin-spark' aria-hidden='true'><Icon name='spark' size={9} /></span><span className='sr-only'>Sign In</span></AppLink>;
+  if (!account) return <AppLink id='header-signin-link' href='/signin' title='Sign In · Enter the Spellbook' className='header-signin-link' aria-label='Sign In'><Icon name='user' size={20} /><span id='header-signin-spark' className='header-signin-spark' aria-hidden='true'><Icon name='spark' size={9} /></span><span id='header-signin-label' className='header-signin-label'>Sign In</span></AppLink>;
   const avatar = getAccountAvatar(account);
   const photo = avatar === failedPhoto ? null : avatar;
   const initial = account.displayName.trim().slice(0, 1).toUpperCase() || `A`;

@@ -34,5 +34,6 @@
   button.hero-carousel-control:not(:disabled):hover { border-color: var(--lavender); background: var(--muted); }
   .hero-carousel-page:hover { color: var(--lavender); }
 }
-@media (max-width: 680px) { .hero-carousel-navigation { margin-top: 30px; } .hero-carousel-deck { --hero-stack-near-transform: translate3d(-7px, 10px, 0) rotate(-2deg) scale(.97); --hero-stack-far-transform: translate3d(7px, 14px, 0) rotate(2.5deg) scale(.96); } }
+@media (max-width: 850px) { .hero-carousel-deck { --hero-stack-near-transform: translate3d(-7px, 10px, 0) rotate(-2deg) scale(.97); --hero-stack-far-transform: translate3d(7px, 14px, 0) rotate(2.5deg) scale(.96); } }
+@media (max-width: 680px) { .hero-carousel-navigation { margin-top: 30px; } }
 @media (prefers-reduced-motion: reduce) { .hero-carousel-slide, .hero-carousel-control, .hero-carousel-page > span { transition: none; } }

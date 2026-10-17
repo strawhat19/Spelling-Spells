@@ -1,4 +1,5 @@
 import Icon from '../Icon';
+import SpellMedia from '../SpellMedia';
 import { useRouter } from 'expo-router';
 import Svg, { Path } from 'react-native-svg';
 import styles, { parchment } from './styles.native';
@@ -66,6 +67,7 @@ const SpellCard = ({ spell, idPrefix, compact = false, featured = false }: Props
       <Text nativeID={`spell-name-${elementId}`} style={[styles.title, featured && styles.titleFeatured]}>{spell.name}</Text>
       <Text nativeID={`spell-pronunciation-${elementId}`} style={styles.pronunciation}>{spell.pronunciation}</Text>
       <Text style={styles.definition} numberOfLines={compact ? 3 : undefined}>{spell.definition}</Text>
+      <SpellMedia spell={spell} compact idPrefix={idPrefix} />
       {!compact && (
         <View nativeID={`spell-spelling-${elementId}`} accessibilityLabel={`Spelling: ${spell.name.split(``).join(`, `)}`} style={styles.letters}>
           {Array.from(spell.name).map((letter, index) => (

@@ -18,9 +18,11 @@ export default StyleSheet.create({
   pill: { gap: 4, minHeight: 16, maxWidth: `58%`, flexShrink: 0, borderWidth: 1, borderRadius: 999, paddingVertical: 1, paddingHorizontal: 6, flexDirection: `row`, alignItems: `center` },
   signInSpark: { top: 3, right: 4, position: `absolute` },
   signInStar: { left: 6, bottom: 6, width: 3, height: 3, position: `absolute`, borderRadius: 2 },
-  signInArtwork: { ...StyleSheet.absoluteFillObject, alignItems: `center`, justifyContent: `center` },
+  signInLabel: { flexShrink: 0, fontSize: 12, lineHeight: 16, fontWeight: `700` },
+  signInArtwork: { width: 42, height: 42, flexShrink: 0, alignItems: `center`, justifyContent: `center` },
   signInRing: { top: 5, left: 5, right: 5, bottom: 5, opacity: .55, position: `absolute`, borderWidth: 1, borderRadius: 17 },
   signInButton: { elevation: 3, shadowRadius: 7, shadowOpacity: .22, shadowOffset: { width: 0, height: 1 } },
+  signInPill: { gap: 3, width: `auto`, paddingLeft: 1, paddingRight: 16, flexDirection: `row` },
   button: { width: 44, height: 44, padding: 1, flexShrink: 0, borderWidth: 1, borderRadius: 22, alignItems: `center`, justifyContent: `center` },
   options: { width: 260, maxWidth: `92%`, position: `absolute`, borderWidth: 1, borderRadius: 14, elevation: 8, shadowColor: `#000`, shadowOpacity: .14, shadowRadius: 18, shadowOffset: { width: 0, height: 6 } },
 });

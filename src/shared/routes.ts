@@ -1,5 +1,5 @@
 export const navigation = [
-  { href: `/spells`, icon: `book`, label: `Spell Index` },
+  { href: `/spells`, icon: `book`, label: `Spells` },
   { href: `/worlds`, icon: `globe`, label: `Worlds` },
   { href: `/pronunciation`, icon: `audio`, label: `Pronunciation` },
   { href: `/submit`, icon: `edit`, label: `Contribute` },

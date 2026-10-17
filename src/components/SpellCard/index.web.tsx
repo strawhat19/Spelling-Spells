@@ -1,6 +1,7 @@
 import './styles.scss';
 import { Icon } from '../Icon';
 import { AppLink } from '../AppLink';
+import SpellMedia from '../SpellMedia';
 import type { Spell } from '../../shared/models/Spell';
 import { getSpellPath } from '../../shared/catalog/routes';
 import { useSpells } from '../../shared/spellsContext/useSpells';
@@ -40,6 +41,7 @@ export const SpellCard = ({ spell, compact = false, featured = false }: SpellCar
       <h3 className="spell-card-title" id={`${prefix}-title`}><AppLink id={`${prefix}-name-link`} href={destination}>{spell.name}</AppLink></h3>
       <p className="spell-card-pronunciation" id={`${prefix}-pronunciation`}><Icon name="audio" size={14} />{spell.pronunciation}</p>
       <p className="spell-card-definition" id={`${prefix}-definition`}>{spell.definition}</p>
+      <SpellMedia spell={spell} idPrefix={prefix} compact />
       {featured && (
         <>
           <div className="spell-card-spelling" id={`${prefix}-spelling`}>

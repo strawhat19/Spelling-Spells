@@ -27,6 +27,7 @@ export default StyleSheet.create({
   featuredSkeletonFooter: { minHeight: 44 },
   featuredSkeletonPronunciation: { minHeight: 22, justifyContent: `center` },
   featuredSkeletonDefinition: { gap: 9, minHeight: 46, justifyContent: `center` },
+  featuredSkeletonMedia: { width: `100%`, aspectRatio: 16 / 9, borderRadius: 4, overflow: `hidden` },
   featuredLoadingStatus: { width: 1, height: 1, overflow: `hidden`, position: `absolute` },
   pageNote: { gap: 8, padding: 16, borderWidth: 1, borderRadius: 14 },
   noteTitle: { gap: 8, flexDirection: `row`, alignItems: `center` },

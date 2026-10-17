@@ -150,6 +150,7 @@ export const spellsAPI = {
       ...spell,
       aliases: [...spell.aliases],
       syllables: [...spell.syllables],
+      media: spell.media?.map((media) => ({ ...media })),
       sources: spell.sources.map((source) => ({ ...source })),
       breakdown: spell.breakdown.map((part) => ({ ...part })),
     })),
@@ -214,8 +215,8 @@ const getHealth = async (): Promise<ServiceHealth> => {
     storageMode: sessionOnly ? `session` : `local`,
     storageName: sessionOnly ? `Session Memory` : storageName,
     connection: sessionOnly
-      ? `The catalog is bundled locally. Some or all preferences are available in this session only; no backend is connected.`
-      : `The catalog is bundled locally. Preferences use browser or device storage; no backend is connected.`,
+      ? `The spell catalog is bundled with the app. Some or all device preferences are available in this session only. Account services report their connection status separately.`
+      : `The spell catalog is bundled with the app. Device preferences use browser or device storage. Account services report their connection status separately.`,
   };
 };
 

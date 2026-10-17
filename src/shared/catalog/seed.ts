@@ -1,3 +1,4 @@
+import { spellMedia } from './media';
 import { createRecordId } from '../common/ids';
 import type { Spell, World } from '../models/Spell';
 
@@ -29,6 +30,8 @@ const ancientLanguageDictionary = {
 const freezeSpell = (spell: Spell): Spell => {
   Object.freeze(spell.aliases);
   Object.freeze(spell.syllables);
+  spell.media?.forEach((media) => Object.freeze(media));
+  if (spell.media) Object.freeze(spell.media);
   spell.sources.forEach((source) => Object.freeze(source));
   spell.breakdown.forEach((part) => Object.freeze(part));
   Object.freeze(spell.sources);
@@ -340,7 +343,7 @@ const catalog: Spell[] = [
   },
 ];
 
-export const seedSpells: readonly Spell[] = Object.freeze(catalog.map(freezeSpell));
+export const seedSpells: readonly Spell[] = Object.freeze(catalog.map((spell) => freezeSpell({ ...spell, media: spellMedia[spell.name] })));
 
 export const catalogNotes = {
   ratings: `Danger, utility, and skill labels are editorial comparisons within fictional worlds, rather than official statistics.`,

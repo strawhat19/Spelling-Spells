@@ -34,9 +34,19 @@ References: [Expo static rendering](https://docs.expo.dev/router/web/static-rend
 
 The additive migration was created with Supabase CLI 2.121.0 and applied through the connected Supabase migration tool to the existing Spelling Spells project `qtfajiuilwdtywkklbjq`. The local migration filename, `20261016215525_notifications_system.sql`, matches the authoritative applied version returned by the database.
 
-Post-application metadata shows all three public tables with RLS enabled, receipt/feed-state Realtime membership, no direct content write privilege for `anon` or `authenticated`, and no anonymous execute privilege on the manager RPC. The announcement table contains zero records; no sample content, recipients, emails, push messages or Owner grants were created.
+Post-application metadata showed all three public tables with RLS enabled, receipt/feed-state Realtime membership, no direct content write privilege for `anon` or `authenticated`, and no anonymous execute privilege on the manager RPC. Immediately after installation, the announcement table contained zero records; no sample content, recipients, emails, push messages or Owner grants were created during installation.
 
 Source review covered the reference workflow, public/private boundaries, scoped subscriptions, late account results, confirmed mutation behavior, guest reload/write ordering, browser locking, limits, accessible dismissal/focus and web/native implementations. Added the pinned React DOM type dependency for the portal. No test suite, compiler, build, browser or native-device checks have run for this addition, and no app deployment or commit was made. The database installation is confirmed; browser/native interactions, live account-to-account isolation, cross-device read sync and deployed deep links still need runtime review under the user's verification preference.
+
+## Published Editorial Guidance
+
+On 2026-10-17 at 00:58 UTC, the user-requested catalog note was published as **Fictional Worlds & Editorial Guides**, slug `catalog-editorial-guidance`, at `/notifications/catalog-editorial-guidance`:
+
+> All effects belong to fictional worlds. Danger, utility, and skill levels are editorial guides, with linked sources inside each entry.
+
+The persisted ID is `Notification_1_Announcement_2026-10-17_05bb5ba9-294e-40ab-a884-c78256d1e1be`. The content-only management transaction locked the existing counter, allocated the matching number, inserted the announcement and incremented the public feed revision atomically. The stable slug accepts identical retries without another insert or revision change; conflicting content aborts. No application identity was impersonated, and schema, permissions and read receipts were unchanged.
+
+Post-publication reads confirmed one matching published record, counter `1` and feed revision `1`. A separate read-only transaction confirmed that the `anon` role can select it. The public catalog footer note was removed in source; saved-shelf storage notices remain. Bell rendering and browser/native interaction were not runtime-checked.
 
 ## Reference Source Evidence
 
