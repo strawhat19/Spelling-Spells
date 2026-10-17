@@ -1,0 +1,4 @@
+.account-signin-methods { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 5px; }
+.account-signin-method { display: inline-flex; flex: 0 0 16px; align-items: center; justify-content: center; width: 16px; height: 16px; color: var(--lavender); }
+.account-signin-method > svg { width: 15px; height: 15px; flex: 0 0 15px; }
+.account-signin-method-unavailable { color: var(--soft); }

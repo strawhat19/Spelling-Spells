@@ -1,5 +1,1 @@
-import CatalogPage from '../src/components/CatalogPage';
-
-const SavedPage = () => <CatalogPage savedOnly />;
-
-export default SavedPage;
+export { default } from '../src/components/SavedPage';

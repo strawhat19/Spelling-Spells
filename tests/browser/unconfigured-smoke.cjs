@@ -39,20 +39,26 @@ const server = http.createServer((request, response) => {
     await visit('/spells');
     await page.locator('#catalog-title').waitFor();
     const save = page.locator('button[id$="-save"]').first();
-    await save.click();
-    await page.waitForFunction(() => document.querySelector('button[id$="-save"]')?.getAttribute('aria-pressed') === 'true');
-    const stored = await page.evaluate(() => localStorage.getItem('spelling-spells:preferences:v1'));
-    const parsed = JSON.parse(stored);
-    assert.equal(parsed.savedIds.length, 1);
+    const spellId = (await save.getAttribute('id')).replace(/^spell-card-catalog-/, '').replace(/-save$/, '');
+    const stored = JSON.stringify({ version: 1, savedIds: [spellId], historyIds: [] });
+    await page.evaluate((value) => localStorage.setItem('spelling-spells:preferences:v1', value), stored);
     await page.reload({ waitUntil: 'networkidle' });
-    assert.equal(await page.locator('button[id$="-save"]').first().getAttribute('aria-pressed'), 'true');
-    checks.push('Guest bookmark survives reload');
+    assert.equal(await save.getAttribute('aria-pressed'), 'false');
+    await save.click();
+    await page.waitForURL(`${baseUrl}/signin`);
+    await page.getByText('Account connection unavailable', { exact: true }).waitFor();
+    assert.equal(await page.evaluate(() => localStorage.getItem('spelling-spells:preferences:v1')), stored);
+    await visit('/spells');
+    assert.equal(await save.getAttribute('aria-pressed'), 'false');
+    checks.push('Guest bookmark clicks require sign-in and preserve legacy device bookmarks for import');
 
     await visit('/saved');
-    await page.getByText('On This Device', { exact: true }).waitFor();
-    assert.equal(await page.locator('#saved-shelf-count strong').innerText(), '1');
+    await page.waitForURL(`${baseUrl}/signin`);
+    await page.getByText('Account connection unavailable', { exact: true }).waitFor();
+    assert.equal(await page.locator('#saved-page').count(), 0);
     assert.equal(await page.locator('#saved-device-import').count(), 0);
-    checks.push('Device shelf stays separate; account import absent for guest');
+    assert.equal(await page.evaluate(() => localStorage.getItem('spelling-spells:preferences:v1')), stored);
+    checks.push('Saved shelf redirects guests to sign-in without exposing legacy device bookmarks');
 
     for (const route of ['/signin', '/signup']) {
       await visit(route);
@@ -93,9 +99,10 @@ const server = http.createServer((request, response) => {
 
     await page.evaluate(() => localStorage.setItem('spelling-spells:preferences:v1', '{unreadable-preserve-this'));
     await visit('/saved');
-    await page.locator('#saved-page').waitFor();
+    await page.waitForURL(`${baseUrl}/signin`);
+    await page.getByText('Account connection unavailable', { exact: true }).waitFor();
     assert.equal(await page.evaluate(() => localStorage.getItem('spelling-spells:preferences:v1')), '{unreadable-preserve-this');
-    checks.push('Unreadable device preferences preserved');
+    checks.push('Unreadable device preferences preserved through guest saved-shelf redirect');
 
     assert.deepEqual(errors, []);
     assert.deepEqual([...new Set(external)], []);

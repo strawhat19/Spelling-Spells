@@ -63,7 +63,7 @@ const SpellDetailPage = () => {
         {[spell.language, spell.category, spell.kind].map((label, index) => <View key={index} nativeID={`spell-tag-${spell.id}-${index}`} style={[styles.badge, { borderColor: palette.border, backgroundColor: palette.panel }]}><Text style={[styles.badgeText, { color: palette.lavender }]}>{label}</Text></View>)}
       </View>
       <SpellMedia spell={spell} idPrefix='detail' />
-      <Pressable nativeID={`detail-save-${spell.id}`} accessibilityRole="button" accessibilityState={{ selected: saved, disabled: !savedReady }} disabled={!savedReady} onPress={() => void toggleSaved(spell.id)} style={[styles.save, { opacity: savedReady ? 1 : .5, backgroundColor: palette.panel, borderColor: palette.border }]}>
+      <Pressable nativeID={`detail-save-${spell.id}`} accessibilityRole="button" accessibilityState={{ selected: saved, disabled: !presentation.canSave }} disabled={!presentation.canSave} onPress={() => void toggleSaved(spell.id)} style={[styles.save, { opacity: presentation.canSave ? 1 : .5, backgroundColor: palette.panel, borderColor: palette.border }]}>
         <Icon name="bookmark" size={19} color={palette.gold} /><Text style={[styles.saveText, { color: palette.gold }]}>{presentation.saveLabel(saved)}</Text>
       </Pressable>
       {(error || saveMessage || !savedReady || presentation.session) && <Text nativeID={`detail-save-feedback-${spell.id}`} accessibilityLiveRegion="polite" style={[styles.copy, { color: error ? palette.error : palette.muted }]}>{error || presentation.description}</Text>}

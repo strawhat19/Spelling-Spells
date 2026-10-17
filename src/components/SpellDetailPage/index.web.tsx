@@ -34,7 +34,7 @@ const SpellDetailPage = () => {
         <AppLink id={`${prefix}-back`} href="/spells"><Icon name="chevron-left" size={16} />Back to the spellbook</AppLink>
         <div id={`${prefix}-actions`} className="ss-detail-actions">
           <button id={`${prefix}-share`} type="button" disabled={sharing.busy} onClick={() => void sharing.share()}><Icon name="external-link" size={16} />{sharing.busy ? `Opening…` : `Share spell`}</button>
-          <button id={`${prefix}-save`} type="button" disabled={!savedReady} className={saved ? `is-saved` : ``} aria-pressed={saved} onClick={() => void toggleSaved(spell.id)}><Icon name="bookmark" size={16} />{presentation.saveLabel(saved)}</button>
+          <button id={`${prefix}-save`} type="button" disabled={!presentation.canSave} className={saved ? `is-saved` : ``} aria-pressed={saved} onClick={() => void toggleSaved(spell.id)}><Icon name="bookmark" size={16} />{presentation.saveLabel(saved)}</button>
         </div>
       </div>
       {(error || saveMessage || !savedReady || presentation.session) && <div id={`${prefix}-save-feedback`} className="ss-detail-share-feedback"><p role="status">{error || presentation.description}</p></div>}

@@ -11,7 +11,7 @@ type SpellCardProps = { spell: Spell; compact?: boolean; featured?: boolean };
 
 export const SpellCard = ({ spell, compact = false, featured = false }: SpellCardProps) => {
   const collection = useSpells();
-  const { worlds, isSaved, savedReady, toggleSaved } = collection;
+  const { worlds, isSaved, toggleSaved } = collection;
   const presentation = getSavedCollectionPresentation(collection);
   const saved = isSaved(spell.id);
   const world = worlds.find((item) => item.id === spell.worldId);
@@ -28,12 +28,12 @@ export const SpellCard = ({ spell, compact = false, featured = false }: SpellCar
         <span className="spell-card-label" id={`${prefix}-label`}><Icon name={featured ? `book` : spell.accent} size={15} />{featured ? `Inside the spellbook` : spell.category}</span>
         <button
           type="button"
-          disabled={!savedReady}
+          disabled={!presentation.canSave}
           aria-pressed={saved}
           id={`${prefix}-save`}
           className={`spell-card-save${saved ? ` is-saved` : ``}`}
           title={presentation.saveLabel(saved)}
-          aria-label={savedReady ? `${saved ? `Remove` : `Save`} ${spell.name} ${saved ? `from` : `to`} ${presentation.destination}` : `${presentation.blockedLabel}: ${spell.name}`}
+          aria-label={presentation.requiresSignIn ? `Sign In To Save ${spell.name}` : presentation.canSave ? `${saved ? `Remove` : `Save`} ${spell.name} ${saved ? `from` : `to`} ${presentation.destination}` : `${presentation.blockedLabel}: ${spell.name}`}
           onClick={() => void toggleSaved(spell.id)}
         ><Icon name="bookmark" size={17} /></button>
       </div>

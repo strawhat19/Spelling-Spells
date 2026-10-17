@@ -1,13 +1,14 @@
 import type { SpellsContextValue } from '../../shared/spellsContext/SpellsContext';
 
 type SavedCollectionState = Pick<SpellsContextValue,
-  `ready` | `saveBusy` | `saveScope` | `saveStatus` | `savedReady` | `storageMode` | `saveMessage`
+  `ready` | `saveBusy` | `saveScope` | `saveStatus` | `savedReady` | `storageMode` | `saveMessage` | `saveRequiresSignIn`
 >;
 
 export const getSavedCollectionPresentation = (collection: SavedCollectionState) => {
+  const requiresSignIn = collection.saveRequiresSignIn;
   const account = collection.saveScope === `account`;
   const session = !account && collection.storageMode === `session`;
-  const destination = account ? `your account` : session ? `this session` : `this device`;
+  const destination = account || requiresSignIn ? `your account` : session ? `this session` : `this device`;
   let badge = account ? `Private Account Shelf` : session ? `This Session Only` : `On This Device`;
   let description = account
     ? `Your private account bookmarks, confirmed by the server. Device bookmarks stay separate unless you import them.`
@@ -15,7 +16,11 @@ export const getSavedCollectionPresentation = (collection: SavedCollectionState)
       : `Bookmarks stay in this browser or app, separate from any account. Clearing local data can remove them.`;
   let blockedLabel = `Opening saved spells…`;
 
-  if (collection.saveBusy || collection.saveStatus === `pending`) {
+  if (requiresSignIn) {
+    badge = `Sign-In Required`;
+    blockedLabel = `Sign In To Save`;
+    description = `Sign in or create an account to save spells to your private collection.`;
+  } else if (collection.saveBusy || collection.saveStatus === `pending`) {
     badge = `Save Confirmation Pending`;
     blockedLabel = `Waiting for save confirmation…`;
     description = `A change is awaiting confirmation. The account view may be incomplete; more changes are paused.`;
@@ -47,8 +52,10 @@ export const getSavedCollectionPresentation = (collection: SavedCollectionState)
     session,
     destination,
     blockedLabel,
+    requiresSignIn,
+    canSave: collection.savedReady || requiresSignIn,
     description: collection.saveMessage ? `${description} ${collection.saveMessage}` : description,
-    saveLabel: (saved: boolean) => !collection.savedReady ? blockedLabel
+    saveLabel: (saved: boolean) => requiresSignIn ? `Sign In To Save` : !collection.savedReady ? blockedLabel
       : saved ? account ? `Saved to your account` : session ? `Saved for this session` : `Saved on this device`
         : `Save to ${destination}`,
   };

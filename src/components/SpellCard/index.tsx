@@ -14,7 +14,7 @@ type Props = { spell: Spell; compact?: boolean; featured?: boolean; idPrefix?: s
 const SpellCard = ({ spell, idPrefix, compact = false, featured = false }: Props) => {
   const router = useRouter();
   const collection = useSpells();
-  const { worlds, isSaved, savedReady, toggleSaved } = collection;
+  const { worlds, isSaved, toggleSaved } = collection;
   const presentation = getSavedCollectionPresentation(collection);
   const saved = isSaved(spell.id);
   const world = worlds.find(item => item.id === spell.worldId);
@@ -55,11 +55,11 @@ const SpellCard = ({ spell, idPrefix, compact = false, featured = false }: Props
         <Pressable
           nativeID={`save-spell-${elementId}`}
           accessibilityRole="button"
-          accessibilityLabel={savedReady ? `${saved ? `Remove` : `Save`} ${spell.name} ${saved ? `from` : `to`} ${presentation.destination}` : `${presentation.blockedLabel}: ${spell.name}`}
-          accessibilityState={{ selected: saved, disabled: !savedReady }}
-          disabled={!savedReady}
+          accessibilityLabel={presentation.requiresSignIn ? `Sign In To Save ${spell.name}` : presentation.canSave ? `${saved ? `Remove` : `Save`} ${spell.name} ${saved ? `from` : `to`} ${presentation.destination}` : `${presentation.blockedLabel}: ${spell.name}`}
+          accessibilityState={{ selected: saved, disabled: !presentation.canSave }}
+          disabled={!presentation.canSave}
           onPress={() => void toggleSaved(spell.id)}
-          style={[styles.save, saved && styles.saveActive, !savedReady && styles.saveDisabled]}
+          style={[styles.save, saved && styles.saveActive, !presentation.canSave && styles.saveDisabled]}
         >
           <Icon name="bookmark" size={18} color={saved ? `#FFF9EA` : parchment.accent} />
         </Pressable>

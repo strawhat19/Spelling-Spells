@@ -39,7 +39,7 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
         noIndex={savedOnly}
         canonicalPath={savedOnly ? `/saved` : `/spells`}
         title={savedOnly ? `Your saved spells` : `The spell index`}
-        description={savedOnly ? `Your personal shelf of bookmarked fictional spells. Revisit your private account collection or separate device bookmarks.` : `Find fictional spells by name, story world, language, purpose, and skill. Read exact spellings, pronunciation guides, and sourced word origins.`}
+        description={savedOnly ? `Your personal shelf of bookmarked fictional spells. Revisit your private account collection.` : `Find fictional spells by name, story world, language, purpose, and skill. Read exact spellings, pronunciation guides, and sourced word origins.`}
       />
       <div id="catalog-page-heading" className="ss-catalog-heading">
         <div className="ss-catalog-heading-copy">
@@ -56,7 +56,7 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
         <div id="saved-shelf-storage" className="ss-catalog-storage-note" role="status"><span className={`ss-catalog-device-badge${presentation.session || !savedResolved ? ` is-session` : ``}`}><Icon name="shield" size={13} />{presentation.badge}</span><p>{presentation.description}</p></div>
       </div>}
 
-      {savedOnly && saveScope === `account` && deviceSavedCount > 0 && <div id="saved-device-import" className="ss-catalog-import"><div><h2>Bring your device bookmarks along.</h2><p>{deviceSavedCount} local {deviceSavedCount === 1 ? `bookmark is` : `bookmarks are`} separate from this account. Import copies supported spell bookmarks into this account without replacing its collection. Local bookmarks are kept for when you sign out.</p></div><button id="saved-device-import-button" type="button" disabled={!savedReady || actionBusy || confirmClear} onClick={() => void importBookmarks()}><Icon name="bookmark" size={15} />{importing ? `Importing…` : `Import device bookmarks`}</button></div>}
+      {savedOnly && saveScope === `account` && deviceSavedCount > 0 && <div id="saved-device-import" className="ss-catalog-import"><div><h2>Bring your device bookmarks along.</h2><p>{deviceSavedCount} local {deviceSavedCount === 1 ? `bookmark is` : `bookmarks are`} separate from this account. Import copies supported spell bookmarks into this account without replacing its collection. Original device bookmarks are preserved.</p></div><button id="saved-device-import-button" type="button" disabled={!savedReady || actionBusy || confirmClear} onClick={() => void importBookmarks()}><Icon name="bookmark" size={15} />{importing ? `Importing…` : `Import device bookmarks`}</button></div>}
 
       <div id="catalog-filter-bar" className="ss-catalog-filters">
         <label id="catalog-search-label" className="ss-catalog-search" htmlFor="catalog-search"><Icon name="search" size={18} /><span className="ss-visually-hidden">{savedOnly ? `Search your saved spells` : `Search the spellbook`}</span><input id="catalog-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={savedOnly ? `Find a spell on your shelf…` : `A spell, a meaning, a world…`} />{query && <button id="catalog-clear-search" type="button" aria-label="Clear search" onClick={() => setQuery(``)}><Icon name="close" size={16} /></button>}</label>

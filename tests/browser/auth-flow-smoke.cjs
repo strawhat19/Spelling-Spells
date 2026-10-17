@@ -274,22 +274,23 @@ const checkHeader = async (scenario, state) => {
     await active.waitRequest('POST /rest/v1/rpc/ensure_account');
     assert.equal(new URL(active.page.url()).pathname, '/signup', 'Signup must wait for the mapped account');
     active.accountGate.resolve();
-    await active.page.waitForURL(`${baseUrl}/profile`);
+    await active.page.waitForURL(`${baseUrl}/`);
+    await active.visit('/profile');
     await active.page.locator('#profile-name').waitFor();
     assert.equal(await active.page.locator('#profile-name').inputValue(), fixtureName);
     assert.equal(await active.page.locator('#profile-metadata').innerText().then((text) => text.includes('Subscriber')), true);
-    checks.push('Session signup automatically reaches the real profile only after verified user and private account hydration');
+    checks.push('Session signup reaches Home only after verified user and private account hydration; the profile remains available');
     await checkHeader(active, 'signed-in');
     checks.push('Signed-in avatar immediately follows working theme control; 44px targets, aligned menus and no overflow at 1440/1366/400/320px');
     await finish('session signup and signed-in header');
 
-    for (const [requested, destination] of [['/saved', '/saved'], ['https://example.invalid/untrusted', '/profile']]) {
+    for (const [requested, destination] of [['/saved', '/'], ['https://example.invalid/untrusted', '/']]) {
       active = await createScenario(browser, baseUrl, { signupSession: true });
       await active.visit(`/signup?returnTo=${encodeURIComponent(requested)}`);
       await submitSignup(active);
       await active.page.waitForURL(`${baseUrl}${destination}`);
       assert.equal(active.requests.some((endpoint) => endpoint.includes('import_saved_spells')), false);
-      checks.push(requested === '/saved' ? 'Session signup respects allowlisted return destination without implicit device import' : 'Session signup rejects an external return destination');
+      checks.push(requested === '/saved' ? 'Session signup reaches Home despite an account return destination, without implicit device import' : 'Session signup reaches Home despite an external return destination');
       await finish(`session signup return ${destination}`);
     }
 

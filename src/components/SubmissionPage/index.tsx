@@ -6,12 +6,13 @@ import { draftLimits } from '../../shared/submissions/service';
 import type { SubmissionField } from '../../shared/submissions/types';
 import { Text, View, Alert, Linking, TextInput, Pressable, ActivityIndicator } from 'react-native';
 
-const fields: { key: SubmissionField; label: string; multiline?: boolean }[] = [
+const fields: { key: SubmissionField; label: string; url?: boolean; multiline?: boolean }[] = [
   { key: `name`, label: `Spell Name *` },
   { key: `world`, label: `Story or World *` },
   { key: `pronunciation`, label: `Pronunciation (Optional)` },
   { key: `definition`, label: `What Does It Do? *`, multiline: true },
-  { key: `sourceUrl`, label: `HTTPS Source Link *` },
+  { key: `sourceUrl`, label: `HTTPS Source Link *`, url: true },
+  { key: `mediaUrl`, label: `Public Image or Media URL (Optional)`, url: true },
   { key: `notes`, label: `Notes for the Editor (Optional)`, multiline: true },
 ];
 
@@ -42,13 +43,14 @@ const SubmissionPage = () => {
                 value={draft[field.key]}
                 multiline={field.multiline}
                 editable={!busy}
-                autoCorrect={field.key !== `sourceUrl`}
-                autoCapitalize={field.key === `sourceUrl` ? `none` : `sentences`}
-                keyboardType={field.key === `sourceUrl` ? `url` : `default`}
+                autoCorrect={!field.url}
+                autoCapitalize={field.url ? `none` : `sentences`}
+                keyboardType={field.url ? `url` : `default`}
                 maxLength={draftLimits[field.key]}
                 onChangeText={(text) => update(field.key, text)}
                 style={[styles.input, field.multiline && styles.textarea, { color: palette.text, backgroundColor: palette.background, borderColor: errors[field.key] ? palette.error : palette.border }]}
               />
+              {field.key === `mediaUrl` ? <Text nativeID='contribution-mediaUrl-hint' style={[styles.hint, { color: palette.muted }]}>A public HTTPS link to an image, video, or other media for this spell</Text> : null}
               {errors[field.key] ? <Text accessibilityRole='alert' style={[styles.hint, { color: palette.error }]}>{errors[field.key]}</Text> : null}
             </View>
           ))}
@@ -70,6 +72,7 @@ const SubmissionPage = () => {
           <Text style={[styles.body, { color: palette.text }]}>{draft.definition}</Text>
           {draft.notes ? <Text style={[styles.body, { color: palette.muted }]}>{draft.notes}</Text> : null}
           <Pressable nativeID='contribution-preview-source' accessibilityRole='link' onPress={() => void Linking.openURL(draft.sourceUrl.trim()).catch(() => Alert.alert(`Couldn’t Open Source`, `Please try the source link again when you’re connected.`))}><Text style={[styles.sourceLink, { color: palette.gold }]}>View Source ↗</Text></Pressable>
+          {draft.mediaUrl.trim() ? <Pressable nativeID='contribution-preview-media' accessibilityRole='link' onPress={() => void Linking.openURL(draft.mediaUrl.trim()).catch(() => Alert.alert(`Couldn’t Open Media`, `Please try the media link again when you’re connected.`))}><Text style={[styles.sourceLink, { color: palette.gold }]}>View Image or Media ↗</Text></Pressable> : null}
           <View style={styles.notice}><Icon name='lock' size={17} color={palette.muted} /><Text style={[styles.noticeText, { color: palette.muted }]}>Online submission is unavailable. Save your draft for later.</Text></View>
         </View>
       ) : null}

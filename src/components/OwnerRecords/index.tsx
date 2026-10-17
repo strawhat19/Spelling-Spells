@@ -5,6 +5,7 @@ import AccountLayout from '../AccountLayout';
 import { useRouter, type Href } from 'expo-router';
 import { useOwnerRecords } from './useOwnerRecords';
 import { Text, View, Image, Pressable } from 'react-native';
+import AccountSignInMethods from '../AccountSignInMethods';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import type { OwnerRecordView, OwnerAccountRecord } from '../../shared/admin/service';
 
@@ -38,7 +39,7 @@ const OwnerRecords = ({ view }: { view: OwnerRecordView }) => {
       <Text nativeID={`owner-${view}-records-status`} accessibilityLiveRegion='polite' accessibilityRole={!ready && !loading ? `alert` : undefined} style={[styles.copy, { color: !ready && !loading && view === `users` ? palette.error : palette.muted }]}>{ready ? snapshot?.realtime === `subscribed` ? `Listening for account changes.` : `Server data loaded; connecting updates.` : snapshot?.message ?? (loading ? `Loading confirmed records.` : `Records unavailable. No empty-result count is assumed.`)}</Text>
       {ready && snapshot?.records?.length ? snapshot.records.map((record) => <View key={record.id} nativeID={`owner-user-${record.id}`} style={[styles.record, { borderColor: palette.border }]}>
         <View nativeID={`owner-user-identity-${record.id}`} style={styles.recordHeading}><OwnerRecordAvatar record={record} /><Text nativeID={`owner-user-name-${record.id}`} accessibilityRole='header' style={[styles.recordTitle, { color: palette.text }]}>{record.number}. {record.displayName}</Text></View>
-        <Text style={[styles.copy, { color: palette.muted }]}>{record.email}</Text>
+        <View nativeID={`owner-user-email-${record.id}`} style={styles.email}><AccountSignInMethods id={`owner-user-signin-methods-${record.id}`} providers={record.authProviders} /><Text nativeID={`owner-user-email-address-${record.id}`} style={[styles.copy, styles.emailAddress, { color: palette.muted }]}>{record.email}</Text></View>
         <Text style={[styles.copy, { color: palette.muted }]}>Role: {record.role}</Text>
         <View style={styles.rowStatus}><View style={styles.statusDotWrap}><View style={[styles.statusDot, { backgroundColor: record.active ? `#38a778` : palette.muted }]} /></View><Text style={[styles.statusText, { color: record.active ? `#38a778` : palette.muted }]}>{record.active ? `Active` : `Inactive`}</Text></View>
         <Text style={[styles.copy, { color: palette.muted }]}>Read only</Text>

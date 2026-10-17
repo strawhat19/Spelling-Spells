@@ -7,12 +7,13 @@ import { useSubmissionPage } from './useSubmissionPage';
 import { draftLimits } from '../../shared/submissions/service';
 import type { SubmissionField } from '../../shared/submissions/types';
 
-const fields: { key: SubmissionField; label: string; hint: string; required?: boolean; multiline?: boolean }[] = [
+const fields: { key: SubmissionField; label: string; hint: string; url?: boolean; required?: boolean; multiline?: boolean }[] = [
   { key: `name`, label: `Spell name`, hint: `The exact spelling, including any accents`, required: true },
   { key: `world`, label: `Story or world`, hint: `Book, film, game, or fictional universe`, required: true },
   { key: `pronunciation`, label: `Pronunciation`, hint: `Optional. Add a sound guide and distinguish it from a canonical pronunciation` },
   { key: `definition`, label: `What does it do?`, hint: `Use your own words and keep it grounded in the story`, required: true, multiline: true },
-  { key: `sourceUrl`, label: `Source link`, hint: `An HTTPS link to the original work, publisher, creator, or reliable reference`, required: true },
+  { key: `sourceUrl`, label: `Source link`, hint: `An HTTPS link to the original work, publisher, creator, or reliable reference`, url: true, required: true },
+  { key: `mediaUrl`, label: `Public image or media URL`, hint: `Optional. A public HTTPS link to an image, video, or other media for this spell`, url: true },
   { key: `notes`, label: `Notes for the editor`, hint: `Optional. Edition, chapter, correction, or why this entry belongs here`, multiline: true },
 ];
 
@@ -80,7 +81,7 @@ const SubmissionPage = () => {
                       value={draft[field.key]}
                       required={field.required}
                       maxLength={draftLimits[field.key]}
-                      type={field.key === `sourceUrl` ? `url` : `text`}
+                      type={field.url ? `url` : `text`}
                       autoComplete='off'
                       aria-invalid={Boolean(errors[field.key])}
                       aria-describedby={`contribution-${field.key}-hint${errors[field.key] ? ` contribution-${field.key}-error` : ``}`}
@@ -118,7 +119,10 @@ const SubmissionPage = () => {
           {draft.pronunciation ? <p className='contribution-preview-pronunciation'>{draft.pronunciation}</p> : null}
           <p className='contribution-preview-definition'>{draft.definition}</p>
           {draft.notes ? <p className='contribution-preview-notes'>{draft.notes}</p> : null}
-          <a id='contribution-preview-source' href={draft.sourceUrl.trim()} target='_blank' rel='noreferrer'>View source<Icon name='external' size={16} /></a>
+          <div id='contribution-preview-links' className='contribution-preview-links'>
+            <a id='contribution-preview-source' href={draft.sourceUrl.trim()} target='_blank' rel='noreferrer'>View source<Icon name='external' size={16} /></a>
+            {draft.mediaUrl.trim() ? <a id='contribution-preview-media' href={draft.mediaUrl.trim()} target='_blank' rel='noreferrer'>View image or media<Icon name='external' size={16} /></a> : null}
+          </div>
           <div className='contribution-send-row'><button id='contribution-send' type='button' className='secondary-button' disabled aria-describedby='contribution-send-explanation'><Icon name='lock' size={17} />Online Submission Unavailable</button><p id='contribution-send-explanation'>Save your draft for later. Account connection and editorial review will be enabled after setup.</p></div>
         </section>
       ) : null}

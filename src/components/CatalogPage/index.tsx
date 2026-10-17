@@ -41,7 +41,7 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
       </View>}
       {savedOnly && saveScope === `account` && deviceSavedCount > 0 && <View nativeID="saved-device-import" style={[styles.shelf, { backgroundColor: palette.surface, borderColor: palette.border }]}>
         <Text accessibilityRole="header" style={[styles.panelTitle, { color: palette.text }]}>Bring your device bookmarks along.</Text>
-        <Text style={[styles.storageCopy, { color: palette.muted }]}>{deviceSavedCount} local {deviceSavedCount === 1 ? `bookmark is` : `bookmarks are`} separate from this account. Import copies supported spell bookmarks into this account without replacing its collection. Local bookmarks are kept for when you sign out.</Text>
+        <Text style={[styles.storageCopy, { color: palette.muted }]}>{deviceSavedCount} local {deviceSavedCount === 1 ? `bookmark is` : `bookmarks are`} separate from this account. Import copies supported spell bookmarks into this account without replacing its collection. Original device bookmarks are preserved.</Text>
         <Pressable nativeID="saved-device-import-button" accessibilityRole="button" disabled={!savedReady || actionBusy || confirmClear} accessibilityState={{ disabled: !savedReady || actionBusy || confirmClear }} onPress={() => void importBookmarks()} style={[styles.action, (!savedReady || actionBusy || confirmClear) && styles.disabled]}><Icon name="bookmark" size={16} color={palette.gold} /><Text style={[styles.actionText, { color: palette.gold }]}>{importing ? `Importing…` : `Import device bookmarks`}</Text></Pressable>
       </View>}
       <View style={[styles.search, { backgroundColor: palette.surface, borderColor: palette.border }]}>

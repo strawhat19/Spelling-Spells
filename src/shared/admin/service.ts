@@ -11,12 +11,14 @@ export type OwnerAccountRecord = {
   role: AccountRole;
   displayName: string;
   avatarUrl: string | null;
+  authProviders: string[] | null;
 };
 export type OwnerRecordsSnapshot = {
   message: string;
   nextCursor: number | null;
   records: OwnerAccountRecord[] | null;
   source: `supabase` | null;
+  authProvidersState: `ready` | `unavailable` | null;
   realtime: `connecting` | `subscribed` | `unavailable`;
   state: `loading` | `ready` | `error` | `denied` | `unavailable`;
 };
@@ -31,6 +33,7 @@ const blankSnapshot = (state: OwnerRecordsSnapshot[`state`], message: string): O
   source: null,
   records: null,
   nextCursor: null,
+  authProvidersState: null,
   realtime: `unavailable`,
 });
 
@@ -51,9 +54,24 @@ const readDirectoryRecord = (value: unknown, profileValue: unknown): OwnerAccoun
     active: row.active,
     number: Number(row.number),
     role: row.role as AccountRole,
+    authProviders: null,
     displayName: profile.display_name,
     avatarUrl: getAccountAvatar({ avatarUrl: typeof profile.avatar_url === `string` ? profile.avatar_url : null }),
   };
+};
+
+const readSignInMethods = (value: unknown, accountIds: string[]): Map<string, string[]> | null => {
+  if (!Array.isArray(value) || value.length !== accountIds.length) return null;
+  const expectedIds = new Set(accountIds);
+  const methods = new Map<string, string[]>();
+  for (const item of value) {
+    const row = item as Record<string, unknown> | null;
+    if (!row || typeof row.account_id !== `string` || !expectedIds.has(row.account_id) || methods.has(row.account_id) || !Array.isArray(row.providers)) return null;
+    const providers = row.providers as unknown[];
+    if (providers.some((provider) => typeof provider !== `string` || !/^[a-z][a-z0-9:_-]{0,63}$/.test(provider)) || new Set(providers).size !== providers.length) return null;
+    methods.set(row.account_id, providers as string[]);
+  }
+  return methods;
 };
 
 export const ownerRecordsService = {
@@ -148,6 +166,18 @@ export const ownerRecordsService = {
           if (profiles.error || !profiles.data) throw new Error(`Profile read failed.`);
           const profileMap = new Map<string, unknown>(profiles.data.map((profile) => [profile.account_id, profile] as [string, unknown]));
           const records = rows.map((row) => readDirectoryRecord(row, profileMap.get(row.id)));
+          let signInMethods: Map<string, string[]> | null = records.length ? null : new Map();
+          if (records.length) {
+            try {
+              const methods = await client.rpc(`get_account_sign_in_methods`, {
+                p_account_ids: records.map((record) => record.id),
+                p_expected_auth_uid: account.authUid,
+              }).abortSignal(controller.signal);
+              assertCurrent();
+              if (!methods.error) signInMethods = readSignInMethods(methods.data, records.map((record) => record.id));
+            } catch { assertCurrent(); }
+          }
+          records.forEach((record) => { record.authProviders = signInMethods?.get(record.id) ?? null; });
           await verifyOwner(controller.signal);
           assertCurrent();
           const latest: OwnerRecordsSnapshot = {
@@ -155,8 +185,9 @@ export const ownerRecordsService = {
             realtime: queriedRealtime,
             state: `ready`,
             source: `supabase`,
+            authProvidersState: signInMethods ? `ready` : `unavailable`,
             nextCursor: result.data.length > ownerDirectoryPageSize ? records[records.length - 1]?.number ?? null : null,
-            message: `${records.length} account(s) loaded from Supabase. This page contains at most ${ownerDirectoryPageSize} accounts; it is not a global total.`,
+            message: `${records.length} account(s) loaded from Supabase. This page contains at most ${ownerDirectoryPageSize} accounts; it is not a global total.${signInMethods ? `` : ` Sign-in methods are unavailable.`}`,
           };
           receive(latest);
         } catch {

@@ -3,6 +3,7 @@ import AppLink from '../AppLink';
 import { useState } from 'react';
 import AccountLayout from '../AccountLayout';
 import { useOwnerRecords } from './useOwnerRecords';
+import AccountSignInMethods from '../AccountSignInMethods';
 import type { OwnerRecordView, OwnerAccountRecord } from '../../shared/admin/service';
 import './styles.scss';
 
@@ -34,7 +35,7 @@ const OwnerRecords = ({ view }: { view: OwnerRecordView }) => {
       <div className='owner-records-heading'><h2>{view === `users` ? `Users` : `Feedback workspace`}</h2><div className='owner-records-actions'><span className={`rowStatus ${ready ? `is-active` : ``}`}><span className='statusDotWrap'><i className='statusDot' /></span><span className='statusText'>{status}</span></span>{page.permitted && view === `users` ? <button id='owner-users-reload' className='owner-records-button' type='button' disabled={loading} onClick={page.retry}><Icon name='refresh' size={15} />{loading ? `Loading` : `Reload Users`}</button> : null}</div></div>
       <div className='owner-records-table' role='region' aria-label={`${content.title}: ${ready ? `loaded page` : `unavailable`}`} tabIndex={0} aria-busy={loading}>
         <table><thead><tr>{content.columns.map((column) => <th key={column} scope='col'>{column}</th>)}</tr></thead><tbody>{ready && snapshot?.records?.length ? snapshot.records.map((record) => <tr key={record.id} id={`owner-user-${record.id}`}>
-          <td>{record.number}</td><td><UserIdentity record={record} /></td><td>{record.email}</td><td>{record.role}</td>
+          <td>{record.number}</td><td><UserIdentity record={record} /></td><td><span id={`owner-user-email-${record.id}`} className='owner-user-email'><AccountSignInMethods id={`owner-user-signin-methods-${record.id}`} providers={record.authProviders} /><span id={`owner-user-email-address-${record.id}`} className='owner-user-email-address'>{record.email}</span></span></td><td>{record.role}</td>
           <td><span className={`rowStatus ${record.active ? `is-active` : `is-inactive`}`}><span className='statusDotWrap'><i className='statusDot' /></span><span className='statusText'>{record.active ? `Active` : `Inactive`}</span></span></td>
           <td className='actionsCell'>Read only</td>
         </tr>) : <tr><td colSpan={content.columns.length}><span role={!loading && (snapshot?.state === `error` || snapshot?.state === `denied`) ? `alert` : undefined}>{ready ? `No users on this page.` : loading ? `Loading users…` : snapshot?.message ?? `Users unavailable`}</span></td></tr>}</tbody></table>

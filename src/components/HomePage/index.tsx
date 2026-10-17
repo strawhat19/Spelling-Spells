@@ -126,7 +126,7 @@ const HomePage = () => {
         <View style={[styles.savedNote, { backgroundColor: palette.panel, borderColor: palette.border }]}>
           <Icon name="bookmark" size={26} color={palette.gold} />
           <Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>Keep a little magic.</Text>
-          <Text style={[styles.sectionCopy, { color: palette.muted }]}>Build your personal grimoire by saving spells. Your collection stays on this device, ready for the next chapter.</Text>
+          <Text style={[styles.sectionCopy, { color: palette.muted }]}>Sign in to save favorites in your private account collection. Browse and read freely, with no account needed.</Text>
           <Pressable nativeID="home-open-saved" accessibilityRole="link" onPress={() => router.push(`/saved`)} style={styles.secondary}>
             <Text style={[styles.secondaryText, { color: palette.gold }]}>{savedIds.length ? `Open ${savedIds.length} saved spell${savedIds.length === 1 ? `` : `s`}` : `Open your grimoire`}</Text>
             <Icon name="arrow-right" size={17} color={palette.gold} />

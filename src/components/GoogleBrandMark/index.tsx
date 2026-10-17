@@ -1,13 +1,13 @@
 import { googleBrandPaths } from './paths';
 import Svg, { Path } from 'react-native-svg';
 
-const GoogleBrandMark = () => (
+const GoogleBrandMark = ({ size = 20, id = `auth-google-mark` }: { id?: string; size?: number }) => (
   <Svg
-    width={20}
-    height={20}
+    width={size}
+    height={size}
+    nativeID={id}
     accessible={false}
     viewBox='0 0 48 48'
-    nativeID='auth-google-mark'
     accessibilityElementsHidden
     importantForAccessibility='no-hide-descendants'
   >

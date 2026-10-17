@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { useRouter } from 'expo-router';
 import { useAuth } from '../authContext';
 import type { StorageMode } from '../../types/types';
 import type { Spell, World } from '../models/Spell';
@@ -16,6 +17,7 @@ export type SpellsContextValue = {
   savedIds: string[];
   historyIds: string[];
   savedReady: boolean;
+  saveRequiresSignIn: boolean;
   saveVersion: number | null;
   saveBusy: boolean;
   saveScopeKey: string;
@@ -37,6 +39,7 @@ export const SpellsContext = createContext<SpellsContextValue | null>(null);
 
 export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const auth = useAuth();
+  const router = useRouter();
   const hydrated = useRef(false);
   const scopeRef = useRef(`device`);
   const lifecycle = useRef({ key: ``, revision: 0 });
@@ -57,13 +60,13 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const lifecycleKey = `${saveScopeKey}:${auth.account?.id ?? auth.status}:${auth.account?.active ?? false}`;
   if (lifecycle.current.key !== lifecycleKey) lifecycle.current = { key: lifecycleKey, revision: lifecycle.current.revision + 1 };
   scopeRef.current = saveScopeKey;
-  const snapshot = canAccessAccount(auth.account) && cloud?.scope === saveScopeKey ? cloud.snapshot : null;
+  const accountReady = !auth.loading && auth.status === `signed-in` && canAccessAccount(auth.account);
+  const saveRequiresSignIn = !auth.loading && auth.status !== `loading` && !accountReady;
+  const snapshot = accountReady && cloud?.scope === saveScopeKey ? cloud.snapshot : null;
   const saveBusy = operation?.scope === saveScopeKey && operation.busy;
   const saveStatus = saveScope === `device` ? `device` : snapshot?.status ?? (auth.status === `error` ? `error` : `loading`);
-  const savedReady = ready && !auth.loading && !saveBusy && (saveScope === `device`
-    ? hydrated.current
-    : canAccessAccount(auth.account) && (snapshot?.status === `live` || snapshot?.status === `server`) && snapshot.source === `server` && !snapshot.truncated);
-  const savedIds = saveScope === `account` ? snapshot?.savedIds ?? [] : deviceIds;
+  const savedReady = ready && accountReady && !saveBusy && (snapshot?.status === `live` || snapshot?.status === `server`) && snapshot.source === `server` && !snapshot.truncated;
+  const savedIds = useMemo(() => snapshot?.savedIds ?? [], [snapshot]);
   const saveVersion = snapshot?.version ?? null;
   const saveMessage = saveScope === `account` ? snapshot?.message ?? auth.message : null;
   const error = operation?.scope === saveScopeKey && operation.error
@@ -141,17 +144,17 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
 
   const clearSaved = useCallback(async (): Promise<boolean> => {
     if (!savedReady) return false;
-    if (saveScope === `device`) return mutatePreferences(() => preferencesAPI.clearSaved());
     const account = auth.account;
     return account && snapshot ? mutateCloud(() => savedSpellsService.clearSaved(account, snapshot)) : false;
-  }, [savedReady, saveScope, auth.account, snapshot, mutateCloud, mutatePreferences]);
+  }, [savedReady, auth.account, snapshot, mutateCloud]);
 
   const toggleSaved = useCallback(async (id: string): Promise<void> => {
+    if (auth.loading || auth.status === `loading`) return;
+    if (auth.status !== `signed-in` || !canAccessAccount(auth.account)) { router.push(`/signin`); return; }
     if (!savedReady) return;
-    if (saveScope === `device`) { await mutatePreferences(() => preferencesAPI.toggleSaved(id)); return; }
     const account = auth.account;
-    if (account) await mutateCloud(() => savedSpellsService.setSaved(account, id, !savedIds.includes(id)));
-  }, [savedReady, saveScope, auth.account, savedIds, mutateCloud, mutatePreferences]);
+    await mutateCloud(() => savedSpellsService.setSaved(account, id, !savedIds.includes(id)));
+  }, [auth.loading, auth.status, auth.account, savedReady, savedIds, mutateCloud, router]);
 
   const importDeviceSaved = useCallback(async (): Promise<boolean> => {
     const account = auth.account;
@@ -167,10 +170,10 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const value = useMemo<SpellsContextValue>(() => ({
     ready, error, spells, worlds, isSaved, savedIds, saveBusy, saveScope, savedReady,
     clearSaved, historyIds, saveStatus, saveVersion, storageMode, saveMessage, saveScopeKey,
-    toggleSaved, recordViewed, dismissError, refreshSaved, importDeviceSaved,
+    toggleSaved, recordViewed, dismissError, refreshSaved, importDeviceSaved, saveRequiresSignIn,
     deviceSavedCount: deviceIds.length,
   }), [ready, error, spells, worlds, isSaved, savedIds, saveBusy, saveScope, savedReady,
     clearSaved, historyIds, saveStatus, saveVersion, storageMode, saveMessage, saveScopeKey,
-    toggleSaved, recordViewed, dismissError, refreshSaved, importDeviceSaved, deviceIds.length]);
+    toggleSaved, recordViewed, dismissError, refreshSaved, importDeviceSaved, saveRequiresSignIn, deviceIds.length]);
   return <SpellsContext.Provider value={value}>{children}</SpellsContext.Provider>;
 };

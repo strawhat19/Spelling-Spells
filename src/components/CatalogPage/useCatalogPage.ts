@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSpells } from '../../shared/spellsContext/useSpells';
 import { getSavedCollectionPresentation } from './savedCollectionPresentation';
@@ -9,13 +9,15 @@ const firstValue = (value?: string | string[]) => Array.isArray(value) ? value[0
 const searchable = (value: string) => value.normalize(`NFKD`).replace(/[\u0300-\u036f]/g, ``).toLowerCase();
 
 export const useCatalogPage = (savedOnly = false) => {
+  const router = useRouter();
   const collection = useSpells();
   const parameters = useLocalSearchParams<{ q?: string | string[]; world?: string | string[]; skill?: string | string[]; category?: string | string[] }>();
   const [query, setQuery] = useState(firstValue(parameters.q));
   const [skill, setSkill] = useState(firstValue(parameters.skill));
   const [world, setWorld] = useState(firstValue(parameters.world));
   const [category, setCategory] = useState(firstValue(parameters.category));
-  const [savedFilter, setSavedFilter] = useState(savedOnly);
+  const [savedFilterRequested, setSavedFilter] = useState(savedOnly);
+  const savedFilter = savedOnly || (savedFilterRequested && !collection.saveRequiresSignIn);
   const [sort, setSort] = useState<CatalogSort>(savedOnly ? `recent` : `catalog`);
   const scopeRef = useRef({ key: collection.saveScopeKey, revision: 0 });
   const mountedRef = useRef(true);
@@ -111,6 +113,11 @@ export const useCatalogPage = (savedOnly = false) => {
     setSavedFilter(savedOnly);
   };
 
+  const changeSavedFilter = (value: boolean) => {
+    if (value && collection.saveRequiresSignIn) { router.push(`/signin`); return; }
+    setSavedFilter(value);
+  };
+
   const requestClear = () => {
     if (!collection.savedReady || actionBusy) return;
     clearRequest.current = { scope: scopeKey, version: collection.saveVersion, run: collection.clearSaved };
@@ -171,7 +178,7 @@ export const useCatalogPage = (savedOnly = false) => {
     shelfWorlds,
     setCategory,
     clearFilters,
-    setSavedFilter,
+    setSavedFilter: changeSavedFilter,
     removeAll: () => runShelfAction(`clear`),
     importBookmarks: () => runShelfAction(`import`),
     error: collection.error ?? (actionError?.scope === scopeKey ? actionError.message : null),

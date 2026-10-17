@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   card: { gap: 16, padding: 23, borderWidth: 1, borderRadius: 16, marginBottom: 20 },
   copy: { fontSize: 13, lineHeight: 23 },
+  email: { gap: 8, flexDirection: `row`, alignItems: `center` },
+  emailAddress: { minWidth: 0, flexShrink: 1 },
   title: { fontSize: 24, fontFamily: `serif`, lineHeight: 30 },
   record: { gap: 7, paddingVertical: 18, borderTopWidth: 1 },
   recordTitle: { minWidth: 0, flexShrink: 1, fontSize: 16, fontWeight: `600` },

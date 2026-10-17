@@ -1,9 +1,8 @@
 import { Platform } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../shared/authContext';
-import { safeReturnPath } from '../../shared/routes';
-import { rememberAuthDestination } from '../../shared/authentication/returnPath';
-import { useLocalSearchParams, useRouter, type Href } from 'expo-router';
+import { useRouter, type Href } from 'expo-router';
+import { getSignInDestination } from '../../shared/authentication/returnPath';
 import { canAccessAccount, type AuthResult } from '../../shared/authentication/types';
 
 export type AuthPageProps = { mode?: `signin` | `signup` };
@@ -38,8 +37,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
   const auth = useAuth();
   const router = useRouter();
   const isSignUp = mode === `signup`;
-  const { returnTo: requestedReturn } = useLocalSearchParams<{ returnTo?: string | string[] }>();
-  const returnTo = safeReturnPath(requestedReturn);
+  const returnTo = getSignInDestination(auth.account);
   const scope = `${mode}:${auth.identity?.authUid ?? `guest`}`;
   const scopeRef = useRef(scope);
   const mounted = useRef(true);
@@ -50,7 +48,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
   const sessionRevision = useRef({ key: scope, value: 0 });
   const [signingOut, setSigningOut] = useState(false);
   const transition = useRef<{ attempt: number; scope: string; mode: string; identityUid: string | null } | null>(null);
-  const redirect = useRef<{ target: string; mode: string; accountId: string; identityUid: string } | null>(null);
+  const redirect = useRef<{ mode: string; accountId: string; identityUid: string } | null>(null);
   const identityRef = useRef(auth.identity?.authUid ?? null);
   const [state, setState] = useState<FormState>(() => emptyForm(scope));
   scopeRef.current = scope;
@@ -93,8 +91,8 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     if (!destination || destination.mode !== mode || loading || !signedIn || form.busy ||
       destination.accountId !== auth.account?.id || destination.identityUid !== auth.identity?.authUid) return;
     redirect.current = null;
-    router.replace(destination.target as Href);
-  }, [mode, loading, signedIn, form.busy, auth.account?.id, auth.identity?.authUid, router]);
+    router.replace(returnTo as Href);
+  }, [mode, loading, signedIn, form.busy, auth.account?.id, auth.identity?.authUid, returnTo, router]);
 
   const patch = (update: Partial<FormState>) => setState((previous) => ({
     ...(previous.scope === scope ? previous : emptyForm(scope)),
@@ -130,7 +128,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
       if (!current()) return;
       if (result.ok) {
         if (shouldRedirect && result.account && canAccessAccount(result.account)) {
-          redirect.current = { mode, target: returnTo, accountId: result.account.id, identityUid: result.account.authUid };
+          redirect.current = { mode, accountId: result.account.id, identityUid: result.account.authUid };
         }
         update({
           feedback: { tone: `notice`, message: result.message ?? success },
@@ -215,7 +213,6 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
 
   const signInWithGoogle = async () => {
     if (!editable || Platform.OS !== `web`) return;
-    rememberAuthDestination(returnTo);
     await run(`google`, auth.signInWithGoogle, `Finishing your private account connection…`, true);
   };
 
@@ -230,6 +227,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     isSignUp,
     returnTo,
     editable,
+    continueLabel: returnTo === `/dashboard` ? `Open Dashboard` : `Return Home`,
     confirmationPending,
     canResendConfirmation: ready && validEmail(form.confirmationEmail ?? form.email.trim()),
     changeConfirmationEmail: () => { if (ready) patch({ confirmationEmail: null, feedback: null, password: `` }); },
@@ -243,7 +241,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     retryConnection: () => run(`retry`, auth.retryHydration, `Account connection refreshed.`),
     resendVerification: () => run(`verify`, auth.sendVerification, `Verification email requested. Check your inbox and spam folder.`),
     refreshVerification: () => run(`refresh`, auth.refreshIdentity, `Verification status refreshed. Your current status is shown above.`),
-    switchHref: `${isSignUp ? `/signin` : `/signup`}?returnTo=${encodeURIComponent(returnTo)}`,
+    switchHref: isSignUp ? `/signin` : `/signup`,
     title: isSignUp ? `Begin your next chapter.` : `Welcome back, word wanderer.`,
     formTitle: confirmationPending ? `Check your email` : isSignUp ? `Create your account` : `Sign in to your grimoire`,
     confirmationInstructions: Platform.OS === `web`

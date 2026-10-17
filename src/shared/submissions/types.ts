@@ -9,6 +9,7 @@ export type SubmissionDraft = {
   pronunciation: string;
   definition: string;
   sourceUrl: string;
+  mediaUrl: string;
   notes: string;
 };
 

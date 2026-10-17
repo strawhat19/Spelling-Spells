@@ -51,7 +51,7 @@ const AuthPage = (props: AuthPageProps) => {
             <Icon name='shield' size={20} />
             <div>
               <strong>{page.loading ? `Connecting your private account` : page.signedIn ? page.busy ? `Finishing your account request` : `Your account is ready` : page.unavailable ? `Account connection unavailable` : `Account connection needs attention`}</strong>
-              <p>{page.loading ? `Please wait while your identity and private account are loaded.` : page.signedIn ? page.busy ? `Your identity is connected. Please wait for the requested account steps to finish.` : `You are signed in. Open your account to manage your profile.` : page.unavailable ? `Account services are not configured here. The fields are disabled and no credentials are collected.` : page.message ?? `Your private account could not be loaded. Retry the connection or sign out before trying another account.`}</p>
+              <p>{page.loading ? `Please wait while your identity and private account are loaded.` : page.signedIn ? page.busy ? `Your identity is connected. Please wait for the requested account steps to finish.` : `You are signed in and ready to continue.` : page.unavailable ? `Account services are not configured here. The fields are disabled and no credentials are collected.` : page.message ?? `Your private account could not be loaded. Retry the connection or sign out before trying another account.`}</p>
               {page.status === `error` || page.identity ? <div className='auth-recovery-actions'>
                 {page.status === `error` && !page.loading ? <button id='auth-retry-connection' type='button' disabled={Boolean(page.busy) || page.signingOut} onClick={() => void page.retryConnection()}><Icon name='refresh' size={15} />{page.busy === `retry` ? `Retrying…` : `Retry connection`}</button> : null}
                 {page.identity ? <button id='auth-reset-session' type='button' disabled={page.signingOut} onClick={() => void page.resetSession()}><Icon name='logout' size={15} />{page.signingOut ? `Signing out…` : `Sign out`}</button> : null}
@@ -66,7 +66,7 @@ const AuthPage = (props: AuthPageProps) => {
             <button id='auth-refresh-verification' type='button' disabled={Boolean(page.busy) || page.loading} onClick={() => void page.refreshVerification()}><Icon name='refresh' size={15} />{page.busy === `refresh` ? `Refreshing…` : `I verified my email`}</button>
           </div></div>
         </div> : null}
-        {page.signedIn ? page.busy ? <p className='auth-feedback' role='status'>Finishing your account request…</p> : <AppLink id='auth-open-profile' href={page.returnTo} className='primary-button'><Icon name='profile' size={17} /> Continue to your account</AppLink> : page.confirmationPending ? (
+        {page.signedIn ? page.busy ? <p className='auth-feedback' role='status'>Finishing your account request…</p> : <AppLink id='auth-open-profile' href={page.returnTo} className='primary-button'><Icon name={page.returnTo === `/dashboard` ? `dashboard` : `arrow-left`} size={17} />{page.continueLabel}</AppLink> : page.confirmationPending ? (
           <div id='auth-signup-confirmation' className='auth-form'>
             <div className='auth-connection-notice' role='status'>
               <Icon name='mail' size={20} />
