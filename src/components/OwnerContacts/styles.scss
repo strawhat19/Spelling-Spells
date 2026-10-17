@@ -1,0 +1,48 @@
+.owner-contacts { min-width: 0; padding: clamp(18px, 2.4vw, 28px); border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+.owner-contacts-heading, .owner-contacts-filters, .owner-contacts-actions, .owner-contacts-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.owner-contacts-heading, .owner-contacts-pagination { justify-content: space-between; }
+.owner-contacts h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font: 500 26px/1.3 Georgia, serif; color: var(--ink); }
+.owner-contacts h2 svg { color: var(--gold); }
+.owner-contacts-copy, .owner-contacts-pagination { color: var(--soft); font-size: 11px; line-height: 1.8; }
+.owner-contacts-copy { margin: 8px 0; }
+.owner-contacts-summary { display: flex; flex: 1 1 300px; max-width: 420px; gap: 8px; margin: 0; }
+.owner-contacts-summary > div { flex: 1; min-width: 0; padding: 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--muted); }
+.owner-contacts-summary dt { color: var(--soft); font-size: 10px; }
+.owner-contacts-summary dd { margin: 7px 0 0; color: var(--ink); font-size: 23px; line-height: 1.2; }
+.owner-contacts-filters { margin: 22px 0 16px; }
+.owner-contacts-search { display: flex; align-items: center; gap: 8px; flex: 1 1 200px; max-width: 320px; min-height: 40px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--muted); color: var(--soft); }
+.owner-contacts-search input { min-width: 0; width: 100%; height: 38px; border: 0; background: transparent; color: var(--ink); font-size: 12px; }
+.owner-contacts-search input::placeholder { color: var(--soft); }
+.owner-contacts-filter { display: flex; align-items: center; gap: 8px; color: var(--soft); font-size: 11px; }
+.owner-contacts-filter select, .owner-contacts-status-select { min-height: 40px; max-width: 100%; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--muted); color: var(--ink); font-size: 11px; }
+.owner-contacts-filters > button { margin-left: auto; }
+.owner-contacts-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 40px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--muted); color: var(--gold); font-size: 11px; }
+.owner-contacts button, .owner-contacts select { transition: border-color .2s, background-color .2s; }
+.owner-contacts button:hover:not(:disabled), .owner-contacts select:hover:not(:disabled) { border-color: var(--gold); }
+.owner-contacts button:disabled, .owner-contacts select:disabled, .owner-contacts input:disabled { cursor: not-allowed; opacity: .5; }
+.owner-contacts :is(button, input, select):focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.owner-contacts-table { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; margin: 0 0 18px; }
+.owner-contacts-table table { border-collapse: collapse; width: 100%; min-width: 820px; }
+.owner-contacts-table th { text-align: left; padding: 13px 15px; font-size: 10px; font-weight: 600; background: var(--muted); color: var(--ink); }
+.owner-contacts-table td { padding: 19px 15px; border-top: 1px solid var(--line); font-size: 11px; color: var(--soft); line-height: 1.8; overflow-wrap: anywhere; }
+.owner-contacts-table td:nth-child(2) { min-width: 180px; max-width: 260px; }
+.owner-contacts-table td:nth-child(3) { min-width: 150px; max-width: 280px; color: var(--ink); }
+.owner-contacts-table time { white-space: normal; }
+.owner-contacts-identity { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.owner-contacts-identity strong { color: var(--ink); font-weight: 600; }
+.owner-contacts .actionsCell { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.owner-contacts .rowStatus { display: inline-flex; align-items: center; color: var(--soft); white-space: nowrap; }
+.owner-contacts .statusDotWrap { display: grid; place-items: center; width: 16px; }
+.owner-contacts .statusDot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.owner-contacts .statusText { font-size: 11px; }
+.owner-contacts .rowStatus.is-new { color: #38a778; }
+.owner-contacts .rowStatus.is-archived { color: #d36b77; }
+.owner-contact-details-row td { padding: 0; }
+.owner-contact-details { padding: 20px 24px; background: var(--muted); }
+.owner-contact-details h3 { margin: 0 0 12px; color: var(--ink); font-size: 15px; font-weight: 600; }
+.owner-contact-message { margin: 0 0 16px; color: var(--body); font-size: 13px; line-height: 1.9; white-space: pre-wrap; overflow-wrap: anywhere; }
+.owner-contacts-error { color: #e58b93; font-size: 12px; line-height: 1.8; }
+.owner-contacts-notice { display: flex; align-items: center; gap: 8px; color: #38a778; font-size: 12px; line-height: 1.8; }
+@media (max-width: 650px) { .owner-contacts-heading { align-items: stretch; } .owner-contacts-summary { max-width: none; } .owner-contacts-search { max-width: none; } .owner-contacts-filters > button { margin-left: 0; } .owner-contacts-pagination { align-items: flex-start; } }
+@media (pointer: coarse) { .owner-contacts-button, .owner-contacts-filter select, .owner-contacts-status-select, .owner-contacts-search { min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .owner-contacts button, .owner-contacts select { transition: none; } }

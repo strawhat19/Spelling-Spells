@@ -10,6 +10,7 @@ export const glyphs: Record<string, string> = {
   download: `M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5`,
   calendar: `M5 5h14v16H5V5ZM5 10h14M8 2v6M16 2v6`,
   user: `M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8M4 21v-2a8 8 0 0 1 16 0v2`,
+  info: `M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20M12 10v7M12 6v1`,
   edit: `M15 5l4 4M3 21l5-1L21 7a2 2 0 0 0-4-4L4 16l-1 5Z`,
   chart: `M3 3v18h18M7 16v-5M12 16V7M17 16v-9`,
   link: `M10 13a5 5 0 0 0 7 0l4-4a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-4 4a5 5 0 0 0 7 7l2-2`,

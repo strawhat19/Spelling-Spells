@@ -11,7 +11,7 @@ const SubmissionReview = ({ review = false }: { review?: boolean }) => {
   const { palette } = useTheme();
   const { account, loading, permitted, result } = useSubmissionReview(review);
   return (
-    <AccountLayout section={review ? `admin` : `account`} eyebrow={review ? `Editorial desk` : `Your contributions`} title={review ? `Every word deserves a second look.` : `A little knowledge, shared carefully.`}>
+    <AccountLayout section={review ? `admin` : `account`} eyebrow={review ? `Editorial desk` : `Your contributions`} title={review ? `Requests` : `A little knowledge, shared carefully.`}>
       <View nativeID={review ? `review-submissions` : `my-submissions`} style={styles.page}>
         <View style={[styles.card, { backgroundColor: palette.surface, borderColor: palette.border }]}>
           <Icon name={review ? `shield` : `edit`} size={30} color={palette.gold} />

@@ -32,11 +32,11 @@ export const informationPages = {
     icon: `book`,
     kicker: `A conversation beyond the spellbook`,
     title: `Found a word worth sharing?`,
-    intro: `Have a source correction, a pronunciation reference, or a spell you would love to see included? Start with Piratechs, the team behind Spelling Spells.`,
+    intro: `Have a question, a source correction, or a credit that needs attention? Send a private message to the people behind Spelling Spells using the Contact form. No account is needed.`,
     sections: [
       { title: `Help us follow the source`, body: `For an entry correction or suggestion, include the spell's exact name, its story or media source, and a link to the creator's reference or original work when available. Tell us what should change and why.` },
       { title: `Credit and rights`, body: `If a credit or attribution needs attention, identify the entry and the relevant work. A clear reference helps us understand the request.` },
-      { title: `Reach Piratechs`, body: `Visit the Piratechs website for its available contact information. This app does not send a contact message or online form submission. The Contribute page lets you prepare a device-only draft, but it does not reach the team.` },
+      { title: `Leave a message`, body: `The Contact form saves your name, email address, subject and message privately for the site owner to review. Confirmation appears only after the message is saved. A contact message does not publish an entry or send an automated email.` },
     ],
   },
   privacy: {
@@ -49,12 +49,13 @@ export const informationPages = {
       { title: `Where that data lives`, body: `On the web, local preferences and legacy device bookmarks use localStorage; mobile uses device storage. Browsers and operating systems control when that storage may be cleared. Signing in does not automatically upload legacy bookmarks, history or contribution drafts. The explicit import action copies supported device bookmarks into the private account collection without deleting the originals.` },
       { title: `Optional accounts`, body: `When account services are connected, Supabase processes sign-in credentials and stores account identity. The app stores your Supabase user ID, email, display name, optional HTTPS avatar, private account status and role, plus private saved spell references in its database. Passwords are handled by Supabase Auth and are not stored in application profile records. Google sign-in can supply the name, email and profile photo you authorize. No public profile is published.` },
       { title: `Sessions and private data`, body: `Supabase manages sign-in session tokens. Web and native session storage are separate from legacy device bookmarks; signing out clears the stored sign-in session. Account data is held in memory and private views are cleared on sign-out or account changes. Signing out does not delete your cloud account or saved collection.` },
+      { title: `Contact messages`, body: `If you submit the Contact form, your name, email address, subject and message are saved in a private Supabase table for the site owner to review. A signed-in submission can also reference your account identity. Guests can submit without an account. Contact drafts stay in memory while the page is open and are not saved to browser or device storage. The form confirms a save only after it succeeds; no automated email is sent. Never include passwords, verification codes or private credentials.` },
       { title: `Notifications`, body: `Published announcements are public. When signed in, notification IDs and read times are saved privately with your Supabase account so read status can sync across devices. Guests keep up to 2,000 recent read IDs on the current browser or device. Guest read status is separate from account read status and is not uploaded on sign-in. Notification links open their stated destinations. Publishing an announcement does not send email or push notifications.` },
       { title: `Optional browser speech`, body: `If you choose the computer voice reading aid, the browser or operating system's speech engine processes the selected spell text. Voice availability and processing depend on that provider; this app does not record your voice or request microphone access.` },
       { title: `Website analytics`, body: `The website uses Vercel Web Analytics to understand page views, referring sites, approximate location, and browser/device categories. It does not use third-party tracking cookies. Our integration removes query strings and URL fragments and excludes authentication callback and password-reset pages. It sends no custom account identifiers, profile fields, saved spell lists, or contribution text. Native app screens do not use this web tracker.` },
       { title: `Links and hosting`, body: `Opening a source or Piratechs link sends you to an external website with its own privacy practices. The service hosting this website may process ordinary connection information, such as an IP address and request logs, to serve the page.` },
       { title: `Your choices`, body: `The Saved page requires sign-in and its bookmark actions affect your private account collection. You can remove individual bookmarks or confirm clearing that collection; the public archive, legacy device bookmarks and local viewing history are not deleted. Clearing browser/app storage removes local preferences and legacy bookmarks, not cloud data. Contribution drafts can be cleared on the Contribute page. Your device nickname and reading note can be cleared separately on Profile. For account-data deletion requests, use the Contact page; this release does not provide a one-click account deletion action.` },
-      { title: `Questions`, body: `For privacy questions about Spelling Spells, visit the Contact page and follow the Piratechs contact link.` },
+      { title: `Questions`, body: `For privacy questions or requests concerning a saved contact message, use the Contact form. Describe the data involved without including passwords or private credentials.` },
     ],
   },
   help: {
@@ -68,7 +69,7 @@ export const informationPages = {
       { title: `Read pronunciation with context`, body: `Pronunciation guides are editorial reading aids unless an entry identifies a creator’s source. If your browser offers speech, the computer voice may pronounce fantasy words differently. No microphone recording is needed.` },
       { title: `Your private account`, body: `When account services are configured, sign in with Google on the website or email/password. Confirm your email before signing in. Your account spellbook is separate from legacy device bookmarks; the Saved page shows the current sync state and an optional explicit import action. Disabled controls indicate missing configuration.` },
       { title: `Prepare a contribution`, body: `The Contribute page lets you prepare and explicitly save a device-only draft. It does not send a submission to an editor. Read Editorial Guidelines for source, attribution and safety expectations before preparing a suggestion.` },
-      { title: `Get support`, body: `Use Contact for the Piratechs contact route. Include the page address, device/browser and a description of what happened. Never include passwords, verification codes, private keys or payment-card information.` },
+      { title: `Get support`, body: `Use the Contact form to send a private message for review. Include the page address, device/browser and a description of what happened. The form confirms when your message is saved. Never include passwords, verification codes, private keys or payment-card information.` },
     ],
   },
   guidelines: {
@@ -95,7 +96,7 @@ export const informationPages = {
       { title: `Device profile`, body: `Profile offers a device-only nickname and reading note without sign-in. Save explicitly to retain them after reload, or use Clear device profile to remove them. They do not create an account or grant any role. Avoid sensitive information on shared devices.` },
       { title: `Contribution drafts`, body: `Use the clear action on Contribute to remove its saved draft. A device draft has not been sent to the team. Browser/app storage controls can remove local preferences, but clearing local storage is not a request to delete future cloud data.` },
       { title: `Future account deletion`, body: `This release does not provide account deletion. A deletion request must cover the Supabase identity and associated private app records; use Contact to request help. Signing out alone does not delete an account.` },
-      { title: `Ask a privacy question`, body: `Use the Contact page and the Piratechs contact route. State that the question concerns Spelling Spells and describe the data involved. Do not send a password, verification code or private credential. No deletion request is submitted by viewing this page.` },
+      { title: `Ask a privacy question`, body: `Use the Contact form and describe the data involved. Your submitted message is stored privately for the site owner to review. Do not send a password, verification code or private credential. No deletion request is submitted by viewing this page.` },
     ],
   },
   'not-found': {

@@ -15,11 +15,13 @@ import { useRef, useMemo, useState, useEffect, useCallback, type PropsWithChildr
 import { Text, View, Alert, Linking, Animated, Pressable, ScrollView, AccessibilityInfo, useWindowDimensions } from 'react-native';
 
 const navigation = [
-  { href: `/spells`, label: `Spell Library`, icon: `book` },
+  { href: `/about`, label: `About`, icon: `info` },
+  { href: `/spells`, label: `Spells`, icon: `book` },
   { href: `/worlds`, label: `Worlds`, icon: `globe` },
   { href: `/pronunciation`, label: `Pronunciation`, icon: `audio` },
   { href: `/saved`, label: `Saved`, icon: `bookmark` },
   { href: `/submit`, label: `Contribute`, icon: `edit` },
+  { href: `/contact`, label: `Contact`, icon: `mail` },
 ] as const;
 
 const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: boolean }>) => {

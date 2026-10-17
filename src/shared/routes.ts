@@ -1,8 +1,10 @@
 export const navigation = [
+  { href: `/about`, icon: `info`, label: `About` },
   { href: `/spells`, icon: `book`, label: `Spells` },
   { href: `/worlds`, icon: `globe`, label: `Worlds` },
   { href: `/pronunciation`, icon: `audio`, label: `Pronunciation` },
   { href: `/submit`, icon: `edit`, label: `Contribute` },
+  { href: `/contact`, icon: `mail`, label: `Contact` },
 ];
 
 export const footerNavigation = [
@@ -46,7 +48,8 @@ export const accountNavigation: AccountRoute[] = [
   { href: `/health`, icon: `shield`, label: `Health`, access: `owner`, section: `admin` },
   { href: `/analytics`, icon: `chart`, label: `Analytics`, access: `owner`, section: `admin` },
   { href: `/feedback`, icon: `edit`, label: `Feedback`, access: `owner`, section: `admin` },
-  { href: `/review`, icon: `shield`, label: `Review Submissions`, access: `owner`, section: `admin` },
+  { href: `/contacts`, icon: `mail`, label: `Contacts`, parent: `/feedback`, access: `owner`, section: `admin` },
+  { href: `/review`, icon: `shield`, label: `Requests`, parent: `/feedback`, access: `owner`, section: `admin` },
 ];
 
 export const getAccountRoute = (pathname: string) => accountNavigation.find((route) => route.href === pathname);

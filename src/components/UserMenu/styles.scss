@@ -31,8 +31,8 @@
   .header-signin-spark { top: 6px; right: auto; left: 29px; }
   .header-signin-label { display: inline; }
 }
-@container site-header (min-width: 1180px) { @include header-signin-pill; }
-@media (max-width: 1050px) { @container site-header (min-width: 640px) { @include header-signin-pill; } }
+@container site-header (min-width: 1320px) { @include header-signin-pill; }
+@media (max-width: 1280px) { @container site-header (min-width: 640px) { @include header-signin-pill; } }
 @media (prefers-reduced-motion: reduce) { .header-signin-link, .user-menu-trigger { transition: none; } .header-signin-link:is(:hover, :focus-visible) { transform: none; } }
 @media (pointer: coarse) { .user-menu-popover a, .user-menu-popover > button { min-height: 44px; } }
 @keyframes account-menu-enter { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }

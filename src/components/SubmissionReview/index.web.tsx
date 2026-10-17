@@ -10,7 +10,7 @@ const SubmissionReview = ({ review = false }: { review?: boolean }) => {
     <AccountLayout
       section={review ? `admin` : `account`}
       eyebrow={review ? `Editorial desk` : `Your contributions`}
-      title={review ? `Every word deserves a second look.` : `A little knowledge, shared carefully.`}
+      title={review ? `Requests` : `A little knowledge, shared carefully.`}
       description={review ? `A private workspace for reviewing sourced suggestions before publication.` : `Track your suggestions and editorial feedback when account services are connected.`}
     >
       <div id={review ? `review-submissions` : `my-submissions`} className='submission-review'>

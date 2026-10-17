@@ -1,0 +1,7 @@
+.feedback-destinations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.feedback-destination { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; padding: clamp(20px, 2.5vw, 28px); border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+.feedback-destination > svg { color: var(--gold); }
+.feedback-destination h2 { margin: 17px 0 10px; color: var(--ink); font: 500 26px/1.3 Georgia, serif; }
+.feedback-destination p { flex: 1; margin: 0 0 24px; color: var(--body); font-size: 13px; line-height: 1.9; }
+.feedback-destination a { gap: 9px; min-height: 44px; padding: 11px 15px; border-radius: 8px; }
+@media (max-width: 850px) { .feedback-destinations { grid-template-columns: minmax(0, 1fr); } }

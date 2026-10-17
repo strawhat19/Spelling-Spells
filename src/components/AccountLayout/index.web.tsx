@@ -9,9 +9,9 @@ import './styles.scss';
 const AccountLayout = ({ title, children, description, section = `account`, eyebrow = `YOUR CORNER OF THE ARCHIVE` }: AccountLayoutProps) => {
   const page = useAccountLayout();
   const dashboard = page.adminLinks.find((item) => item.href === `/dashboard`);
-  const childrenLinks = page.adminLinks.filter((item) => item.href !== `/dashboard` && item.href !== `/review` && item.href !== `/feedback`);
+  const childrenLinks = page.adminLinks.filter((item) => item.href !== `/dashboard` && item.href !== `/feedback` && item.parent !== `/feedback`);
   const feedback = page.adminLinks.find((item) => item.href === `/feedback`);
-  const review = page.adminLinks.find((item) => item.href === `/review`);
+  const feedbackChildren = page.adminLinks.filter((item) => item.parent === `/feedback`);
   const current = (href: string) => page.pathname === href;
   return (
     <div id='account-layout' className={`account-layout ${page.collapsed ? `is-collapsed` : ``}`} data-section={section} data-view={page.activeRoute?.parent ?? page.pathname}>
@@ -32,12 +32,12 @@ const AccountLayout = ({ title, children, description, section = `account`, eyeb
             {([false, true] as const).map((mobile) => <div key={String(mobile)} id={`account-${mobile ? `mobile` : `desktop`}-dashboard-children`} className={`account-sidebar-children ${mobile ? `account-mobile-control` : `account-desktop-control`} ${(mobile ? page.mobileDashboard : page.desktopDashboard) || (!mobile && page.collapsed) ? `is-open` : ``}`} aria-hidden={!((mobile ? page.mobileDashboard : page.desktopDashboard) || (!mobile && page.collapsed))}><div>{childrenLinks.map((item) => <AppLink key={item.href} href={item.href} id={`account-${mobile ? `mobile` : `desktop`}-child-${item.icon}`} title={item.label} aria-label={item.label} tabIndex={(mobile ? page.mobileDashboard : page.desktopDashboard) || (!mobile && page.collapsed) ? 0 : -1} aria-current={current(item.href) ? `page` : undefined} className={`account-sidebar-link ${current(item.href) ? `is-active` : ``}`}><Icon name={item.icon} size={15} /><span>{item.label}</span></AppLink>)}</div></div>)}
             {feedback ? <>
               <div className='account-sidebar-parent'>
-                <AppLink id='account-nav-feedback' href={feedback.href} title={feedback.label} aria-label={feedback.label} aria-current={current(feedback.href) ? `page` : undefined} className={`account-sidebar-link ${current(feedback.href) || current(`/review`) ? `is-active` : ``}`}><Icon name={feedback.icon} size={16} /><span>{feedback.label}</span></AppLink>
+                <AppLink id='account-nav-feedback' href={feedback.href} title={feedback.label} aria-label={feedback.label} aria-current={current(feedback.href) ? `page` : undefined} className={`account-sidebar-link ${current(feedback.href) || feedbackChildren.some((item) => current(item.href)) ? `is-active` : ``}`}><Icon name={feedback.icon} size={16} /><span>{feedback.label}</span></AppLink>
                 {([false, true] as const).map((mobile) => <button key={String(mobile)} id={`account-toggle-${mobile ? `mobile` : `desktop`}-feedback`} type='button' className={`account-submenu-toggle ${mobile ? `account-mobile-control` : `account-desktop-control`}`} aria-controls={`account-${mobile ? `mobile` : `desktop`}-feedback-children`} aria-label='Toggle feedback pages' aria-expanded={mobile ? page.mobileFeedback : page.desktopFeedback} onClick={() => page.toggleFeedback(mobile)}><Icon name={(mobile ? page.mobileFeedback : page.desktopFeedback) ? `chevron-up` : `chevron-down`} size={13} /></button>)}
               </div>
-              {review ? ([false, true] as const).map((mobile) => {
+              {feedbackChildren.length ? ([false, true] as const).map((mobile) => {
                 const expanded = (mobile ? page.mobileFeedback : page.desktopFeedback) || (!mobile && page.collapsed);
-                return <div key={String(mobile)} id={`account-${mobile ? `mobile` : `desktop`}-feedback-children`} className={`account-sidebar-children ${mobile ? `account-mobile-control` : `account-desktop-control`} ${expanded ? `is-open` : ``}`} aria-hidden={!expanded}><div><AppLink id={`account-${mobile ? `mobile` : `desktop`}-review`} href={review.href} title={review.label} aria-label={review.label} tabIndex={expanded ? 0 : -1} aria-current={current(review.href) ? `page` : undefined} className={`account-sidebar-link ${current(review.href) ? `is-active` : ``}`}><Icon name={review.icon} size={15} /><span>{review.label}</span></AppLink></div></div>;
+                return <div key={String(mobile)} id={`account-${mobile ? `mobile` : `desktop`}-feedback-children`} className={`account-sidebar-children ${mobile ? `account-mobile-control` : `account-desktop-control`} ${expanded ? `is-open` : ``}`} aria-hidden={!expanded}><div>{feedbackChildren.map((item) => <AppLink key={item.href} id={`account-${mobile ? `mobile` : `desktop`}-${item.href.slice(1)}`} href={item.href} title={item.label} aria-label={item.label} tabIndex={expanded ? 0 : -1} aria-current={current(item.href) ? `page` : undefined} className={`account-sidebar-link ${current(item.href) ? `is-active` : ``}`}><Icon name={item.icon} size={15} /><span>{item.label}</span></AppLink>)}</div></div>;
               }) : null}
             </> : null}
           </nav> : null}

@@ -23,8 +23,8 @@ const NativeAccountNavigation = ({ desktop, railWidth }: { desktop: boolean; rai
   const feedbackOpen = iconOnly || (desktop ? page.desktopFeedback : page.mobileFeedback);
   const dashboard = page.adminLinks.find((item) => item.href === `/dashboard`);
   const feedback = page.adminLinks.find((item) => item.href === `/feedback`);
-  const review = page.adminLinks.find((item) => item.href === `/review`);
-  const dashboardChildren = page.adminLinks.filter((item) => ![`/dashboard`, `/feedback`, `/review`].includes(item.href));
+  const feedbackChildren = page.adminLinks.filter((item) => item.parent === `/feedback`);
+  const dashboardChildren = page.adminLinks.filter((item) => ![`/dashboard`, `/feedback`].includes(item.href) && item.parent !== `/feedback`);
   const animateNavigation = (action: () => void) => {
     if (!shell?.reducedMotion) LayoutAnimation.configureNext(LayoutAnimation.create(300, LayoutAnimation.Types.easeInEaseOut, LayoutAnimation.Properties.opacity));
     action();
@@ -55,10 +55,10 @@ const NativeAccountNavigation = ({ desktop, railWidth }: { desktop: boolean; rai
         {dashboardOpen ? <View nativeID='account-native-dashboard-children' style={[styles.children, iconOnly && styles.iconChildren, { borderLeftColor: palette.border }]}>{dashboardChildren.map((item) => renderLink(item, true))}</View> : null}
         {feedback ? <>
           <View nativeID='account-native-feedback-row' style={styles.parentRow}>
-            <View style={styles.parentLink}>{renderLink(feedback, false, page.pathname === review?.href)}</View>
+            <View style={styles.parentLink}>{renderLink(feedback, false, feedbackChildren.some((item) => item.href === page.pathname))}</View>
             {!iconOnly && <Pressable nativeID='account-toggle-native-feedback' accessibilityRole='button' accessibilityLabel={`${feedbackOpen ? `Collapse` : `Expand`} Feedback Pages`} accessibilityState={{ expanded: feedbackOpen }} onPress={() => animateNavigation(() => page.toggleFeedback(!desktop))} style={styles.submenuToggle}><Icon name={feedbackOpen ? `chevron-up` : `chevron-down`} size={16} color={palette.primary} /></Pressable>}
           </View>
-          {feedbackOpen && review ? <View nativeID='account-native-feedback-children' style={[styles.children, iconOnly && styles.iconChildren, { borderLeftColor: palette.border }]}>{renderLink(review, true)}</View> : null}
+          {feedbackOpen && feedbackChildren.length ? <View nativeID='account-native-feedback-children' style={[styles.children, iconOnly && styles.iconChildren, { borderLeftColor: palette.border }]}>{feedbackChildren.map((item) => renderLink(item, true))}</View> : null}
         </> : null}
       </View> : null}
   </>;

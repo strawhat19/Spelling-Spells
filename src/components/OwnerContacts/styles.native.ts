@@ -1,0 +1,26 @@
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+  stack: { gap: 16, minWidth: 0 },
+  small: { fontSize: 10, lineHeight: 18 },
+  copy: { fontSize: 12, lineHeight: 21 },
+  message: { fontSize: 13, lineHeight: 23 },
+  statusText: { fontSize: 11 },
+  statusDot: { width: 6, height: 6, borderRadius: 3 },
+  statusDotWrap: { width: 16, alignItems: `center` },
+  summaryValue: { fontSize: 23, fontWeight: `600` },
+  buttonText: { fontSize: 11, fontWeight: `600` },
+  title: { fontSize: 25, fontFamily: `Georgia`, lineHeight: 31 },
+  recordTitle: { minWidth: 0, fontSize: 16, fontWeight: `600` },
+  summary: { gap: 8, flexDirection: `row`, flexWrap: `wrap` },
+  rowStatus: { flexDirection: `row`, alignItems: `center` },
+  heading: { gap: 10, flexDirection: `row`, alignItems: `center` },
+  details: { gap: 12, borderTopWidth: 1, paddingTop: 16 },
+  record: { gap: 10, padding: 20, borderWidth: 1, borderRadius: 12 },
+  actions: { gap: 8, flexDirection: `row`, flexWrap: `wrap`, alignItems: `center` },
+  actionsCell: { gap: 8, flexDirection: `row`, flexWrap: `wrap`, alignItems: `center` },
+  summaryCard: { gap: 7, minWidth: 84, flex: 1, padding: 13, borderWidth: 1, borderRadius: 10 },
+  input: { minWidth: 0, minHeight: 44, borderWidth: 1, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 11, fontSize: 16 },
+  button: { gap: 7, minHeight: 44, borderWidth: 1, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 10, flexDirection: `row`, alignItems: `center`, justifyContent: `center` },
+  loadingAnnouncement: { position: `absolute`, width: 1, height: 1, overflow: `hidden` },
+});

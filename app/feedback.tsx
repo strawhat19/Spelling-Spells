@@ -1,3 +1,4 @@
-import OwnerRecords from '../src/components/OwnerRecords';
-const Page = () => <OwnerRecords view='feedback' />;
+import FeedbackPage from '../src/components/FeedbackPage';
+
+const Page = () => <FeedbackPage />;
 export default Page;
