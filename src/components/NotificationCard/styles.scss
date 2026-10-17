@@ -2,6 +2,7 @@
 .notification-card:last-child { border-bottom: 0; }
 .notification-card-icon { display: grid; width: 36px; height: 36px; flex: none; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--muted); color: var(--lavender); }
 .notification-card-copy { min-width: 0; }
+.notification-card-skeleton .notification-card-copy { display: grid; gap: 10px; }
 .notification-card-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; color: var(--ink); font: 500 22px/1.25 Georgia, serif; letter-spacing: -.3px; overflow-wrap: anywhere; transition: color .2s ease; }
 .notification-card-body { display: -webkit-box; overflow: hidden; margin: 0; color: var(--soft); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; white-space: pre-line; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
 .notification-card-unread-dot { width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--lavender); }

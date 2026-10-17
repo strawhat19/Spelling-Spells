@@ -16,7 +16,8 @@ export default StyleSheet.create({
   buttonText: { fontSize: 11, fontWeight: `500` },
   button: { gap: 7, minHeight: 38, borderWidth: 1, borderRadius: 7, paddingHorizontal: 12, paddingVertical: 9, flexDirection: `row`, alignItems: `center` },
   empty: { gap: 13, paddingVertical: 40, alignItems: `center` },
-  loading: { gap: 20, paddingVertical: 20 },
-  skeleton: { height: 70, borderRadius: 8 },
+  skeletonCopy: { flex: 1, minWidth: 0, gap: 10 },
+  skeletonRow: { gap: 13, paddingVertical: 20, borderBottomWidth: 1, flexDirection: `row`, alignItems: `flex-start` },
+  loadingLabel: { position: `absolute`, width: 1, height: 1, overflow: `hidden` },
   footer: { gap: 5, borderTopWidth: 1, paddingTop: 18 },
 });

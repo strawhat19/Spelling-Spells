@@ -3,9 +3,11 @@ import Header from '../Header/index.web';
 import Footer from '../Footer/index.web';
 import PageMetadata from '../PageMetadata';
 import WebAnalytics from '../WebAnalytics';
+import PageTransition from '../PageTransition';
 import { useAppShell } from './useAppShell';
 import type { PropsWithChildren } from 'react';
 import { getAccountRoute } from '../../shared/routes';
+import { RevealScope } from '../TextReveal/RevealScope';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { useSpells } from '../../shared/spellsContext/useSpells';
 import { publicPageMetadata } from '../PageMetadata/publicRoutes';
@@ -21,6 +23,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
 
   return (
     <div id='app-shell' data-theme={theme} className={`app-shell theme-${theme} ${getAccountRoute(pathname) ? `is-account` : ``} ${pathname === `/` ? `is-home` : ``}`}>
+      <PageTransition />
       {metadata ? <PageMetadata title={metadata.title} description={metadata.description} canonicalPath={pathname} /> : null}
       <a id='skip-to-content' className='skip-to-content' href='#main-content'>Skip to Content</a>
       <Header sticky={sticky} scrolled={scrolled} />
@@ -30,7 +33,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           {error ? <button id='dismiss-storage-notice' type='button' onClick={dismissError} aria-label='Dismiss Storage Notice'><Icon name='close' size={18} /></button> : null}
         </div>
       ) : null}
-      <main id='main-content' className='app-main'>{children}</main>
+      <main id='main-content' className='app-main'><RevealScope pathname={pathname}>{children}</RevealScope></main>
       <Footer />
       <WebAnalytics />
       <button

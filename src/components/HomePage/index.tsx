@@ -1,15 +1,18 @@
 import Icon from '../Icon';
+import { useState } from 'react';
 import SpellCard from '../SpellCard';
 import styles from './styles.native';
 import BrandLogo from '../BrandLogo';
-import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { useHomeMotion } from './useHomeMotion';
+import HeroSpellCarousel from '../HeroSpellCarousel';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { useSpells } from '../../shared/spellsContext/useSpells';
-import { Text, View, Image, Pressable, TextInput } from 'react-native';
+import { Text, View, Image, Animated, Pressable, TextInput } from 'react-native';
 
 const HomePage = () => {
   const router = useRouter();
+  const motion = useHomeMotion();
   const [query, setQuery] = useState(``);
   const { theme, palette } = useTheme();
   const { spells, worlds, savedIds, ready } = useSpells();
@@ -19,11 +22,11 @@ const HomePage = () => {
 
   return (
     <View nativeID="home-page" style={styles.page}>
-      <View nativeID="landing-hero" style={styles.hero}>
+      <Animated.View nativeID='landing-hero' style={[styles.hero, motion.heroStyle]}>
         {theme === `night` && <Image nativeID="hero-night-archive-art" accessible={false} resizeMode="cover" source={require('../../../public/visuals/hero-night-background.png')} style={styles.heroBackground} />}
-        <View pointerEvents="none" style={[styles.orbit, { borderColor: palette.lavender }]} />
-        <View pointerEvents="none" style={[styles.orbitInner, { borderColor: palette.gold }]} />
-        <View pointerEvents="none" style={styles.watermark}><BrandLogo size={270} /></View>
+        <Animated.View pointerEvents='none' nativeID='hero-orbit-outer' accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={[styles.orbit, motion.orbitStyle, { borderColor: palette.lavender }]} />
+        <Animated.View pointerEvents='none' nativeID='hero-orbit-inner' accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={[styles.orbitInner, motion.innerOrbitStyle, { borderColor: palette.gold }]} />
+        <Animated.View pointerEvents='none' nativeID='hero-watermark' accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={[styles.watermark, motion.watermarkStyle]}><BrandLogo size={270} /></Animated.View>
         <View nativeID="hero-eyebrow" style={styles.eyebrow}>
           <Icon name="spark" size={17} color={palette.gold} />
           <Text style={[styles.eyebrowText, { color: palette.lavender }]}>A FIELD GUIDE TO FICTIONAL MAGIC</Text>
@@ -71,7 +74,7 @@ const HomePage = () => {
         </View>
         <View nativeID="hero-spell-stage" style={styles.stage}>
           <Text style={[styles.stageCaption, { color: palette.gold }]}>A little light to begin…</Text>
-          {ready && featured ? <SpellCard spell={featured} featured /> : <View nativeID="hero-spell-loading" style={[styles.pageNote, { minHeight: ready ? 80 : 290, backgroundColor: palette.surface, borderColor: palette.border }]}><Text style={[styles.loading, { color: palette.muted }]}>{ready ? `Your spell library is empty` : `Opening the archive…`}</Text>{!ready && [80, 55, 90].map((width, index) => <View key={index} nativeID={`hero-skeleton-${index}`} style={{ height: index === 0 ? 31 : 14, width: `${width}%`, borderRadius: 7, backgroundColor: palette.panel }} />)}</View>}
+          <HeroSpellCarousel spells={spells} ready={ready} />
           <View nativeID="hero-spelling-note" style={[styles.pageNote, { backgroundColor: palette.panel, borderColor: palette.border }]}>
             <View style={styles.noteTitle}>
               <Icon name="spark" size={16} color={palette.gold} />
@@ -80,7 +83,7 @@ const HomePage = () => {
             <Text style={[styles.noteCopy, { color: palette.muted }]}>Each record connects its exact letters, phonetic guide, meaning, and source. Invented words welcome.</Text>
           </View>
         </View>
-      </View>
+      </Animated.View>
 
       <View nativeID="worlds-section" style={styles.section}>
         <Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>Magic has many worlds.</Text>

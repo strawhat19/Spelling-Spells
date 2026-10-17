@@ -35,24 +35,22 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
           ))}
         </nav>
         <div id='header-actions' className='header-actions'>
-          <AppLink id='header-saved-link' href='/saved' className='header-saved-link' aria-label={`Saved Spells, ${savedIds.length} saved`}>
-            <Icon name='bookmark' size={21} /><span>Saved</span>
-            {savedIds.length > 0 ? <span className='saved-count'>{savedIds.length}</span> : null}
+          <AppLink id='header-saved-link' href='/saved' title='Saved Spells' className='header-saved-link' aria-label={`Saved Spells, ${savedIds.length} saved`}>
+            <Icon name='bookmark' size={21} />
+            {savedIds.length > 0 ? <span id='header-saved-count' className='saved-count' aria-hidden='true'>{savedIds.length > 99 ? `99+` : savedIds.length}</span> : null}
           </AppLink>
           <NotificationMenu />
-          <div id='header-account-actions' className='header-account-actions'>
-            <button
-              type='button'
-              id='header-theme-toggle'
-              onClick={toggleTheme}
-              className='header-theme-toggle'
-              aria-label={`Switch to ${theme === `night` ? `Ivory` : `Night`} Mode`}
-              title={`Switch to ${theme === `night` ? `Ivory` : `Night`} Mode`}
-            >
-              <Icon name={theme === `night` ? `sun` : `moon`} size={21} />
-            </button>
-            <UserMenu />
-          </div>
+          <button
+            type='button'
+            id='header-theme-toggle'
+            onClick={toggleTheme}
+            className='header-theme-toggle'
+            aria-label={`Switch to ${theme === `night` ? `Ivory` : `Night`} Mode`}
+            title={`Switch to ${theme === `night` ? `Ivory` : `Night`} Mode`}
+          >
+            <Icon name={theme === `night` ? `sun` : `moon`} size={21} />
+          </button>
+          <UserMenu />
           <button
             type='button'
             id='header-menu-toggle'

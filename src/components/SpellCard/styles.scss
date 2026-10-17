@@ -98,6 +98,12 @@
   &-rating-bars i.is-active { background: var(--spell-accent); }
   &-editorial { margin: 13px 0 0; font-size: 10px; color: var(--spell-soft); line-height: 1.5; }
 }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .spell-card:not(.spell-card--featured) { transition: transform .28s cubic-bezier(.22, 1, .36, 1); }
+  .spell-card:not(.spell-card--featured):is(:hover, :focus-within) { transform: translateY(-3px); }
+  .spell-card-open > .app-icon { transition: transform .22s ease; }
+  .spell-card-open:is(:hover, :focus-visible) > .app-icon { transform: translateX(3px); }
+}
 @media (max-width: 760px) {
   .spell-card--featured { padding: 27px 23px; }
   .spell-card--featured .spell-card-title { font-size: 49px; }

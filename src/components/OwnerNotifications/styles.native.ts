@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   stack: { gap: 16, minWidth: 0 },
+  loadingAnnouncement: { position: `absolute`, width: 1, height: 1, overflow: `hidden` },
   field: { gap: 8 },
   small: { fontSize: 10, lineHeight: 17 },
   label: { fontSize: 11, lineHeight: 18 },

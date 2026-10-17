@@ -1,8 +1,10 @@
 import './styles.scss';
 import Icon from '../Icon';
 import AppLink from '../AppLink';
+import Skeleton from '../Skeleton';
 import { createPortal } from 'react-dom';
 import NotificationCard from '../NotificationCard';
+import NotificationCardSkeleton from '../NotificationCard/Skeleton.web';
 import { useNotificationMenu } from './useNotificationMenu';
 import { useRef, useState, useEffect, useCallback } from 'react';
 
@@ -54,9 +56,11 @@ const NotificationMenu = () => {
       document.removeEventListener(`keydown`, escape);
     };
   }, [page.open, close]);
-  const unreadDescription = page.unreadCount === null ? `Unread Count ${page.state === `loading` || page.readState === `loading` ? `Loading` : `Unavailable`}` : `${page.unreadCount} Unread`;
+  const loading = page.state === `loading`;
+  const countLoading = loading || (page.state === `ready` && page.readState === `loading`);
+  const unreadDescription = page.unreadCount === null ? `Unread Count ${countLoading ? `Loading` : `Unavailable`}` : `${page.unreadCount} Unread`;
   return <div id='header-notifications' className='notification-menu'>
-    <button ref={trigger} id='header-notifications-trigger' type='button' onClick={toggle} className={`notification-menu-trigger${page.open ? ` is-open` : ``}`} aria-label={`Notifications, ${unreadDescription}`} title='Notifications' aria-haspopup='dialog' aria-expanded={page.open} aria-controls={page.open ? `header-notifications-panel` : undefined}><Icon name='bell' size={20} />{page.unreadCount === null || page.unreadCount > 0 ? <span id='header-notifications-badge' className='notification-menu-badge' aria-hidden='true'>{page.unreadLabel}</span> : null}</button>
+    <button ref={trigger} id='header-notifications-trigger' type='button' onClick={toggle} className={`notification-menu-trigger${page.open ? ` is-open` : ``}`} aria-label={`Notifications, ${unreadDescription}`} title='Notifications' aria-haspopup='dialog' aria-expanded={page.open} aria-controls={page.open ? `header-notifications-panel` : undefined}><Icon name='bell' size={20} />{countLoading || page.unreadCount === null || page.unreadCount > 0 ? <span id='header-notifications-badge' className={`notification-menu-badge${countLoading ? ` is-loading` : ``}`} aria-hidden='true'>{countLoading ? <Skeleton id='header-notifications-badge-skeleton' width={10} height={8} /> : page.unreadLabel}</span> : null}</button>
     {page.open && typeof document !== `undefined` ? createPortal(<section
       ref={panel}
       role='dialog'
@@ -68,10 +72,11 @@ const NotificationMenu = () => {
       onBlur={(event) => { if (event.relatedTarget instanceof Node && !event.currentTarget.contains(event.relatedTarget) && !trigger.current?.contains(event.relatedTarget)) close(false); }}
     >
       <header id='header-notifications-heading' className='notification-menu-heading'><div id='header-notifications-heading-copy' className='notification-menu-heading-copy'><span id='header-notifications-eyebrow'>From the Archive</span><h2 id='header-notifications-title'>Notifications</h2></div><button ref={closeButton} id='header-notifications-close' type='button' onClick={() => close()} className='notification-menu-close' aria-label='Close Notifications'><Icon name='close' size={18} /></button></header>
-      <div id='header-notifications-toolbar' className='notification-menu-toolbar'><span id='header-notifications-count' role='status'>{unreadDescription}</span><button id='header-notifications-read-all' type='button' disabled={!page.canMarkRead || !page.unreadCount} onClick={() => void page.markAllRead().catch(() => undefined)}><Icon name='check-all' size={14} />{page.busy ? `Saving` : `Mark All Read`}</button><button id='header-notifications-reload' type='button' onClick={page.reload} aria-label='Reload Notifications' title='Reload Notifications'><Icon name='refresh' size={14} /></button></div>
+      <div id='header-notifications-toolbar' className='notification-menu-toolbar'><span id='header-notifications-count' role={loading ? undefined : `status`}>{countLoading ? <><Skeleton id='header-notifications-count-skeleton' width={75} height={10} />{!loading ? <span className='sr-only'>Loading Read Status</span> : null}</> : unreadDescription}</span><button id='header-notifications-read-all' type='button' disabled={!page.canMarkRead || !page.unreadCount} onClick={() => void page.markAllRead().catch(() => undefined)}><Icon name='check-all' size={14} />{page.busy ? `Saving` : `Mark All Read`}</button><button id='header-notifications-reload' type='button' onClick={page.reload} aria-label='Reload Notifications' title='Reload Notifications'><Icon name='refresh' size={14} /></button></div>
       {page.message ? <p id='header-notifications-message' className={`notification-menu-message${page.state === `error` || page.state === `denied` ? ` is-error` : ``}`} role={page.state === `error` || page.state === `denied` ? `alert` : `status`}>{page.message}</p> : null}
-      <div id='header-notifications-list' className='notification-menu-list' aria-busy={page.state === `loading'}>
-        {page.state === `loading` && !page.records.length ? <div id='header-notifications-loading' className='notification-menu-empty' role='status'><Icon name='bell' size={25} /><p>Loading Notifications…</p></div> : page.records.length ? page.records.map((record) => <NotificationCard key={record.id} record={record} idPrefix='notification-menu-card' onNavigate={() => close(false)} />) : <div id='header-notifications-empty' className='notification-menu-empty' role='status'><Icon name='bell' size={25} /><strong>{page.state === `ready` ? `You’re All Caught Up` : `Notifications Unavailable`}</strong><p>{page.state === `ready` ? `New updates will appear here.` : `Reload to reconnect.`}</p></div>}
+      {loading ? <span id='header-notifications-loading-label' className='sr-only' role='status'>Loading Notifications</span> : null}
+      <div id='header-notifications-list' className='notification-menu-list' aria-busy={loading}>
+        {loading && !page.records.length ? <div id='header-notifications-loading'>{[0, 1, 2].map((index) => <NotificationCardSkeleton key={index} id={`header-notifications-skeleton-${index}`} />)}</div> : page.records.length ? page.records.map((record) => <NotificationCard key={record.id} record={record} idPrefix='notification-menu-card' onNavigate={() => close(false)} />) : <div id='header-notifications-empty' className='notification-menu-empty' role='status'><Icon name='bell' size={25} /><strong>{page.state === `ready` ? `You’re All Caught Up` : `Notifications Unavailable`}</strong><p>{page.state === `ready` ? `New updates will appear here.` : `Reload to reconnect.`}</p></div>}
       </div>
       {page.readError ? <p id='header-notifications-read-error' className='notification-menu-message is-error' role='alert'>{page.readError}</p> : null}
       {page.actionError ? <p id='header-notifications-action-error' className='notification-menu-message is-error' role='alert'>{page.actionError}</p> : null}

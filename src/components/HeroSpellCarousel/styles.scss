@@ -1,0 +1,38 @@
+.hero-spell-carousel { position: relative; min-width: 0; outline-offset: 12px; }
+.hero-carousel-deck { --hero-stack-near-transform: translate3d(-14px, 12px, 0) rotate(-4deg) scale(.97); --hero-stack-far-transform: translate3d(14px, 18px, 0) rotate(5deg) scale(.96); position: relative; touch-action: pan-y pinch-zoom; }
+.hero-carousel-slides { display: grid; }
+.hero-carousel-slide { --stack-paper: #d8c8f2; position: relative; grid-area: 1 / 1; min-width: 0; visibility: hidden; pointer-events: none; transform-origin: 50% 65%; transition: transform .72s cubic-bezier(.2, .75, .25, 1), visibility 0s linear .72s; }
+.hero-carousel-slide.is-stack-near { --stack-paper: #bfa9e9; z-index: 2; visibility: visible; transform: var(--hero-stack-near-transform); }
+.hero-carousel-slide.is-stack-far { z-index: 1; visibility: visible; transform: var(--hero-stack-far-transform); }
+.hero-carousel-slide.is-stack-near, .hero-carousel-slide.is-stack-far { transition-delay: 0s; }
+.hero-carousel-slide.is-active { z-index: 3; visibility: visible; pointer-events: auto; transform: none; }
+.hero-carousel-slide.is-shuffle-source, .hero-carousel-slide.is-shuffle-target { visibility: visible; pointer-events: none; will-change: transform; transition: none; }
+.hero-carousel-slide.is-shuffle-target { --stack-paper: #bfa9e9; z-index: 4; transform: var(--hero-stack-near-transform); transition: none; }
+.hero-carousel-slide > .spell-card--featured { height: 100%; }
+.hero-spell-carousel .hero-carousel-slide .spell-card-open { margin-top: auto; padding-top: 14px; }
+.hero-carousel-card-cover { position: absolute; inset: 0; padding: 26px; border: 1px solid #e1d6f1; border-radius: 19px; color: #37214b; background: var(--stack-paper); pointer-events: none; }
+.hero-carousel-slide.is-active .hero-carousel-card-cover { opacity: 0; }
+.hero-carousel-slide.is-shuffle-target .hero-carousel-card-cover { opacity: 1; }
+.hero-carousel-card-cover > span { display: flex; gap: 7px; align-items: center; font-size: 9px; letter-spacing: 1px; }
+.hero-carousel-card-cover > strong { position: absolute; bottom: 9px; font-size: 22px; font-family: Georgia, serif; font-weight: 500; }
+.hero-carousel-card-cover > p { position: absolute; right: 18px; bottom: 2px; font-size: 10px; }
+.hero-carousel-navigation { position: relative; z-index: 4; margin-top: 36px; }
+.hero-carousel-controls { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 8px; }
+.hero-carousel-control { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 50%; color: var(--lavender); background: var(--card); transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.hero-carousel-control[aria-disabled='true'] { opacity: .55; cursor: wait; }
+.hero-carousel-control:disabled { cursor: default; opacity: .4; }
+.hero-carousel-counter { text-align: center; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--ink); letter-spacing: 1.5px; white-space: nowrap; }
+.hero-carousel-counter > span { color: var(--soft); font-size: 10px; }
+.hero-carousel-pagination { display: flex; justify-content: center; gap: 3px; margin-top: 4px; }
+.hero-carousel-page { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; color: var(--soft); background: none; }
+.hero-carousel-page > span { width: 6px; height: 6px; border: 1px solid currentColor; border-radius: 50%; transition: color .2s ease, background .2s ease, transform .2s ease; }
+.hero-carousel-page.is-active { color: var(--gold); }
+.hero-carousel-page.is-active > span { background: currentColor; transform: scale(1.35); }
+[data-theme='ivory'] .hero-carousel-page.is-active { color: var(--purple); }
+.hero-carousel-help { margin: 0; text-align: center; color: var(--soft); font-size: 10px; line-height: 1.6; }
+@media (hover: hover) and (pointer: fine) {
+  button.hero-carousel-control:not(:disabled):hover { border-color: var(--lavender); background: var(--muted); }
+  .hero-carousel-page:hover { color: var(--lavender); }
+}
+@media (max-width: 680px) { .hero-carousel-navigation { margin-top: 30px; } .hero-carousel-deck { --hero-stack-near-transform: translate3d(-7px, 10px, 0) rotate(-2deg) scale(.97); --hero-stack-far-transform: translate3d(7px, 14px, 0) rotate(2.5deg) scale(.96); } }
+@media (prefers-reduced-motion: reduce) { .hero-carousel-slide, .hero-carousel-control, .hero-carousel-page > span { transition: none; } }

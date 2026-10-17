@@ -1,0 +1,6 @@
+.skeleton { position: relative; display: inline-block; flex-shrink: 0; overflow: hidden; max-width: 100%; border-radius: 5px; background: var(--muted); vertical-align: middle; }
+.skeleton::after { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, var(--line), transparent); content: ''; transform: translateX(-100%); animation: skeleton-shimmer 1.5s ease-in-out infinite; }
+.skeleton-circle { border-radius: 50%; }
+.skeleton-block { border-radius: 9px; }
+@keyframes skeleton-shimmer { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .skeleton::after { animation: none; transform: none; background: none; } }

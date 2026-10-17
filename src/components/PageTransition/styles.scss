@@ -1,0 +1,6 @@
+.page-transition { inset: 0 0 auto; z-index: 150; height: 2px; overflow: hidden; position: fixed; opacity: 1; pointer-events: none; transition: opacity .16s ease; }
+.page-transition-bar { display: block; width: 35%; height: 100%; background: linear-gradient(90deg, var(--purple), var(--lavender) 65%, var(--gold)); box-shadow: 0 0 7px #ffc85745; transform: translateX(-110%); animation: page-transition-travel 1s ease-in-out infinite; }
+.page-transition.is-finishing { opacity: 0; }
+.page-transition.is-finishing .page-transition-bar { width: 100%; animation: none; transform: none; }
+@keyframes page-transition-travel { to { transform: translateX(400%); } }
+@media (prefers-reduced-motion: reduce) { .page-transition { display: none; } }

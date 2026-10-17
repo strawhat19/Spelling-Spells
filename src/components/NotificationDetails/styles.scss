@@ -1,6 +1,7 @@
 .notification-details { width: min(900px, calc(100% - 96px)); margin: 42px auto 80px; }
 .notification-details-back { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 26px; color: var(--lavender); font-size: 12px; }
 .notification-details-article { display: grid; justify-items: start; gap: 20px; border: 1px solid var(--line); border-radius: 17px; padding: clamp(24px, 4vw, 50px); background: var(--card); }
+.notification-details-skeleton-body { display: grid; gap: 14px; width: 100%; }
 .notification-details-emblem { display: grid; width: 72px; height: 72px; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--muted); color: var(--lavender); }
 .notification-details-eyebrow { margin-top: 7px; color: var(--lavender); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; }
 .notification-details h1 { margin: 0; color: var(--ink); font: 500 clamp(34px, 4.5vw, 52px)/1.15 Georgia, serif; letter-spacing: -.8px; overflow-wrap: anywhere; }

@@ -1,9 +1,10 @@
 import './styles.scss';
 import { Icon } from '../Icon';
 import { AppLink } from '../AppLink';
+import TextReveal from '../TextReveal';
 import { SpellCard } from '../SpellCard';
-import PageMetadata from '../PageMetadata';
 import { useEffect, useRef } from 'react';
+import PageMetadata from '../PageMetadata';
 import { useCatalogPage, type CatalogSort } from './useCatalogPage';
 
 const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
@@ -43,7 +44,7 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
       <div id="catalog-page-heading" className="ss-catalog-heading">
         <div className="ss-catalog-heading-copy">
           <p className="ss-catalog-eyebrow"><Icon name={savedOnly ? `bookmark` : `book`} size={16} />{savedOnly ? `A shelf of your own` : `Words from extraordinary worlds`}</p>
-          <h1 id="catalog-title">{savedOnly ? `Your personal spellbook.` : `Find your next magic word.`}</h1>
+          <h1 id="catalog-title"><TextReveal id='catalog-title-copy' text={savedOnly ? `Your personal spellbook.` : `Find your next magic word.`} /></h1>
           <p>{savedOnly ? `The words you want to keep close. Revisit a favorite, find a forgotten incantation, or make room for your next discovery.` : `Browse incantations, invented languages, and the stories behind them. Search by name, meaning, language, or world.`}</p>
         </div>
         {savedOnly && <div id="saved-shelf-emblem" className="ss-catalog-shelf-emblem" aria-hidden="true"><Icon name="book" size={44} /><span>YOUR FIELD NOTES</span><i /><Icon name="spark" size={13} /></div>}

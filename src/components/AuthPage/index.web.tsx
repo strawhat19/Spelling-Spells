@@ -1,10 +1,11 @@
+import './styles.scss';
 import Icon from '../Icon';
 import AppLink from '../AppLink';
 import BrandLogo from '../BrandLogo';
+import TextReveal from '../TextReveal';
 import PageMetadata from '../PageMetadata';
 import GoogleBrandMark from '../GoogleBrandMark';
 import { useAuthPage, type AuthPageProps } from './useAuthPage';
-import './styles.scss';
 
 const AuthPage = (props: AuthPageProps) => {
   const page = useAuthPage(props);
@@ -16,7 +17,7 @@ const AuthPage = (props: AuthPageProps) => {
         <div className='auth-story-orbit auth-story-orbit--inner' aria-hidden='true' />
         <div className='auth-story-content'>
           <span className='auth-eyebrow'><Icon name='spark' size={15} /> YOUR PERSONAL ARCHIVE</span>
-          <h1>{page.title}</h1>
+          <h1 id='auth-story-title'><TextReveal id='auth-story-title-copy' text={page.title} /></h1>
           <p>{page.subtitle}</p>
           <div className='auth-illustration' aria-hidden='true'>
             <span className='auth-illustration-spark auth-illustration-spark--one'>✦</span>
@@ -31,7 +32,7 @@ const AuthPage = (props: AuthPageProps) => {
         <AppLink id='auth-back-to-library' href='/spells' className='auth-back'><Icon name='arrow-left' size={16} /> Back to the archive</AppLink>
         <div className='auth-form-heading'>
           <span className='auth-eyebrow'>A LITTLE MAGIC, JUST FOR YOU</span>
-          <h2>{page.formTitle}</h2>
+          <h2 id='auth-form-title'><TextReveal id='auth-form-title-copy' text={page.formTitle} /></h2>
           {!page.confirmationPending ? <div id='auth-switch-prompt' className='auth-switch-prompt'>
             <p>{page.isSignUp ? `Already have an account?` : `New to the archive?`}</p>
             <AppLink

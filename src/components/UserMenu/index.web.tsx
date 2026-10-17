@@ -1,5 +1,6 @@
 import Icon from '../Icon';
 import AppLink from '../AppLink';
+import Skeleton from '../Skeleton';
 import { usePathname } from 'expo-router';
 import { useAuth } from '../../shared/authContext';
 import { useEffect, useRef, useState } from 'react';
@@ -32,8 +33,8 @@ const UserMenu = () => {
     return () => { document.removeEventListener(`pointerdown`, outside); document.removeEventListener(`keydown`, escape); };
   }, [open]);
 
-  if (loading) return <span id='header-account-loading' className='user-menu-loading' aria-label='Loading Account' />;
-  if (!account) return <AppLink id='header-signin-link' href='/signin' className='header-signin-link' aria-label='Sign In'><Icon name='user' size={19} /><span>Sign In</span></AppLink>;
+  if (loading) return <span id='header-account-loading' className='user-menu-loading' role='status'><span className='sr-only'>Loading Account</span><Skeleton shape='circle' width={44} height={44} /></span>;
+  if (!account) return <AppLink id='header-signin-link' href='/signin' title='Sign In · Enter the Spellbook' className='header-signin-link' aria-label='Sign In'><Icon name='user' size={20} /><span id='header-signin-spark' className='header-signin-spark' aria-hidden='true'><Icon name='spark' size={9} /></span><span className='sr-only'>Sign In</span></AppLink>;
   const avatar = getAccountAvatar(account);
   const photo = avatar === failedPhoto ? null : avatar;
   const initial = account.displayName.trim().slice(0, 1).toUpperCase() || `A`;

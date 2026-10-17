@@ -1,8 +1,8 @@
 import Icon from '../Icon';
-import NotificationMenu from '../NotificationMenu';
 import UserMenu from '../UserMenu';
 import styles from './styles.native';
 import BrandLogo from '../BrandLogo';
+import NotificationMenu from '../NotificationMenu';
 import { useAuth } from '../../shared/authContext';
 import { useRouter, usePathname } from 'expo-router';
 import { getAccountRoute } from '../../shared/routes';
@@ -17,7 +17,7 @@ import { Text, View, Alert, Linking, Animated, Pressable, ScrollView, Accessibil
 const navigation = [
   { href: `/spells`, label: `Spell Library`, icon: `book` },
   { href: `/worlds`, label: `Worlds`, icon: `globe` },
-  { href: `/pronunciation`, label: `Pronunciation`, icon: `wand` },
+  { href: `/pronunciation`, label: `Pronunciation`, icon: `audio` },
   { href: `/saved`, label: `Saved`, icon: `bookmark` },
   { href: `/submit`, label: `Contribute`, icon: `edit` },
 ] as const;
@@ -39,7 +39,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
   const [reducedMotion, setReducedMotion] = useState(false);
   const topOpacity = useRef(new Animated.Value(0)).current;
   const { theme, palette, toggleTheme, error: themeError } = useTheme();
-  const { error, dismissError } = useSpells();
+  const { error, savedIds, dismissError } = useSpells();
   const accountShell = Boolean(getAccountRoute(pathname));
   const scope = `${pathname}:${account?.id ?? `guest`}:${canAccessOwner(account)}`;
   const clearRail = useCallback((railScope: string) => setRail((current) => current?.scope === railScope ? null : current), []);
@@ -78,7 +78,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
         },
       ]}
     >
-      <View nativeID="header-content" style={[styles.headerRow, accountShell && styles.accountHeaderRow]}>
+      <View nativeID="header-content" style={[styles.headerRow, width <= 580 && styles.compactHeaderRow, accountShell && styles.accountHeaderRow]}>
         <Pressable
           accessibilityRole="link"
           accessibilityLabel="Spelling Spells home"
@@ -87,31 +87,44 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           style={styles.brand}
         >
           <View nativeID='header-brand-content' onLayout={(event) => setBrandWidth(event.nativeEvent.layout.width + event.nativeEvent.layout.x + styles.headerRow.padding)} style={styles.brandContent}>
-            <BrandLogo size={accountShell ? 36 : 48} />
-            <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.brandName, { color: palette.text }]}>Spelling Spells</Text>
+            <BrandLogo size={accountShell || width <= 480 ? 36 : 48} />
+            {width > 480 ? <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.brandName, { color: palette.text }]}>Spelling Spells</Text> : null}
           </View>
         </Pressable>
-        <NotificationMenu />
-        <UserMenu />
-        <Pressable
-          nativeID="header-theme-toggle"
-          accessibilityRole="button"
-          accessibilityLabel={`Switch to ${theme === `night` ? `light` : `dark`} mode`}
-          onPress={() => void toggleTheme()}
-          style={[styles.iconButton, styles.themeButton, { backgroundColor: palette.panel }]}
-        >
-          <Icon name={theme === `night` ? `sun` : `moon`} size={20} color={palette.gold} />
-        </Pressable>
-        <Pressable
-          nativeID="header-menu-toggle"
-          accessibilityRole="button"
-          accessibilityLabel={menuOpen ? `Close menu` : `Open menu`}
-          accessibilityState={{ expanded: menuOpen }}
-          onPress={() => setMenuOpen(!menuOpen)}
-          style={styles.iconButton}
-        >
-              <Icon name={menuOpen ? `close` : `menu`} size={23} color={palette.text} />
-        </Pressable>
+        <View nativeID='header-actions' style={[styles.actions, width <= 580 && styles.compactActions]}>
+          <Pressable
+            accessibilityRole='link'
+            nativeID='header-saved-link'
+            onPress={() => router.push(`/saved`)}
+            accessibilityState={{ selected: pathname === `/saved` }}
+            accessibilityLabel={`Saved Spells, ${savedIds.length} Saved`}
+            style={[styles.iconButton, { borderColor: palette.border, backgroundColor: palette.panel }]}
+          >
+            <Icon name='bookmark' size={20} color={palette.primary} />
+            {savedIds.length > 0 ? <View nativeID='header-saved-badge' accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={[styles.savedBadge, { borderColor: palette.background, backgroundColor: palette.gold }]}><Text nativeID='header-saved-count' style={styles.savedBadgeText}>{savedIds.length}</Text></View> : null}
+          </Pressable>
+          <NotificationMenu />
+          <Pressable
+            nativeID='header-theme-toggle'
+            accessibilityRole='button'
+            onPress={() => void toggleTheme()}
+            accessibilityLabel={`Switch to ${theme === `night` ? `light` : `dark`} mode`}
+            style={[styles.iconButton, { borderColor: palette.border, backgroundColor: palette.panel }]}
+          >
+            <Icon name={theme === `night` ? `sun` : `moon`} size={20} color={palette.gold} />
+          </Pressable>
+          <UserMenu />
+          <Pressable
+            nativeID='header-menu-toggle'
+            accessibilityRole='button'
+            onPress={() => setMenuOpen(!menuOpen)}
+            accessibilityState={{ expanded: menuOpen }}
+            accessibilityLabel={menuOpen ? `Close menu` : `Open menu`}
+            style={[styles.iconButton, { borderColor: palette.border, backgroundColor: palette.panel }]}
+          >
+            <Icon name={menuOpen ? `close` : `menu`} size={23} color={palette.text} />
+          </Pressable>
+        </View>
       </View>
       {menuOpen && (
         <View nativeID="header-navigation" style={styles.nav}>

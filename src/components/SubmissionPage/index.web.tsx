@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react';
+import './styles.scss';
 import Icon from '../Icon';
 import AppLink from '../AppLink';
+import TextReveal from '../TextReveal';
+import { useEffect, useRef } from 'react';
 import { useSubmissionPage } from './useSubmissionPage';
 import { draftLimits } from '../../shared/submissions/service';
 import type { SubmissionField } from '../../shared/submissions/types';
-import './styles.scss';
 
 const fields: { key: SubmissionField; label: string; hint: string; required?: boolean; multiline?: boolean }[] = [
   { key: `name`, label: `Spell name`, hint: `The exact spelling, including any accents`, required: true },
@@ -36,7 +37,7 @@ const SubmissionPage = () => {
     <article id='contribution-page' className='contribution-page page-container'>
       <header id='contribution-heading' className='contribution-heading'>
         <span className='contribution-kicker'><Icon name='edit' size={17} />Add a page to the archive</span>
-        <h1>A good spell starts<br />with a good source.</h1>
+        <h1 id='contribution-title'><TextReveal id='contribution-title-opening' text={`A good spell starts`} /><br /><TextReveal id='contribution-title-ending' text={`with a good source.`} /></h1>
         <p>Know a magical word we have missed? Prepare a carefully sourced suggestion or help us correct an existing entry.</p>
       </header>
       <div id='contribution-connection' className='contribution-connection' role='status'>
@@ -51,7 +52,7 @@ const SubmissionPage = () => {
           className='contribution-form'
           onSubmit={(event) => { event.preventDefault(); showPreview(); }}
         >
-          <div className='contribution-form-heading'><div><span className='contribution-step'>01 / Your contribution</span><h2>Leave a little knowledge.</h2></div><span className='contribution-storage'>{loading ? `Loading Draft` : dirty ? `Unsaved Changes` : persisted ? `On This Device` : `Session Only`}</span></div>
+          <div className='contribution-form-heading'><div><span className='contribution-step'>01 / Your contribution</span><h2 id='contribution-form-title'><TextReveal id='contribution-form-title-copy' text={`Leave a little knowledge.`} /></h2></div><span className='contribution-storage'>{loading ? `Loading Draft` : dirty ? `Unsaved Changes` : persisted ? `On This Device` : `Session Only`}</span></div>
           {loading ? <div className='contribution-skeleton' role='status' aria-label='Loading saved draft'><span /><span /><span /></div> : (
             <fieldset disabled={busy} className='contribution-fields'>
               <legend className='sr-only'>Contribution details</legend>
@@ -102,7 +103,7 @@ const SubmissionPage = () => {
         <aside id='contribution-guidelines' className='contribution-guidelines'>
           <span className='contribution-seal'><Icon name='book' size={35} /></span>
           <p className='contribution-step'>A note from the archive</p>
-          <h2>Wonder, with footnotes.</h2>
+          <h2 id='contribution-guidelines-title'><TextReveal id='contribution-guidelines-title-copy' text={`Wonder, with footnotes.`} /></h2>
           <p>Great entries make it easy to tell the story from the interpretation.</p>
           <ol><li><strong>Start with the original.</strong><span>Prefer an author, publisher, game, or primary reference.</span></li><li><strong>Write it in your words.</strong><span>Summarize instead of pasting a whole passage.</span></li><li><strong>Make uncertainty visible.</strong><span>A suggested origin or sound guide is not confirmed canon.</span></li></ol>
           <div className='contribution-review-note'><Icon name='shield' size={19} /><p>When submissions launch, an editor will review them before anything reaches the public archive.</p></div>

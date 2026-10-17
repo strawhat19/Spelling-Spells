@@ -1,5 +1,6 @@
 import Icon from '../Icon';
 import AppLink from '../AppLink';
+import TextReveal from '../TextReveal';
 import AccountGate from './AccountGate';
 import PageMetadata from '../PageMetadata';
 import { useAccountLayout, type AccountLayoutProps } from './useAccountLayout';
@@ -47,7 +48,7 @@ const AccountLayout = ({ title, children, description, section = `account`, eyeb
         </div>
       </aside>
       <div id='account-main' className='account-main'>
-        <header id='account-page-heading' className='account-page-heading'><span className='account-eyebrow'>{eyebrow}</span><h1 id='account-page-title'><Icon name={page.activeRoute?.icon ?? (section === `admin` ? `dashboard` : `user`)} size={29} /><span>{title}</span></h1>{description ? <p>{description}</p> : null}</header>
+        <header id='account-page-heading' className='account-page-heading'><span className='account-eyebrow'>{eyebrow}</span><h1 id='account-page-title'><Icon name={page.activeRoute?.icon ?? (section === `admin` ? `dashboard` : `user`)} size={29} /><TextReveal id='account-page-title-text' text={title} /></h1>{description ? <p>{description}</p> : null}</header>
         {page.error ? <p id='account-navigation-error' role='status' className='account-storage-error'>{page.error}</p> : null}
         {section === `admin` && !page.ownerAllowed ? <AccountGate ownerOnly returnTo={page.pathname} /> : children}
       </div>

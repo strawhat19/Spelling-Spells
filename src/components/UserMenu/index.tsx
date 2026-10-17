@@ -1,4 +1,5 @@
 import Icon from '../Icon';
+import Skeleton from '../Skeleton';
 import styles from './styles.native';
 import { useAuth } from '../../shared/authContext';
 import { useEffect, useRef, useState } from 'react';
@@ -22,7 +23,7 @@ const UserMenu = () => {
   const [error, setError] = useState(``);
   const [panelHeight, setPanelHeight] = useState(280);
   const [failedPhoto, setFailedPhoto] = useState<string | null>(null);
-  const [anchor, setAnchor] = useState({ x: 0, y: 0, width: 36, height: 36 });
+  const [anchor, setAnchor] = useState({ x: 0, y: 0, width: 44, height: 44 });
   const { palette } = useTheme();
   const { account, loading, signOut } = useAuth();
   const photo = getAccountAvatar(account);
@@ -60,10 +61,15 @@ const UserMenu = () => {
       nativeID='header-account-link'
       accessibilityRole={account ? `button` : `link`}
       accessibilityState={{ busy: loading || busy, expanded: account ? open : undefined }}
-      accessibilityLabel={account ? `${account.displayName} Account Menu` : loading ? `Loading Account` : `Sign In`}
-      style={[styles.button, { borderColor: palette.border, backgroundColor: palette.panel }]}
+      accessibilityLabel={loading ? `Loading Account` : account ? `${account.displayName} Account Menu` : `Sign In`}
+      style={[styles.button, { borderColor: palette.border, backgroundColor: palette.panel }, !loading && !account && [styles.signInButton, { borderColor: palette.gold, shadowColor: palette.primary }]]}
     >
-      {account ? photo && photo !== failedPhoto ? <Image nativeID='header-account-avatar' source={{ uri: photo }} onError={() => setFailedPhoto(photo)} style={styles.avatar} /> : <Text nativeID='header-account-initial' style={[styles.initial, { color: palette.gold }]}>{account.displayName?.trim()?.[0]?.toUpperCase() || `A`}</Text> : <Icon name='user' size={19} color={palette.text} />}
+      {loading ? <Skeleton id='header-account-loading' shape='circle' width={30} height={30} /> : account ? photo && photo !== failedPhoto ? <Image nativeID='header-account-avatar' source={{ uri: photo }} onError={() => setFailedPhoto(photo)} style={styles.avatar} /> : <Text nativeID='header-account-initial' style={[styles.initial, { color: palette.gold }]}>{account.displayName?.trim()?.[0]?.toUpperCase() || `A`}</Text> : <View nativeID='header-signin-artwork' accessible={false} pointerEvents='none' accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={styles.signInArtwork}>
+        <View nativeID='header-signin-ring' style={[styles.signInRing, { borderColor: palette.gold }]} />
+        <Icon name='user' size={20} color={palette.primary} />
+        <View nativeID='header-signin-spark' style={styles.signInSpark}><Icon name='spark' size={8} color={palette.gold} /></View>
+        <View nativeID='header-signin-star' style={[styles.signInStar, { backgroundColor: palette.gold }]} />
+      </View>}
     </Pressable>
     <Modal transparent visible={open && Boolean(account)} statusBarTranslucent onRequestClose={close} onShow={() => focus(profileLink.current)} onDismiss={() => focus(trigger.current)} animationType={shell?.reducedMotion ? `none` : `fade`}>
       <View nativeID='account-menu-overlay' style={styles.overlay}>

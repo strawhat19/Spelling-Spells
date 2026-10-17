@@ -1,9 +1,10 @@
 import Icon from '../Icon';
+import TextReveal from '../TextReveal';
+import { useRouter } from 'expo-router';
 import PageMetadata from '../PageMetadata';
 import styles from '../AuthPage/styles.native';
-import { useRouter } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../shared/authContext';
+import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { Text, View, Pressable, TextInput } from 'react-native';
 
@@ -60,7 +61,7 @@ const PasswordRecovery = () => {
   return <View nativeID='password-recovery-page' style={styles.page}>
     <PageMetadata noIndex title='Reset password' description='Choose a new password after opening your recovery email.' />
     <Icon name='shield' color={palette.gold} size={28} />
-    <Text accessibilityRole='header' style={[styles.title, { color: palette.text }]}>A fresh key to your spellbook.</Text>
+    <Text nativeID='password-recovery-title' accessibilityRole='header' style={[styles.title, { color: palette.text }]}><TextReveal id='password-recovery-title-copy' text={`A fresh key to your spellbook.`} /></Text>
     <Text style={[styles.copy, { color: palette.muted }]}>{auth.loading ? `Checking your recovery link.` : allowed ? `Choose a password between 12 and 128 characters.` : complete ? `Your password change was confirmed.` : `Open a fresh password recovery email in the browser where you requested it. You can request a new link from sign in.`}</Text>
     {allowed ? <View nativeID='password-recovery-form' style={[styles.form, { borderColor: palette.border }]}>
       <Text style={[styles.label, { color: palette.text }]}>New password</Text>
