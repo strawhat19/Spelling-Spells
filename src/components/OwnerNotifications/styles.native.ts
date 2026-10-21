@@ -30,6 +30,6 @@ export default StyleSheet.create({
   statusDot: { width: 6, height: 6, borderRadius: 3 },
   statusText: { fontSize: 10 },
   overlay: { flex: 1, paddingHorizontal: 18, justifyContent: `center` },
-  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: `#100b23b3` },
+  backdrop: { ...StyleSheet.absoluteFill, backgroundColor: `#100b23b3` },
   editor: { width: `100%`, maxWidth: 680, maxHeight: `100%`, alignSelf: `center`, borderWidth: 1, borderRadius: 16, overflow: `hidden` },
 });

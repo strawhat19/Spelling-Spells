@@ -18,6 +18,7 @@ export type SpellMedia = {
 
 export type Spell = {
   id: string;
+  slug?: string;
   number: number;
   name: string;
   worldId: string;
@@ -40,15 +41,26 @@ export type Spell = {
   accent: SpellAccent;
   counterspell?: string;
   aliases: string[];
+  effect?: string;
+  casters?: string[];
+  sourceIds?: string[];
+  continuity?: string;
+  entryType?: `spell` | `ability` | `incantation`;
+  evidenceStatus?: `verified` | `unverified`;
+  pronunciationStatus?: `verified` | `approximate` | `unavailable`;
   media?: SpellMedia[];
   sources: { label: string; url: string }[];
 };
 
 export type World = {
   id: string;
+  slug?: string;
   name: string;
   medium: string;
+  revision?: number;
+  continuity?: string;
   description: string;
+  kind?: `fictional` | `folklore`;
 };
 
 export type SpellRecord = Spell;

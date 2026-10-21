@@ -1,6 +1,6 @@
 import type { Spell } from '../models/Spell';
 
-type SpellIdentity = Pick<Spell, `name` | `number`>;
+type SpellIdentity = Pick<Spell, `name` | `number` | `slug`>;
 type SpellRoute = { id?: string; slug?: string };
 
 // Published slugs stay stable even if an entry's display name is edited.
@@ -17,6 +17,7 @@ const publishedSlugs: Record<number, string> = {
 };
 
 export const getSpellSlug = (spell: SpellIdentity): string => {
+  if (spell.slug && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(spell.slug)) return spell.slug;
   const name = spell.name.normalize(`NFKD`).replace(/[\u0300-\u036f]/g, ``)
     .toLowerCase().replace(/[^a-z0-9]+/g, `-`).replace(/^-|-$/g, ``);
   return publishedSlugs[spell.number] ?? `${name || `spell`}-${spell.number}`;

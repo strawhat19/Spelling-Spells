@@ -18,12 +18,12 @@ const fields: { key: SubmissionField; label: string; url?: boolean; multiline?: 
 
 const SubmissionPage = () => {
   const { palette } = useTheme();
-  const { draft, loading, busy, dirty, preview, persisted, notice, errors, update, save, clear, showPreview } = useSubmissionPage();
+  const { draft, loading, busy, dirty, preview, persisted, notice, errors, update, save, clear, showPreview, submit, signedIn, configured, authLoading } = useSubmissionPage();
   return (
     <View nativeID='contribution-page' style={styles.page}>
       <Text style={[styles.kicker, { color: palette.gold }]}>ADD A PAGE TO THE ARCHIVE</Text>
       <Text accessibilityRole='header' style={[styles.title, { color: palette.text }]}>A good spell starts with a good source.</Text>
-      <Text style={[styles.body, { color: palette.muted }]}>Prepare a sourced spell suggestion or correction. Online submissions are not connected yet. Nothing is sent to an editor or published.</Text>
+      <Text style={[styles.body, { color: palette.muted }]}>Prepare a sourced suggestion or correction. Sign in to send it for private Owner review. Saving a device draft does not submit or publish it.</Text>
       <View nativeID='contribution-local-status' style={[styles.notice, { backgroundColor: palette.panel, borderColor: palette.border }]}>
         <Icon name='shield' size={19} color={palette.gold} /><Text style={[styles.noticeText, { color: palette.text }]}>{dirty ? `Unsaved Changes` : persisted ? `Draft on This Device` : `Session Draft`} · Not Submitted</Text>
       </View>
@@ -73,7 +73,8 @@ const SubmissionPage = () => {
           {draft.notes ? <Text style={[styles.body, { color: palette.muted }]}>{draft.notes}</Text> : null}
           <Pressable nativeID='contribution-preview-source' accessibilityRole='link' onPress={() => void Linking.openURL(draft.sourceUrl.trim()).catch(() => Alert.alert(`Couldn’t Open Source`, `Please try the source link again when you’re connected.`))}><Text style={[styles.sourceLink, { color: palette.gold }]}>View Source ↗</Text></Pressable>
           {draft.mediaUrl.trim() ? <Pressable nativeID='contribution-preview-media' accessibilityRole='link' onPress={() => void Linking.openURL(draft.mediaUrl.trim()).catch(() => Alert.alert(`Couldn’t Open Media`, `Please try the media link again when you’re connected.`))}><Text style={[styles.sourceLink, { color: palette.gold }]}>View Image or Media ↗</Text></Pressable> : null}
-          <View style={styles.notice}><Icon name='lock' size={17} color={palette.muted} /><Text style={[styles.noticeText, { color: palette.muted }]}>Online submission is unavailable. Save your draft for later.</Text></View>
+          <Pressable nativeID='contribution-send' accessibilityRole='button' disabled={busy || authLoading || !configured} onPress={() => void submit()} style={[styles.button, { backgroundColor: palette.gold, opacity: busy || !configured ? .5 : 1 }]}><Icon name={signedIn ? `check` : `user`} size={17} color='#20134D' /><Text style={styles.buttonText}>{busy ? `Submitting…` : signedIn ? `Submit For Review` : `Sign In To Submit`}</Text></Pressable>
+          <Text style={[styles.hint, { color: palette.muted }]}>A confirmed submission appears in your private submission history. Publication requires a separate Owner decision.</Text>
         </View>
       ) : null}
       {!loading ? <Pressable nativeID='contribution-clear' accessibilityRole='button' disabled={busy} style={styles.clear} onPress={() => Alert.alert(`Clear This Draft?`, `This removes the saved draft and your current edits on this device.`, [{ text: `Keep Draft`, style: `cancel` }, { text: `Clear Draft`, style: `destructive`, onPress: () => void clear() }])}><Icon name='trash' size={16} color={palette.muted} /><Text style={{ color: palette.muted }}>Clear This Draft</Text></Pressable> : null}

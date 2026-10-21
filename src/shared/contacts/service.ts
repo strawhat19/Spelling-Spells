@@ -77,7 +77,7 @@ const subscribeManager = (receive: ContactListener, options: { before?: number |
       return;
     }
     try {
-      const scope = requireOwner(auth.account);
+      const scope = requireOwner(auth.account ?? undefined);
       const nextKey = `${scope.account.id}:${scope.account.authUid}:${scope.revision}`;
       if (scopeKey === nextKey) return;
       stop();

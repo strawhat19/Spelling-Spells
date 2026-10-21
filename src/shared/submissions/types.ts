@@ -1,5 +1,5 @@
 export type SubmissionKind = 'new-spell' | 'correction';
-export type SubmissionStatus = 'pending' | 'approved' | 'changes-requested' | 'declined';
+export type SubmissionStatus = 'review' | 'approved' | 'changes-requested' | 'rejected';
 
 export type SubmissionDraft = {
   version: 1;
@@ -20,21 +20,24 @@ export type SubmissionRecord = Omit<SubmissionDraft, 'version'> & {
   createdAt: string;
   updatedAt: string;
   status: SubmissionStatus;
+  revision: number;
+  entryId?: string;
   reviewerNote?: string;
 };
 
 export type SubmissionField = Exclude<keyof SubmissionDraft, 'version' | 'kind'>;
 export type SubmissionErrors = Partial<Record<SubmissionField, string>>;
 export type SubmissionPageResult = {
-  state: 'unavailable' | 'ready' | 'error';
+  state: 'unavailable' | 'ready' | 'error' | 'denied';
   message: string;
   records: SubmissionRecord[] | null;
   nextCursor: string | null;
 };
 
 export type SubmissionService = {
-  submit: (draft: SubmissionDraft) => Promise<{ state: 'unavailable' | 'committed' | 'error'; message: string; record: SubmissionRecord | null }>;
+  submit: (draft: SubmissionDraft, requestId: string) => Promise<{ state: 'unavailable' | 'committed' | 'error' | 'denied'; message: string; record: SubmissionRecord | null }>;
   getOwnPage: (cursor?: string) => Promise<SubmissionPageResult>;
   getReviewPage: (cursor?: string) => Promise<SubmissionPageResult>;
-  review: (id: string, status: Exclude<SubmissionStatus, 'pending'>, note: string) => Promise<{ state: 'unavailable' | 'committed' | 'error'; message: string }>;
+  getById: (id: string) => Promise<SubmissionRecord>;
+  review: (record: SubmissionRecord, status: Exclude<SubmissionStatus, 'review'>, note: string, entryId?: string) => Promise<SubmissionRecord>;
 };

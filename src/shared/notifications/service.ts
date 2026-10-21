@@ -131,7 +131,7 @@ const subscribeRecords = (receive: FeedListener, manager: boolean, before: numbe
         return;
       }
       try {
-        const scope = requireScope(auth.account, undefined, true);
+        const scope = requireScope(auth.account ?? undefined, undefined, true);
         if (scopeKey !== `${scope.account.id}:${scope.revision}`) start(scope);
       } catch (error) { stop(); emit({ ...emptyFeed(), ...failure(error), realtime: `unavailable` }); }
     });
@@ -299,7 +299,7 @@ export const notificationsService = {
   }),
   getPublished: (slug: string): Promise<NotificationRecord | null> => mutate(async () => {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 120) return null;
-    const { data, error } = await boundedRequest((signal) => getSupabaseClient().from(`notifications`).select(notificationColumns).eq(`status`, `published`).eq(`slug`, slug).maybeSingle().abortSignal(signal));
+    const { data, error } = await boundedRequest((signal) => getSupabaseClient().from(`notifications`).select(notificationColumns).eq(`status`, `published`).eq(`slug`, slug).abortSignal(signal).maybeSingle());
     if (error) throw error;
     return data ? readNotification(data) : null;
   }),

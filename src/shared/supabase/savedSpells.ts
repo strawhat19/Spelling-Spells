@@ -1,5 +1,4 @@
 import { AppState } from 'react-native';
-import { seedSpells } from '../catalog/seed';
 import { authFailure, getErrorCode } from './errors';
 import type { Account } from '../authentication/types';
 import { authenticationService, requireCurrentAccount } from '../authentication/service';
@@ -23,7 +22,6 @@ type RefreshCollection = () => Promise<void>;
 type CollectionObserver = { refresh: RefreshCollection; invalidate: (message: string) => void };
 type ClearCheckpoint = { account: string; sessionRevision: number; references: readonly SavedReference[] };
 
-const eligibleIds = new Set(seedSpells.map((spell) => spell.id));
 const collections = new Map<string, Set<CollectionObserver>>();
 const clearCheckpoints = new WeakMap<SavedSpellsSnapshot, ClearCheckpoint>();
 let snapshotNumber = 0;
@@ -40,7 +38,7 @@ const emptySnapshot = (): SavedSpellsSnapshot => ({
 });
 
 const validateId = (id: string): void => {
-  if (!eligibleIds.has(id)) throw new Error(`Only a spell in the current published archive can be saved.`);
+  if (!id || id.length > 250 || !/^[A-Za-z0-9_-]+$/.test(id)) throw new Error(`The Saved Spell Reference Is Invalid`);
 };
 
 const withRequestTimeout = async <T>(operation: (signal: AbortSignal) => PromiseLike<T>, mutation = false): Promise<T> => {

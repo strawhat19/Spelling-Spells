@@ -1,11 +1,11 @@
 export const publicPageMetadata: Record<string, { title: string; description: string }> = {
   '/': {
     title: `Every Spell Has a Story`,
-    description: `Explore fictional spells from books and games: exact spelling, pronunciation guides, meanings, origins and source-linked references.`,
+    description: `Explore source-linked fictional spells, abilities and incantations across books, films, comics, television and games. Pronunciation is included where supported.`,
   },
   '/worlds': {
     title: `Fantasy Worlds and Their Spells`,
-    description: `Explore the story worlds behind the Spelling Spells catalog, with source-linked entries from Harry Potter, Skyrim and the Inheritance Cycle.`,
+    description: `Explore published entries by universe and continuity. Fictional worlds and cultural folklore traditions are identified separately.`,
   },
   '/pronunciation': {
     title: `How to Pronounce Fantasy Spells`,

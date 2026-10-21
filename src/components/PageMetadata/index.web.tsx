@@ -2,7 +2,7 @@ import Head from 'expo-router/head';
 import { getPublicPageUrl } from './urls';
 import type { PageMetadataProps } from './types';
 
-const PageMetadata = ({ title, description, canonicalPath, noIndex = false }: PageMetadataProps) => {
+const PageMetadata = ({ title, description, canonicalPath, structuredData, noIndex = false }: PageMetadataProps) => {
   const pageTitle = `${title} · Spelling Spells`;
   const publicUrl = canonicalPath ? getPublicPageUrl(canonicalPath) : undefined;
   const imageUrl = getPublicPageUrl(`/icons/icon-512.png`);
@@ -23,6 +23,7 @@ const PageMetadata = ({ title, description, canonicalPath, noIndex = false }: Pa
       <meta name="twitter:description" content={description} />
       {canonicalPath && <link rel="canonical" href={publicUrl ?? canonicalPath} />}
       {publicUrl && <meta property="og:url" content={publicUrl} />}
+      {!noIndex && structuredData && <script type='application/ld+json'>{JSON.stringify(structuredData).replace(/</g, `\\u003c`)}</script>}
     </Head>
   );
 };

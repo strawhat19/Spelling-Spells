@@ -12,6 +12,7 @@
   --lavender: #d8c8f2;
   --gold: #ffc857;
   --night-ink: #20134d;
+  --scrollbar-thumb: var(--soft);
   --header-height: 100px;
 }
 
@@ -25,9 +26,13 @@
   --line: #6039d827;
   --muted: #6039d80b;
   --lavender: #6039d8;
+  --scrollbar-thumb: var(--purple);
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--page); }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track, *::-webkit-scrollbar-corner { background: var(--page); }
+*::-webkit-scrollbar-thumb { border: 2px solid var(--page); border-radius: 10px; background: var(--scrollbar-thumb); }
 html { scroll-behavior: smooth; background: #17102b; }
 html[data-theme='ivory'] { background: #fff9ea; }
 body { margin: 0; color: var(--ink); background: var(--page); font-family: 'Avenir Next', 'Segoe UI', Arial, sans-serif; }

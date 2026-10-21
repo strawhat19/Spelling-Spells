@@ -1,6 +1,6 @@
 {
   "name": "spelling-spells",
-  "version": "0.0.0.6",
+  "version": "0.0.0.7",
   "private": true,
   "license": "MIT",
   "main": "expo-router/entry",
@@ -15,7 +15,10 @@
     "web": "expo start --web",
     "ios": "expo start --ios",
     "android": "expo start --android",
-    "export:web": "expo export --platform web",
+    "export:web": "node scripts/prepare-catalog-build.cjs && expo export --platform web && node scripts/finalize-catalog-build.cjs",
+    "catalog:seed": "node scripts/catalog-seed.cjs",
+    "test:catalog": "node --test tests/catalog-contracts.cjs",
+    "test:catalog:security": "node supabase/tests/run-catalog-security.cjs",
     "test:web:auth": "node tests/browser/auth-flow-smoke.cjs",
     "test:web:unconfigured": "node tests/browser/unconfigured-smoke.cjs"
   },
@@ -42,6 +45,7 @@
     "react-native-worklets": "0.10.1"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.3.14",
     "@types/react": "~19.2.0",
     "@types/react-dom": "19.2.0",
     "playwright": "1.64.1",

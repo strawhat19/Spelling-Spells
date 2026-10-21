@@ -9,7 +9,7 @@ export default StyleSheet.create({
   email: { flex: 1, minWidth: 0, fontSize: 10, lineHeight: 14 },
   error: { padding: 12, fontSize: 11, lineHeight: 17 },
   optionsContent: { padding: 6 },
-  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: `#00000024` },
+  backdrop: { ...StyleSheet.absoluteFill, backgroundColor: `#00000024` },
   itemText: { fontSize: 11, fontWeight: `600` },
   pillText: { minWidth: 0, flexShrink: 1, fontSize: 8, lineHeight: 12, fontWeight: `700` },
   signout: { marginTop: 4, borderTopWidth: 1 },

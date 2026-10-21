@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { seedSpells, seedWorlds } from '../../shared/catalog/seed';
 import { useSpells } from '../../shared/spellsContext/useSpells';
 import { findSpellByRoute, getSpellPath } from '../../shared/catalog/routes';
 
@@ -12,9 +11,7 @@ export const useSpellDetailPage = () => {
   const parameters = useLocalSearchParams<{ id?: string | string[]; slug?: string | string[] }>();
   const id = firstValue(parameters.id);
   const slug = firstValue(parameters.slug);
-  // Public records are bundled, so exported spell pages do not wait for private device preferences.
-  const spells = collection.spells.length ? collection.spells : seedSpells;
-  const worlds = collection.worlds.length ? collection.worlds : seedWorlds;
+  const { spells, worlds } = collection;
   const spell = useMemo(() => findSpellByRoute(spells, { id, slug }), [id, slug, spells]);
   const world = useMemo(() => worlds.find((item) => item.id === spell?.worldId), [spell?.worldId, worlds]);
   const related = useMemo(() => spells.filter((item) => item.id !== spell?.id && (item.worldId === spell?.worldId || item.category === spell?.category)).slice(0, 3), [spell?.id, spell?.worldId, spell?.category, spells]);

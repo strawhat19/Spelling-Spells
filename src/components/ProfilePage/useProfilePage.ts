@@ -167,7 +167,7 @@ export const useProfilePage = ({ view = `profile` }: ProfilePageProps) => {
   const connectionRequirements = [
     { id: `identity`, icon: `user`, name: `Account identity`, detail: `Your sign-in identity and private app account are loaded.`, status: allowed ? `Connected` : `Not connected`, connected: allowed },
     { id: `sync`, icon: `bookmark`, name: `Cross-device collection`, detail: `Open your spellbook to see the current connection and save status for this account. Device bookmarks remain separate.`, status: `View spellbook`, connected: false },
-    { id: `contributions`, icon: `edit`, name: `Your contributions`, detail: `Private submissions and review history are planned for a later connected stage.`, status: `Not connected`, connected: false },
+    { id: `contributions`, icon: `edit`, name: `Your contributions`, detail: `Open My Submissions for server-confirmed contributions and review decisions. A missing database setup is reported there.`, status: `View submissions`, connected: false },
     { id: `reporting`, icon: `chart`, name: `Archive reporting`, detail: `Provider reporting has not been connected. Account access does not enable reporting or grant an Owner role.`, status: `Not connected`, connected: false },
   ];
 

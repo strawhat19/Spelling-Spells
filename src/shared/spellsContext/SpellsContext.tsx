@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../authContext';
+import { catalogService } from '../catalog/service';
+import { buildCatalog } from '../catalog/buildSnapshot';
 import type { StorageMode } from '../../types/types';
 import type { Spell, World } from '../models/Spell';
 import type { PreferenceSnapshot } from '../models/Preferences';
@@ -12,6 +14,7 @@ import { createContext, useCallback, useEffect, useMemo, useRef, useState } from
 export type SpellsContextValue = {
   ready: boolean;
   error: string | null;
+  catalogError: string | null;
   spells: Spell[];
   worlds: World[];
   savedIds: string[];
@@ -32,6 +35,7 @@ export type SpellsContextValue = {
   toggleSaved: (id: string) => Promise<void>;
   recordViewed: (id: string) => Promise<void>;
   refreshSaved: () => void;
+  reloadCatalog: () => void;
   dismissError: () => void;
 };
 
@@ -46,8 +50,10 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const pending = useRef<string | null>(null);
   const [ready, setReady] = useState(false);
   const [retry, setRetry] = useState(0);
-  const [spells, setSpells] = useState<Spell[]>([]);
-  const [worlds, setWorlds] = useState<World[]>([]);
+  const [catalogRetry, setCatalogRetry] = useState(0);
+  const [spells, setSpells] = useState<Spell[]>(buildCatalog.spells);
+  const [worlds, setWorlds] = useState<World[]>(buildCatalog.worlds);
+  const [catalogError, setCatalogError] = useState<string | null>(null);
   const [deviceIds, setDeviceIds] = useState<string[]>([]);
   const [historyIds, setHistoryIds] = useState<string[]>([]);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -69,8 +75,8 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   const savedIds = useMemo(() => snapshot?.savedIds ?? [], [snapshot]);
   const saveVersion = snapshot?.version ?? null;
   const saveMessage = saveScope === `account` ? snapshot?.message ?? auth.message : null;
-  const error = operation?.scope === saveScopeKey && operation.error
-    ? operation.error : saveScope === `device` ? localError : snapshot?.status === `error` ? snapshot.message : null;
+  const error = catalogError ?? (operation?.scope === saveScopeKey && operation.error
+    ? operation.error : saveScope === `device` ? localError : snapshot?.status === `error` ? snapshot.message : null);
 
   const applyPreferences = useCallback((value: PreferenceSnapshot) => {
     setStorageMode(value.mode);
@@ -81,20 +87,50 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     let active = true;
-    void Promise.all([spellsAPI.getCatalog(), preferencesAPI.getPreferences()]).then(([catalog, preferences]) => {
+    void preferencesAPI.getPreferences().then((preferences) => {
       if (!active) return;
-      setSpells(catalog.spells);
-      setWorlds(catalog.worlds);
       applyPreferences(preferences);
       hydrated.current = true;
-      setReady(true);
     }).catch((failure: unknown) => {
       if (!active) return;
-      setLocalError(failure instanceof Error ? failure.message : `The Spell Catalog Could Not Be Loaded`);
-      setReady(true);
+      setLocalError(failure instanceof Error ? failure.message : `Device Preferences Could Not Be Loaded`);
     });
     return () => { active = false; };
   }, [applyPreferences]);
+
+  useEffect(() => {
+    let active = true;
+    let generation = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const refresh = async () => {
+      const request = ++generation;
+      try {
+        const catalog = await spellsAPI.getCatalog();
+        if (!active || request !== generation) return;
+        setSpells(catalog.spells);
+        setWorlds(catalog.worlds);
+        setCatalogError(null);
+      } catch (failure) {
+        if (!active || request !== generation) return;
+        setSpells([]);
+        setWorlds([]);
+        setCatalogError(failure instanceof Error ? failure.message : `The Database Catalog Could Not Be Loaded`);
+      } finally { if (active && request === generation) setReady(true); }
+    };
+    const schedule = () => { clearTimeout(timer); timer = setTimeout(() => { void refresh(); }, 150); };
+    const stop = catalogService.subscribe(schedule);
+    const interval = setInterval(() => { if (typeof document === `undefined` || !document.hidden) schedule(); }, 60_000);
+    if (typeof window !== `undefined`) window.addEventListener(`focus`, schedule);
+    void refresh();
+    return () => {
+      active = false;
+      generation += 1;
+      stop();
+      clearTimeout(timer);
+      clearInterval(interval);
+      if (typeof window !== `undefined`) window.removeEventListener(`focus`, schedule);
+    };
+  }, [catalogRetry]);
 
   useEffect(() => {
     let active = true;
@@ -166,13 +202,14 @@ export const SpellsProvider = ({ children }: { children: ReactNode }) => {
   }, [mutatePreferences]);
   const isSaved = useCallback((id: string) => savedIds.includes(id), [savedIds]);
   const refreshSaved = useCallback(() => setRetry((value) => value + 1), []);
+  const reloadCatalog = useCallback(() => setCatalogRetry((value) => value + 1), []);
   const dismissError = useCallback(() => { setLocalError(null); setOperation(null); }, []);
   const value = useMemo<SpellsContextValue>(() => ({
-    ready, error, spells, worlds, isSaved, savedIds, saveBusy, saveScope, savedReady,
+    ready, error, spells, worlds, isSaved, savedIds, saveBusy, saveScope, savedReady, catalogError, reloadCatalog,
     clearSaved, historyIds, saveStatus, saveVersion, storageMode, saveMessage, saveScopeKey,
     toggleSaved, recordViewed, dismissError, refreshSaved, importDeviceSaved, saveRequiresSignIn,
     deviceSavedCount: deviceIds.length,
-  }), [ready, error, spells, worlds, isSaved, savedIds, saveBusy, saveScope, savedReady,
+  }), [ready, error, spells, worlds, isSaved, savedIds, saveBusy, saveScope, savedReady, catalogError, reloadCatalog,
     clearSaved, historyIds, saveStatus, saveVersion, storageMode, saveMessage, saveScopeKey,
     toggleSaved, recordViewed, dismissError, refreshSaved, importDeviceSaved, saveRequiresSignIn, deviceIds.length]);
   return <SpellsContext.Provider value={value}>{children}</SpellsContext.Provider>;

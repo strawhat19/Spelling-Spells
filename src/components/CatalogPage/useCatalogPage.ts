@@ -41,8 +41,8 @@ export const useCatalogPage = (savedOnly = false) => {
     ? (collection.saveStatus === `live` || collection.saveStatus === `server`) && (collection.savedReady || collection.saveBusy)
     : collection.savedReady);
   const usesSaved = savedOnly || savedFilter;
-  const resultsResolved = collection.ready && (!usesSaved || savedResolved);
-  const snapshotVisible = collection.ready && usesSaved && collection.saveScope === `account` && collection.savedIds.length > 0;
+  const resultsResolved = collection.ready && !collection.catalogError && (!usesSaved || savedResolved);
+  const snapshotVisible = collection.ready && !collection.catalogError && usesSaved && collection.saveScope === `account` && collection.savedIds.length > 0;
   const resultsVisible = resultsResolved || snapshotVisible;
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export const useCatalogPage = (savedOnly = false) => {
     const search = searchable(query.trim());
     const matching = source.filter((spell) => {
       const sourceWorld = collection.worlds.find((item) => item.id === spell.worldId);
-      const text = searchable([spell.name, spell.definition, spell.language, spell.sourceTitle, sourceWorld?.name, spell.category, ...spell.aliases].join(` `));
+      const text = searchable([spell.name, spell.definition, spell.effect, spell.entryType, spell.continuity, spell.language, spell.sourceTitle, sourceWorld?.name, spell.category, ...spell.aliases, ...(spell.casters ?? [])].join(` `));
       return (!search || text.includes(search))
         && (!skill || spell.skill === skill)
         && (!world || spell.worldId === world)
