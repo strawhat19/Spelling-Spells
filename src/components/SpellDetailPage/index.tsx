@@ -15,10 +15,12 @@ const SpellDetailPage = () => {
   const router = useRouter();
   const { palette } = useTheme();
   const collection = useSpellDetailPage();
-  const { spell, world, ready, error, related, isSaved, savedReady, saveMessage, toggleSaved } = collection;
+  const { spell, world, ready, error, related, isSaved, savedReady, saveMessage, catalogError, reloadCatalog, toggleSaved } = collection;
   const presentation = getSavedCollectionPresentation(collection);
 
   const [sharing, setSharing] = useState(false);
+
+  if (!spell && catalogError) return <View nativeID={`spell-detail-catalog-error`} style={[styles.page, styles.empty]}><Icon name={`book`} size={32} color={palette.gold} /><Text accessibilityRole={`header`} style={[styles.sectionTitle, { color: palette.text }]}>The archive could not be opened.</Text><Text accessibilityLiveRegion={`polite`} style={[styles.copy, { color: palette.error }]}>{catalogError}</Text><Pressable nativeID={`spell-detail-retry`} accessibilityRole={`button`} onPress={() => void reloadCatalog()} style={styles.link}><Icon name={`book`} size={16} color={palette.gold} /><Text style={[styles.linkText, { color: palette.gold }]}>Try Again</Text></Pressable><Pressable nativeID={`spell-detail-error-browse`} accessibilityRole={`link`} onPress={() => router.push(`/spells`)} style={styles.link}><Text style={[styles.linkText, { color: palette.gold }]}>Open the spell index</Text><Icon name={`arrow-right`} size={16} color={palette.gold} /></Pressable></View>;
 
   if (!spell) return (
     <View nativeID="spell-detail-empty" style={[styles.page, styles.empty]}>
@@ -31,6 +33,8 @@ const SpellDetailPage = () => {
   );
 
   const saved = isSaved(spell.id);
+  const hasPronunciation = Boolean(spell.pronunciation?.trim()) && spell.pronunciationStatus !== `unavailable`;
+  const entryType = spell.entryType === `ability` ? `Power / Ability` : spell.entryType === `incantation` ? `Incantation` : spell.entryType === `spell` ? `Spell` : spell.kind;
   const shareSpell = async () => {
     if (sharing) return;
     setSharing(true);
@@ -38,7 +42,7 @@ const SpellDetailPage = () => {
     try {
       await Share.share({
         title: `${spell.name} · Spelling Spells`,
-        message: `${spell.name} · ${spell.pronunciation}\n${spell.definition}\nFrom ${spell.sourceTitle}${url ? `\n${url}` : ``}`,
+        message: `${spell.name}${hasPronunciation ? ` · ${spell.pronunciation}` : ``}\n${spell.definition}\nFrom ${spell.sourceTitle}${url ? `\n${url}` : ``}`,
       });
     } catch {
       Alert.alert(`Couldn’t Open Sharing`, `Please try again. No sharing result was confirmed.`);
@@ -57,11 +61,15 @@ const SpellDetailPage = () => {
       <Pressable nativeID="spell-detail-back" accessibilityRole="link" onPress={() => router.push(`/spells`)} style={styles.link}><Icon name="chevron-left" size={17} color={palette.muted} /><Text style={[styles.linkText, { color: palette.muted }]}>Spell library</Text></Pressable>
       <Text style={[styles.eyebrow, { color: palette.lavender }]}>{world?.name ?? spell.sourceTitle} · {spell.medium}</Text>
       <Text nativeID="spell-detail-title" accessibilityRole="header" style={[styles.title, { color: palette.text }]}>{spell.name}</Text>
-      <Text nativeID="spell-detail-phonetic" style={[styles.phonetic, { color: palette.gold }]}>{spell.pronunciation}</Text>
+      {hasPronunciation && <Text nativeID="spell-detail-phonetic" style={[styles.phonetic, { color: palette.gold }]}>{spell.pronunciation}{spell.pronunciationStatus === `approximate` ? ` · Approximate` : ``}</Text>}
       <Text style={[styles.definition, { color: palette.text }]}>{spell.definition}</Text>
       <View style={styles.badges}>
-        {[spell.language, spell.category, spell.kind].map((label, index) => <View key={index} nativeID={`spell-tag-${spell.id}-${index}`} style={[styles.badge, { borderColor: palette.border, backgroundColor: palette.panel }]}><Text style={[styles.badgeText, { color: palette.lavender }]}>{label}</Text></View>)}
+        {[entryType, world?.kind === `folklore` ? `Folklore Tradition` : `Fictional Setting`, spell.language, spell.category, spell.kind].filter(Boolean).map((label, index) => <View key={index} nativeID={`spell-tag-${spell.id}-${index}`} style={[styles.badge, { borderColor: palette.border, backgroundColor: palette.panel }]}><Text style={[styles.badgeText, { color: palette.lavender }]}>{label}</Text></View>)}
       </View>
+      {!!spell.casters?.length && <Text nativeID={`spell-detail-casters-${spell.id}`} style={[styles.copy, { color: palette.muted }]}>Character / Caster: {spell.casters.join(`, `)}</Text>}
+      {!!spell.continuity && <Text nativeID={`spell-detail-continuity-${spell.id}`} style={[styles.copy, { color: palette.muted }]}>Continuity / Version: {spell.continuity}</Text>}
+      {world?.kind === `folklore` && <Text nativeID={`spell-detail-belief-note-${spell.id}`} style={[styles.copy, { color: palette.muted }]}>This entry describes a cultural belief or tradition. It does not establish supernatural effects.</Text>}
+      {!!catalogError && <View nativeID={`spell-detail-catalog-status-${spell.id}`}><Text accessibilityLiveRegion={`polite`} style={[styles.copy, { color: palette.error }]}>{catalogError}</Text><Pressable nativeID={`spell-detail-retry-${spell.id}`} accessibilityRole={`button`} onPress={() => void reloadCatalog()} style={styles.link}><Icon name={`book`} size={16} color={palette.gold} /><Text style={[styles.linkText, { color: palette.gold }]}>Try Again</Text></Pressable></View>}
       <SpellMedia spell={spell} idPrefix='detail' />
       <Pressable nativeID={`detail-save-${spell.id}`} accessibilityRole="button" accessibilityState={{ selected: saved, disabled: !presentation.canSave }} disabled={!presentation.canSave} onPress={() => void toggleSaved(spell.id)} style={[styles.save, { opacity: presentation.canSave ? 1 : .5, backgroundColor: palette.panel, borderColor: palette.border }]}>
         <Icon name="bookmark" size={19} color={palette.gold} /><Text style={[styles.saveText, { color: palette.gold }]}>{presentation.saveLabel(saved)}</Text>
@@ -79,12 +87,12 @@ const SpellDetailPage = () => {
         {spell.aliases.length > 0 && <Text style={[styles.copy, { color: palette.muted }]}>Also known as: {spell.aliases.join(` · `)}</Text>}
       </View>
 
-      <View nativeID="spell-pronunciation-section" style={sectionStyle}>
-        <View style={styles.sectionHeading}><Icon name="wand" size={20} color={palette.gold} /><Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>How to say it</Text></View>
+      {hasPronunciation && <View nativeID="spell-pronunciation-section" style={sectionStyle}>
+        <View style={styles.sectionHeading}><Icon name="wand" size={20} color={palette.gold} /><Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>How to say it{spell.pronunciationStatus === `approximate` ? ` · Approximate` : ``}</Text></View>
         <Text style={[styles.phonetic, { color: palette.gold }]}>{spell.pronunciation}</Text>
         <View style={styles.syllables}>{spell.syllables.map((syllable, index) => <View key={index} nativeID={`detail-syllable-${spell.id}-${index}`} style={[styles.syllable, { backgroundColor: palette.panel }]}><Text style={[styles.syllableText, { color: palette.lavender }]}>{syllable}</Text></View>)}</View>
         <Text style={[styles.copy, { color: palette.muted }]}>{spell.pronunciationNote}</Text>
-      </View>
+      </View>}
 
       <View nativeID="spell-origin-section" style={sectionStyle}>
         <View style={styles.sectionHeading}><Icon name="globe" size={20} color={palette.gold} /><Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>Roots & word parts</Text></View>
@@ -95,6 +103,7 @@ const SpellDetailPage = () => {
 
       <View nativeID="spell-usage-section" style={sectionStyle}>
         <View style={styles.sectionHeading}><Icon name="spark" size={20} color={palette.gold} /><Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>Usage in the story</Text></View>
+        {!!spell.effect && <Text nativeID={`spell-detail-effect-${spell.id}`} style={[styles.copy, { color: palette.text }]}>{world?.kind === `folklore` ? `Reported Belief` : `Fictional Effect`}: {spell.effect}</Text>}
         <Text style={[styles.copy, { color: palette.muted }]}>{spell.usage}</Text>
         {spell.counterspell && <Text style={[styles.copy, { color: palette.lavender }]}>Counterspell or reversal: {spell.counterspell}</Text>}
       </View>

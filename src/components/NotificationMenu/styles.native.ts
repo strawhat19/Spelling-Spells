@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   overlay: { flex: 1 },
-  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: `#08031525` },
+  backdrop: { ...StyleSheet.absoluteFill, backgroundColor: `#08031525` },
   scroll: { flexGrow: 0, flexShrink: 1 },
   content: { gap: 13, padding: 22 },
   panel: { position: `absolute`, overflow: `hidden`, borderWidth: 1, borderRadius: 16, elevation: 12, shadowColor: `#080315`, shadowOffset: { width: 0, height: 15 }, shadowOpacity: .25, shadowRadius: 22 },

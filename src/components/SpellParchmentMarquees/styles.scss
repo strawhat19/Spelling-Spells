@@ -1,0 +1,41 @@
+.spell-parchment-marquees { --parchment-width: 88px; --parchment-peek: 8px; z-index: 2; position: fixed; inset: -64px 0; overflow: hidden; pointer-events: none; user-select: none; }
+.spell-parchment {
+  --parchment-paper: #e7d2aa;
+  --parchment-ink: #30232c;
+  --parchment-accent: #79536e;
+  --parchment-edge: #956b3d;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--parchment-width);
+  padding-inline: 12px;
+  color: var(--parchment-ink);
+  background:
+    radial-gradient(ellipse at 20% 30%, #b57a2630, transparent 62%),
+    repeating-linear-gradient(7deg, #78522c08 0 1px, transparent 1px 4px),
+    linear-gradient(90deg, #93653140, transparent 13%, #fff7dc45 50%, transparent 87%, #93653140),
+    var(--parchment-paper);
+  box-shadow: inset 0 0 28px #8c5c2933, 0 12px 34px #08041324;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 2px) 17%, 100% 35%, calc(100% - 1px) 56%, 100% 78%, calc(100% - 2px) 92%, 100% 100%, 0 100%, 2px 82%, 0 64%, 2px 43%, 0 23%, 2px 9%);
+  &::before { content: ''; position: absolute; inset: 0 6px; border-inline: 1px solid #956b3d40; pointer-events: none; }
+  &--left { left: calc(var(--parchment-peek) - var(--parchment-width)); }
+  &--right { right: calc(var(--parchment-peek) - var(--parchment-width)); }
+}
+.spell-parchment-window { height: 100%; overflow: hidden; }
+.spell-parchment-track { display: flex; flex-direction: column; }
+.spell-parchment-group { flex: 0 0 auto; height: max(1440px, calc(100vh + 128px)); height: max(1440px, calc(100lvh + 128px)); }
+.spell-parchment-scripture { display: block; width: 100%; height: 100%; }
+.spell-parchment-sigil-ink { fill: currentColor; stroke: none; }
+.spell-parchment-sigil-detail { fill: none; stroke-width: .8; stroke-linecap: butt; stroke-linejoin: miter; stroke: var(--parchment-accent); opacity: .72; }
+[data-theme='ivory'] .spell-parchment { --parchment-paper: #f3e3bf; --parchment-ink: #493042; --parchment-edge: #a17a45; }
+@media (min-width: 700px) { .spell-parchment-marquees { --parchment-peek: 12px; } }
+@media (min-width: 1680px) {
+  .spell-parchment-marquees { z-index: 35; }
+  .spell-parchment--left { left: max(12px, calc((100% - 1440px) / 4 - 44px)); }
+  .spell-parchment--right { right: max(12px, calc((100% - 1440px) / 4 - 44px)); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spell-parchment-track { will-change: transform; animation: spell-parchment-travel 75s linear infinite; }
+  .spell-parchment--right .spell-parchment-track { animation-direction: reverse; }
+}
+@keyframes spell-parchment-travel { to { transform: translate3d(0, -50%, 0); } }

@@ -1,4 +1,4 @@
-import { seedSpells, seedWorlds } from '../shared/catalog/seed';
+import { catalogService } from '../shared/catalog/service';
 import type { Spell, World } from '../shared/models/Spell';
 import type { ThemeName, StorageMode } from '../types/types';
 import { appName, historyLimit, storageKeys, useLocalStorage } from '../shared/config';
@@ -56,9 +56,7 @@ const errorMessage = (error: unknown, fallback: string): string => (
   error instanceof Error ? error.message : fallback
 );
 const assertSpellExists = (id: string): void => {
-  if (!seedSpells.some((spell) => spell.id === id)) {
-    throw new Error(`This Spell Is Not in the Catalog`);
-  }
+  if (!id || id.length > 250 || !/^[A-Za-z0-9_-]+$/.test(id)) throw new Error(`This Spell Reference Is Invalid`);
 };
 const clonePreferences = (snapshot: PreferenceSnapshot): PreferenceSnapshot => ({
   ...snapshot,
@@ -144,17 +142,7 @@ const updatePreferences = (
 });
 
 export const spellsAPI = {
-  getCatalog: async (): Promise<SpellCatalog> => ({
-    worlds: seedWorlds.map((world) => ({ ...world })),
-    spells: seedSpells.map((spell) => ({
-      ...spell,
-      aliases: [...spell.aliases],
-      syllables: [...spell.syllables],
-      media: spell.media?.map((media) => ({ ...media })),
-      sources: spell.sources.map((source) => ({ ...source })),
-      breakdown: spell.breakdown.map((part) => ({ ...part })),
-    })),
-  }),
+  getCatalog: (): Promise<SpellCatalog> => catalogService.getPublicCatalog(),
 };
 
 export const preferencesAPI = {
@@ -205,8 +193,12 @@ export const themeAPI = {
 };
 
 const getHealth = async (): Promise<ServiceHealth> => {
-  const [preferences, theme] = await Promise.all([loadPreferences(), loadTheme()]);
-  const hasError = Boolean(preferences.error || theme.error);
+  const [preferences, theme, catalog] = await Promise.all([
+    loadPreferences(), loadTheme(),
+    spellsAPI.getCatalog().then((value) => ({ count: value.spells.length, error: null as string | null }))
+      .catch((failure: unknown) => ({ count: 0, error: errorMessage(failure, `The Database Catalog Is Unavailable`) })),
+  ]);
+  const hasError = Boolean(preferences.error || theme.error || catalog.error);
   const sessionOnly = preferences.mode === `session` || theme.mode === `session`;
   return {
     title: appName,
@@ -214,9 +206,9 @@ const getHealth = async (): Promise<ServiceHealth> => {
     timestamp: new Date().toISOString(),
     storageMode: sessionOnly ? `session` : `local`,
     storageName: sessionOnly ? `Session Memory` : storageName,
-    connection: sessionOnly
-      ? `The spell catalog is bundled with the app. Some or all device preferences are available in this session only. Account services report their connection status separately.`
-      : `The spell catalog is bundled with the app. Device preferences use browser or device storage. Account services report their connection status separately.`,
+    connection: catalog.error ?? (sessionOnly
+      ? `The catalog reads published records from Supabase. Some device preferences are available in this session only. Catalog and account views report their own connection errors.`
+      : `The database returned ${catalog.count} published entry record(s). Device preferences use browser or device storage. Account views report their own connection status.`),
   };
 };
 

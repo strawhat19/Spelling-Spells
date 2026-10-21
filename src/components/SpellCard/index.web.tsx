@@ -17,6 +17,8 @@ export const SpellCard = ({ spell, compact = false, featured = false }: SpellCar
   const world = worlds.find((item) => item.id === spell.worldId);
   const prefix = `spell-card-${featured ? `hero` : compact ? `curated` : `catalog`}-${spell.id}`;
   const destination = getSpellPath(spell);
+  const hasPronunciation = Boolean(spell.pronunciation?.trim()) && spell.pronunciationStatus !== `unavailable`;
+  const entryType = spell.entryType === `ability` ? `Power / Ability` : spell.entryType === `incantation` ? `Incantation` : spell.entryType === `spell` ? `Spell` : spell.kind;
 
   return (
     <article
@@ -37,10 +39,12 @@ export const SpellCard = ({ spell, compact = false, featured = false }: SpellCar
           onClick={() => void toggleSaved(spell.id)}
         ><Icon name="bookmark" size={17} /></button>
       </div>
-      <p className="spell-card-origin" id={`${prefix}-origin`}><span className="spell-card-origin-dot" aria-hidden="true" />{world?.name ?? spell.sourceTitle}{featured && <span className="spell-card-kind"> · {spell.kind}</span>}</p>
+      <p className="spell-card-origin" id={`${prefix}-origin`}><span className="spell-card-origin-dot" aria-hidden="true" />{world?.name ?? spell.sourceTitle}<span className="spell-card-kind"> · {entryType}</span></p>
       <h3 className="spell-card-title" id={`${prefix}-title`}><AppLink id={`${prefix}-name-link`} href={destination}>{spell.name}</AppLink></h3>
-      <p className="spell-card-pronunciation" id={`${prefix}-pronunciation`}><Icon name="audio" size={14} />{spell.pronunciation}</p>
-      <p className="spell-card-definition" id={`${prefix}-definition`}>{spell.definition}</p>
+      {hasPronunciation && <p className="spell-card-pronunciation" id={`${prefix}-pronunciation`}><Icon name="audio" size={14} />{spell.pronunciation}{spell.pronunciationStatus === `approximate` ? ` · Approximate` : ``}</p>}
+      <p className="spell-card-origin" id={`${prefix}-world-kind`}>{world?.kind === `folklore` ? `Folklore Tradition` : `Fictional Setting`}{spell.casters?.length ? ` · ${spell.casters.join(`, `)}` : ``}</p>
+      {spell.continuity && <p className="spell-card-origin" id={`${prefix}-continuity`}>{spell.continuity}</p>}
+      <p className="spell-card-definition" id={`${prefix}-definition`}>{spell.effect || spell.definition}</p>
       <SpellMedia spell={spell} idPrefix={prefix} compact />
       {featured && (
         <>

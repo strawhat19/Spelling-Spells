@@ -20,7 +20,7 @@ const fields: { key: SubmissionField; label: string; hint: string; url?: boolean
 const SubmissionPage = () => {
   const model = useSubmissionPage();
   const formRef = useRef<HTMLFormElement>(null);
-  const { draft, loading, busy, dirty, preview, persisted, notice, errors, update, save, clear, showPreview } = model;
+  const { draft, loading, busy, dirty, preview, persisted, notice, errors, update, save, clear, showPreview, submit } = model;
 
   useEffect(() => {
     if (!dirty) return;
@@ -43,7 +43,7 @@ const SubmissionPage = () => {
       </header>
       <div id='contribution-connection' className='contribution-connection' role='status'>
         <Icon name='lock' size={21} />
-        <div><strong>Drafts are open. Online submissions are not connected yet.</strong><p>You can prepare, preview, and save a draft on this device. Nothing is sent to an editor or published.</p></div>
+        <div><strong>{model.configured ? `Sourced Suggestions Go To Private Owner Review` : `The Submission Service Needs Configuration`}</strong><p>Prepare and preview a draft here. Sign in to submit it; saving a device draft sends nothing. Submission does not publish an entry.</p></div>
       </div>
       <div id='contribution-workspace' className='contribution-workspace'>
         <form
@@ -107,7 +107,7 @@ const SubmissionPage = () => {
           <h2 id='contribution-guidelines-title'><TextReveal id='contribution-guidelines-title-copy' text={`Wonder, with footnotes.`} /></h2>
           <p>Great entries make it easy to tell the story from the interpretation.</p>
           <ol><li><strong>Start with the original.</strong><span>Prefer an author, publisher, game, or primary reference.</span></li><li><strong>Write it in your words.</strong><span>Summarize instead of pasting a whole passage.</span></li><li><strong>Make uncertainty visible.</strong><span>A suggested origin or sound guide is not confirmed canon.</span></li></ol>
-          <div className='contribution-review-note'><Icon name='shield' size={19} /><p>When submissions launch, an editor will review them before anything reaches the public archive.</p></div>
+          <div className='contribution-review-note'><Icon name='shield' size={19} /><p>The Owner checks evidence and attribution before approving an entry. Approval and public publication are separate actions.</p></div>
           <AppLink id='contribution-examples' href='/spells' className='contribution-examples'>Explore existing entries<Icon name='arrow' size={17} /></AppLink>
         </aside>
       </div>
@@ -123,7 +123,7 @@ const SubmissionPage = () => {
             <a id='contribution-preview-source' href={draft.sourceUrl.trim()} target='_blank' rel='noreferrer'>View source<Icon name='external' size={16} /></a>
             {draft.mediaUrl.trim() ? <a id='contribution-preview-media' href={draft.mediaUrl.trim()} target='_blank' rel='noreferrer'>View image or media<Icon name='external' size={16} /></a> : null}
           </div>
-          <div className='contribution-send-row'><button id='contribution-send' type='button' className='secondary-button' disabled aria-describedby='contribution-send-explanation'><Icon name='lock' size={17} />Online Submission Unavailable</button><p id='contribution-send-explanation'>Save your draft for later. Account connection and editorial review will be enabled after setup.</p></div>
+          <div className='contribution-send-row'><button id='contribution-send' type='button' className='primary-button' disabled={busy || model.authLoading || !model.configured} onClick={() => void submit()} aria-describedby='contribution-send-explanation'><Icon name={model.signedIn ? `check` : `user`} size={17} />{busy ? `Submitting…` : model.signedIn ? `Submit For Review` : `Sign In To Submit`}</button><p id='contribution-send-explanation'>A confirmed submission appears in your private <AppLink id='contribution-history' href='/submissions'>submission history</AppLink>. Your draft stays available if saving fails.</p></div>
         </section>
       ) : null}
       {!loading ? <button id='contribution-clear' type='button' className='contribution-clear' disabled={busy} onClick={() => { if (window.confirm(`Clear the contribution draft on this device? This also removes your current edits.`)) void clear(); }}><Icon name='trash' size={16} />Clear This Draft</button> : null}

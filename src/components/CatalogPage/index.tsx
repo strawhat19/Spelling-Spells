@@ -10,7 +10,7 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
   const router = useRouter();
   const { palette } = useTheme();
   const {
-    sort, ready, error, worlds, query, skill, world, category, results, categories,
+    sort, ready, error, catalogError, reloadCatalog, worlds, query, skill, world, category, results, categories,
     filtered, savedCount, shelfWorlds, unavailableCount, setSort,
     savedFilter, savedIds, setQuery, setSkill, setWorld, setCategory,
     saveScope, saveStatus, savedReady, saveMessage, refreshSaved, deviceSavedCount,
@@ -68,7 +68,7 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
         <View style={styles.choices}>{[{ id: savedOnly ? `recent` as const : `catalog` as const, name: savedOnly ? `Recently saved` : `Archive order` }, { id: `name` as const, name: `Name, A–Z` }, { id: `world` as const, name: `Story world` }].map(option => <Pressable key={option.id} nativeID={`catalog-sort-${option.id}`} accessibilityRole="button" accessibilityState={{ selected: sort === option.id }} onPress={() => setSort(option.id)} style={[styles.choice, { borderColor: sort === option.id ? palette.primary : palette.border, backgroundColor: sort === option.id ? palette.panel : palette.surface }]}><Text style={[styles.choiceText, { color: sort === option.id ? palette.gold : palette.muted }]}>{option.name}</Text></Pressable>)}</View>
       </View>
       <View nativeID="catalog-toolbar" style={styles.toolbar}>
-        <Text accessibilityLiveRegion="polite" style={[styles.toolbarText, { color: palette.muted }]}>{resultsResolved ? `${results.length} spell${results.length === 1 ? `` : `s`}` : resultsVisible ? `${results.length} spells shown · account view not confirmed` : savedView ? `Your saved collection is not confirmed yet` : `Opening the archive…`}</Text>
+        <Text accessibilityLiveRegion="polite" style={[styles.toolbarText, { color: palette.muted }]}>{catalogError ? `Catalog unavailable` : resultsResolved ? `${results.length} spell${results.length === 1 ? `` : `s`}` : resultsVisible ? `${results.length} spells shown · account view not confirmed` : savedView ? `Your saved collection is not confirmed yet` : `Opening the archive…`}</Text>
         {!savedOnly && (
           <Pressable nativeID="catalog-saved-filter" accessibilityRole="button" accessibilityState={{ selected: savedFilter }} onPress={() => setSavedFilter(!savedFilter)} style={styles.action}>
             <Icon name="bookmark" size={16} color={savedFilter ? palette.gold : palette.muted} /><Text style={[styles.actionText, { color: savedFilter ? palette.gold : palette.text }]}>Saved only</Text>
@@ -76,11 +76,12 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
         )}
         {filtered && <Pressable nativeID="catalog-clear-filters" onPress={clearFilters} style={styles.action} accessibilityRole="button"><Icon name="close" size={15} color={palette.muted} /><Text style={[styles.actionText, { color: palette.muted }]}>Reset filters</Text></Pressable>}
       </View>
+      {catalogError && <Pressable nativeID="catalog-error-retry" accessibilityRole="button" onPress={reloadCatalog}><Text style={{ color: palette.primary }}>Try Catalog Again</Text></Pressable>}
       {error && <Text nativeID="catalog-storage-warning" accessibilityRole="alert" style={[styles.storageCopy, { color: palette.error }]}>{error}</Text>}
       {!savedOnly && (saveMessage || !savedReady) && <Text nativeID="catalog-save-status" accessibilityLiveRegion="polite" style={[styles.storageCopy, { color: palette.muted }]}>{presentation.description}</Text>}
       {saveScope === `account` && (!savedReady || saveStatus === `server`) && !actionBusy && <Pressable nativeID="catalog-retry-saved" accessibilityRole="button" onPress={refreshSaved} style={styles.action}><Icon name="bookmark" size={16} color={palette.gold} /><Text style={[styles.actionText, { color: palette.gold }]}>Reconnect saved collection</Text></Pressable>}
       {savedOnly && ready && unavailableCount > 0 && <Text nativeID="saved-unavailable-records" style={[styles.storageCopy, { color: palette.muted }]}>{unavailableCount} {savedResolved ? `saved` : `unconfirmed`} {unavailableCount === 1 ? `entry is` : `entries are`} not in this catalog. Their bookmarks are preserved until you clear the shelf.</Text>}
-      {!opening && !resultsVisible && <View nativeID="saved-unconfirmed-state" style={[styles.empty, { borderColor: palette.border, backgroundColor: palette.surface }]}><Icon name="shield" size={29} color={palette.gold} /><Text style={[styles.emptyTitle, { color: palette.text }]}>Your shelf isn’t confirmed yet.</Text><Text style={[styles.emptyCopy, { color: palette.muted }]}>{presentation.description} This is not an empty-collection result.</Text><Pressable nativeID="saved-unconfirmed-browse" accessibilityRole="link" onPress={() => router.push(`/spells`)} style={styles.action}><Icon name="book" size={16} color={palette.gold} /><Text style={[styles.actionText, { color: palette.gold }]}>Browse the public spellbook</Text></Pressable></View>}
+      {!catalogError && !opening && !resultsVisible && <View nativeID="saved-unconfirmed-state" style={[styles.empty, { borderColor: palette.border, backgroundColor: palette.surface }]}><Icon name="shield" size={29} color={palette.gold} /><Text style={[styles.emptyTitle, { color: palette.text }]}>Your shelf isn’t confirmed yet.</Text><Text style={[styles.emptyCopy, { color: palette.muted }]}>{presentation.description} This is not an empty-collection result.</Text><Pressable nativeID="saved-unconfirmed-browse" accessibilityRole="link" onPress={() => router.push(`/spells`)} style={styles.action}><Icon name="book" size={16} color={palette.gold} /><Text style={[styles.actionText, { color: palette.gold }]}>Browse the public spellbook</Text></Pressable></View>}
       {resultsVisible && results.length === 0 && (
         <View nativeID="catalog-empty" style={[styles.empty, { borderColor: palette.border, backgroundColor: palette.surface }]}>
           <Icon name={savedOnly && savedIds.length === 0 ? `bookmark` : `search`} size={29} color={palette.gold} />

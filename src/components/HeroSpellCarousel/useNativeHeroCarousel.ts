@@ -1,4 +1,5 @@
 import { useHeroDeck } from './useHeroDeck';
+import type { Spell } from '../../shared/models/Spell';
 import type { HeroSpellCarouselProps } from './types';
 import { useRef, useMemo, useState, useEffect, useCallback, useLayoutEffect } from 'react';
 import { Easing, AppState, Animated, PanResponder, AccessibilityInfo, useWindowDimensions, type View, type LayoutChangeEvent, type GestureResponderEvent } from 'react-native';
@@ -22,8 +23,8 @@ export const useNativeHeroCarousel = ({ spells, ready }: HeroSpellCarouselProps)
   const readerAllowed = useRef(false);
   const foreground = useRef(AppState.currentState === `active`);
   const [active, setActive] = useState(foreground.current);
-  const [shown, setShown] = useState(current);
-  const [rear, setRear] = useState(deck[1] ?? null);
+  const [shown, setShown] = useState<Spell | null>(current ?? null);
+  const [rear, setRear] = useState<Spell | null>(deck[1] ?? null);
   const [raised, setRaised] = useState(false);
   const [focused, setFocused] = useState(false);
   const [touching, setTouching] = useState(false);

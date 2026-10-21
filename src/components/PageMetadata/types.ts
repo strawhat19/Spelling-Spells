@@ -3,4 +3,5 @@ export type PageMetadataProps = {
   noIndex?: boolean;
   description: string;
   canonicalPath?: string;
+  structuredData?: Record<string, unknown>;
 };

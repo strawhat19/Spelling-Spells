@@ -6,6 +6,8 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/spell/:slug", "destination": "/spell" },
+    { "source": "/world/:slug", "destination": "/world" },
     { "source": "/notifications/:slug", "destination": "/notification-details" }
   ]
 }

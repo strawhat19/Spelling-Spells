@@ -19,6 +19,8 @@ const SpellCard = ({ spell, idPrefix, compact = false, featured = false }: Props
   const saved = isSaved(spell.id);
   const world = worlds.find(item => item.id === spell.worldId);
   const elementId = idPrefix ? `${idPrefix}-${spell.id}` : spell.id;
+  const hasPronunciation = Boolean(spell.pronunciation?.trim()) && spell.pronunciationStatus !== `unavailable`;
+  const entryType = spell.entryType === `ability` ? `Power / Ability` : spell.entryType === `incantation` ? `Incantation` : spell.entryType === `spell` ? `Spell` : spell.kind;
 
   return (
     <View
@@ -65,8 +67,11 @@ const SpellCard = ({ spell, idPrefix, compact = false, featured = false }: Props
         </Pressable>
       </View>
       <Text nativeID={`spell-name-${elementId}`} style={[styles.title, featured && styles.titleFeatured]}>{spell.name}</Text>
-      <Text nativeID={`spell-pronunciation-${elementId}`} style={styles.pronunciation}>{spell.pronunciation}</Text>
-      <Text style={styles.definition} numberOfLines={compact ? 3 : undefined}>{spell.definition}</Text>
+      {hasPronunciation && <Text nativeID={`spell-pronunciation-${elementId}`} style={styles.pronunciation}>{spell.pronunciation}{spell.pronunciationStatus === `approximate` ? ` · Approximate` : ``}</Text>}
+      <Text nativeID={`spell-entry-type-${elementId}`} style={styles.origin}>{entryType} · {world?.kind === `folklore` ? `Folklore Tradition` : `Fictional Setting`}</Text>
+      {!!spell.casters?.length && <Text nativeID={`spell-casters-${elementId}`} style={styles.origin}>{spell.casters.join(`, `)}</Text>}
+      {!!spell.continuity && <Text nativeID={`spell-continuity-${elementId}`} style={styles.origin}>{spell.continuity}</Text>}
+      <Text nativeID={`spell-effect-${elementId}`} style={styles.definition} numberOfLines={compact ? 3 : undefined}>{spell.effect || spell.definition}</Text>
       <SpellMedia spell={spell} compact idPrefix={idPrefix} />
       {!compact && (
         <View nativeID={`spell-spelling-${elementId}`} accessibilityLabel={`Spelling: ${spell.name.split(``).join(`, `)}`} style={styles.letters}>

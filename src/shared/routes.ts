@@ -43,6 +43,7 @@ export const accountNavigation: AccountRoute[] = [
   { href: `/profile/connections`, icon: `link`, label: `Connections`, parent: `/profile`, access: `account`, section: `account` },
   { href: `/submissions`, icon: `edit`, label: `My Submissions`, parent: `/profile`, access: `account`, section: `account` },
   { href: `/dashboard`, icon: `dashboard`, label: `Dashboard`, access: `owner`, section: `admin` },
+  { href: `/catalog-editor`, icon: `book`, label: `Catalog`, parent: `/dashboard`, access: `owner`, section: `admin` },
   { href: `/users`, icon: `user`, label: `Users`, access: `owner`, section: `admin` },
   { href: `/admin/notifications`, icon: `bell`, label: `Notifications`, access: `owner`, section: `admin` },
   { href: `/health`, icon: `shield`, label: `Health`, access: `owner`, section: `admin` },
