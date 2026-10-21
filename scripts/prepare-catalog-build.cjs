@@ -71,7 +71,14 @@ const readPublicRows = async (table, configuration, fetcher = fetch) => {
     try {
       response = await fetcher(url, { method: `GET`, redirect: `error`, signal: AbortSignal.timeout(15000), headers: { apikey: configuration.key, Prefer: `count=exact`, Accept: `application/json` } });
     } catch { throw new Error(`Anonymous Catalog Read Failed For ${table}. No Bundled Catalog Was Substituted`); }
-    if (!response.ok) throw new Error(`Anonymous Catalog Read Failed For ${table} (HTTP ${response.status}). Check The Approved Catalog Migration And Anonymous Read Grants`);
+    if (!response.ok) {
+      let code;
+      try { code = (await response.json())?.code; } catch {}
+      const missingSchema = response.status === 404 && [`PGRST205`, `42P01`].includes(code);
+      throw Object.assign(new Error(`Anonymous Catalog Read Failed For ${table} (HTTP ${response.status}). Check The Approved Catalog Migration And Anonymous Read Grants`), {
+        code: missingSchema ? `CATALOG_SCHEMA_UNAVAILABLE` : `CATALOG_READ_FAILED`,
+      });
+    }
     let data;
     try { data = await response.json(); } catch { throw new Error(`Anonymous Catalog Read Returned Invalid JSON For ${table}`); }
     if (!Array.isArray(data) || data.length > limit) throw new Error(`Anonymous Catalog Read Returned An Unsupported Page For ${table}`);
@@ -165,16 +172,23 @@ const prepareCatalogBuild = async (options = {}) => {
   const fixture = options.fixture ?? environment.CATALOG_BUILD_FIXTURE;
   const shell = options.shell === true;
   if (shell && fixture) throw new Error(`Choose An Explicit Fixture Or An Empty Shell, Not Both`);
-  const mode = shell ? `shell` : fixture ? `fixture` : `anonymous`;
+  let mode = shell ? `shell` : fixture ? `fixture` : `anonymous`;
   let catalog = { spells: [], worlds: [] };
   if (fixture) catalog = normalizeFixtureCatalog(JSON.parse(fs.readFileSync(path.resolve(root, fixture), `utf8`)));
   if (mode === `anonymous`) {
     const configuration = getPublicConfiguration(readPublicEnvironment(root, environment));
-    const [spells, worlds, sources] = await Promise.all([`catalog_spells`, `catalog_universes`, `catalog_sources`].map((table) => readPublicRows(table, configuration, options.fetcher ?? fetch)));
-    catalog = normalizeAnonymousCatalog(spells, worlds, sources);
+    const reads = await Promise.allSettled([`catalog_spells`, `catalog_universes`, `catalog_sources`].map((table) => readPublicRows(table, configuration, options.fetcher ?? fetch)));
+    const failures = reads.filter((read) => read.status === `rejected`);
+    const otherFailure = failures.find((read) => read.reason?.code !== `CATALOG_SCHEMA_UNAVAILABLE`);
+    if (otherFailure) throw otherFailure.reason;
+    if (failures.length) {
+      if (environment.VERCEL_ENV !== `preview`) throw failures[0].reason;
+      mode = `preview-shell`;
+      if (!options.quiet) console.warn(`Preview Catalog Tables Are Not Installed. Exporting An Empty Shell; Runtime Will Show The Migration Error. No Seed Catalog Was Substituted`);
+    } else catalog = normalizeAnonymousCatalog(...reads.map((read) => read.value));
   }
   const generatedAt = (options.now?.() ?? new Date()).toISOString();
-  const timestamp = shell ? null : generatedAt;
+  const timestamp = shell || mode === `preview-shell` ? null : generatedAt;
   const origin = getSiteOrigin(root);
   const spellPaths = catalog.spells.map((spell) => `/spell/${spell.slug}`);
   const worldPaths = catalog.worlds.map((world) => `/world/${world.slug}`);
@@ -182,7 +196,7 @@ const prepareCatalogBuild = async (options = {}) => {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${locations.map((location) => `  <url><loc>${xml(location)}</loc></url>`).join(`\n`)}\n</urlset>\n`;
   const robots = `User-agent: *\nAllow: /\n${privatePaths.map((value) => `Disallow: ${value}`).join(`\n`)}\n\nSitemap: ${origin}/sitemap.xml\n`;
   const snapshot = `import type { PublicCatalog } from './types';\n\nexport const buildCatalog: PublicCatalog = ${JSON.stringify(catalog, null, 2)};\nexport const buildCatalogTimestamp: string | null = ${JSON.stringify(timestamp)};\n`;
-  const manifest = { version: 1, mode, generatedAt, catalogTimestamp: timestamp, siteOrigin: origin, spellCount: catalog.spells.length, worldCount: catalog.worlds.length, spellPaths, worldPaths, snapshotSha256: snapshotHash(snapshot), files: [`sitemap.xml`, `robots.txt`] };
+  const manifest = { version: 1, mode, generatedAt, catalogTimestamp: timestamp, siteOrigin: origin, spellCount: catalog.spells.length, worldCount: catalog.worlds.length, spellPaths, worldPaths, snapshotSha256: snapshotHash(snapshot), files: [`sitemap.xml`, `robots.txt`], ...(mode === `preview-shell` ? { reason: `catalog-schema-unavailable` } : {}) };
   const generatedDirectory = path.join(root, `test-results`, `catalog-build`);
   const snapshotPath = path.join(root, `src`, `shared`, `catalog`, `buildSnapshot.ts`);
   fs.mkdirSync(path.dirname(snapshotPath), { recursive: true });
@@ -191,7 +205,7 @@ const prepareCatalogBuild = async (options = {}) => {
   fs.writeFileSync(path.join(generatedDirectory, `sitemap.xml`), sitemap);
   fs.writeFileSync(path.join(generatedDirectory, `robots.txt`), robots);
   fs.writeFileSync(path.join(generatedDirectory, `manifest.json`), `${JSON.stringify(manifest, null, 2)}\n`);
-  if (!options.quiet) console.log(`${mode === `fixture` ? `Explicit Public Catalog Fixture Used` : mode === `shell` ? `Explicit Empty Catalog Shell Used` : `Anonymous Public Catalog Snapshot Loaded`}: ${catalog.spells.length} Spell(s), ${catalog.worlds.length} Universe(s)`);
+  if (!options.quiet) console.log(`${mode === `fixture` ? `Explicit Public Catalog Fixture Used` : mode === `shell` ? `Explicit Empty Catalog Shell Used` : mode === `preview-shell` ? `Preview Catalog Shell Prepared / Migration Required` : `Anonymous Public Catalog Snapshot Loaded`}: ${catalog.spells.length} Spell(s), ${catalog.worlds.length} Universe(s)`);
   return { catalog, manifest, snapshotPath, generatedDirectory };
 };
 
@@ -199,7 +213,7 @@ module.exports = { prepareCatalogBuild, readPublicEnvironment, getPublicConfigur
 
 if (require.main === module) {
   const flags = process.argv.slice(2);
-  if (flags.includes(`--help`)) console.log(`Usage: node scripts/prepare-catalog-build.cjs [--shell]\nDefault: Anonymous Published Supabase Catalog\nIsolated Fixture: Set CATALOG_BUILD_FIXTURE To A PublicCatalog JSON File\nOnly Public Supabase URL And Publishable-Key Environment Values Are Read`);
+  if (flags.includes(`--help`)) console.log(`Usage: node scripts/prepare-catalog-build.cjs [--shell]\nDefault: Anonymous Published Supabase Catalog\nVercel Preview: Confirmed Missing Catalog Tables Produce An Empty Shell With A Warning\nIsolated Fixture: Set CATALOG_BUILD_FIXTURE To A PublicCatalog JSON File\nOnly Public Supabase URL And Publishable-Key Environment Values Are Read For Database Access`);
   else if (flags.some((value) => value !== `--shell`)) { console.error(`Unknown Catalog Build Option`); process.exitCode = 1; }
   else prepareCatalogBuild({ shell: flags.includes(`--shell`) }).catch((error) => { console.error(error.message); process.exitCode = 1; });
 }

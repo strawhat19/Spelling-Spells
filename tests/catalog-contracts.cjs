@@ -229,6 +229,116 @@ test(`Failed Anonymous Build Reads Do Not Overwrite The Existing Snapshot With D
   assert.equal(fs.existsSync(path.join(directory, `test-results`, `catalog-build`, `manifest.json`)), false);
 });
 
+test(`Preview Catalog Missing-Schema Classification Requires An Exact Code And HTTP 404`, async () => {
+  for (const code of [`PGRST205`, `42P01`]) {
+    await assert.rejects(() => readPublicRows(`catalog_sources`, configuration, async () => response({ code }, `*`, 404)), (error) => error.code === `CATALOG_SCHEMA_UNAVAILABLE` && /HTTP 404/.test(error.message));
+  }
+  for (const [status, code] of [[404, undefined], [404, `PGRST301`], [401, `PGRST205`], [403, `42P01`], [500, `PGRST205`]]) {
+    await assert.rejects(() => readPublicRows(`catalog_sources`, configuration, async () => response({ code }, `*`, status)), (error) => error.code !== `CATALOG_SCHEMA_UNAVAILABLE`);
+  }
+});
+
+test(`Preview Catalog Missing Tables Produce A Clearly Marked Empty Shell`, async () => {
+  for (const code of [`PGRST205`, `42P01`]) {
+    const directory = temporaryProject();
+    const requests = [];
+    const result = await prepareCatalogBuild({ projectRoot: directory, environment: { ...environment, VERCEL_ENV: `preview` }, quiet: true, fetcher: async (url) => {
+      requests.push(new URL(url).pathname);
+      return response({ code }, `*`, 404);
+    } });
+    assert.equal(requests.length, 3);
+    assert.equal(result.manifest.mode, `preview-shell`);
+    assert.equal(result.manifest.reason, `catalog-schema-unavailable`);
+    assert.equal(result.manifest.catalogTimestamp, null);
+    assert.equal(result.manifest.spellCount, 0);
+    assert.equal(result.manifest.worldCount, 0);
+    assert.deepEqual(result.manifest.spellPaths, []);
+    assert.deepEqual(result.manifest.worldPaths, []);
+    assert.deepEqual(result.catalog, { spells: [], worlds: [] });
+    assert.match(fs.readFileSync(result.snapshotPath, `utf8`), /buildCatalogTimestamp: string \| null = null/);
+  }
+});
+
+test(`Preview Catalog Partial Schema Availability Does Not Export A Partial Catalog`, async () => {
+  const directory = temporaryProject();
+  const result = await prepareCatalogBuild({ projectRoot: directory, environment: { ...environment, VERCEL_ENV: `preview` }, quiet: true, fetcher: async (url) => {
+    const table = new URL(url).pathname.split(`/`).at(-1);
+    return table === `catalog_sources` ? response({ code: `PGRST205` }, `*`, 404) : response(table === `catalog_spells` ? [spellRow()] : [worldRow], 1);
+  } });
+  assert.equal(result.manifest.mode, `preview-shell`);
+  assert.deepEqual(result.catalog, { spells: [], worlds: [] });
+  assert.ok(!fs.readFileSync(result.snapshotPath, `utf8`).includes(`Fixture Flame`));
+});
+
+test(`Preview Catalog Fallback Is Unavailable In Production Local And Differently Cased Environments`, async () => {
+  for (const value of [undefined, `development`, `production`, `Preview`]) {
+    const directory = temporaryProject();
+    await assert.rejects(() => prepareCatalogBuild({ projectRoot: directory, environment: { ...environment, ...(value === undefined ? {} : { VERCEL_ENV: value }) }, quiet: true, fetcher: async () => response({ code: `PGRST205` }, `*`, 404) }), (error) => error.code === `CATALOG_SCHEMA_UNAVAILABLE`);
+    assert.equal(fs.existsSync(path.join(directory, `src`, `shared`, `catalog`, `buildSnapshot.ts`)), false);
+    assert.equal(fs.existsSync(path.join(directory, `test-results`, `catalog-build`, `manifest.json`)), false);
+  }
+});
+
+test(`Preview Catalog Unexpected Failures Leave The Existing Snapshot Untouched`, async () => {
+  const failures = [
+    async () => response({}, `*`, 404),
+    async () => response({ code: `PGRST301` }, `*`, 401),
+    async () => response({ code: `42501` }, `*`, 403),
+    async () => response({ code: `PGRST205` }, `*`, 500),
+    async () => { throw new Error(`Isolated Network Failure`); },
+    async () => ({ ...response({}, `*`, 404), json: async () => { throw new SyntaxError(`Isolated Invalid Error JSON`); } }),
+    async () => ({ ...response([], 0), json: async () => { throw new SyntaxError(`Isolated Invalid Catalog JSON`); } }),
+  ];
+  for (const fetcher of failures) {
+    const directory = temporaryProject();
+    const snapshotPath = path.join(directory, `src`, `shared`, `catalog`, `buildSnapshot.ts`);
+    fs.mkdirSync(path.dirname(snapshotPath), { recursive: true });
+    fs.writeFileSync(snapshotPath, `existing snapshot marker`);
+    await assert.rejects(() => prepareCatalogBuild({ projectRoot: directory, environment: { ...environment, VERCEL_ENV: `preview` }, quiet: true, fetcher }));
+    assert.equal(fs.readFileSync(snapshotPath, `utf8`), `existing snapshot marker`);
+    assert.equal(fs.existsSync(path.join(directory, `test-results`, `catalog-build`, `manifest.json`)), false);
+  }
+});
+
+test(`Preview Catalog Missing Tables Cannot Mask A Concurrent Authorization Failure`, async () => {
+  const directory = temporaryProject();
+  await assert.rejects(() => prepareCatalogBuild({ projectRoot: directory, environment: { ...environment, VERCEL_ENV: `preview` }, quiet: true, fetcher: async (url) => {
+    const table = new URL(url).pathname.split(`/`).at(-1);
+    return table === `catalog_sources` ? response({ code: `PGRST301` }, `*`, 401) : response({ code: `PGRST205` }, `*`, 404);
+  } }), /HTTP 401/);
+  assert.equal(fs.existsSync(path.join(directory, `test-results`, `catalog-build`, `manifest.json`)), false);
+});
+
+test(`Preview Catalog Still Requires Public Configuration Before Any Fetch`, async () => {
+  const directory = temporaryProject();
+  let requested = false;
+  await assert.rejects(() => prepareCatalogBuild({ projectRoot: directory, environment: { VERCEL_ENV: `preview` }, quiet: true, fetcher: async () => { requested = true; return response({ code: `PGRST205` }, `*`, 404); } }), /Public Supabase Publishable Key/);
+  assert.equal(requested, false);
+});
+
+test(`Preview Catalog Healthy Reads Use The Normal Anonymous Snapshot`, async () => {
+  const directory = temporaryProject();
+  const result = await prepareCatalogBuild({ projectRoot: directory, environment: { ...environment, VERCEL_ENV: `preview` }, quiet: true, fetcher: async (url) => {
+    const table = new URL(url).pathname.split(`/`).at(-1);
+    return response(table === `catalog_sources` ? [sourceRow] : table === `catalog_universes` ? [worldRow] : [spellRow()], 1);
+  } });
+  assert.equal(result.manifest.mode, `anonymous`);
+  assert.equal(result.manifest.spellCount, 1);
+  assert.equal(result.manifest.worldCount, 1);
+  assert.notEqual(result.manifest.catalogTimestamp, null);
+  assert.equal(result.manifest.reason, undefined);
+  assert.equal(result.catalog.spells[0].id, spellRow().id);
+});
+
+test(`Preview Catalog Malformed Published Records Still Fail Validation`, async () => {
+  const directory = temporaryProject();
+  await assert.rejects(() => prepareCatalogBuild({ projectRoot: directory, environment: { ...environment, VERCEL_ENV: `preview` }, quiet: true, fetcher: async (url) => {
+    const table = new URL(url).pathname.split(`/`).at(-1);
+    return response(table === `catalog_sources` ? [sourceRow] : table === `catalog_universes` ? [worldRow] : [spellRow({}, { evidenceStatus: `unverified` })], 1);
+  } }), /Unverified/);
+  assert.equal(fs.existsSync(path.join(directory, `test-results`, `catalog-build`, `manifest.json`)), false);
+});
+
 test(`Catalog Finalization Copies Generated Metadata And Rejects A Stale Snapshot`, async () => {
   const directory = temporaryProject();
   await prepareCatalogBuild({ projectRoot: directory, shell: true, environment: {}, quiet: true });

@@ -51,7 +51,11 @@ Existing contact intake remains a separate private Owner inbox. A confirmed cont
 
 ## Static Export And Publication Timing
 
-`npm run export:web` first fetches the **anonymous published catalog** using only the public project URL and publishable key, then exports Expo and finalizes sitemap/robots metadata. Missing configuration, missing migration, malformed records and incomplete reads fail the build. A failed read never silently exports the legacy seed.
+`npm run export:web` first fetches the **anonymous published catalog** using only the public project URL and publishable key, then exports Expo and finalizes sitemap/robots metadata. Production and ordinary local builds fail for a missing migration. Missing configuration, permission errors, malformed records and incomplete reads fail every normal catalog build. A failed read never silently exports the legacy seed.
+
+Vercel previews may export before the separately approved catalog migration: when `VERCEL_ENV` is exactly `preview` and catalog reads return HTTP 404 with Supabase `PGRST205` or `42P01`, preparation emits an explicit warning and an empty `preview-shell` snapshot. The manifest records `reason: catalog-schema-unavailable` and a null catalog timestamp. No spell/universe detail pages are invented. Every concurrent read settles first; a permission, network or other server failure still fails the preview even if another table is missing. Once all tables are available, previews export the actual anonymous published catalog normally. Vercel documents this environment indicator in its [system environment variables](https://vercel.com/docs/environment-variables/system-environment-variables#vercel_env).
+
+This fixes the branch preview build sequence without applying SQL. Runtime browsing/editor requests still report the missing catalog migration; a successful shell export is not evidence of database connectivity or a release-ready catalog. Production still needs the approved migration/import before its build.
 
 The generated `src/shared/catalog/buildSnapshot.ts` contains only the public build snapshot. Its checked-in baseline is empty. Do not commit generated fixture or production snapshots accidentally. Build metadata is written under ignored `test-results/catalog-build`, and final output under ignored `dist`.
 
@@ -70,6 +74,7 @@ Checks use synthetic identities and disposable in-memory PostgreSQL only. Browse
 - `npm run test:catalog:security`: all five migrations and the authorization/moderation/favorites/submissions/contact assertions passed in disposable PGlite PostgreSQL. All 21 imported payloads pass SQL validation; repeated imports preserve Owner spell/source/universe edits, status and joins. The import guard rejects an unacknowledged application.
 - `node supabase/tests/run-catalog-security.cjs --initial-legacy-publication`: passed separately; exactly nine legacy publications and twelve expansion drafts, with later imports preserving Owner edits/statuses.
 - `CATALOG_BUILD_FIXTURE=test-results/catalog-fixture/public.json` with `npm run export:web`: passed, exporting 50 static routes. The fixture contains only one static spell; the second publication is deliberately absent from the snapshot for dynamic-fallback testing. Exported entry/universe HTML contains JSON-LD, and the sitemap covers only public canonical routes.
+- Preview-build follow-up: all three configured public catalog endpoints were checked with `select=id&limit=0`; each returned HTTP 404 / `PGRST205`, confirming the pending schema without reading records. `VERCEL_ENV=preview npm run export:web` then passed locally with 48 shell routes and the explicit migration warning. Nine additional preview-boundary regressions passed, bringing the complete catalog suite to 35 passing tests. The source snapshot was restored afterward. A new hosted Vercel deployment has not been triggered or verified by this fix.
 - `git diff --check`: passed; shared guidance has no diff. Existing Git LF/CRLF notices and Metro's NO_COLOR/FORCE_COLOR warning are environment notices rather than compiler errors.
 
 The isolated browser pass additionally confirmed:
@@ -83,7 +88,7 @@ The isolated browser pass additionally confirmed:
 
 The browser fixtures retained 11 synthetic mutations, one favorite, approved/rejected submissions and a read contact. Evidence is under ignored `test-results/catalog-browser-evidence.json` and `test-results/catalog-review-results.jpg`; the fixture server was stopped. The checked-in source snapshot was restored to empty after the export.
 
-No hosted Auth callback, real-user submission, production SQL execution, Vercel deployment, hosted Realtime delivery or native-device interaction is claimed by these checks. The browser harness supplies synthetic transport/session responses; actual permission enforcement is supported separately by the PostgreSQL checks, not by the harness. Vercel filesystem/rewrites were modeled locally and still require the approved hosted smoke check. The test build is retained in `dist` and must not be deployed.
+No hosted Auth callback, real-user submission, production SQL execution, Vercel deployment, hosted Realtime delivery or native-device interaction is claimed by these checks. The browser harness supplies synthetic transport/session responses; actual permission enforcement is supported separately by the PostgreSQL checks, not by the harness. Vercel filesystem/rewrites were modeled locally and still require the approved hosted smoke check. The latest local `dist` is the preview shell export; earlier fixture-browser evidence is retained separately under `test-results`.
 
 ## Go-Live Approval Checklist
 
