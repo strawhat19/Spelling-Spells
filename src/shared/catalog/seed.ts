@@ -18,6 +18,10 @@ const officialEtymology = {
   label: `Harry Potter · Spell Etymology`,
   url: `https://www.harrypotter.com/features/the-etymology-of-harry-potter-spells`,
 };
+const philosophersStoneGuide = {
+  label: `Harry Potter · Philosopher’s Stone Spell Guide`,
+  url: `https://www.harrypotter.com/features/guide-to-the-spells-creatures-and-potions-of-philosophers-stone`,
+};
 const ancientLanguageGuide = {
   label: `Christopher Paolini · Ancient Language Guide`,
   url: `https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/`,
@@ -30,6 +34,7 @@ const ancientLanguageDictionary = {
 const freezeSpell = (spell: Spell): Spell => {
   Object.freeze(spell.aliases);
   Object.freeze(spell.syllables);
+  if (spell.casters) Object.freeze(spell.casters);
   spell.media?.forEach((media) => Object.freeze(media));
   if (spell.media) Object.freeze(spell.media);
   spell.sources.forEach((source) => Object.freeze(source));
@@ -85,6 +90,12 @@ const catalog: Spell[] = [
     accent: `light`,
     counterspell: `Nox`,
     aliases: [`Wand-Lighting Charm`],
+    entryType: `spell`,
+    evidenceStatus: `verified`,
+    pronunciationStatus: `approximate`,
+    casters: [`Harry Potter`, `Albus Dumbledore`],
+    continuity: `Harry Potter novels; also depicted in the film adaptations`,
+    effect: `Produces a light at the wand tip that remains useful for exploring dark places until extinguished with Nox.`,
     sources: [
       officialEtymology,
       {
@@ -120,6 +131,12 @@ const catalog: Spell[] = [
     category: `Force`,
     accent: `wind`,
     aliases: [`Unrelenting Force`, `Thu’um`, `Dragon Shout`],
+    entryType: `ability`,
+    casters: [`The Dragonborn`],
+    evidenceStatus: `verified`,
+    pronunciationStatus: `approximate`,
+    continuity: `The Elder Scrolls V: Skyrim`,
+    effect: `A forceful vocal blast pushes enemies away; the complete three-word shout can launch them into the air.`,
     sources: [
       {
         label: `Bethesda · Creating Skyrim’s Dragon Language`,
@@ -154,6 +171,12 @@ const catalog: Spell[] = [
     category: `Fire`,
     accent: `fire`,
     aliases: [`Fire`, `Ancient Language`],
+    casters: [],
+    entryType: `incantation`,
+    evidenceStatus: `verified`,
+    pronunciationStatus: `verified`,
+    continuity: `Inheritance Cycle novels; Ancient Language word entry`,
+    effect: `Names fire in the Ancient Language and supplies a fire-related word for magic; the intended result depends on how it is used.`,
     sources: [
       {
         label: `Christopher Paolini · Language Origins FAQ`,
@@ -192,10 +215,13 @@ const catalog: Spell[] = [
     category: `Access`,
     accent: `unlock`,
     aliases: [`Unlocking Charm`, `Thief’s Friend`],
-    sources: [{
-      label: `Harry Potter · Philosopher’s Stone Spell Guide`,
-      url: `https://www.harrypotter.com/features/guide-to-the-spells-creatures-and-potions-of-philosophers-stone`,
-    }],
+    entryType: `spell`,
+    evidenceStatus: `verified`,
+    casters: [`Hermione Granger`],
+    pronunciationStatus: `approximate`,
+    continuity: `Harry Potter novels; the cited scene is from Philosopher’s Stone`,
+    effect: `Unlocks a locked door, allowing the caster to open it; the cited example is Hermione’s escape into the forbidden third-floor corridor.`,
+    sources: [philosophersStoneGuide],
   },
   {
     id: recordId(5, `Wingardium-Leviosa`),
@@ -223,7 +249,13 @@ const catalog: Spell[] = [
     category: `Levitation`,
     accent: `wand`,
     aliases: [`Levitation Charm`, `Swish and Flick`],
-    sources: [officialSpellGuide],
+    entryType: `spell`,
+    evidenceStatus: `verified`,
+    pronunciationStatus: `approximate`,
+    casters: [`Ron Weasley`, `Hermione Granger`],
+    continuity: `Harry Potter novels; the cited lesson is from Philosopher’s Stone`,
+    effect: `Raises an object into the air. Ron uses the charm on a mountain troll’s club after learning it in Professor Flitwick’s class.`,
+    sources: [officialSpellGuide, philosophersStoneGuide],
   },
   {
     id: recordId(6, `Expelliarmus`),
@@ -248,6 +280,12 @@ const catalog: Spell[] = [
     category: `Defense`,
     accent: `wand`,
     aliases: [`Disarming Charm`, `Harry’s Signature Spell`],
+    entryType: `spell`,
+    evidenceStatus: `verified`,
+    pronunciationStatus: `approximate`,
+    casters: [`Harry Potter`, `Severus Snape`],
+    continuity: `Harry Potter novels; Harry learns it during the Chamber of Secrets Duelling Club`,
+    effect: `Makes a target release a held object, commonly a wand, and gives a duellist a way to disarm an opponent.`,
     sources: [{
       label: `Harry Potter · Harry’s Signature Spell`,
       url: `https://www.harrypotter.com/features/expelliarmus-exploring-harry-potters-signature-spell`,
@@ -267,11 +305,11 @@ const catalog: Spell[] = [
     syllables: [`ex`, `PEC`, `to`, `pa`, `TRO`, `num`],
     definition: `Conjures a protective Patronus to oppose Dementors.`,
     usage: `An advanced defensive charm; Patronuses can also carry messages in the stories.`,
-    etymology: `A detailed word-by-word derivation is not established by this entry’s linked references.`,
-    etymologyStatus: `Unconfirmed`,
+    etymology: `The official etymology guide connects the Latin phrase with expecting or awaiting a guardian; patronus carries the sense of a protector.`,
+    etymologyStatus: `Confirmed`,
     breakdown: [
-      { label: `Expecto`, meaning: `First word of the written incantation.` },
-      { label: `Patronum`, meaning: `Second word of the written incantation.` },
+      { label: `Expecto`, meaning: `I expect or await, in the official guide’s approximate Latin translation.` },
+      { label: `Patronum`, meaning: `A guardian or protector, in the official guide’s approximate Latin translation.` },
     ],
     danger: 2,
     utility: 5,
@@ -279,10 +317,19 @@ const catalog: Spell[] = [
     category: `Defense`,
     accent: `shield`,
     aliases: [`Patronus Charm`, `Protective Guardian`],
-    sources: [{
-      label: `Harry Potter · What Is a Patronus?`,
-      url: `https://www.harrypotter.com/features/what-is-a-patronus`,
-    }],
+    entryType: `spell`,
+    evidenceStatus: `verified`,
+    pronunciationStatus: `approximate`,
+    casters: [`Harry Potter`, `Remus Lupin`, `Minerva McGonagall`],
+    continuity: `Harry Potter novels; first taught to Harry in Prisoner of Azkaban`,
+    effect: `Creates a protective positive force against Dementors. A fully formed Patronus takes an animal shape, and some casters use Patronuses to deliver messages.`,
+    sources: [
+      {
+        label: `Harry Potter · What Is a Patronus?`,
+        url: `https://www.harrypotter.com/features/what-is-a-patronus`,
+      },
+      officialEtymology,
+    ],
   },
   {
     id: recordId(8, `Adurna`),
@@ -307,6 +354,12 @@ const catalog: Spell[] = [
     category: `Water`,
     accent: `wind`,
     aliases: [`Water`, `Ancient Language`],
+    casters: [],
+    entryType: `incantation`,
+    evidenceStatus: `verified`,
+    pronunciationStatus: `approximate`,
+    continuity: `Inheritance Cycle novels; Ancient Language word entry`,
+    effect: `Names water in the Ancient Language. This entry records the magical vocabulary rather than claiming that the word alone creates or moves water.`,
     sources: [ancientLanguageGuide, ancientLanguageDictionary],
   },
   {
@@ -332,6 +385,12 @@ const catalog: Spell[] = [
     category: `Force`,
     accent: `wand`,
     aliases: [`Break`, `Hit`, `Ancient Language`],
+    casters: [],
+    entryType: `incantation`,
+    evidenceStatus: `verified`,
+    pronunciationStatus: `verified`,
+    continuity: `Inheritance Cycle novels; Ancient Language word entry`,
+    effect: `Expresses breaking or hitting in the Ancient Language. The word identifies an action; the target and full outcome require further story context.`,
     sources: [
       ancientLanguageGuide,
       ancientLanguageDictionary,

@@ -1,0 +1,26 @@
+# Starter Expansion Source Review — October 23, 2026
+
+This review covers expansion entries 10–21. Publication is recommended for the eight primary-supported Marvel/DC entries. Keep the four Tolkien candidates as unpublished drafts until their complete narrative claims can be checked against a lawful primary text. This file records editorial research, not database publication or application runtime evidence.
+
+Stable entry IDs, numbers, slugs and the existing source URL order are retained. The additional archive locators below are research references only; adding them to the middle of the seed source sequence would renumber existing sources.
+
+| No. | Entry | Recommendation | Inspected Evidence |
+| --- | --- | --- | --- |
+| 10 | Crimson Bands of Cyttorak | Publish | Marvel's [Cyttorak history](https://www.marvel.com/articles/comics/cyttorak-history-hosts-juggernaut-cain-marko-colossus-doctor-strange?linkId=208887688) confirms Strange's binding use and distinguishes the later physical bands. Avoid an absolute unbreakability claim or a first-appearance assertion. |
+| 11 | Shield of the Seraphim | Publish | Marvel's [Tony's Workshop PDF](https://cdn.marvel.com/u/prod/marvel/i/pdf/MMRPG_Tonys_Workshop_20250327.pdf), PDF pages 1–2, names the protective power and the Strange/Dormammu example. Keep the tabletop continuity explicit. |
+| 12 | Winds of Watoomb | Publish | The same [official PDF](https://cdn.marvel.com/u/prod/marvel/i/pdf/MMRPG_Tonys_Workshop_20250327.pdf), PDF page 2, supports the reaction using Focus instead of Health. It is not evidence for every wind effect in other media. |
+| 13 | Astral Projection | Publish | Marvel's [on-screen Strange profile](https://www.marvel.com/characters/doctor-strange-stephen-strange/on-screen?mobile-app=true&theme=dark%2F1000), Tools of the Trade and Strange Tales, supports the ability and hospital scene. Search-index text was inspectable; the direct fetch returned 403. |
+| 14 | Mellon | Retain Draft | The secondary door reference remains. Marquette's primary archive locates the utterance but its guest view omits enough surrounding text that the complete password/translation claim was not independently reviewed. |
+| 15 | Naur an edraith ammen | Retain Draft | The linguistic index supplies publication locators. No complete relevant passage from a lawful publisher, author or archival primary view was inspected. |
+| 16 | Annon edhellen, edro hi ammen | Retain Draft | Marquette's public index supports the phrase and a nearby non-opening outcome, but not a full primary-text review of this entry. Keep the failed attempt distinct from Mellon. |
+| 17 | Shutting-Spell | Retain Draft | The secondary chapter locator remains. No complete relevant primary passage was inspected; do not turn a descriptive working into a verified formal incantation. |
+| 18 | Soul Self | Publish | The official [DC Universe Online Raven spotlight](https://www.dcuniverseonline.com/news/2013-august-20-raven-character-spotlight-dcuo), August 20, 2013, identifies the projection ability. |
+| 19 | Empathy | Publish | The same [official profile](https://www.dcuniverseonline.com/news/2013-august-20-raven-character-spotlight-dcuo) supports emotion sharing. |
+| 20 | Empathic Healing | Publish | The same [official profile](https://www.dcuniverseonline.com/news/2013-august-20-raven-character-spotlight-dcuo) supports pain-taking healing. The catalog name describes the effect. |
+| 21 | Azarath Metrion Zinthos | Publish | [Dwayne McDuffie's Fear Itself script](https://dwaynemcduffie.com/wp-content/uploads/2025/06/WEBSITE_TT_ep205_Fear_Itself_SCRIPT_D2.pdf), printed page 5 / PDF page 5, documents Raven's words immediately before moving DVD boxes with black energy. Treat the inspected script as its source version. |
+
+The [Marquette Anduin archive folio LR02500](https://anduin.marquette.edu/3/0/4/16/lr02500/) is the first galley proof of Book II, chapter 4, page 13, shelfmark MS. Tolkien 3/4/16/89a. Its public index locates Annon at paragraph 115, the non-opening response at paragraphs 116–117, and Mellon at paragraph 127. The linked passage pages returned empty detail sections in the guest view. The archive's [Book II, chapter 5 index](https://anduin.marquette.edu/3/s2/05/) locates the Shutting-Spell chapter but is not evidence that its full passage was inspected. Draft and galley-proof witnesses also require attention to differences from the published edition.
+
+Every expansion record retains `pronunciationStatus: unavailable`, an empty pronunciation and syllable list, and a note explaining that no supported transcription was inspected. English power names are not invented verbal formulas; Raven's formula is not given a fabricated translation. Danger, utility and skill values are editorial browsing aids, not canonical mechanics or measures of real-world efficacy. The version-specific tabletop mechanics are attributed separately in the descriptions.
+
+The source changes make the editorial levels entry-specific and refine the eight supported usage descriptions. No artwork was added or changed. No test, build or UI command was run for this data edit. Live import, readback and any publication totals are recorded by the importing task separately.

@@ -5,6 +5,16 @@
   "installCommand": "npm ci",
   "outputDirectory": "dist",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/plan", "destination": "/pricing", "permanent": true },
+    { "source": "/plans", "destination": "/pricing", "permanent": true },
+    { "source": "/upgrade", "destination": "/pricing", "permanent": true },
+    { "source": "/upgrades", "destination": "/pricing", "permanent": true },
+    { "source": "/membership", "destination": "/pricing", "permanent": true },
+    { "source": "/memberships", "destination": "/pricing", "permanent": true },
+    { "source": "/subscription", "destination": "/pricing", "permanent": true },
+    { "source": "/subscriptions", "destination": "/pricing", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/spell/:slug", "destination": "/spell" },
     { "source": "/world/:slug", "destination": "/world" },

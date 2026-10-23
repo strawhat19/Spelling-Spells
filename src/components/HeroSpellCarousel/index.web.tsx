@@ -5,6 +5,7 @@ import SpellCard from '../SpellCard';
 import type { HeroSpellCarouselProps } from './types';
 import { useHeroCarousel } from './useHeroCarousel.web';
 import FeaturedSkeleton from '../HomePage/FeaturedSkeleton';
+import { scriptureColumns } from '../SpellParchmentMarquees/scripture';
 
 const HeroSpellCarousel = ({ ready, spells }: HeroSpellCarouselProps) => {
   const carousel = useHeroCarousel(spells, ready);
@@ -14,7 +15,7 @@ const HeroSpellCarousel = ({ ready, spells }: HeroSpellCarouselProps) => {
   return <section
     id='hero-spell-carousel'
     ref={carousel.rootRef}
-    className='hero-spell-carousel'
+    className={`hero-spell-carousel${turning ? ` is-shuffling` : ``}`}
     aria-roledescription='carousel'
     aria-label='Featured Spells'
     aria-describedby='hero-carousel-help'
@@ -49,7 +50,30 @@ const HeroSpellCarousel = ({ ready, spells }: HeroSpellCarouselProps) => {
             <strong id={`hero-carousel-cover-name-${spell.id}`}>{spell.name}</strong>
             <p id={`hero-carousel-cover-pronunciation-${spell.id}`}>{spell.pronunciation}</p>
           </div>
-        </div>) : <div id='home-featured-empty' className='ss-home-featured-loading' role='status'><Icon name='book' size={28} />Your spell library is empty</div>}
+        </div>) : <div id='home-featured-empty' className='spell-card hero-carousel-empty' role='status'>
+          <span id='home-featured-empty-roll-top' className='hero-carousel-empty-roll hero-carousel-empty-roll--top' aria-hidden='true' />
+          {scriptureColumns.map((rows, columnIndex) => <svg
+            aria-hidden='true'
+            focusable='false'
+            key={columnIndex}
+            viewBox='0 0 60 300'
+            id={`home-featured-empty-scripture-${columnIndex}`}
+            className={`hero-carousel-empty-scripture hero-carousel-empty-scripture--${columnIndex}`}
+          >
+            {rows.slice(0, 3).map((sigil, rowIndex) => <g key={rowIndex} id={`home-featured-empty-sigil-${columnIndex}-${rowIndex}`} transform={`translate(0 ${rowIndex * 108})`}>
+              {sigil.ink.map((shape, shapeIndex) => <path key={shapeIndex} d={shape} fillRule='evenodd' id={`home-featured-empty-sigil-${columnIndex}-${rowIndex}-ink-${shapeIndex}`} />)}
+            </g>)}
+          </svg>)}
+          <div id='home-featured-empty-seal' className='hero-carousel-empty-seal' aria-hidden='true'>
+            <Icon name='book' size={44} />
+            <span id='home-featured-empty-seal-spark' className='hero-carousel-empty-seal-spark'><Icon name='spark' size={19} /></span>
+          </div>
+          <p id='home-featured-empty-eyebrow' className='hero-carousel-empty-eyebrow'>An Unwritten Chapter</p>
+          <h2 id='home-featured-empty-title' className='hero-carousel-empty-title'>Your spell library <em>is empty</em></h2>
+          <p id='home-featured-empty-description' className='hero-carousel-empty-description'>No spells are inscribed here yet.</p>
+          <span id='home-featured-empty-flourish' className='hero-carousel-empty-flourish' aria-hidden='true'><Icon name='spark' size={15} /></span>
+          <span id='home-featured-empty-roll-bottom' className='hero-carousel-empty-roll hero-carousel-empty-roll--bottom' aria-hidden='true' />
+        </div>}
       </div>
     </div>
     {!ready ? <div id='hero-carousel-navigation-skeleton' className='hero-carousel-navigation' aria-hidden='true'>

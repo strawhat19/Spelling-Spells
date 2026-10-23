@@ -1,0 +1,50 @@
+.ss-pricing {
+  width: min(1060px, calc(100% - 112px));
+  margin: 100px auto;
+  &-heading { max-width: 650px; margin: 0 auto 39px; text-align: center; }
+  &-eyebrow { display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--gold, #ffc857); margin: 0 0 17px; font-size: 9px; font-weight: 650; letter-spacing: 1.8px; text-transform: uppercase; }
+  &-heading .ss-pricing-title { color: var(--ink, #fff9ea); margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(34px, 3.6vw, 46px); font-weight: 500; line-height: 1.15; letter-spacing: -1.2px; text-wrap: balance; }
+  &-intro { max-width: 440px; margin: 19px auto 0; color: var(--body, #c8bcda); font-size: 13px; line-height: 1.85; text-wrap: balance; }
+  &-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 24px; align-items: stretch; }
+  &-card { --pricing-accent: #6b513b; isolation: isolate; position: relative; display: flex; flex-direction: column; min-width: 0; padding: 38px 36px 31px; color: #20134d; box-shadow: 0 14px 32px #08041320; transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s; }
+  &-card::before { content: ''; z-index: -2; position: absolute; inset: 0; background: radial-gradient(ellipse at 0 0, #a66d2820, transparent 60%), repeating-linear-gradient(6deg, #70461904 0 1px, transparent 1px 5px), #f3e3bf; clip-path: polygon(0 4px, 9% 1px, 19% 3px, 31% 0, 43% 3px, 57% 1px, 71% 4px, 87% 0, 100% 3px, 100% calc(100% - 4px), 89% calc(100% - 1px), 76% calc(100% - 4px), 62% 100%, 45% calc(100% - 3px), 29% calc(100% - 1px), 16% calc(100% - 4px), 0 100%); }
+  &-card::after { content: ''; z-index: -1; position: absolute; inset: 13px; pointer-events: none; border: 1px solid #9b713c38; border-block: 3px double #9b713c55; }
+  &-card--highlighted { --pricing-accent: #6039d8; }
+  &-card--highlighted::before { background: radial-gradient(ellipse at 100% 0, #b79aff18, transparent 55%), repeating-linear-gradient(6deg, #70461904 0 1px, transparent 1px 5px), #f8eacb; }
+  &-card--highlighted::after { border-color: #6039d844; }
+  &-card-topline { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; min-height: 21px; }
+  &-edition { color: #6b513b; font-size: 9px; font-weight: 650; text-transform: uppercase; letter-spacing: 1.5px; }
+  &-highlight { display: inline-flex; align-items: center; gap: 5px; color: #6039d8; font-size: 9px; font-weight: 650; }
+  &-name { margin: 19px 0 11px; color: #20134d; font-family: Georgia, 'Times New Roman', serif; font-size: 34px; font-weight: 500; line-height: 1.2; letter-spacing: -.7px; overflow-wrap: anywhere; }
+  &-description { min-height: 43px; max-width: 350px; margin: 0; color: #584333; font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+  &-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 11px; margin: 27px 0 21px; }
+  &-amount { color: #20134d; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(46px, 5vw, 61px); letter-spacing: -2.7px; line-height: 1; }
+  &-interval { color: #6b513b; font-size: 11px; }
+  &-reading { display: flex; gap: 8px; align-items: flex-start; min-height: 35px; margin: 0; padding: 0 0 19px; color: var(--pricing-accent); font-size: 11px; line-height: 1.6; font-weight: 650; }
+  &-reading svg { flex-shrink: 0; margin-top: 1px; }
+  &-features { display: flex; flex-direction: column; gap: 15px; margin: 0 0 31px; padding: 23px 0 0; border-top: 1px solid #9b713c44; list-style: none; }
+  &-feature { display: flex; gap: 10px; align-items: flex-start; color: #584333; font-size: 12px; line-height: 1.7; }
+  &-feature > svg { flex-shrink: 0; margin-top: 2px; color: var(--pricing-accent); }
+  &-feature-copy { overflow-wrap: anywhere; }
+  &-action-area { margin-top: auto; }
+  &-action { display: flex; justify-content: center; align-items: center; width: 100%; min-height: 46px; gap: 8px; padding: 13px; border: 1px solid #6039d83d; border-radius: 4px; background: #fff9ea66; color: #6039d8; font: inherit; font-size: 11px; font-weight: 650; text-decoration: none; transition: background .2s, border-color .2s; }
+  &-action:hover { background: #fff9eacc; border-color: #6039d877; }
+  &-action--unavailable { cursor: default; color: #f9f1e2; background: #44315d; border-color: #44315d; }
+  &-action--unavailable:hover { background: #44315d; border-color: #44315d; }
+  &-card-note { margin: 12px 0 0; text-align: center; color: #6b513b; font-size: 10px; line-height: 1.6; }
+  &-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 26px; }
+  &-note { margin: 0; color: var(--soft, #b8aacd); font-size: 10px; line-height: 1.9; }
+  &-text-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--lavender, #d8c8f2); font: inherit; font-size: 11px; font-weight: 650; text-decoration: none; cursor: pointer; }
+  &-text-link:hover { color: var(--gold, #ffc857); }
+  &-action:focus-visible, &-text-link:focus-visible { outline: 3px solid #9573e4; outline-offset: 5px; }
+  &-state { display: flex; flex-direction: column; gap: 13px; align-items: center; padding: 52px 24px; text-align: center; border-block: 1px solid var(--line, #514065); color: var(--gold, #ffc857); }
+  &-state-title { margin: 0; color: var(--ink, #fff9ea); font-family: Georgia, serif; font-size: 26px; line-height: 1.3; }
+  &-state-copy { max-width: 480px; margin: 0; color: var(--body, #c8bcda); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+  &--page { width: 100%; margin: 0; }
+  &--page &-heading { max-width: 720px; margin-bottom: 43px; }
+  &--page &-heading .ss-pricing-title { font-size: clamp(40px, 4.8vw, 60px); }
+}
+[data-theme='ivory'] .ss-pricing { &-eyebrow, &-text-link { color: #6039d8; } }
+@media (hover: hover) { .ss-pricing-card:hover { transform: translateY(-4px); box-shadow: 0 20px 38px #0804132b; } }
+@media (max-width: 700px) { .ss-pricing { width: calc(100% - 42px); margin: 68px auto; &-heading { margin-bottom: 29px; } &-grid { gap: 21px; } &-card { padding: 34px 29px 29px; } &-footer { flex-direction: column; align-items: flex-start; gap: 9px; } &--page { width: 100%; margin: 0; } } }
+@media (prefers-reduced-motion: reduce) { .ss-pricing-card, .ss-pricing-action { transition: none; } .ss-pricing-card:hover { transform: none; } }

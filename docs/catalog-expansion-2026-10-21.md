@@ -1,5 +1,7 @@
 # Catalog Expansion Handoff — October 21, 2026
 
+Hosted status updated October 23: the catalog migration is installed and the starter import is complete, with 17 published entries and 4 research drafts. See the [starter import record](catalog-starter-import-2026-10-23.md). The preparation notes and earlier evidence below are historical.
+
 Branch: `codex/catalog-expansion-20261021`. Existing uncommitted package, auth-setup, scrollbar and parchment changes were preserved. No merge, push, deployment, DNS, Auth configuration, live SQL, billing, ads or payment changes are part of this work. Shared `AGENTS.md` and `ai/` were not edited.
 
 The October 19 checkpoint, migration draft and named branch could not be recovered from this checkout and inspected refs. [The research register](catalog-sources.md) records the new source review and its limits instead of claiming recovery of unavailable work.

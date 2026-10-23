@@ -7,6 +7,10 @@ export const publicPageMetadata: Record<string, { title: string; description: st
     title: `Fantasy Worlds and Their Spells`,
     description: `Explore published entries by universe and continuity. Fictional worlds and cultural folklore traditions are identified separately.`,
   },
+  '/pricing': {
+    title: `Pricing`,
+    description: `Explore Spelling Spells plans. Browse the spell library for free, or preview upcoming plans for ad-free reading.`,
+  },
   '/pronunciation': {
     title: `How to Pronounce Fantasy Spells`,
     description: `Read fantasy spell pronunciation guides, syllables and source context. Optional computer voices are reading aids, not official recordings.`,

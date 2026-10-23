@@ -1,0 +1,23 @@
+# Original Catalog Source Review
+
+Reviewed October 23, 2026 for the authorized starter-catalog import. This records source review; it does not claim a database import, deployment, build, test, audio playback, or UI check.
+
+The nine original spell IDs, numbers, source URLs, media links, and source first-encounter order are retained. New fields make entry type, continuity, supported effect, and evidence/pronunciation status explicit. Named casters are examples supported by the linked official material, not exhaustive lists.
+
+| Entry | Primary Evidence | Supported Scope |
+| --- | --- | --- |
+| Lumos | [Official encyclopedia](https://www.harrypotter.com/fact-file/spells/the-wand-lighting-charm), [official etymology feature](https://www.harrypotter.com/features/the-etymology-of-harry-potter-spells) | Wand-tip light, Nox, novel and film appearances; the feature identifies Harry and Dumbledore using it. Latin origin remains suggested. |
+| Fus Ro Dah | [Bethesda language interview](https://elderscrolls.bethesda.net/en-AU/news/1rL4bCScN6RYXaXQb4ownj/how-bethesda-game-studios-made-skyrims-dragon-language), [Bethesda Skyrim retrospective](https://elderscrolls.bethesda.net/zh-TW/news/7-memorable-moments-from-the-elder-scrolls-v-skyrim) | Dragonborn ability, three words, forceful push and airborne enemies. Individual word translations remain unasserted because these references do not give them. |
+| Brisingr | [Author FAQ](https://www.paolini.net/faq/), [pronunciation note](https://www.paolini.net/2018/06/11/man-arms-brisingr/), [author audio index](https://www.paolini.net/audio-pronunciation-guide/things/) | Fire translation and author's Old Norse inspiration account. Verified written pronunciation comes from the sword bearing the same word, as disclosed in the entry. |
+| Alohomora | [Official first-book guide](https://www.harrypotter.com/features/guide-to-the-spells-creatures-and-potions-of-philosophers-stone) | Unlocking charm, Thief's Friend alias, Hermione's third-floor corridor scene. No unsupported linguistic derivation added. |
+| Wingardium Leviosa | [Official spell guide](https://www.harrypotter.com/features/your-guide-to-the-best-spells-in-harry-potter), [official first-book guide](https://www.harrypotter.com/features/guide-to-the-spells-creatures-and-potions-of-philosophers-stone) | Levitation, swish and flick, Hermione and Ron casting, Ron moving the troll's club. |
+| Expelliarmus | [Official signature-spell feature](https://www.harrypotter.com/features/expelliarmus-exploring-harry-potters-signature-spell) | Disarming effect, Harry's use, Snape teaching it at the Duelling Club, approximate combined Latin meaning. |
+| Expecto Patronum | [Official Patronus feature](https://www.harrypotter.com/features/what-is-a-patronus), [official etymology feature](https://www.harrypotter.com/features/the-etymology-of-harry-potter-spells) | Defensive effect, corporeal form and communication, named caster examples, approximate Latin meaning. |
+| Adurna | [Author language guide](https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/), [author dictionary](https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/english-ancient-language-dictionary/) | Water vocabulary only; no invented independent spell effect, named caster, dedicated pronunciation, or etymology. |
+| Jierda | [Author language guide](https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/), [author dictionary](https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/english-ancient-language-dictionary/), [author audio index](https://www.paolini.net/audio-pronunciation-guide/words-phrases/) | Break/hit translation and explicit written JEER-duh pronunciation. No named casting scene or individual etymology is asserted. |
+
+All Harry Potter pronunciations, Fus Ro Dah, and Adurna remain approximate reader aids. The explicit Brisingr and Jierda written pronunciations are sourced; linked audio availability is not audio playback verification. Danger, utility, skill, and category remain editorial catalog judgments, as explained in `catalogNotes`.
+
+Ancient Language words are published as vocabulary/incantation entries. Their verified evidence status covers the written word and documented meaning, without implying that every word is a standalone spell with a fixed mechanical effect. Their caster arrays remain empty because the retained primary references do not identify a specific casting scene.
+
+The Bethesda language URL initially timed out, then loaded successfully on retry. No source URL was replaced.

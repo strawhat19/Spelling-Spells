@@ -79,6 +79,7 @@ export const useNativeHeroCarousel = ({ spells, ready }: HeroSpellCarouselProps)
   useLayoutEffect(() => {
     const attempt = ++generation.current;
     const outgoing = shownRef.current;
+    let handoffListener: string | null = null;
     settling.current = null;
     animation.current?.stop();
     progress.setValue(0);
@@ -96,23 +97,28 @@ export const useNativeHeroCarousel = ({ spells, ready }: HeroSpellCarouselProps)
       setShuffling(true);
       setRear(current);
       setShuffleDirection(direction.current);
-      animation.current = Animated.timing(progress, { toValue: .5, duration: 300, isInteraction: false, useNativeDriver: true, easing: Easing.inOut(Easing.cubic) });
+      let handoffApplied = false;
+      handoffListener = progress.addListener(({ value }) => {
+        if (generation.current !== attempt || handoffApplied || value < .495) return;
+        handoffApplied = true;
+        if (handoffListener !== null) { progress.removeListener(handoffListener); handoffListener = null; }
+        setRaised(true);
+      });
+      animation.current = Animated.sequence([
+        Animated.timing(progress, { toValue: .5, duration: 380, isInteraction: false, useNativeDriver: true, easing: Easing.bezier(.22, .72, .25, 1) }),
+        Animated.spring(progress, { toValue: 1, mass: .9, damping: 22, stiffness: 180, isInteraction: false, useNativeDriver: true, restSpeedThreshold: .01, restDisplacementThreshold: .001 }),
+      ]);
       animation.current.start(({ finished }) => {
+        if (handoffListener !== null) { progress.removeListener(handoffListener); handoffListener = null; }
         if (generation.current !== attempt) return;
         if (!finished || !motion.current || !foreground.current) { settle(); return; }
-        setRaised(true);
-        animation.current = Animated.timing(progress, { toValue: 1, duration: 420, isInteraction: false, useNativeDriver: true, easing: Easing.out(Easing.cubic) });
-        animation.current.start(({ finished: completed }) => {
-          if (generation.current !== attempt) return;
-          if (!completed || !motion.current || !foreground.current) { settle(); return; }
-          settling.current = attempt;
-          setShown(current);
-          setRear(outgoing);
-          setRaised(false);
-        });
+        settling.current = attempt;
+        setShown(current);
+        setRear(outgoing);
+        setRaised(false);
       });
     }
-    return () => { generation.current += 1; settling.current = null; animation.current?.stop(); progress.setValue(0); };
+    return () => { generation.current += 1; settling.current = null; if (handoffListener !== null) progress.removeListener(handoffListener); animation.current?.stop(); progress.setValue(0); };
   }, [deck, current, ready, active, standby, progress, motionAllowed]);
 
   useLayoutEffect(() => {
@@ -173,24 +179,28 @@ export const useNativeHeroCarousel = ({ spells, ready }: HeroSpellCarouselProps)
   };
   const gutter = cardSize.width > 0 && cardSize.height > 0 ? Math.max(0, (windowWidth - cardSize.width) / 2 - 10) : 0;
   const halfHeight = Math.max(cardSize.height / 2, 1);
-  const swingDistance = Math.min(cardSize.width * .14, 58, gutter * .45);
-  const swingAngle = Math.min(8, Math.asin(Math.min(1, (gutter - swingDistance) / halfHeight)) * 180 / Math.PI);
+  const swingScale = .94;
+  const swingGutter = gutter + cardSize.width * (1 - swingScale) / 2;
+  const swingDistance = Math.min(cardSize.width * .45, 180, swingGutter * .7);
+  const swingAngle = Math.min(12, Math.asin(Math.min(1, (swingGutter - swingDistance) / (halfHeight * swingScale))) * 180 / Math.PI);
   const rearOffset = Math.min(10, gutter * .35);
   const rearAngle = Math.min(windowWidth <= 620 ? 2 : 4, Math.asin(Math.min(1, (gutter - rearOffset) / halfHeight)) * 180 / Math.PI);
-  const frontStyle = useMemo(() => ({ transform: [
+  const frontStyle = useMemo(() => ({ opacity: progress.interpolate({ inputRange: [0, .4, .49, .5, .74, 1], outputRange: [1, 1, 0, 0, 1, 1] }), transform: [
     { translateX: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [0, -shuffleDirection * swingDistance, rearOffset] }) },
-    { translateY: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [0, -8, 12] }) },
+    { translateY: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [0, -12, 12] }) },
     { rotateZ: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [`0deg`, `${-swingAngle * shuffleDirection}deg`, `${rearAngle}deg`] }) },
-    { scale: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [1, .99, .97] }) },
-  ] }), [progress, rearAngle, rearOffset, swingAngle, swingDistance, shuffleDirection]);
+    { scale: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [1, swingScale, .97] }) },
+  ] }), [progress, rearAngle, rearOffset, swingAngle, swingScale, swingDistance, shuffleDirection]);
   const rearStyle = useMemo(() => ({ transform: [
-    { translateX: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [rearOffset, rearOffset / 2, 0] }) },
-    { translateY: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [12, 4, 0] }) },
-    { rotateZ: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [`${rearAngle}deg`, `${rearAngle / 2}deg`, `0deg`] }) },
-    { scale: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [.97, .985, 1] }) },
+    { translateX: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [rearOffset, rearOffset * .18, 0] }) },
+    { translateY: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [12, 2, 0] }) },
+    { rotateZ: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [`${rearAngle}deg`, `${rearAngle * .15}deg`, `0deg`] }) },
+    { scale: progress.interpolate({ inputRange: [0, .5, 1], outputRange: [.97, .996, 1] }) },
   ] }), [progress, rearAngle, rearOffset]);
+  const rearCoverStyle = useMemo(() => ({ opacity: progress.interpolate({ inputRange: [0, .4, 1], outputRange: [1, 0, 0] }) }), [progress]);
+  const frontCoverStyle = useMemo(() => ({ opacity: progress.interpolate({ inputRange: [0, .38, .49, 1], outputRange: [0, 0, 1, 1] }) }), [progress]);
   const visibleSpell = shown && deck.some((spell) => spell.id === shown.id) ? shown : current;
   const rearSpell = rear && rear.id !== visibleSpell?.id && deck.some((spell) => spell.id === rear.id) ? rear : null;
   const visibleIndex = Math.max(0, deck.findIndex((spell) => spell.id === visibleSpell?.id));
-  return { ...page, raised, choose, change, gestures, stageRef, shuffling, frontStyle, rearStyle, rearSpell, focusCard, blurCard, beginTouch, endTouch, measureCard, visibleSpell, visibleIndex, minHeight: cardSize.height + (count > 1 ? 20 : 0), automatic: motionAllowed && screenReaderAllowed && active && !focused && !touching && count > 1 };
+  return { ...page, raised, choose, change, gestures, stageRef, shuffling, frontStyle, rearStyle, rearSpell, focusCard, blurCard, beginTouch, endTouch, measureCard, visibleSpell, visibleIndex, rearCoverStyle, frontCoverStyle, minHeight: cardSize.height + (count > 1 ? 20 : 0), automatic: motionAllowed && screenReaderAllowed && active && !focused && !touching && count > 1 };
 };

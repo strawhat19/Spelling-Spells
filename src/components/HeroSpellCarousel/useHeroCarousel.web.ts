@@ -4,7 +4,8 @@ import type { MouseEvent, PointerEvent, KeyboardEvent } from 'react';
 import { useRef, useState, useEffect, useCallback, useLayoutEffect } from 'react';
 
 type Shuffle = { token: number; source: string; target: string; direction: number };
-type Turn = Shuffle & { pose: string; paper: string; started: boolean; committed: boolean };
+type CardPose = { paper: string; transform: string; opacity: number };
+type Turn = Shuffle & { poses: Map<string, CardPose>; started: boolean; committed: boolean };
 const useBrowserLayoutEffect = typeof window === `undefined` ? useEffect : useLayoutEffect;
 
 export const useHeroCarousel = (spells: Spell[], ready: boolean) => {
@@ -58,13 +59,18 @@ export const useHeroCarousel = (spells: Spell[], ready: boolean) => {
     if (manual) setAnnouncement(`Spell ${destination + 1} of ${value.count}: ${target.name}`);
     const panel = panels.current.get(value.current.id);
     if (!motionRef.current || !panel?.animate) { value.select(destination); return; }
-    const targetPanel = panels.current.get(target.id);
-    const cover = targetPanel?.querySelector<HTMLElement>(`.hero-carousel-card-cover`);
-    const stacked = targetPanel?.matches(`.is-stack-near, .is-stack-far`);
-    const pose = stacked && targetPanel ? getComputedStyle(targetPanel).transform : getComputedStyle(viewportRef.current ?? panel).getPropertyValue(`--hero-stack-near-transform`);
-    const paper = cover ? getComputedStyle(cover).backgroundColor : `#bfa9e9`;
+    const poses = new Map<string, CardPose>();
+    panels.current.forEach((element, id) => {
+      const style = getComputedStyle(element);
+      const cover = element.querySelector<HTMLElement>(`.hero-carousel-card-cover`);
+      poses.set(id, {
+        transform: style.transform,
+        paper: cover ? getComputedStyle(cover).backgroundColor : `#d8c8f2`,
+        opacity: style.visibility === `visible` ? Number(style.opacity) : 0,
+      });
+    });
     const transition = { token: ++generation.current, source: value.current.id, target: target.id, direction: nextIndex < value.index ? -1 : 1 };
-    turn.current = { ...transition, pose, paper, started: false, committed: false };
+    turn.current = { ...transition, poses, started: false, committed: false };
     setShuffle(transition);
   }, [ready]);
 
@@ -83,32 +89,52 @@ export const useHeroCarousel = (spells: Spell[], ready: boolean) => {
     const bounds = source.getBoundingClientRect();
     const gutter = direction > 0 ? bounds.left : window.innerWidth - bounds.right;
     const budget = Math.max(0, gutter - 10);
-    const distance = Math.min(58, source.clientWidth * .14, budget * .45);
-    const angle = Math.min(8, Math.asin(Math.min(1, (budget - distance) / Math.max(1, source.clientHeight * .65))) * 180 / Math.PI);
+    const scale = .94;
+    const clearance = budget + source.clientWidth * (1 - scale) / 2;
+    const distance = Math.min(240, source.clientWidth * .55, clearance * .74);
+    const angle = Math.min(9, Math.asin(Math.min(1, Math.max(0, clearance - distance) / Math.max(1, source.clientHeight * .65))) * 180 / Math.PI);
+    const lift = Math.min(28, source.clientHeight * .045);
     const stackStyle = getComputedStyle(viewportRef.current ?? source);
+    const nearPose = stackStyle.getPropertyValue(`--hero-stack-near-transform`);
+    const farPose = stackStyle.getPropertyValue(`--hero-stack-far-transform`);
     const sourceIndex = deck.findIndex((spell) => spell.id === transition.source);
     const targetIndex = deck.findIndex((spell) => spell.id === transition.target);
     const sourceRank = (sourceIndex - targetIndex + count) % count;
-    const restingPose = sourceRank === 1 ? stackStyle.getPropertyValue(`--hero-stack-near-transform`) : sourceRank === 2 ? stackStyle.getPropertyValue(`--hero-stack-far-transform`) : `translate3d(0, 8px, 0) rotate(0deg) scale(.94)`;
-    const incomingPose = transition.pose;
-    const options: KeyframeAnimationOptions = { duration: 720, fill: `both`, easing: `linear` };
+    const restingLayer = sourceRank === 1 ? 2 : 1;
+    const restingPose = sourceRank === 1 ? nearPose : farPose;
+    const incomingPose = transition.poses.get(transition.target);
+    const options: KeyframeAnimationOptions = { duration: 920, fill: `both`, easing: `linear` };
     const outgoing = source.animate([
-      { offset: 0, zIndex: 5, transform: `translate3d(0, 0, 0) rotate(0deg) scale(1)`, easing: `cubic-bezier(.32, 0, .3, 1)` },
-      { offset: .44, zIndex: 5, transform: `translate3d(${-direction * distance}px, -8px, 0) rotate(${-direction * angle}deg) scale(.985)` },
-      { offset: .48, zIndex: 5, transform: `translate3d(${-direction * distance}px, -8px, 0) rotate(${-direction * angle}deg) scale(.985)` },
-      { offset: .49, zIndex: 1, transform: `translate3d(${-direction * distance}px, -8px, 0) rotate(${-direction * angle}deg) scale(.985)`, easing: `cubic-bezier(.16, 1, .3, 1)` },
-      { offset: 1, zIndex: 1, transform: restingPose },
+      { offset: 0, zIndex: 5, opacity: 1, transform: `translate3d(0, 0, 0) rotate(0deg) scale(1)`, easing: `cubic-bezier(.32, .04, .2, 1)` },
+      { offset: .38, zIndex: 5, opacity: 1, transform: `translate3d(${-direction * distance}px, ${-lift}px, 0) rotate(${-direction * angle}deg) scale(${scale})`, easing: `ease-out` },
+      { offset: .48, zIndex: 5, opacity: 0, transform: `translate3d(${-direction * distance * .98}px, ${-lift - 2}px, 0) rotate(${-direction * angle * .98}deg) scale(${scale})` },
+      { offset: .49, zIndex: restingLayer, opacity: 0, transform: `translate3d(${-direction * distance * .96}px, ${-lift}px, 0) rotate(${-direction * angle * .96}deg) scale(${scale})`, easing: `cubic-bezier(.16, 1, .3, 1)` },
+      { offset: 1, zIndex: restingLayer, opacity: sourceRank <= 2 ? 1 : 0, transform: restingPose },
     ], options);
     const incoming = target.animate([
-      { offset: 0, transform: incomingPose },
-      { offset: .24, transform: incomingPose, easing: `cubic-bezier(.2, .75, .25, 1)` },
-      { offset: 1, transform: `translate3d(0, 0, 0) rotate(0deg) scale(1)` },
+      { offset: 0, opacity: incomingPose?.opacity ?? 0, transform: incomingPose?.transform ?? nearPose, easing: `cubic-bezier(.16, 1, .3, 1)` },
+      { offset: .72, opacity: 1, transform: `translate3d(0, -3px, 0) rotate(${direction * .25}deg) scale(1.006)`, easing: `cubic-bezier(.22, .8, .4, 1)` },
+      { offset: 1, opacity: 1, transform: `translate3d(0, 0, 0) rotate(0deg) scale(1)` },
     ], options);
     const sourceCover = source.querySelector<HTMLElement>(`.hero-carousel-card-cover`);
     const targetCover = target.querySelector<HTMLElement>(`.hero-carousel-card-cover`);
     animations.current = [outgoing, incoming];
-    if (sourceCover) animations.current.push(sourceCover.animate([{ offset: 0, opacity: 0 }, { offset: .5, opacity: 0 }, { offset: .85, opacity: 1 }, { offset: 1, opacity: 1 }], options));
-    if (targetCover) animations.current.push(targetCover.animate([{ offset: 0, opacity: 1, backgroundColor: transition.paper }, { offset: .1, opacity: 1 }, { offset: .7, opacity: 0 }, { offset: 1, opacity: 0, backgroundColor: transition.paper }], options));
+    if (sourceCover) animations.current.push(sourceCover.animate([{ offset: 0, opacity: 0 }, { offset: .38, opacity: 0 }, { offset: .49, opacity: 1 }, { offset: 1, opacity: 1 }], options));
+    if (targetCover) animations.current.push(targetCover.animate([{ offset: 0, opacity: 1, backgroundColor: incomingPose?.paper ?? `#bfa9e9` }, { offset: .4, opacity: 0 }, { offset: 1, opacity: 0 }], options));
+    deck.forEach((spell, position) => {
+      if (spell.id === transition.source || spell.id === transition.target) return;
+      const panel = panels.current.get(spell.id);
+      const pose = transition.poses.get(spell.id);
+      if (!panel || !pose) return;
+      const rank = (position - targetIndex + count) % count;
+      const transform = rank === 1 ? nearPose : farPose;
+      animations.current.push(panel.animate([
+        { visibility: `visible`, opacity: pose.opacity, transform: pose.transform },
+        { visibility: `visible`, opacity: rank <= 2 ? 1 : 0, transform },
+      ], { ...options, easing: `cubic-bezier(.22, .8, .24, 1)` }));
+      const cover = panel.querySelector<HTMLElement>(`.hero-carousel-card-cover`);
+      if (cover) animations.current.push(cover.animate([{ backgroundColor: pose.paper }, { backgroundColor: getComputedStyle(cover).backgroundColor }], options));
+    });
     outgoing.onfinish = () => {
       if (generation.current !== transition.token || turn.current !== transition) return;
       const targetIndex = latest.current.deck.findIndex((spell) => spell.id === transition.target);
@@ -147,6 +173,7 @@ export const useHeroCarousel = (spells: Spell[], ready: boolean) => {
     window.addEventListener(`pointerup`, clearGesture);
     window.addEventListener(`pointercancel`, clearGesture);
     window.addEventListener(`blur`, clearGesture);
+    window.addEventListener(`resize`, settleTurn);
     return () => {
       disposed = true;
       observer?.disconnect();
@@ -156,6 +183,7 @@ export const useHeroCarousel = (spells: Spell[], ready: boolean) => {
       window.removeEventListener(`pointerup`, clearGesture);
       window.removeEventListener(`pointercancel`, clearGesture);
       window.removeEventListener(`blur`, clearGesture);
+      window.removeEventListener(`resize`, settleTurn);
     };
   }, [cancelTurn, settleTurn]);
 

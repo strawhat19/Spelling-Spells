@@ -40,17 +40,14 @@ export const expansionWorlds: readonly World[] = [
 ];
 
 type ExpansionInput = Omit<Spell,
-  `id` | `danger` | `utility` | `skill` | `etymology` | `breakdown` | `syllables` |
+  `id` | `etymology` | `breakdown` | `syllables` |
   `pronunciation` | `etymologyStatus` | `pronunciationNote` | `pronunciationStatus`
 >;
 
 const createExpansionSpell = (spell: ExpansionInput): Spell => ({
-  danger: 3,
-  utility: 3,
   syllables: [],
   breakdown: [],
   pronunciation: ``,
-  skill: `Intermediate`,
   etymologyStatus: `Unconfirmed`,
   pronunciationStatus: `unavailable`,
   etymology: `No individual word origin is established by the references included in this entry.`,
@@ -62,7 +59,10 @@ const createExpansionSpell = (spell: ExpansionInput): Spell => ({
 export const expansionSpells: readonly Spell[] = [
   createExpansionSpell({
     number: 10,
+    danger: 3,
+    utility: 4,
     aliases: [],
+    skill: `Advanced`,
     medium: `Comics`,
     worldId: `marvel`,
     accent: `shield`,
@@ -78,7 +78,7 @@ export const expansionSpells: readonly Spell[] = [
     language: `English spell name`,
     effect: `Conjures crimson restraints to hold an opponent.`,
     definition: `A binding spell that draws on Cyttorak to restrain opponents with ribbons of energy.`,
-    usage: `Doctor Strange uses the bands to ensnare foes. Their strength and limitations depend on the story; this entry does not assert a single first-appearance issue.`,
+    usage: `Doctor Strange calls on Cyttorak's power to capture foes. Marvel describes the restraints as exceptionally strong; this entry does not promise they are impossible to break or identify the separate physical artifact as the same working.`,
     sources: [{
       label: `Marvel · A History of Cyttorak, Who Is Cyttorak?`,
       url: `https://www.marvel.com/articles/comics/cyttorak-history-hosts-juggernaut-cain-marko-colossus-doctor-strange?linkId=208887688`,
@@ -86,7 +86,10 @@ export const expansionSpells: readonly Spell[] = [
   }),
   createExpansionSpell({
     number: 11,
+    danger: 1,
+    utility: 5,
     aliases: [],
+    skill: `Intermediate`,
     medium: `Games`,
     worldId: `marvel`,
     accent: `shield`,
@@ -103,11 +106,14 @@ export const expansionSpells: readonly Spell[] = [
     effect: `Forms magical protection that can break under an attack.`,
     continuity: `Marvel Multiverse Role-Playing Game · Tony's Workshop (2025)`,
     definition: `A protective spell illustrated in Marvel's tabletop rules discussion with Doctor Strange and Dormammu.`,
-    usage: `The inspected Tony's Workshop example describes a shield that can shatter, allowing excess damage through. The document includes experimental rules; these mechanics are not asserted for every comics or film version.`,
+    usage: `In Tony's Workshop, Doctor Strange raises the shield against Dormammu. An attack can shatter its protection and carry excess damage through. This is the named tabletop version; the document also contains experimental rules.`,
   }),
   createExpansionSpell({
     number: 12,
+    danger: 1,
+    utility: 4,
     aliases: [],
+    skill: `Intermediate`,
     medium: `Games`,
     accent: `wind`,
     worldId: `marvel`,
@@ -124,11 +130,14 @@ export const expansionSpells: readonly Spell[] = [
     continuity: `Marvel Multiverse Role-Playing Game · Tony's Workshop (2025)`,
     effect: `In the cited tabletop example, takes incoming damage against Focus instead of Health.`,
     definition: `A spell that Doctor Strange uses defensively in the inspected Marvel tabletop example.`,
-    usage: `Tony's Workshop shows Strange using the spell as a reaction after an attack on his magical shield. This version-specific description does not establish the spell's wind-conjuring effects in other continuities.`,
+    usage: `Doctor Strange uses it as a reaction during Dormammu's attack, redirecting the remaining 24 damage from Health to Focus in the example. The entry describes that tabletop rule rather than assigning a universal wind attack to every version.`,
   }),
   createExpansionSpell({
     number: 13,
+    danger: 2,
+    utility: 4,
     medium: `Films`,
+    skill: `Advanced`,
     accent: `light`,
     worldId: `marvel`,
     entryType: `ability`,
@@ -144,7 +153,7 @@ export const expansionSpells: readonly Spell[] = [
     continuity: `Marvel Cinematic Universe · Doctor Strange (2016)`,
     effect: `Separates Strange's astral self from his physical body to observe events.`,
     definition: `An ability that lets Doctor Strange send his astral self away from his physical body.`,
-    usage: `Marvel's on-screen profile describes Strange observing events without those present noticing him. Astral Projection is an ability label here, not a unique spoken incantation.`,
+    usage: `Marvel's on-screen profile describes Strange watching events while his astral self is apart from his body. It also recounts his astral fight with Lucian during surgery in Doctor Strange (2016). No single spoken formula is identified.`,
     sources: [{
       label: `Marvel · Doctor Strange On Screen, Astral Projection`,
       url: `https://www.marvel.com/characters/doctor-strange-stephen-strange/on-screen?mobile-app=true&theme=dark%2F1000`,
@@ -152,7 +161,10 @@ export const expansionSpells: readonly Spell[] = [
   }),
   createExpansionSpell({
     number: 14,
+    danger: 1,
+    utility: 3,
     name: `Mellon`,
+    skill: `Beginner`,
     slug: `mellon`,
     medium: `Books`,
     worldId: `tolkien`,
@@ -173,7 +185,10 @@ export const expansionSpells: readonly Spell[] = [
   }),
   createExpansionSpell({
     number: 15,
+    danger: 4,
+    utility: 4,
     aliases: [],
+    skill: `Advanced`,
     medium: `Books`,
     accent: `fire`,
     category: `Fire`,
@@ -194,7 +209,10 @@ export const expansionSpells: readonly Spell[] = [
   }),
   createExpansionSpell({
     number: 16,
+    danger: 1,
+    utility: 2,
     aliases: [],
+    skill: `Advanced`,
     medium: `Books`,
     accent: `unlock`,
     category: `Access`,
@@ -215,7 +233,10 @@ export const expansionSpells: readonly Spell[] = [
   }),
   createExpansionSpell({
     number: 17,
+    danger: 3,
+    utility: 3,
     aliases: [],
+    skill: `Advanced`,
     medium: `Books`,
     accent: `shield`,
     worldId: `tolkien`,
@@ -239,7 +260,10 @@ export const expansionSpells: readonly Spell[] = [
   }),
   createExpansionSpell({
     number: 18,
+    danger: 3,
+    utility: 4,
     medium: `Games`,
+    skill: `Advanced`,
     name: `Soul Self`,
     slug: `soul-self`,
     accent: `shield`,
@@ -256,11 +280,14 @@ export const expansionSpells: readonly Spell[] = [
     continuity: `DC Universe Online · Raven Character Spotlight (2013)`,
     effect: `Projects Raven's spirit for scouting, combat and manipulating objects.`,
     definition: `Raven's ability to project her spirit beyond her physical body.`,
-    usage: `The official game's character profile identifies several uses of her Soul Self. This is a power rather than a verbal spell, and this entry does not merge every comics or animated version.`,
+    usage: `The official game profile identifies scouting, fighting and moving objects as uses. Soul Self names Raven's projected spirit; no spoken formula is supplied.`,
   }),
   createExpansionSpell({
     number: 19,
+    danger: 1,
+    utility: 3,
     aliases: [],
+    skill: `Intermediate`,
     name: `Empathy`,
     slug: `empathy`,
     accent: `light`,
@@ -277,11 +304,14 @@ export const expansionSpells: readonly Spell[] = [
     continuity: `DC Universe Online · Raven Character Spotlight (2013)`,
     effect: `Lets Raven experience other people's emotions as if they were her own.`,
     definition: `Raven's empathic perception of other people's emotional states.`,
-    usage: `The official game's profile describes emotion sensing, not unrestricted mind reading. No verbal formula is identified. Emotion Sensing is a descriptive catalog label, not an alternate canonical incantation.`,
+    usage: `The game profile supports sharing emotional experiences. It gives no spoken incantation and does not establish unrestricted access to another person's thoughts.`,
   }),
   createExpansionSpell({
     number: 20,
+    danger: 3,
+    utility: 4,
     aliases: [],
+    skill: `Advanced`,
     accent: `light`,
     medium: `Games`,
     category: `Healing`,
@@ -298,11 +328,14 @@ export const expansionSpells: readonly Spell[] = [
     continuity: `DC Universe Online · Raven Character Spotlight (2013)`,
     effect: `Helps another person by taking their pain into Raven herself.`,
     definition: `A healing use of Raven's empathy, described in her official game profile.`,
-    usage: `Empathic Healing and Pain Transference describe the effect rather than naming a spoken spell. The entry concerns a fictional power and makes no claim of medical efficacy.`,
+    usage: `Healing comes through Raven taking on someone else's pain. Empathic Healing and Pain Transference are descriptive catalog labels for this use of empathy, not a documented spoken formula.`,
   }),
   createExpansionSpell({
     number: 21,
+    danger: 3,
+    utility: 4,
     aliases: [],
+    skill: `Intermediate`,
     medium: `Television`,
     accent: `wand`,
     casters: [`Raven`],

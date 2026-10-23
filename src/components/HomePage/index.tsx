@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SpellCard from '../SpellCard';
 import styles from './styles.native';
 import BrandLogo from '../BrandLogo';
+import PricingPlans from '../PricingPlans';
 import { useRouter } from 'expo-router';
 import { useHomeMotion } from './useHomeMotion';
 import HeroSpellCarousel from '../HeroSpellCarousel';
@@ -121,6 +122,8 @@ const HomePage = () => {
           ))}
         </View>
       </View>
+
+      <PricingPlans />
 
       <View nativeID="personal-grimoire-section" style={styles.section}>
         <View style={[styles.savedNote, { backgroundColor: palette.panel, borderColor: palette.border }]}>

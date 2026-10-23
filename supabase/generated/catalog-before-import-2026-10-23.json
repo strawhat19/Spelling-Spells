@@ -1,0 +1,132 @@
+{
+  "projectRef": "qtfajiuilwdtywkklbjq",
+  "capturedAt": "2026-10-23",
+  "catalogSpells": [
+    {
+      "id": "Spell_1_Lumos_2026-10-06_719dd0e1-506a-4e67-9b02-04d4af1b4931",
+      "name": "Lumos",
+      "slug": "lumos",
+      "number": 1,
+      "status": "draft",
+      "payload": {
+        "seedPlaceholder": true
+      },
+      "revision": 1,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-21T08:33:45.714711+00:00",
+      "universe_id": null
+    },
+    {
+      "id": "Spell_2_Fus-Ro-Dah_2026-10-06_719dd0e2-506a-4e67-9b02-04d4af1b4932",
+      "name": "Fus Ro Dah",
+      "slug": "fus-ro-dah",
+      "number": 2,
+      "status": "draft",
+      "payload": {
+        "seedPlaceholder": true
+      },
+      "revision": 1,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-21T08:33:45.714711+00:00",
+      "universe_id": null
+    },
+    {
+      "id": "Spell_3_Brisingr_2026-10-06_719dd0e3-506a-4e67-9b02-04d4af1b4933",
+      "name": "Brisingr",
+      "slug": "brisingr",
+      "number": 3,
+      "status": "draft",
+      "payload": {
+        "seedPlaceholder": true
+      },
+      "revision": 1,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-21T08:33:45.714711+00:00",
+      "universe_id": null
+    },
+    {
+      "id": "Spell_4_Alohomora_2026-10-06_719dd0e4-506a-4e67-9b02-04d4af1b4934",
+      "name": "Alohomora",
+      "slug": "alohomora",
+      "number": 4,
+      "status": "draft",
+      "payload": {
+        "seedPlaceholder": true
+      },
+      "revision": 1,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-21T08:33:45.714711+00:00",
+      "universe_id": null
+    },
+    {
+      "id": "Spell_5_Wingardium-Leviosa_2026-10-06_719dd0e5-506a-4e67-9b02-04d4af1b4935",
+      "name": "Wingardium Leviosa",
+      "slug": "wingardium-leviosa",
+      "number": 5,
+      "status": "draft",
+      "payload": {
+        "seedPlaceholder": true
+      },
+      "revision": 1,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-21T08:33:45.714711+00:00",
+      "universe_id": null
+    },
+    {
+      "id": "Spell_6_Expelliarmus_2026-10-06_719dd0e6-506a-4e67-9b02-04d4af1b4936",
+      "name": "Expelliarmus",
+      "slug": "expelliarmus",
+      "number": 6,
+      "status": "draft",
+      "payload": {
+        "seedPlaceholder": true
+      },
+      "revision": 1,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-21T08:33:45.714711+00:00",
+      "universe_id": null
+    },
+    {
+      "id": "Spell_7_Expecto-Patronum_2026-10-06_719dd0e7-506a-4e67-9b02-04d4af1b4937",
+      "name": "Expecto Patronum",
+      "slug": "expecto-patronum",
+      "number": 7,
+      "status": "draft",
+      "payload": {
+        "seedPlaceholder": true
+      },
+      "revision": 1,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-21T08:33:45.714711+00:00",
+      "universe_id": null
+    },
+    {
+      "id": "Spell_8_Adurna_2026-10-06_719dd0e8-506a-4e67-9b02-04d4af1b4938",
+      "name": "Adurna",
+      "slug": "adurna",
+      "number": 8,
+      "status": "draft",
+      "payload": {
+        "seedPlaceholder": true
+      },
+      "revision": 1,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-21T08:33:45.714711+00:00",
+      "universe_id": null
+    },
+    {
+      "id": "Spell_9_Jierda_2026-10-06_719dd0e9-506a-4e67-9b02-04d4af1b4939",
+      "name": "Jierda",
+      "slug": "jierda",
+      "number": 9,
+      "status": "draft",
+      "payload": {
+        "seedPlaceholder": true
+      },
+      "revision": 1,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-21T08:33:45.714711+00:00",
+      "universe_id": null
+    }
+  ]
+}

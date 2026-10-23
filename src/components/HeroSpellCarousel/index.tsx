@@ -2,11 +2,14 @@ import Icon from '../Icon';
 import Skeleton from '../Skeleton';
 import SpellCard from '../SpellCard';
 import styles from './styles.native';
+import Svg, { G, Path } from 'react-native-svg';
 import type { HeroSpellCarouselProps } from './types';
+import { parchment } from '../SpellCard/styles.native';
 import FeaturedSkeleton from '../HomePage/FeaturedSkeleton';
 import { Text, View, Animated, Pressable } from 'react-native';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { useNativeHeroCarousel } from './useNativeHeroCarousel';
+import { scriptureColumns } from '../SpellParchmentMarquees/scripture';
 
 const HeroSpellCarousel = (props: HeroSpellCarouselProps) => {
   const { palette } = useTheme();
@@ -20,16 +23,68 @@ const HeroSpellCarousel = (props: HeroSpellCarouselProps) => {
     </View>
     <View nativeID='hero-spell-carousel-pagination-loading' accessible={false} pointerEvents='none' accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={styles.pagination}>{[0, 1, 2, 3, 4].map((index) => <View key={index} nativeID={`hero-spell-carousel-dot-loading-${index}`} style={styles.dotTarget}><Skeleton id={`hero-spell-carousel-dot-loading-${index}-shape`} shape={index === 0 ? `line` : `circle`} width={index === 0 ? 23 : 7} height={index === 0 ? 6 : 7} /></View>)}</View>
   </View>;
-  if (!page.visibleSpell) return <View nativeID='hero-spell-loading' style={[styles.empty, { borderColor: palette.border, backgroundColor: palette.surface }]}><Text style={[styles.emptyText, { color: palette.muted }]}>Your spell library is empty</Text></View>;
+  if (!page.visibleSpell) return <View
+    accessible
+    style={styles.empty}
+    nativeID='hero-spell-empty'
+    accessibilityLiveRegion='polite'
+    accessibilityLabel='Your spell library is empty. No spells are inscribed here yet.'
+  >
+    <View
+      accessible={false}
+      pointerEvents='none'
+      style={styles.emptyArtwork}
+      accessibilityElementsHidden
+      nativeID='hero-spell-empty-parchment'
+      importantForAccessibility='no-hide-descendants'
+    >
+      <View nativeID='hero-spell-empty-paper' style={styles.emptyPaper} />
+      <View nativeID='hero-spell-empty-frame' style={styles.emptyFrame} />
+      <View nativeID='hero-spell-empty-inner-frame' style={styles.emptyInnerFrame} />
+      {scriptureColumns.map((glyphs, columnIndex) => <Svg
+        key={columnIndex}
+        width={28}
+        height={220}
+        viewBox='0 0 60 300'
+        nativeID={`hero-spell-empty-scripture-${columnIndex}`}
+        style={[styles.emptyScripture, columnIndex ? styles.emptyScriptureRight : styles.emptyScriptureLeft]}
+      >
+        {glyphs.slice(0, 3).map((glyph, glyphIndex) => <G key={glyphIndex} nativeID={`hero-spell-empty-sigil-${columnIndex}-${glyphIndex}`} transform={`translate(0 ${glyphIndex * 105 + 4})`}>
+          {glyph.ink.map((shape, shapeIndex) => <Path key={shapeIndex} d={shape} fill={parchment.soft} fillRule='evenodd' nativeID={`hero-spell-empty-sigil-${columnIndex}-${glyphIndex}-ink-${shapeIndex}`} />)}
+          <Path d={glyph.details} fill='none' strokeWidth={1} stroke={parchment.soft} nativeID={`hero-spell-empty-sigil-${columnIndex}-${glyphIndex}-detail`} />
+        </G>)}
+      </Svg>)}
+      {[styles.emptyRollTop, styles.emptyRollBottom].map((position, index) => <View
+        key={index}
+        style={[styles.emptyRoll, position]}
+        nativeID={`hero-spell-empty-roll-${index}`}
+      >
+        <View nativeID={`hero-spell-empty-roll-highlight-${index}`} style={styles.emptyRollHighlight} />
+        <View nativeID={`hero-spell-empty-roll-shade-${index}`} style={styles.emptyRollShade} />
+      </View>)}
+    </View>
+    <View nativeID='hero-spell-empty-seal' accessible={false} accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={styles.emptySeal}>
+      <View nativeID='hero-spell-empty-seal-spark' style={styles.emptySealSpark}><Icon name='spark' size={18} color={parchment.accent} /></View>
+      <View nativeID='hero-spell-empty-seal-inner' style={styles.emptySealInner}><Icon name='book' size={45} color={parchment.accent} /></View>
+    </View>
+    <Text nativeID='hero-spell-empty-eyebrow' style={styles.emptyEyebrow}>An Unwritten Chapter</Text>
+    <Text nativeID='hero-spell-empty-title' style={styles.emptyTitle}>Your spell library is empty</Text>
+    <Text nativeID='hero-spell-empty-description' style={styles.emptyDescription}>No spells are inscribed here yet.</Text>
+    <View nativeID='hero-spell-empty-flourish' accessible={false} accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={styles.emptyFlourish}>
+      <View nativeID='hero-spell-empty-flourish-left' style={styles.emptyFlourishLine} />
+      <Icon name='spark' size={12} color={parchment.accent} />
+      <View nativeID='hero-spell-empty-flourish-right' style={styles.emptyFlourishLine} />
+    </View>
+  </View>;
   return <View nativeID='hero-spell-carousel' onTouchEnd={page.endTouch} onTouchStart={page.beginTouch} onTouchCancel={() => page.endTouch()} style={styles.root}>
     <View ref={page.stageRef} collapsable={false} nativeID='hero-spell-carousel-stage' onBlur={page.blurCard} onFocus={page.focusCard} style={[styles.stage, { minHeight: page.minHeight }]} {...page.gestures.panHandlers}>
       {page.rearSpell ? <Animated.View nativeID='hero-spell-carousel-rear' accessible={false} pointerEvents='none' onLayout={page.measureCard} accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={[styles.rear, { zIndex: page.raised ? 3 : 1 }, page.rearStyle]}>
         <SpellCard key={page.rearSpell.id} idPrefix='hero-stack' spell={page.rearSpell} featured />
-        {!page.raised ? <View nativeID='hero-spell-carousel-rear-cover' style={styles.cover}><View nativeID='hero-spell-carousel-rear-cover-frame' style={styles.coverFrame} /></View> : null}
+        <Animated.View pointerEvents='none' nativeID='hero-spell-carousel-rear-cover' style={[styles.cover, page.rearCoverStyle]}><View nativeID='hero-spell-carousel-rear-cover-frame' style={styles.coverFrame} /></Animated.View>
       </Animated.View> : null}
       <Animated.View nativeID='hero-spell-carousel-face' onLayout={page.measureCard} pointerEvents={page.shuffling ? `none` : `auto`} accessibilityElementsHidden={page.shuffling} importantForAccessibility={page.shuffling ? `no-hide-descendants` : `auto`} style={[styles.face, { zIndex: page.raised ? 1 : 2 }, page.frontStyle]}>
         <SpellCard key={page.visibleSpell.id} idPrefix='hero' spell={page.visibleSpell} featured />
-        {page.raised ? <View nativeID='hero-spell-carousel-face-cover' style={styles.cover}><View nativeID='hero-spell-carousel-face-cover-frame' style={styles.coverFrame} /></View> : null}
+        <Animated.View pointerEvents='none' nativeID='hero-spell-carousel-face-cover' style={[styles.cover, page.frontCoverStyle]}><View nativeID='hero-spell-carousel-face-cover-frame' style={styles.coverFrame} /></Animated.View>
       </Animated.View>
     </View>
     {page.count > 1 ? <>
