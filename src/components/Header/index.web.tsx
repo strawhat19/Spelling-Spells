@@ -39,7 +39,6 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
             <Icon name='bookmark' size={21} />
             {savedIds.length > 0 ? <span id='header-saved-count' className='saved-count' aria-hidden='true'>{savedIds.length > 99 ? `99+` : savedIds.length}</span> : null}
           </AppLink>
-          <NotificationMenu />
           {themeToggleEnabled ? <button
             type='button'
             id='header-theme-toggle'
@@ -50,6 +49,7 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
           >
             <Icon name={theme === `night` ? `sun` : `moon`} size={21} />
           </button> : null}
+          <NotificationMenu />
           <UserMenu />
           <button
             type='button'

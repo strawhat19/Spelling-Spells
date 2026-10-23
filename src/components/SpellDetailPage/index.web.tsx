@@ -34,7 +34,7 @@ const SpellDetailPage = () => {
         title={`${spell.name}: spelling${hasPronunciation ? `, pronunciation` : ``} & meaning`}
         description={`${spell.definition} Explore its ${entryType.toLowerCase()}, context, effects and linked sources in ${world?.name ?? spell.sourceTitle}.`}
         canonicalPath={getSpellPath(spell)}
-        structuredData={getSpellStructuredData(spell, world, getPublicPageUrl(`/`) ?? `https://spelling-spells.vercel.app`)}
+        structuredData={getSpellStructuredData(spell, world, getPublicPageUrl(`/`) ?? `https://spellingspells.com`)}
       />
       <div id={`${prefix}-topbar`} className="ss-detail-topbar">
         <AppLink id={`${prefix}-back`} href="/spells"><Icon name="chevron-left" size={16} />Back to the spellbook</AppLink>

@@ -1,9 +1,9 @@
+import './styles.scss';
 import Icon from '../Icon';
 import AppLink from '../AppLink';
 import AccountLayout from '../AccountLayout';
 import AccountGate from '../AccountLayout/AccountGate';
 import { useProfilePage, type ProfilePageProps } from './useProfilePage';
-import './styles.scss';
 
 const ProfilePage = (props: ProfilePageProps) => {
   const page = useProfilePage(props);
@@ -63,6 +63,17 @@ const ProfilePage = (props: ProfilePageProps) => {
         <aside id='profile-metadata' className='profile-metadata'>
           <h2>Account Details</h2>
           <dl><div><dt>No.</dt><dd>{page.account?.number}</dd></div><div><dt>Role</dt><dd><span id='profile-role-pill' className='profile-account-pill'>{page.account?.roleVerified ? page.account.role : `Unverified`}</span></dd></div><div><dt>Plan</dt><dd><span id='profile-plan-pill' className='profile-account-pill'>{page.planLabel}</span></dd></div><div><dt>Profile</dt><dd>Private</dd></div><div><dt>Email</dt><dd>{page.identity?.emailVerified ? `Verified` : `Unverified`}</dd></div></dl>
+          <section id={`profile-billing`} className={`profile-billing`} aria-labelledby={`profile-billing-title`}>
+            <h3 id={`profile-billing-title`}>Subscription</h3>
+            <p id={`profile-billing-status`}>{page.billing.entitlement.state === `paid` && page.billing.entitlement.validUntil ? `${page.billing.entitlement.cancelAtPeriodEnd ? `Access ends` : `Paid access through`} ${new Date(page.billing.entitlement.validUntil).toLocaleDateString()}` : page.billing.entitlement.state === `free` ? `No paid subscription is active` : page.billing.entitlement.state === `pending` ? `Waiting for payment confirmation` : page.billing.status === `loading` ? `Loading billing status…` : `Billing status is unavailable`}</p>
+            <div id={`profile-billing-actions`} className={`profile-billing-actions`}>
+              <button type={`button`} id={`profile-manage-billing`} className={`profile-billing-action`} title={`Manage Billing`} aria-label={page.billing.busy === `portal` ? `Opening Billing` : `Manage Billing`} disabled={busy || Boolean(page.billing.busy) || !page.billing.portalAvailable} onClick={() => void page.billing.openPortal()}><Icon name={`plans`} size={17} /></button>
+              <button type={`button`} id={`profile-refresh-billing`} className={`profile-billing-action`} title={`Refresh Billing`} aria-label={`Refresh Billing`} disabled={busy || Boolean(page.billing.busy)} onClick={() => void page.billing.refresh()}><Icon name={`refresh`} size={17} /></button>
+              <AppLink id={`profile-view-plans`} href={`/pricing`} className={`profile-billing-action`} title={`View Plans`} aria-label={`View Plans`}><Icon name={`spark`} size={17} /></AppLink>
+            </div>
+            {page.billing.error && <p id={`profile-billing-error`} role={`status`}>{page.billing.error}</p>}
+            {!page.billing.portalAvailable && <p id={`profile-billing-unavailable`}>Manage Billing becomes available when your account has a verified billing connection</p>}
+          </section>
           <AppLink id='profile-open-connections' href='/profile/connections' className='profile-metadata-link'><Icon name='link' size={15} /> Private connections<Icon name='arrow-right' size={14} /></AppLink>
           <AppLink id='profile-open-spellbook' href='/saved' className='profile-metadata-link'><Icon name='bookmark' size={15} /> Your spellbook<Icon name='arrow-right' size={14} /></AppLink>
           <AppLink id='profile-open-submissions' href='/submissions' className='profile-metadata-link'><Icon name='edit' size={15} /> My submissions<Icon name='arrow-right' size={14} /></AppLink>

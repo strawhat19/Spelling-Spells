@@ -10,6 +10,7 @@ import { useTheme } from '../../shared/themeContext/useTheme';
 import { useSpells } from '../../shared/spellsContext/useSpells';
 import { canAccessOwner } from '../../shared/authentication/types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useFeatureFlags } from '../../shared/featureFlags/useFeatureFlags';
 import { AccountShellContext, type AccountShellRail } from '../../shared/accountShellContext';
 import { useRef, useMemo, useState, useEffect, useCallback, type PropsWithChildren } from 'react';
 import { Text, View, Alert, Easing, Linking, Animated, Pressable, ScrollView, AccessibilityInfo, useWindowDimensions } from 'react-native';
@@ -28,6 +29,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
   const router = useRouter();
   const pathname = usePathname();
   const { account } = useAuth();
+  const { contactEnabled } = useFeatureFlags();
   const insets = useSafeAreaInsets();
   const { width, height } = useWindowDimensions();
   const scroll = useRef<ScrollView>(null);
@@ -124,7 +126,6 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
             <Icon name='bookmark' size={20} color={palette.primary} />
             {savedIds.length > 0 ? <View nativeID='header-saved-badge' accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={[styles.savedBadge, { borderColor: palette.background, backgroundColor: palette.gold }]}><Text nativeID='header-saved-count' style={styles.savedBadgeText}>{savedIds.length}</Text></View> : null}
           </Pressable>
-          <NotificationMenu />
           {themeToggleEnabled ? <Pressable
             nativeID='header-theme-toggle'
             accessibilityRole='button'
@@ -134,6 +135,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           >
             <Icon name={theme === `night` ? `sun` : `moon`} size={20} color={palette.gold} />
           </Pressable> : null}
+          <NotificationMenu />
           <UserMenu />
           <Pressable
             nativeID='header-menu-toggle'
@@ -162,7 +164,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
             transform: [{ translateY: menuProgress.interpolate({ inputRange: [0, 1], outputRange: [-8, 0] }) }],
           }]}
         >
-          {navigation.map(item => (
+          {navigation.filter((item) => item.href !== `/contact` || contactEnabled).map(item => (
             <Pressable
               key={item.href}
               disabled={!menuOpen}
@@ -214,7 +216,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           </View>
           <Text style={[styles.footerCopy, { color: palette.muted }]}>A little curiosity. A world of magic. Discover the words behind your favorite fictional spells.</Text>
           <View nativeID="footer-information-links" style={styles.footerLinks}>
-            {([`about`, `terms`, `contact`, `privacy`] as const).map(page => (
+            {([`about`, `terms`, `contact`, `privacy`] as const).filter((page) => page !== `contact` || contactEnabled).map(page => (
               <Pressable key={page} nativeID={`footer-link-${page}`} accessibilityRole="link" onPress={() => router.push(`/${page}`)}>
                 <Text style={[styles.footerLink, { color: palette.text }]}>{page === `privacy` ? `Privacy Policy` : page.charAt(0).toUpperCase() + page.slice(1)}</Text>
               </Pressable>

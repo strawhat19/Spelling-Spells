@@ -1,6 +1,7 @@
 import { useAuth } from '../authContext';
 import { notificationsAPI } from '../../api/notifications';
 import { canAccessAccount } from '../authentication/types';
+import { useFeatureFlags } from '../featureFlags/useFeatureFlags';
 import { subscribeGuestNotificationReads } from './guestReadEvents';
 import type { NotificationRecord, NotificationSnapshot, NotificationReadsSnapshot } from './types';
 import { createContext, useContext, useEffect, useRef, useState, type PropsWithChildren } from 'react';
@@ -8,6 +9,7 @@ import { guestNotificationReadScope, loadGuestNotificationReads, markGuestNotifi
 
 type NotificationsValue = {
   busy: boolean;
+  enabled: boolean;
   reload: () => void;
   readIds: string[];
   message: string | null;
@@ -29,10 +31,12 @@ const waitingReads: NotificationReadsSnapshot = { readIds: [], state: `loading`,
 
 export const NotificationsProvider = ({ children }: PropsWithChildren) => {
   const auth = useAuth();
+  const features = useFeatureFlags();
+  const enabled = features.notificationsEnabled;
   const [reloadNumber, setReloadNumber] = useState(0);
   const accountReady = auth.status === `signed-in` && canAccessAccount(auth.account);
   const guestReady = !auth.identity && (auth.status === `signed-out` || auth.status === `unavailable`);
-  const identityScope = `${auth.status}:${auth.account?.id ?? `guest`}:${auth.account?.authUid ?? ``}:${auth.account?.role ?? ``}:${auth.account?.active ?? false}:${auth.account?.roleVerified ?? false}:${auth.account?.emailVerified ?? false}`;
+  const identityScope = `${enabled}:${features.status}:${auth.status}:${auth.account?.id ?? `guest`}:${auth.account?.authUid ?? ``}:${auth.account?.role ?? ``}:${auth.account?.active ?? false}:${auth.account?.roleVerified ?? false}:${auth.account?.emailVerified ?? false}`;
   const lifecycle = useRef({ key: identityScope, epoch: 0 });
   if (lifecycle.current.key !== identityScope) lifecycle.current = { key: identityScope, epoch: lifecycle.current.epoch + 1 };
   const scope = `${identityScope}:${lifecycle.current.epoch}:${reloadNumber}`;
@@ -49,13 +53,15 @@ export const NotificationsProvider = ({ children }: PropsWithChildren) => {
   }, [scope]);
 
   useEffect(() => {
+    if (!enabled) return;
     let active = true;
     const unsubscribe = notificationsAPI.subscribeFeed((value) => { if (active) setFeedState({ scope, value }); });
     return () => { active = false; unsubscribe(); };
-  }, [scope]);
+  }, [scope, enabled]);
 
   useEffect(() => {
     let active = true;
+    if (!enabled) return;
     if (accountReady) {
       const unsubscribe = notificationsAPI.subscribeReads((value) => { if (active) setReceiptState({ scope, value }); });
       return () => { active = false; unsubscribe(); };
@@ -77,14 +83,14 @@ export const NotificationsProvider = ({ children }: PropsWithChildren) => {
       setReceiptState({ scope, value: { readIds: [], state: `denied`, message: `Account read status is unavailable. Refresh your account before marking notifications read` } });
     }
     return () => { active = false; };
-  }, [scope, accountReady, guestReady, auth.status]);
+  }, [scope, enabled, accountReady, guestReady, auth.status]);
 
-  const feed = feedState?.scope === scope ? feedState.value : waitingFeed;
-  const reads = receiptState?.scope === scope ? receiptState.value : waitingReads;
+  const feed: NotificationSnapshot = !enabled ? { records: [], nextCursor: null, realtime: `unavailable`, state: features.status === `loading` ? `loading` : `denied`, message: features.status === `loading` ? `Confirming Notification Access` : features.error ?? `Notifications Are Not Available For This Account` } : feedState?.scope === scope ? feedState.value : waitingFeed;
+  const reads: NotificationReadsSnapshot = !enabled ? { readIds: [], state: `denied`, message: null } : receiptState?.scope === scope ? receiptState.value : waitingReads;
   const actions = actionState?.scope === scope ? actionState : null;
   const readScope = auth.identity ? `account` : guestNotificationReadScope;
   const markRead = async (requestedIds: string[]) => {
-    if (currentScope.current !== scope || mutationScope.current === scope) return;
+    if (!enabled || currentScope.current !== scope || mutationScope.current === scope) return;
     if (reads.state !== `ready`) {
       setActionState({ scope, busy: false, error: `Wait for read status to load, or reload to retry` });
       return;
@@ -111,6 +117,7 @@ export const NotificationsProvider = ({ children }: PropsWithChildren) => {
 
   return <NotificationsContext.Provider value={{
     ...feed,
+    enabled,
     readScope,
     readIds: reads.readIds,
     readState: reads.state,

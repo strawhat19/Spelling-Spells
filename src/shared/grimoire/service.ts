@@ -1,105 +1,163 @@
+import { AppState } from 'react-native';
 import { randomUUID } from 'expo-crypto';
-import { useLocalStorage } from '../config';
 import { createRecordId } from '../common/ids';
-import { lockGrimoireStorage } from './storageLock';
-import { queueStorageOperation } from '../common/storage';
-import { storageAdapter } from '../common/storageAdapter';
+import { getErrorCode } from '../supabase/errors';
+import { requireCurrentAccount } from '../authentication/service';
 import type { GrimoireData, GrimoireEntry, GrimoireCollection, GrimoireSnapshot } from './types';
+import { isSpellId, isGrimoire, cloneData, emptyGrimoire, grimoireLimits, emptyGrimoireEntry, deviceGrimoireService } from './deviceService';
 
-export const grimoireStorageKey = `spelling-spells:grimoire:v1`;
-export const grimoireLimits = { name: 80, collections: 50, spells: 500, note: 4_000, entries: 2_000 };
-const listeners = new Set<(snapshot: GrimoireSnapshot) => void>();
-let sessionData: string | null = null;
-let snapshot: GrimoireSnapshot | null = null;
-
-export const emptyGrimoire = (): GrimoireData => ({ version: 1, collections: [], entries: {}, nextCollectionNumber: 1 });
-export const emptyGrimoireEntry = (): GrimoireEntry => ({ note: ``, streak: 0, reviews: 0, correct: 0, lastReviewedAt: null });
-const isObject = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === `object` && !Array.isArray(value)
-  && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
-const hasFields = (value: Record<string, unknown>, fields: string[]): boolean => Object.keys(value).length === fields.length
-  && fields.every((field) => Object.hasOwn(value, field));
-const isCount = (value: unknown): value is number => Number.isSafeInteger(value) && (value as number) >= 0;
-const isSpellId = (value: unknown): value is string => typeof value === `string` && value.length > 0 && value.length <= 250
-  && /^[A-Za-z0-9_-]+$/.test(value) && ![`__proto__`, `constructor`, `prototype`].includes(value);
-const isEntry = (value: unknown): value is GrimoireEntry => {
-  if (!isObject(value) || !hasFields(value, [`note`, `streak`, `reviews`, `correct`, `lastReviewedAt`])) return false;
-  if (typeof value.note !== `string` || value.note.length > grimoireLimits.note) return false;
-  if (!isCount(value.reviews) || !isCount(value.correct) || !isCount(value.streak)) return false;
-  if (value.correct > value.reviews || value.streak > value.correct) return false;
-  if (value.reviews === 0) return value.lastReviewedAt === null;
-  if (typeof value.lastReviewedAt !== `string`) return false;
-  const date = new Date(value.lastReviewedAt);
-  return Number.isFinite(date.getTime()) && date.toISOString() === value.lastReviewedAt;
+export { emptyGrimoire, grimoireLimits, emptyGrimoireEntry, grimoireStorageKey } from './deviceService';
+type AccountScope = ReturnType<typeof requireCurrentAccount>;
+type Attempt = { key: string; result: unknown; data: GrimoireData; expectedRevision: number };
+const queues = new Map<string, Promise<unknown>>();
+const attempts = new Map<string, Attempt>();
+const confirmed = new Map<string, GrimoireSnapshot>();
+const listeners = new Map<string, Set<(snapshot: GrimoireSnapshot) => void>>();
+let subscriptionNumber = 0;
+const scopeKey = (scope: AccountScope) => `${scope.account.id}:${scope.account.authUid}:${scope.revision}`;
+const assertScope = (scope: AccountScope) => requireCurrentAccount(scope.account, scope.revision);
+const cloneSnapshot = (snapshot: GrimoireSnapshot): GrimoireSnapshot => ({ ...snapshot, data: cloneData(snapshot.data) });
+const messageFrom = (error: unknown) => {
+  const code = getErrorCode(error);
+  if ([`42P01`, `PGRST202`, `PGRST205`, `42883`].includes(code)) return `Account Grimoire Database Setup Is Not Available Yet`;
+  if (code === `40001`) return `Your Grimoire Changed On Another Device. Reload And Review Before Saving`;
+  if (code === `app/identity-changed`) return `Your Account Changed. Reopen Your Grimoire`;
+  return error instanceof Error ? error.message : error && typeof error === `object` && `message` in error ? String(error.message) : `The Account Grimoire Request Was Not Confirmed. Reload Before Trying Again`;
 };
-const isCollection = (value: unknown): value is GrimoireCollection => isObject(value)
-  && hasFields(value, [`id`, `name`, `number`, `spellIds`])
-  && isCount(value.number) && value.number > 0
-  && typeof value.id === `string` && value.id.length <= 350 && /^[A-Za-z0-9_-]+$/.test(value.id)
-  && value.id.startsWith(`Collection_${value.number}_`)
-  && typeof value.name === `string` && value.name.trim().length > 0 && value.name.length <= grimoireLimits.name
-  && Array.isArray(value.spellIds) && value.spellIds.length <= grimoireLimits.spells && value.spellIds.every(isSpellId)
-  && new Set(value.spellIds).size === value.spellIds.length;
-const isGrimoire = (value: unknown): value is GrimoireData => {
-  if (!isObject(value) || !hasFields(value, [`version`, `collections`, `entries`, `nextCollectionNumber`])) return false;
-  if (value.version !== 1 || !isCount(value.nextCollectionNumber) || value.nextCollectionNumber < 1) return false;
-  const nextCollectionNumber = value.nextCollectionNumber;
-  if (!Array.isArray(value.collections) || value.collections.length > grimoireLimits.collections || !value.collections.every(isCollection)) return false;
-  const ids = value.collections.map((collection) => collection.id);
-  const numbers = value.collections.map((collection) => collection.number);
-  if (new Set(ids).size !== ids.length || new Set(numbers).size !== numbers.length) return false;
-  if (numbers.some((number) => number >= nextCollectionNumber)) return false;
-  return isObject(value.entries) && Object.keys(value.entries).length <= grimoireLimits.entries
-    && Object.entries(value.entries).every(([id, entry]) => isSpellId(id) && isEntry(entry));
-};
-const cloneData = (data: GrimoireData): GrimoireData => ({
-  ...data,
-  entries: Object.fromEntries(Object.entries(data.entries).map(([id, entry]) => [id, { ...entry }])),
-  collections: data.collections.map((collection) => ({ ...collection, spellIds: [...collection.spellIds] })),
-});
-const cloneSnapshot = (value: GrimoireSnapshot): GrimoireSnapshot => ({ ...value, data: cloneData(value.data) });
-const publish = (value: GrimoireSnapshot): GrimoireSnapshot => {
-  snapshot = cloneSnapshot(value);
-  listeners.forEach((listener) => listener(cloneSnapshot(value)));
+const publish = (scope: AccountScope, value: GrimoireSnapshot): GrimoireSnapshot => {
+  assertScope(scope);
+  const key = scopeKey(scope);
+  const previous = confirmed.get(key);
+  if (previous && previous.revision > value.revision && !value.error) return cloneSnapshot(previous);
+  confirmed.set(key, cloneSnapshot(value));
+  listeners.get(key)?.forEach((listener) => listener(cloneSnapshot(value)));
   return cloneSnapshot(value);
 };
-const messageFrom = (failure: unknown): string => failure instanceof Error ? failure.message : `Grimoire Could Not Be Updated`;
-const publishFailure = (failure: unknown): GrimoireSnapshot => publish({
+const fail = (scope: AccountScope, error: unknown): GrimoireSnapshot => publish(scope, {
+  data: emptyGrimoire(),
+  revision: 0,
+  updatedAt: null,
   persisted: false,
-  error: messageFrom(failure),
-  data: snapshot?.data ?? emptyGrimoire(),
+  source: `unavailable`,
+  accountId: scope.account.id,
+  ...confirmed.get(scopeKey(scope)),
+  error: messageFrom(error),
 });
-const readData = async (): Promise<GrimoireData> => {
-  let raw: string | null;
-  try { raw = useLocalStorage ? await storageAdapter.getItem(grimoireStorageKey) : sessionData; }
-  catch { throw new Error(`Grimoire Could Not Be Loaded. Editing Is Blocked Until Storage Is Available`); }
-  if (raw === null) return emptyGrimoire();
+const readResponse = (scope: AccountScope, value: unknown): GrimoireSnapshot => {
+  if (!value || typeof value !== `object` || Array.isArray(value)) throw new Error(`The Account Grimoire Response Is Unsupported`);
+  const row = value as Record<string, unknown>;
+  if (Object.keys(row).length !== 3 || !isGrimoire(row.data) || !Number.isSafeInteger(row.revision) || Number(row.revision) < 0 ||
+    (row.updatedAt !== null && (typeof row.updatedAt !== `string` || !Number.isFinite(Date.parse(row.updatedAt)))) || (Number(row.revision) > 0 && row.updatedAt === null)) throw new Error(`The Account Grimoire Data Could Not Be Confirmed`);
+  return { error: null, source: `cloud`, persisted: true, accountId: scope.account.id, revision: row.revision as number, updatedAt: row.updatedAt as string | null, data: cloneData(row.data) };
+};
+const request = async (scope: AccountScope, operation: `get_grimoire` | `save_grimoire`, input: Record<string, unknown> = {}): Promise<GrimoireSnapshot> => {
+  assertScope(scope);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12_000);
   try {
-    const value: unknown = JSON.parse(raw);
-    if (!isGrimoire(value)) throw new Error(`Unsupported Grimoire Format`);
-    return cloneData(value);
-  } catch { throw new Error(`Saved Grimoire Is Unreadable Or Unsupported. The Original Data Is Preserved; Editing Is Blocked`); }
+    const { data, error } = await scope.client.rpc(operation, { ...input, p_expected_auth_uid: scope.account.authUid }).abortSignal(controller.signal);
+    assertScope(scope);
+    if (error) throw error;
+    return readResponse(scope, data);
+  } finally { clearTimeout(timeout); }
 };
-const writeData = async (data: GrimoireData): Promise<void> => {
-  if (!isGrimoire(data)) throw new Error(`Grimoire Data Is Invalid`);
-  const serialized = JSON.stringify(data);
-  if (!useLocalStorage) { sessionData = serialized; return; }
-  try { await storageAdapter.setItem(grimoireStorageKey, serialized); }
-  catch { throw new Error(`Grimoire Could Not Be Saved. Try Again When Storage Is Available`); }
+const refresh = async (scope: AccountScope): Promise<GrimoireSnapshot> => {
+  try { return publish(scope, await request(scope, `get_grimoire`)); }
+  catch (error) { return fail(scope, error); }
 };
-const withStorage = <T,>(operation: () => Promise<T>): Promise<T> => queueStorageOperation(
-  grimoireStorageKey,
-  () => lockGrimoireStorage(grimoireStorageKey, operation),
-);
-const update = <T,>(change: (data: GrimoireData) => T): Promise<T> => withStorage(async () => {
-  const data = await readData();
-  const result = change(data);
-  await writeData(data);
-  publish({ data, error: null, persisted: useLocalStorage });
-  return result;
-}).catch((failure: unknown) => {
-  publishFailure(failure);
-  throw failure;
-});
+const queue = <T,>(scope: AccountScope, operation: () => Promise<T>): Promise<T> => {
+  const key = scopeKey(scope);
+  const next = (queues.get(key) ?? Promise.resolve()).catch(() => undefined).then(() => { assertScope(scope); return operation(); });
+  queues.set(key, next);
+  void next.then(() => { if (queues.get(key) === next) queues.delete(key); }, () => { if (queues.get(key) === next) queues.delete(key); });
+  return next;
+};
+const canonical = (data: GrimoireData) => JSON.stringify(data, (_key, value) => value && typeof value === `object` && !Array.isArray(value) ? Object.fromEntries(Object.entries(value).sort(([left], [right]) => left.localeCompare(right))) : value);
+const sameData = (left: GrimoireData, right: GrimoireData) => canonical(left) === canonical(right);
+const update = <T,>(key: string, change: (data: GrimoireData, revision: number) => T): Promise<T> => {
+  const scope = requireCurrentAccount();
+  return queue(scope, async () => {
+    const identity = scopeKey(scope);
+    try {
+      const pending = attempts.get(identity);
+      const viewed = confirmed.get(identity);
+      const previous = pending || !viewed?.persisted ? await request(scope, `get_grimoire`) : cloneSnapshot(viewed);
+      if (pending && previous.revision > pending.expectedRevision && sameData(previous.data, pending.data)) {
+        attempts.delete(identity);
+        publish(scope, previous);
+        if (pending.key === key) return pending.result as T;
+        throw new Error(`Your Previous Change Is Confirmed. Review The Latest Grimoire Before Saving Another Change`);
+      }
+      if (pending && previous.revision !== pending.expectedRevision) {
+        attempts.delete(identity);
+        publish(scope, previous);
+        throw new Error(`Your Grimoire Changed While A Save Was Unconfirmed. Review The Latest Data Before Saving`);
+      }
+      if (pending && pending.key !== key) throw new Error(`Retry The Unconfirmed Change Before Making Another Change`);
+      const data = pending?.data ?? cloneData(previous.data);
+      const result = pending ? pending.result as T : change(data, previous.revision);
+      if (!isGrimoire(data)) throw new Error(`The Grimoire Change Is Unsupported`);
+      const attempt = pending ?? { key, data, result, expectedRevision: previous.revision };
+      attempts.set(identity, attempt);
+      const saved = await request(scope, `save_grimoire`, { p_data: attempt.data, p_expected_revision: attempt.expectedRevision });
+      if (!sameData(saved.data, attempt.data)) throw new Error(`The Saved Grimoire Did Not Match The Requested Change`);
+      attempts.delete(identity);
+      publish(scope, saved);
+      return result;
+    } catch (error) {
+      if ([`40001`, `42501`, `22023`, `23514`].includes(getErrorCode(error))) attempts.delete(identity);
+      if (getErrorCode(error) === `40001`) {
+        try { publish(scope, await request(scope, `get_grimoire`)); } catch {}
+      }
+      fail(scope, error);
+      throw new Error(messageFrom(error));
+    }
+  });
+};
+const subscribe = (listener: (snapshot: GrimoireSnapshot) => void): (() => void) => {
+  const scope = requireCurrentAccount();
+  const key = scopeKey(scope);
+  let disposed = false;
+  let dirty = false;
+  let pending = false;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const observers = listeners.get(key) ?? new Set<(snapshot: GrimoireSnapshot) => void>();
+  listeners.set(key, observers);
+  observers.add(listener);
+  const load = async () => {
+    dirty = true;
+    if (pending || disposed) return;
+    pending = true;
+    try {
+      while (dirty && !disposed) {
+        dirty = false;
+        try {
+          const snapshot = await request(scope, `get_grimoire`);
+          if (!disposed && !dirty) publish(scope, snapshot);
+        } catch (error) {
+          try { if (!disposed) fail(scope, error); } catch {}
+        }
+      }
+    } finally { pending = false; }
+  };
+  const schedule = () => { clearTimeout(timer); timer = setTimeout(() => { void load(); }, 150); };
+  const channel = scope.client.channel(`grimoire:${scope.account.id}:${++subscriptionNumber}`).on(`postgres_changes`, { event: `*`, schema: `public`, table: `account_grimoires`, filter: `account_id=eq.${scope.account.id}` }, schedule).subscribe((status) => { if (status === `SUBSCRIBED`) schedule(); });
+  const foreground = AppState.addEventListener(`change`, (state) => { if (state === `active`) schedule(); });
+  if (typeof window !== `undefined`) window.addEventListener(`focus`, schedule);
+  const interval = setInterval(() => { if (typeof document === `undefined` || !document.hidden) schedule(); }, 60_000);
+  void load();
+  return () => {
+    disposed = true;
+    clearTimeout(timer);
+    clearInterval(interval);
+    foreground.remove();
+    observers.delete(listener);
+    if (!observers.size) { listeners.delete(key); confirmed.delete(key); attempts.delete(key); }
+    if (typeof window !== `undefined`) window.removeEventListener(`focus`, schedule);
+    void scope.client.removeChannel(channel);
+  };
+};
+
 const collectionById = (data: GrimoireData, id: string): GrimoireCollection => {
   const collection = data.collections.find((item) => item.id === id);
   if (!collection) throw new Error(`This Collection Is No Longer Available. Refresh And Try Again`);
@@ -119,12 +177,20 @@ const assertEntryCapacity = (data: GrimoireData, id: string): void => {
 };
 
 export const grimoireService = {
-  subscribe: (listener: (value: GrimoireSnapshot) => void): (() => void) => {
-    listeners.add(listener);
-    return () => { listeners.delete(listener); };
+  subscribe,
+  getSnapshot: (): Promise<GrimoireSnapshot> => refresh(requireCurrentAccount()),
+  importDevicePreview: async (): Promise<void> => {
+    const scope = requireCurrentAccount();
+    const legacy = await deviceGrimoireService.getSnapshot();
+    assertScope(scope);
+    if (legacy.error) throw new Error(legacy.error);
+    if (!legacy.data.collections.length && !Object.keys(legacy.data.entries).length) throw new Error(`No Device Preview Data Was Found`);
+    await update(`import-device-preview`, (data, revision) => {
+      if (revision !== 0 || data.collections.length || Object.keys(data.entries).length) throw new Error(`Device Preview Import Requires An Empty New Account Grimoire`);
+      Object.assign(data, cloneData(legacy.data));
+    });
   },
-  getSnapshot: (): Promise<GrimoireSnapshot> => withStorage(async () => publish({ error: null, data: await readData(), persisted: useLocalStorage })).catch(publishFailure),
-  createCollection: (value: string): Promise<string> => update((data) => {
+  createCollection: (value: string): Promise<string> => update(JSON.stringify([`create`, value]), (data) => {
     const name = collectionName(value);
     if (data.collections.length >= grimoireLimits.collections) throw new Error(`You Can Create Up To ${grimoireLimits.collections} Collections`);
     if (data.nextCollectionNumber >= Number.MAX_SAFE_INTEGER) throw new Error(`Collection Number Limit Reached`);
@@ -135,12 +201,12 @@ export const grimoireService = {
     data.collections.push({ id, name, number, spellIds: [] });
     return id;
   }),
-  renameCollection: (id: string, name: string): Promise<void> => update((data) => { collectionById(data, id).name = collectionName(name); }),
-  deleteCollection: (id: string): Promise<void> => update((data) => {
+  renameCollection: (id: string, name: string): Promise<void> => update(JSON.stringify([`rename`, id, name]), (data) => { collectionById(data, id).name = collectionName(name); }),
+  deleteCollection: (id: string): Promise<void> => update(JSON.stringify([`delete`, id]), (data) => {
     collectionById(data, id);
     data.collections = data.collections.filter((collection) => collection.id !== id);
   }),
-  setCollectionSpell: (collectionId: string, spellId: string, included: boolean): Promise<void> => update((data) => {
+  setCollectionSpell: (collectionId: string, spellId: string, included: boolean): Promise<void> => update(JSON.stringify([`membership`, collectionId, spellId, included]), (data) => {
     assertSpellId(spellId);
     const collection = collectionById(data, collectionId);
     const existing = collection.spellIds.includes(spellId);
@@ -148,7 +214,7 @@ export const grimoireService = {
     if (included && !existing) collection.spellIds.push(spellId);
     if (!included) collection.spellIds = collection.spellIds.filter((id) => id !== spellId);
   }),
-  saveNote: (spellId: string, note: string): Promise<void> => update((data) => {
+  saveNote: (spellId: string, note: string): Promise<void> => update(JSON.stringify([`note`, spellId, note]), (data) => {
     assertSpellId(spellId);
     if (note.length > grimoireLimits.note) throw new Error(`Notes Can Be Up To ${grimoireLimits.note.toLocaleString()} Characters`);
     const entry = entryById(data, spellId);
@@ -156,7 +222,7 @@ export const grimoireService = {
     assertEntryCapacity(data, spellId);
     data.entries[spellId] = { ...entry, note };
   }),
-  recordReview: (spellId: string, remembered: boolean): Promise<void> => update((data) => {
+  recordReview: (spellId: string, remembered: boolean): Promise<void> => update(JSON.stringify([`review`, spellId, remembered]), (data) => {
     assertSpellId(spellId);
     assertEntryCapacity(data, spellId);
     const entry = entryById(data, spellId);
@@ -169,7 +235,7 @@ export const grimoireService = {
       lastReviewedAt: new Date().toISOString(),
     };
   }),
-  resetProgress: (spellIds: string[]): Promise<void> => update((data) => {
+  resetProgress: (spellIds: string[]): Promise<void> => update(JSON.stringify([`reset`, spellIds]), (data) => {
     spellIds.forEach(assertSpellId);
     [...new Set(spellIds)].forEach((id) => {
       const entry = Object.hasOwn(data.entries, id) ? data.entries[id] : undefined;

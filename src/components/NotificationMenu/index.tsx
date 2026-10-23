@@ -62,6 +62,7 @@ const NotificationMenu = () => {
   const top = Math.max(insets.top + 12, Math.min(anchor.y + anchor.height + 10, height - insets.bottom - 180));
   const countPending = page.state === `loading` || (page.state === `ready` && page.readState === `loading`);
   const unreadDescription = page.unreadCount === null ? `Unread Count ${countPending ? `Loading` : `Unavailable`}` : `${page.unreadCount} Unread`;
+  if (!page.enabled) return null;
   return <>
     <Pressable ref={trigger} nativeID='header-notifications-trigger' accessibilityRole='button' accessibilityLabel={`Notifications, ${unreadDescription}`} accessibilityState={{ expanded: page.open }} onPress={toggle} style={[styles.trigger, { borderColor: palette.border, backgroundColor: palette.panel }]}><Icon name='bell' size={20} color={palette.primary} />{page.unreadCount === null || page.unreadCount > 0 ? <View nativeID='header-notifications-badge' accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={[styles.badge, { borderColor: palette.background, backgroundColor: countPending ? palette.panel : palette.gold }]}>{countPending ? <Skeleton id='header-notifications-badge-skeleton' width={10} height={7} /> : <Text style={styles.badgeText}>{page.unreadLabel}</Text>}</View> : null}</Pressable>
     <Modal transparent visible={present} statusBarTranslucent onRequestClose={() => close()} onShow={() => { if (open.current) focus(closeButton.current); }} onDismiss={() => { if (!open.current && restoreFocus.current) focus(trigger.current); }} animationType='none'>

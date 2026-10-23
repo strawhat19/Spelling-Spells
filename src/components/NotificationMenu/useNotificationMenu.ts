@@ -9,6 +9,6 @@ export const useNotificationMenu = () => {
   const { account, status } = useAuth();
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
-  useEffect(() => setOpen(false), [pathname, status, account?.id]);
-  return { ...page, open, close, setOpen };
+  useEffect(() => setOpen(false), [pathname, status, account?.id, page.enabled]);
+  return { ...page, open: page.enabled && open, close, setOpen };
 };

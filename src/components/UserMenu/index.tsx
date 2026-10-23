@@ -4,14 +4,16 @@ import styles from './styles.native';
 import { useAuth } from '../../shared/authContext';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'expo-router';
+import { useBilling } from '../../shared/billing/useBilling';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { useAccountShell } from '../../shared/accountShellContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { canAccessOwner, getAccountAvatar, getAccountPlanLabel } from '../../shared/authentication/types';
+import { canAccessOwner, getAccountAvatar } from '../../shared/authentication/types';
 import { Text, View, Image, Modal, Pressable, ScrollView, findNodeHandle, AccessibilityInfo, useWindowDimensions } from 'react-native';
 
 const UserMenu = () => {
   const router = useRouter();
+  const { planLabel } = useBilling();
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const shell = useAccountShell();
@@ -99,7 +101,7 @@ const UserMenu = () => {
               </View>
               <View nativeID='account-menu-email-row' style={styles.identityRow}>
                 <Text numberOfLines={1} nativeID='account-menu-email' style={[styles.email, { color: palette.muted }]}>{account?.email}</Text>
-                {account?.role !== `Owner` ? <View nativeID='account-menu-plan-pill' style={[styles.pill, { borderColor: palette.primary, backgroundColor: palette.panel }]}><Icon name='check' size={10} color={palette.primary} /><Text numberOfLines={1} accessibilityLabel={`Plan: ${getAccountPlanLabel(account)}`} style={[styles.pillText, { color: palette.primary }]}>{getAccountPlanLabel(account)}</Text></View> : null}
+                {account?.role !== `Owner` ? <View nativeID='account-menu-plan-pill' style={[styles.pill, { borderColor: palette.primary, backgroundColor: palette.panel }]}><Icon name='check' size={10} color={palette.primary} /><Text numberOfLines={1} accessibilityLabel={`Plan: ${planLabel}`} style={[styles.pillText, { color: palette.primary }]}>{planLabel}</Text></View> : null}
               </View>
             </View>
             <Pressable ref={profileLink} nativeID='account-menu-profile' accessibilityRole='link' onPress={() => navigate(`/profile`)} style={styles.item}><Icon name='user' size={16} color={palette.primary} /><Text style={[styles.itemText, { color: palette.text }]}>{`Profile`}</Text></Pressable>

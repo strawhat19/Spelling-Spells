@@ -1,0 +1,177 @@
+{
+  "checkedAt": "2026-10-23T20:30:08.634Z",
+  "origin": "https://spellingspells.com",
+  "http": [
+    {
+      "path": "/pricing",
+      "method": "GET",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "allow": null,
+      "bundle": "entry-b19496809ccef32dd5fb7139fc32e75b.js",
+      "passed": true
+    },
+    {
+      "path": "/billing-return?cancelled=1",
+      "method": "GET",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "allow": null,
+      "bundle": "entry-b19496809ccef32dd5fb7139fc32e75b.js",
+      "passed": true
+    },
+    {
+      "path": "/terms",
+      "method": "GET",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "allow": null,
+      "bundle": "entry-b19496809ccef32dd5fb7139fc32e75b.js",
+      "copyConfirmed": true,
+      "passed": true
+    },
+    {
+      "path": "/privacy",
+      "method": "GET",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "allow": null,
+      "bundle": "entry-b19496809ccef32dd5fb7139fc32e75b.js",
+      "copyConfirmed": true,
+      "passed": true
+    },
+    {
+      "path": "/help",
+      "method": "GET",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "allow": null,
+      "bundle": "entry-b19496809ccef32dd5fb7139fc32e75b.js",
+      "copyConfirmed": true,
+      "passed": true
+    },
+    {
+      "path": "/api/billing/status",
+      "method": "GET",
+      "status": 401,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "allow": null,
+      "code": "sign-in-required",
+      "passed": true
+    },
+    {
+      "path": "/api/billing/checkout",
+      "method": "GET",
+      "status": 405,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "allow": "POST",
+      "code": "method-not-allowed",
+      "passed": true
+    },
+    {
+      "path": "/api/billing/webhook",
+      "method": "GET",
+      "status": 405,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "allow": "POST",
+      "code": "method-not-allowed",
+      "passed": true
+    },
+    {
+      "path": "/api/billing/unknown",
+      "method": "GET",
+      "status": 404,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "allow": null,
+      "code": "not-found",
+      "passed": true
+    },
+    {
+      "path": "/api/billing/webhook",
+      "method": "POST",
+      "signature": "Missing",
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "allow": null,
+      "code": "webhook-signature-required",
+      "passed": true
+    },
+    {
+      "path": "/api/billing/webhook",
+      "method": "POST",
+      "signature": "Invalid",
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "allow": null,
+      "code": "webhook-signature-invalid",
+      "passed": true
+    }
+  ],
+  "database": {
+    "features": {
+      "version": 2,
+      "revision": 2
+    },
+    "tiers": {
+      "records": [
+        {
+          "slug": "free",
+          "number": 1,
+          "display_order": 0
+        },
+        {
+          "slug": "starter",
+          "number": 2,
+          "display_order": 1
+        }
+      ]
+    },
+    "plans": {
+      "records": [
+        {
+          "slug": "free",
+          "price_cents": 0,
+          "currency": "USD",
+          "interval": "month",
+          "revision": 1,
+          "description": "Explore the archive and build your own spell library.",
+          "removes_ads": false
+        },
+        {
+          "slug": "starter",
+          "price_cents": 100,
+          "currency": "USD",
+          "interval": "month",
+          "revision": 3,
+          "description": "Create private spell collections, save personal notes, practice with flashcards, and export your grimoire.",
+          "removes_ads": false
+        }
+      ]
+    },
+    "anonymousEntitlementsDenied": "42501",
+    "anonymousDispatcherDenied": "42501",
+    "serviceDispatcherRead": {
+      "result": {
+        "alreadyProcessed": false
+      }
+    }
+  },
+  "passed": true,
+  "transactionCreated": false,
+  "authenticatedBillingStatusChecked": false,
+  "webhookDeliveryVerified": false,
+  "databaseCheckedAt": "2026-10-23T20:25:26.734Z",
+  "deploymentId": "dpl_5XxZN4BCwTqcuUUYaJ4VgmiE2N4M",
+  "deploymentUrl": "https://spelling-spells-b4bfagt0n-piratechs.vercel.app"
+}

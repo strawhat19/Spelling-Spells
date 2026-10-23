@@ -1,7 +1,8 @@
 import { useAuth } from '../../shared/authContext';
 import { useEffect, useRef, useState } from 'react';
+import { useBilling } from '../../shared/billing/useBilling';
 import { useTheme } from '../../shared/themeContext/useTheme';
-import { canAccessAccount, getAccountAvatar, getAccountPlanLabel, type AuthResult } from '../../shared/authentication/types';
+import { canAccessAccount, getAccountAvatar, type AuthResult } from '../../shared/authentication/types';
 
 export type ProfilePageProps = { view?: `profile` | `connections` };
 type ProfileAction = `save` | `verify` | `refresh` | `retry` | `signout`;
@@ -29,6 +30,7 @@ const emptyEditor = (scope: string): EditorState => ({
 
 export const useProfilePage = ({ view = `profile` }: ProfilePageProps) => {
   const auth = useAuth();
+  const billing = useBilling();
   const theme = useTheme();
   const confirmedScope = useRef<{ identityUid: string; accountId: string } | null>(null);
   const identityUid = auth.identity?.authUid ?? null;
@@ -177,6 +179,7 @@ export const useProfilePage = ({ view = `profile` }: ProfilePageProps) => {
     ...editor,
     view,
     dirty,
+    billing,
     loading,
     allowed,
     signingOut,
@@ -185,7 +188,7 @@ export const useProfilePage = ({ view = `profile` }: ProfilePageProps) => {
     avatarDraft,
     saveProfile,
     displayName,
-    planLabel: getAccountPlanLabel(auth.account),
+    planLabel: billing.planLabel,
     connectionRequirements,
     editable: allowed && !editor.busy && !signingOut,
     showRecovery: !allowed && (auth.status === `error` || Boolean(auth.identity)),

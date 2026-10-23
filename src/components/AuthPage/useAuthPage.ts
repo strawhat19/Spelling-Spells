@@ -1,9 +1,11 @@
 import { Platform } from 'react-native';
-import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../shared/authContext';
-import { useRouter, type Href } from 'expo-router';
+import { useEffect, useRef, useState } from 'react';
+import { safeReturnPath } from '../../shared/routes';
+import { useRouter, useLocalSearchParams, type Href } from 'expo-router';
 import { getSignInDestination } from '../../shared/authentication/returnPath';
 import { canAccessAccount, type AuthResult } from '../../shared/authentication/types';
+import { rememberSignInContinuation, clearSignInContinuation } from '../../shared/authentication/continuation';
 
 export type AuthPageProps = { mode?: `signin` | `signup` };
 type AuthAction = `email` | `google` | `reset` | `retry` | `signout` | `verify` | `refresh`;
@@ -36,8 +38,10 @@ const validEmail = (value: string) => value.length <= 254 && /^[^\s@]+@[^\s@]+\.
 export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
   const auth = useAuth();
   const router = useRouter();
+  const params = useLocalSearchParams<{ returnTo?: string | string[] }>();
   const isSignUp = mode === `signup`;
-  const returnTo = getSignInDestination(auth.account);
+  const requestedReturn = params.returnTo ? safeReturnPath(params.returnTo) : null;
+  const returnTo = requestedReturn ?? getSignInDestination(auth.account);
   const scope = `${mode}:${auth.identity?.authUid ?? `guest`}`;
   const scopeRef = useRef(scope);
   const mounted = useRef(true);
@@ -91,6 +95,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     if (!destination || destination.mode !== mode || loading || !signedIn || form.busy ||
       destination.accountId !== auth.account?.id || destination.identityUid !== auth.identity?.authUid) return;
     redirect.current = null;
+    clearSignInContinuation();
     router.replace(returnTo as Href);
   }, [mode, loading, signedIn, form.busy, auth.account?.id, auth.identity?.authUid, returnTo, router]);
 
@@ -124,6 +129,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     if (action === `signout`) redirect.current = null;
     patch({ busy: action, errors: {}, password: ``, feedback: null });
     try {
+      if (shouldRedirect && requestedReturn) rememberSignInContinuation(requestedReturn);
       const result = await task();
       if (!current()) return;
       if (result.ok) {
@@ -135,12 +141,14 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
           ...(action === `email` && isSignUp ? { confirmationEmail: result.account ? null : form.email.trim() } : {}),
         });
       } else {
+        if (shouldRedirect) clearSignInContinuation();
         redirect.current = null;
         const nonfatal = result.code === `cancelled` || result.code === `unsupported`;
         update({ feedback: { tone: nonfatal ? `notice` : `error`, message: action === `reset` && result.code !== `unsupported` ? `The reset request could not be completed. Please try again later.` : result.message } });
       }
     } catch {
       if (!current()) return;
+      if (shouldRedirect) clearSignInContinuation();
       redirect.current = null;
       update({ feedback: { tone: `error`, message: `The request could not be completed. Please try again.` } });
     } finally {
@@ -159,6 +167,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     signOutPending.current = true;
     operation.current += 1;
     pending.current = false;
+    clearSignInContinuation();
     redirect.current = null;
     transition.current = null;
     setSigningOut(true);
@@ -227,7 +236,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     isSignUp,
     returnTo,
     editable,
-    continueLabel: returnTo === `/dashboard` ? `Open Dashboard` : `Return Home`,
+    continueLabel: returnTo === `/dashboard` ? `Open Dashboard` : returnTo === `/pricing` ? `Review Plans` : returnTo.startsWith(`/billing-return`) ? `Return To Billing` : returnTo === `/` ? `Return Home` : `Continue`,
     confirmationPending,
     canResendConfirmation: ready && validEmail(form.confirmationEmail ?? form.email.trim()),
     changeConfirmationEmail: () => { if (ready) patch({ confirmationEmail: null, feedback: null, password: `` }); },
@@ -241,7 +250,7 @@ export const useAuthPage = ({ mode = `signin` }: AuthPageProps) => {
     retryConnection: () => run(`retry`, auth.retryHydration, `Account connection refreshed.`),
     resendVerification: () => run(`verify`, auth.sendVerification, `Verification email requested. Check your inbox and spam folder.`),
     refreshVerification: () => run(`refresh`, auth.refreshIdentity, `Verification status refreshed. Your current status is shown above.`),
-    switchHref: isSignUp ? `/signin` : `/signup`,
+    switchHref: `${isSignUp ? `/signin` : `/signup`}${requestedReturn ? `?returnTo=${encodeURIComponent(requestedReturn)}` : ``}`,
     title: isSignUp ? `Begin your next chapter.` : `Welcome back, word wanderer.`,
     formTitle: confirmationPending ? `Check your email` : isSignUp ? `Create your account` : `Sign in to your grimoire`,
     confirmationInstructions: Platform.OS === `web`

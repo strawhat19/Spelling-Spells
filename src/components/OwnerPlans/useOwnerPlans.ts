@@ -7,8 +7,8 @@ import { planCatalogLimit, createPlanDraft, normalizePlanDraft } from '../../sha
 
 type PlanFilter = `all` | `active` | `inactive`;
 type Editor = { draft: PlanDraft; price: string; order: string; features: string; record: PlanRecord | null };
-type Controls = { scope: string; search: string; filter: PlanFilter; deletingId: string; editor: Editor | null };
-const emptyControls = (scope: string): Controls => ({ scope, search: ``, filter: `all`, deletingId: ``, editor: null });
+type Controls = { scope: string; search: string; filter: PlanFilter; archivingId: string; editor: Editor | null };
+const emptyControls = (scope: string): Controls => ({ scope, search: ``, filter: `all`, archivingId: ``, editor: null });
 
 export const formatPlanDate = (value: string) => {
   const date = new Date(value);
@@ -79,7 +79,7 @@ export const useOwnerPlans = () => {
     if (!permitted || !ready || response.busy) return;
     const draft = createPlanDraft(record);
     clearFeedback();
-    setControls({ ...current, deletingId: ``, editor: { draft, record: record ?? null, price: (draft.priceCents / 100).toFixed(2), order: String(draft.displayOrder), features: draft.features.join(`\n`) } });
+    setControls({ ...current, archivingId: ``, editor: { draft, record: record ?? null, price: (draft.priceCents / 100).toFixed(2), order: String(draft.displayOrder), features: draft.features.join(`\n`) } });
   };
   const closeEditor = () => {
     if (pending.current?.scope !== identityScope) setControl(`editor`, null);
@@ -116,13 +116,13 @@ export const useOwnerPlans = () => {
     const saved = await runMutation(plan.id, () => plansAPI.setActive(plan, !plan.active), plan.active ? `Plan Hidden` : `Plan Published`);
     if (saved) setRevision((value) => value + 1);
   };
-  const remove = async (plan: PlanRecord) => {
-    if (current.deletingId !== plan.id) return;
-    const saved = await runMutation(plan.id, () => plansAPI.deletePlan(plan), `Plan Deleted`);
-    if (saved) { setControl(`deletingId`, ``); setRevision((value) => value + 1); }
+  const archive = async (plan: PlanRecord) => {
+    if (current.archivingId !== plan.id) return;
+    const saved = await runMutation(plan.id, () => plansAPI.deletePlan(plan), `Plan Archived`);
+    if (saved) { setControl(`archivingId`, ``); setRevision((value) => value + 1); }
   };
   return {
-    edit, save, remove, ready, plans, loading, snapshot, permitted, closeEditor, changeStatus, setDraftField, setEditorText, matchingPlans,
+    edit, save, archive, ready, plans, loading, snapshot, permitted, closeEditor, changeStatus, setDraftField, setEditorText, matchingPlans,
     busy: loading || response.busy,
     limit: planCatalogLimit,
     notice: response.notice,
@@ -131,14 +131,14 @@ export const useOwnerPlans = () => {
     search: current.search,
     filter: current.filter,
     editor: current.editor,
-    deletingId: current.deletingId,
+    archivingId: current.archivingId,
     activeCount: plans.filter((plan) => plan.active).length,
     error: response.error || (!loading && snapshot?.status !== `ready` ? snapshot?.message : null) || ``,
     setSearch: (value: string) => setControl(`search`, value),
     setFilter: (value: PlanFilter) => setControl(`filter`, value),
-    cancelDelete: () => { if (!response.busy) setControl(`deletingId`, ``); },
+    cancelArchive: () => { if (!response.busy) setControl(`archivingId`, ``); },
     reload: () => { if (!response.busy) setRevision((value) => value + 1); },
-    requestDelete: (plan: PlanRecord) => { if (!response.busy) { clearFeedback(); setControl(`deletingId`, plan.id); } },
+    requestArchive: (plan: PlanRecord) => { if (!response.busy) { clearFeedback(); setControl(`archivingId`, plan.id); } },
   };
 };
 

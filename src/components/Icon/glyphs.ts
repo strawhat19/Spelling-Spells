@@ -2,6 +2,7 @@ export const glyphs: Record<string, string> = {
   plus: `M12 5v14M5 12h14`,
   play: `M8 4l12 8-12 8V4Z`,
   pause: `M8 5v14M16 5v14`,
+  archive: `M3 3h18v5H3V3ZM5 8h14v13H5V8ZM9 12h6`,
   plans: `M6 3h12v18H6V3ZM9 7h6M9 11h6M9 15h3`,
   'check-all': `M2 12l4 4L16 6M10 16l3 3L23 9`,
   save: `M5 3h12l4 4v14H3V3h2Zm2 0v6h10V3M7 21v-8h10v8`,

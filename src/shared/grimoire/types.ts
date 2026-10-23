@@ -20,21 +20,34 @@ export type GrimoireData = {
   nextCollectionNumber: number;
 };
 
-export type GrimoireSnapshot = {
+export type DeviceGrimoireSnapshot = {
   data: GrimoireData;
   persisted: boolean;
   error: string | null;
+};
+export type GrimoireSnapshot = DeviceGrimoireSnapshot & {
+  revision: number;
+  accountId: string;
+  updatedAt: string | null;
+  source: `cloud` | `unavailable`;
 };
 
 export type GrimoireContextValue = {
   ready: boolean;
   busy: boolean;
+  scope: string;
+  writable: boolean;
+  authenticated: boolean;
+  canImportDevicePreview: boolean;
+  revision: number;
+  source: `cloud` | `unavailable`;
   persisted: boolean;
   error: string | null;
   collections: GrimoireCollection[];
   entries: Record<string, GrimoireEntry>;
   exportData: () => string;
   refresh: () => Promise<void>;
+  importDevicePreview: () => Promise<boolean>;
   saveNote: (spellId: string, note: string) => Promise<boolean>;
   createCollection: (name: string) => Promise<string | null>;
   resetProgress: (spellIds: string[]) => Promise<boolean>;

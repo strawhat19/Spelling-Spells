@@ -1,0 +1,141 @@
+{
+  "checkedAt": "2026-10-23T19:27:03.968Z",
+  "origin": "https://spellingspells.com",
+  "deploymentId": "dpl_E8EBBohny862UE7mmp8G3oGztBH4",
+  "resolver": "System resolver and default fetch; no DNS override or TLS bypass",
+  "addresses": [
+    {
+      "address": "216.150.16.1",
+      "ttl": 600
+    },
+    {
+      "address": "216.150.1.1",
+      "ttl": 600
+    }
+  ],
+  "build": {
+    "version": 1,
+    "mode": "anonymous",
+    "generatedAt": "2026-10-23T19:20:07.411Z",
+    "catalogTimestamp": "2026-10-23T19:20:07.411Z",
+    "siteOrigin": "https://spellingspells.com",
+    "spellCount": 30,
+    "worldCount": 5,
+    "spellPaths": [
+      "/spell/lumos",
+      "/spell/fus-ro-dah",
+      "/spell/brisingr",
+      "/spell/alohomora",
+      "/spell/wingardium-leviosa",
+      "/spell/expelliarmus",
+      "/spell/expecto-patronum",
+      "/spell/adurna",
+      "/spell/jierda",
+      "/spell/crimson-bands-of-cyttorak",
+      "/spell/shield-of-the-seraphim",
+      "/spell/winds-of-watoomb",
+      "/spell/astral-projection",
+      "/spell/soul-self",
+      "/spell/empathy",
+      "/spell/empathic-healing",
+      "/spell/azarath-metrion-zinthos",
+      "/spell/accio",
+      "/spell/reparo",
+      "/spell/protego",
+      "/spell/stupefy",
+      "/spell/riddikulus",
+      "/spell/nox",
+      "/spell/petrificus-totalus",
+      "/spell/rictusempra",
+      "/spell/incendio",
+      "/spell/aguamenti",
+      "/spell/obliviate",
+      "/spell/silencio",
+      "/spell/reducto"
+    ],
+    "worldPaths": [
+      "/world/dc-teen-titans",
+      "/world/harry-potter",
+      "/world/inheritance-cycle",
+      "/world/marvel",
+      "/world/skyrim"
+    ],
+    "snapshotSha256": "31cc20bcfbd6266059032dcfe850e715ff54eafea6ba6e9f46972513468baed8",
+    "files": [
+      "sitemap.xml",
+      "robots.txt"
+    ]
+  },
+  "pages": [
+    {
+      "url": "https://spellingspells.com/",
+      "status": 200,
+      "location": null,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "canonical": "https://spellingspells.com/"
+    },
+    {
+      "url": "https://spellingspells.com/spell/accio",
+      "status": 200,
+      "location": null,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "canonical": "https://spellingspells.com/spell/accio"
+    },
+    {
+      "url": "https://spellingspells.com/about",
+      "status": 200,
+      "location": null,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "canonical": "https://spellingspells.com/about"
+    },
+    {
+      "url": "https://spellingspells.com/terms",
+      "status": 200,
+      "location": null,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "canonical": "https://spellingspells.com/terms"
+    },
+    {
+      "url": "https://spellingspells.com/privacy",
+      "status": 200,
+      "location": null,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "canonical": "https://spellingspells.com/privacy"
+    },
+    {
+      "url": "https://spellingspells.com/contact",
+      "status": 200,
+      "location": null,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "canonical": "https://spellingspells.com/contact"
+    },
+    {
+      "url": "https://spellingspells.com/auth/callback",
+      "status": 200,
+      "location": null,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "http://spellingspells.com/spell/accio?from=domain-check",
+      "status": 308,
+      "location": "https://spellingspells.com/spell/accio?from=domain-check",
+      "server": "Vercel",
+      "contentType": "text/plain"
+    },
+    {
+      "url": "https://www.spellingspells.com/spell/accio?from=domain-check",
+      "status": 308,
+      "location": "https://spellingspells.com/spell/accio?from=domain-check",
+      "server": "Vercel",
+      "contentType": "text/plain"
+    }
+  ],
+  "problems": []
+}

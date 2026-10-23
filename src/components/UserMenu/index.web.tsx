@@ -1,14 +1,16 @@
+import './styles.scss';
 import Icon from '../Icon';
 import AppLink from '../AppLink';
 import Skeleton from '../Skeleton';
 import { usePathname } from 'expo-router';
 import { useAuth } from '../../shared/authContext';
 import { useEffect, useRef, useState } from 'react';
-import { canAccessOwner, getAccountAvatar, getAccountPlanLabel } from '../../shared/authentication/types';
-import './styles.scss';
+import { useBilling } from '../../shared/billing/useBilling';
+import { canAccessOwner, getAccountAvatar } from '../../shared/authentication/types';
 
 const UserMenu = () => {
   const pathname = usePathname();
+  const { planLabel } = useBilling();
   const { account, loading, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -58,7 +60,7 @@ const UserMenu = () => {
         <p className='user-menu-name' title={account.displayName}>{account.displayName}</p>
         <span id='user-menu-role' className='user-menu-pill user-menu-role'><Icon name='shield' size={10} />{account.roleVerified ? account.role : `Role Unavailable`}</span>
         <p className='user-menu-email' title={account.email}>{account.email}</p>
-        {account.role !== `Owner` ? <span id='user-menu-plan' className='user-menu-pill user-menu-plan'><Icon name='spark' size={10} />{getAccountPlanLabel(account)}</span> : null}
+        {account.role !== `Owner` ? <span id='user-menu-plan' className='user-menu-pill user-menu-plan'><Icon name='spark' size={10} />{planLabel}</span> : null}
       </div>
       <nav aria-label='Account Navigation' onClick={() => setOpen(false)}><AppLink id='user-menu-profile' href='/profile'><Icon name='user' size={17} />Profile</AppLink>{canAccessOwner(account) ? <AppLink id='user-menu-dashboard' href='/dashboard'><Icon name='dashboard' size={17} />Dashboard</AppLink> : null}</nav>
       <button id='user-menu-signout' type='button' disabled={busy} onClick={() => void logout()}><Icon name='logout' size={17} />{busy ? `Signing Out…` : `Sign Out`}</button>

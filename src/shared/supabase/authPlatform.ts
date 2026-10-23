@@ -22,7 +22,7 @@ export const configurePlatformAuth = (client: SupabaseClient): void => {
   });
 };
 
-export const getAuthRedirectUrl = (): string => `https://spelling-spells.vercel.app/auth/callback`;
+export const getAuthRedirectUrl = (): string => `https://spellingspells.com/auth/callback`;
 export const passwordRecoveryAvailable = false;
 export const signupConfirmationMessage = `If this address can receive an account email, check your inbox and spam folder to confirm it in your browser. Then return to the app and sign in with your email and password.`;
 export const readAuthRedirect = (): { code: string | null; error: string | null } | null => null;

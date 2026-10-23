@@ -12,7 +12,7 @@ const PricingPage = () => {
   const { palette } = useTheme();
   return (
     <View nativeID={`pricing-page`} style={styles.page}>
-      <PageMetadata title={`Pricing`} canonicalPath={`/pricing`} description={`Explore Spelling Spells plans. Browse for free or preview device-local collections, notes, flashcards and grimoire export. Subscriptions are coming soon.`} />
+      <PageMetadata title={`Pricing`} canonicalPath={`/pricing`} description={`Explore Spelling Spells plans. Browse for free or use your account's confirmed access to private collections, personal notes, flashcards and grimoire export.`} />
       <PricingPlans variant={`page`} />
       <View nativeID={`pricing-questions`} style={[styles.questions, { borderColor: palette.border }]}>
         <Text nativeID={`pricing-questions-eyebrow`} style={[styles.eyebrow, { color: palette.muted }]}>A FEW THINGS TO KNOW</Text>

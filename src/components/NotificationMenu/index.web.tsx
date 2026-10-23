@@ -61,6 +61,7 @@ const NotificationMenu = () => {
   const loading = page.state === `loading`;
   const countLoading = loading || (page.state === `ready` && page.readState === `loading`);
   const unreadDescription = page.unreadCount === null ? `Unread Count ${countLoading ? `Loading` : `Unavailable`}` : `${page.unreadCount} Unread`;
+  if (!page.enabled) return null;
   return <div id='header-notifications' className='notification-menu'>
     <button ref={trigger} id='header-notifications-trigger' type='button' onClick={toggle} className={`notification-menu-trigger${page.open ? ` is-open` : ``}`} aria-label={`Notifications, ${unreadDescription}`} title='Notifications' aria-haspopup='dialog' aria-expanded={page.open} aria-controls={page.open ? `header-notifications-panel` : undefined}><Icon name='bell' size={20} />{countLoading || page.unreadCount === null || page.unreadCount > 0 ? <span id='header-notifications-badge' className={`notification-menu-badge${countLoading ? ` is-loading` : ``}`} aria-hidden='true'>{countLoading ? <Skeleton id='header-notifications-badge-skeleton' width={10} height={8} /> : page.unreadLabel}</span> : null}</button>
     {portalReady ? createPortal(<section

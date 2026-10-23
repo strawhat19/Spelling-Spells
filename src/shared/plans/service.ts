@@ -100,10 +100,10 @@ export const plansService = {
   setActive: async (plan: PlanRecord, active: boolean): Promise<PlanRecord> => plansService.savePlan({ ...plan, active }, plan),
   deletePlan: async (plan: PlanRecord): Promise<void> => {
     const access = ownerScope();
-    const { data, error } = await access.client.rpc(`owner_delete_pricing_plan`, { p_id: plan.id, p_expected_revision: plan.revision, p_expected_auth_uid: access.account.authUid });
+    const { data, error } = await access.client.rpc(`owner_archive_pricing_plan`, { p_id: plan.id, p_expected_revision: plan.revision, p_expected_auth_uid: access.account.authUid });
     ownerScope(access);
-    if (error) throw new Error(failure(error).message ?? `The Plan Could Not Be Deleted`);
-    if (data !== plan.id) throw new Error(`The Database Did Not Confirm The Plan Deletion`);
+    if (error) throw new Error(failure(error).message ?? `The Plan Could Not Be Archived`);
+    if (data !== plan.id) throw new Error(`The Database Did Not Confirm The Plan Archive`);
     invalidate();
   },
 };

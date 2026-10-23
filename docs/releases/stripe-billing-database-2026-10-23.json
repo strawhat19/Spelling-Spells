@@ -1,0 +1,599 @@
+{
+  "migrationVersion": "20261023202432",
+  "migrationName": "stripe_billing_entitlements",
+  "migrationSha256": "38AB1228A7C33B538B625DE5E5F1E7100312B27F1FBBCCBEDDBBCD4F59141CD2",
+  "tiers": {
+    "records": [
+      {
+        "id": "Plan_1_Free_2026-10-23_a00be4fd-37c9-4169-8250-a09627d74c6b",
+        "slug": "free",
+        "number": 1,
+        "display_order": 0
+      },
+      {
+        "id": "Plan_2_Starter_2026-10-23_b8b93b7a-130c-4210-9fe6-7aa9c1c79b1d",
+        "slug": "starter",
+        "number": 2,
+        "display_order": 1
+      }
+    ],
+    "mismatches": 0,
+    "catalogCount": 2,
+    "projectionCount": 2
+  },
+  "tables": [
+    {
+      "rls": true,
+      "table": "app_private.billing_attempts",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": false,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": false
+    },
+    {
+      "rls": true,
+      "table": "app_private.billing_bindings",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": false,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": false
+    },
+    {
+      "rls": true,
+      "table": "app_private.billing_configuration",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": false,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": false
+    },
+    {
+      "rls": true,
+      "table": "app_private.billing_entitlement_authority",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": false,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": false
+    },
+    {
+      "rls": true,
+      "table": "app_private.billing_events",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": false,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": false
+    },
+    {
+      "rls": true,
+      "table": "app_private.billing_operation_leases",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": false,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": false
+    },
+    {
+      "rls": true,
+      "table": "app_private.billing_subscriptions",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": false,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": false
+    },
+    {
+      "rls": true,
+      "table": "public.account_entitlements",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": false,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": true
+    },
+    {
+      "rls": true,
+      "table": "public.account_grimoires",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": false,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": true
+    },
+    {
+      "rls": true,
+      "table": "public.pricing_plan_tiers",
+      "exists": true,
+      "anonWrite": false,
+      "anonSelect": true,
+      "authenticatedWrite": false,
+      "serviceDirectWrite": false,
+      "authenticatedSelect": true
+    }
+  ],
+  "starter": {
+    "id": "Plan_2_Starter_2026-10-23_b8b93b7a-130c-4210-9fe6-7aa9c1c79b1d",
+    "slug": "starter",
+    "active": true,
+    "amount": 100,
+    "currency": "USD",
+    "features": [
+      "Everything In Free",
+      "Custom Spell Collections",
+      "Personal Notes For Every Spell",
+      "Flashcards And Mastery Tracking",
+      "Export Collections, Notes And Progress",
+      "Support The Growing Archive"
+    ],
+    "interval": "month",
+    "revision": 3,
+    "description": "Create private spell collections, save personal notes, practice with flashcards, and export your grimoire."
+  },
+  "policies": [
+    {
+      "name": "account_entitlements_read_self",
+      "check": null,
+      "roles": [
+        "authenticated"
+      ],
+      "table": "public.account_entitlements",
+      "using": "(account_id = ( SELECT app_private.current_billing_account_id() AS current_billing_account_id))",
+      "command": "SELECT"
+    },
+    {
+      "name": "account_grimoires_read_self",
+      "check": null,
+      "roles": [
+        "authenticated"
+      ],
+      "table": "public.account_grimoires",
+      "using": "(account_id = ( SELECT app_private.current_billing_account_id() AS current_billing_account_id))",
+      "command": "SELECT"
+    },
+    {
+      "name": "notification_feed_state_account_read",
+      "check": null,
+      "roles": [
+        "authenticated"
+      ],
+      "table": "public.notification_feed_state",
+      "using": "(( SELECT app_private.feature_allows('notifications'::text) AS feature_allows) OR ( SELECT app_private.is_owner() AS is_owner))",
+      "command": "SELECT"
+    },
+    {
+      "name": "notification_feed_state_public_read",
+      "check": null,
+      "roles": [
+        "anon"
+      ],
+      "table": "public.notification_feed_state",
+      "using": "( SELECT app_private.feature_allows('notifications'::text) AS feature_allows)",
+      "command": "SELECT"
+    },
+    {
+      "name": "notifications_account_read",
+      "check": null,
+      "roles": [
+        "authenticated"
+      ],
+      "table": "public.notifications",
+      "using": "(((status = 'published'::text) AND ( SELECT app_private.feature_allows('notifications'::text) AS feature_allows)) OR ( SELECT app_private.is_owner() AS is_owner))",
+      "command": "SELECT"
+    },
+    {
+      "name": "notifications_public_read",
+      "check": null,
+      "roles": [
+        "anon"
+      ],
+      "table": "public.notifications",
+      "using": "((status = 'published'::text) AND ( SELECT app_private.feature_allows('notifications'::text) AS feature_allows))",
+      "command": "SELECT"
+    },
+    {
+      "name": "pricing_plan_tiers_public_read",
+      "check": null,
+      "roles": [
+        "anon",
+        "authenticated"
+      ],
+      "table": "public.pricing_plan_tiers",
+      "using": "true",
+      "command": "SELECT"
+    }
+  ],
+  "realtime": [
+    "account_entitlements",
+    "account_grimoires",
+    "feature_settings",
+    "pricing_plan_feed",
+    "pricing_plan_tiers"
+  ],
+  "triggers": [
+    {
+      "name": "accounts_initialize_entitlement",
+      "table": "accounts",
+      "enabled": "O",
+      "definition": "CREATE TRIGGER accounts_initialize_entitlement AFTER INSERT ON public.accounts FOR EACH ROW EXECUTE FUNCTION app_private.initialize_account_entitlement()"
+    },
+    {
+      "name": "pricing_plans_sync_tier",
+      "table": "pricing_plans",
+      "enabled": "O",
+      "definition": "CREATE TRIGGER pricing_plans_sync_tier AFTER INSERT OR UPDATE ON public.pricing_plans FOR EACH ROW EXECUTE FUNCTION app_private.sync_pricing_plan_tier()"
+    }
+  ],
+  "checkedAt": "2026-10-23T20:24:40.993758+00:00",
+  "functions": [
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_account_id text",
+      "signature": "app_private.billing_entitlement(text)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": false
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_action text, p_payload jsonb",
+      "signature": "app_private.billing_operation(text,jsonb)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": true,
+      "securityDefiner": true,
+      "authenticatedExecute": false
+    },
+    {
+      "exists": true,
+      "result": "text",
+      "arguments": "",
+      "signature": "app_private.current_billing_account_id()",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "boolean",
+      "arguments": "p_key text",
+      "signature": "app_private.feature_allows(text)",
+      "anonExecute": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_expected_auth_uid uuid",
+      "signature": "app_private.get_grimoire(uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "void",
+      "arguments": "p_ids text[], p_expected_auth_uid uuid",
+      "signature": "app_private.mark_notifications_read_before_feature_gate(text[],uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": false
+    },
+    {
+      "exists": true,
+      "result": "void",
+      "arguments": "p_ids text[], p_expected_auth_uid uuid",
+      "signature": "app_private.mark_notifications_read(text[],uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "",
+      "signature": "app_private.own_billing_entitlement()",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "text",
+      "arguments": "p_id text, p_expected_revision bigint, p_expected_auth_uid uuid",
+      "signature": "app_private.owner_archive_pricing_plan(text,bigint,uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "text",
+      "arguments": "p_id text, p_expected_revision bigint, p_expected_auth_uid uuid",
+      "signature": "app_private.owner_delete_pricing_plan(text,bigint,uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": false,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "boolean",
+      "arguments": "p_plan_slug text, p_minimum_slug text",
+      "signature": "app_private.plan_meets_minimum(text,text)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": false
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_data jsonb, p_expected_revision bigint, p_expected_auth_uid uuid",
+      "signature": "app_private.save_grimoire(jsonb,bigint,uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_payload jsonb, p_request_id uuid, p_expected_auth_uid uuid",
+      "signature": "app_private.submit_contact_before_feature_gate(jsonb,uuid,uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": false
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_payload jsonb, p_request_id uuid, p_expected_auth_uid uuid",
+      "signature": "app_private.submit_contact(jsonb,uuid,uuid)",
+      "anonExecute": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": true,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_action text, p_payload jsonb",
+      "signature": "public.billing_operation(text,jsonb)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": true,
+      "securityDefiner": false,
+      "authenticatedExecute": false
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_expected_auth_uid uuid",
+      "signature": "public.get_grimoire(uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": false,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "void",
+      "arguments": "p_ids text[], p_expected_auth_uid uuid",
+      "signature": "public.mark_notifications_read(text[],uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": true,
+      "securityDefiner": false,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "",
+      "signature": "public.own_billing_entitlement()",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": false,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "text",
+      "arguments": "p_id text, p_expected_revision bigint, p_expected_auth_uid uuid",
+      "signature": "public.owner_archive_pricing_plan(text,bigint,uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": false,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "text",
+      "arguments": "p_id text, p_expected_revision bigint, p_expected_auth_uid uuid",
+      "signature": "public.owner_delete_pricing_plan(text,bigint,uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": true,
+      "securityDefiner": false,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_data jsonb, p_expected_revision bigint, p_expected_auth_uid uuid",
+      "signature": "public.save_grimoire(jsonb,bigint,uuid)",
+      "anonExecute": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": false,
+      "securityDefiner": false,
+      "authenticatedExecute": true
+    },
+    {
+      "exists": true,
+      "result": "jsonb",
+      "arguments": "p_payload jsonb, p_request_id uuid, p_expected_auth_uid uuid",
+      "signature": "public.submit_contact(jsonb,uuid,uuid)",
+      "anonExecute": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "serviceExecute": true,
+      "securityDefiner": false,
+      "authenticatedExecute": true
+    }
+  ],
+  "configuration": [
+    {
+      "appId": "spelling-spells",
+      "active": true,
+      "livemode": true,
+      "providerAccountId": "acct_1URo3fKwCE6Umy8w"
+    }
+  ],
+  "aggregateState": {
+    "events": 0,
+    "accounts": 2,
+    "attempts": 0,
+    "bindings": 0,
+    "grimoires": 0,
+    "entitlements": 2,
+    "subscriptions": 0,
+    "entitlementStates": {
+      "free": 2
+    },
+    "missingEntitlements": 0
+  },
+  "featureSettings": [
+    {
+      "valid": true,
+      "version": 2,
+      "features": {
+        "contact": {
+          "plans": null,
+          "roles": null,
+          "enabled": true,
+          "planMode": "minimum",
+          "description": "Open the public contact page and send a message",
+          "minimumRole": "Guest"
+        },
+        "marquee": {
+          "plans": null,
+          "roles": null,
+          "enabled": true,
+          "planMode": "minimum",
+          "description": "Show the scrolling archive marquee",
+          "minimumRole": "Guest"
+        },
+        "themeToggle": {
+          "plans": null,
+          "roles": null,
+          "enabled": true,
+          "planMode": "minimum",
+          "description": "Choose between the light and dark themes",
+          "minimumRole": "Guest"
+        },
+        "grimoireTools": {
+          "plans": [
+            "starter"
+          ],
+          "roles": null,
+          "enabled": true,
+          "planMode": "minimum",
+          "description": "Use account collections, spell notes and flashcard practice",
+          "minimumRole": "Guest"
+        },
+        "notifications": {
+          "plans": null,
+          "roles": null,
+          "enabled": true,
+          "planMode": "minimum",
+          "description": "Read published archive announcements and manage private read status",
+          "minimumRole": "Guest"
+        }
+      },
+      "revision": 2
+    }
+  ]
+}

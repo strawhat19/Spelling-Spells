@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-23",
+  "appId": "spelling-spells",
+  "stripeAccountId": "acct_1URo3fKwCE6Umy8w",
+  "mode": "live",
+  "accountReadback": {
+    "chargesEnabled": true,
+    "payoutsEnabled": true
+  },
+  "resources": {
+    "productId": "prod_VUoFJCADXDkJdZ",
+    "priceId": "price_1UTodOKwCE6Umy8w83LT0awP",
+    "unitAmount": 100,
+    "currency": "usd",
+    "interval": "month",
+    "portalId": "bpc_1UToe7KwCE6Umy8wSOwQWseZ",
+    "cancellationMode": "at_period_end",
+    "webhookId": "we_1UToi7KwCE6Umy8wnCR6iJII",
+    "webhookUrl": "https://spellingspells.com/api/billing/webhook",
+    "apiVersion": "2026-09-30.endive",
+    "events": 16
+  },
+  "supabaseProjectId": "qtfajiuilwdtywkklbjq",
+  "databaseServerReadConfirmed": true,
+  "migrationApplied": true,
+  "frontendDeployed": true,
+  "sourceReviewed": true,
+  "buildOrTypecheckRun": true,
+  "transactionCreated": false,
+  "webhookDeliveryVerified": false,
+  "credentialRotation": "Replacement Saved And Provider Read Confirmed; Old Key Expired By User And Absent From Current Active Inventory",
+  "hostingEnvironment": {
+    "scope": "Production",
+    "project": "piratechs/spelling-spells",
+    "inspection": "Nine Prepared Values Imported Via Stdin; All Eleven Billing Variable Names Confirmed; Existing Hosted Secret Values Not Printed Or Pulled",
+    "presentBillingNames": [
+      "STRIPE_BILLING_SERVER_KEY",
+      "SUPABASE_SECRET_KEY",
+      "BILLING_APP_ID",
+      "BILLING_SITE_URL",
+      "STRIPE_ACCOUNT_ID",
+      "STRIPE_LIVE_MODE",
+      "STRIPE_STARTER_PRODUCT_ID",
+      "STRIPE_STARTER_PRICE_ID",
+      "STRIPE_PORTAL_CONFIGURATION_ID",
+      "STRIPE_WEBHOOK_ENDPOINT_ID",
+      "STRIPE_WEBHOOK_SECRET"
+    ],
+    "importedBillingNames": [
+      "BILLING_APP_ID",
+      "BILLING_SITE_URL",
+      "STRIPE_ACCOUNT_ID",
+      "STRIPE_LIVE_MODE",
+      "STRIPE_STARTER_PRODUCT_ID",
+      "STRIPE_STARTER_PRICE_ID",
+      "STRIPE_PORTAL_CONFIGURATION_ID",
+      "STRIPE_WEBHOOK_ENDPOINT_ID",
+      "STRIPE_WEBHOOK_SECRET"
+    ],
+    "missingBillingNames": [],
+    "releaseApproval": "User Approved Import And Deploy"
+  },
+  "stripeKeyInventory": {
+    "active": 1,
+    "oldKeyPresent": false,
+    "replacementPresent": true
+  },
+  "migration": {
+    "version": "20261023202432",
+    "name": "stripe_billing_entitlements",
+    "file": "supabase/migrations/20261023202432_stripe_billing_entitlements.sql",
+    "sha256": "38AB1228A7C33B538B625DE5E5F1E7100312B27F1FBBCCBEDDBBCD4F59141CD2",
+    "readbackFile": "stripe-billing-database-2026-10-23.json"
+  },
+  "validation": {
+    "sourceReviewed": true,
+    "deploymentBuildPassed": true,
+    "standaloneTypecheckRun": false,
+    "uiVerificationRun": false,
+    "authenticatedBillingStatusChecked": false,
+    "paidLifecycleVerified": false,
+    "hostedReadbackFile": "stripe-billing-hosted-2026-10-23.json",
+    "hostedReadbackPassed": true,
+    "databaseReadbackPassed": true,
+    "finalCanonicalDeploymentConfirmed": true,
+    "runtimeHistoricalErrorScanRun": false
+  },
+  "catalog": {
+    "starterRevision": 3,
+    "unitAmount": 100,
+    "currency": "USD",
+    "interval": "month",
+    "removesAds": false
+  },
+  "deployment": {
+    "id": "dpl_5XxZN4BCwTqcuUUYaJ4VgmiE2N4M",
+    "url": "https://spelling-spells-b4bfagt0n-piratechs.vercel.app",
+    "canonicalOrigin": "https://spellingspells.com",
+    "status": "READY",
+    "environment": "Production",
+    "baseCommit": "270787a55090bf6973b35b5f8adeae803fd8c1f6",
+    "source": "Authorized Dirty Working Tree; No Commit Or Branch Created",
+    "frontendCorrection": "Owner Subscription Actions Use Confirmed Billing And Feature Policy; Terms Privacy And Help Describe Released Billing And Private Grimoire",
+    "buildDurationSeconds": 53,
+    "webBundle": "entry-b19496809ccef32dd5fb7139fc32e75b.js"
+  },
+  "buildWarnings": {
+    "dependencyAdvisories": {
+      "moderate": 3,
+      "high": 4,
+      "total": 7
+    },
+    "nodeEngineRangeWarning": true,
+    "parcelWatcherInstallScriptWarning": true,
+    "dependencyRemediationPerformed": false
+  },
+  "initialStagedBuild": {
+    "id": "dpl_GaqGizS223Qftvans1D2KRCHLn8U",
+    "promoted": false,
+    "apiTypeErrors": 3,
+    "resolvedBeforePromotion": true
+  },
+  "coordinatedInitialDeployment": {
+    "id": "dpl_7zBXSjjcZJpZvKi9rRX5eZiMLyHJ",
+    "supersededBy": "dpl_5XxZN4BCwTqcuUUYaJ4VgmiE2N4M"
+  },
+  "completedAt": "2026-10-23T20:30:43.307Z"
+}

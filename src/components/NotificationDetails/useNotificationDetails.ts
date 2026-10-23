@@ -21,6 +21,10 @@ export const useNotificationDetails = () => {
   const isRead = page.readState === `ready` && Boolean(record && page.readIds.includes(record.id));
   useEffect(() => {
     let active = true;
+    if (!page.enabled) {
+      setSnapshot({ slug, state: `denied`, record: null, error: `Notifications Are Not Available For This Account` });
+      return;
+    }
     if (!slug || slug.length > 120 || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
       setSnapshot({ slug, state: `ready`, record: null, error: null });
       return;
@@ -32,19 +36,19 @@ export const useNotificationDetails = () => {
       if (active) setSnapshot({ slug, state: `error`, record: null, error: error instanceof Error ? error.message : `This Notification Could Not Be Loaded` });
     });
     return () => { active = false; };
-  }, [slug, revision, page.records]);
+  }, [slug, revision, page.enabled, page.records]);
   useEffect(() => {
-    if (!record || page.readState !== `ready` || page.busy || isRead || attemptedRead.current === readScope) return;
+    if (!page.enabled || !record || page.readState !== `ready` || page.busy || isRead || attemptedRead.current === readScope) return;
     attemptedRead.current = readScope;
     void page.markRead([record.id]).catch(() => undefined);
   }, [record, page.readState, page.busy, page.markRead, isRead, readScope]);
   return {
     ...page,
     slug,
-    record,
+    record: page.enabled ? record : null,
     isRead,
-    detailError: current?.error ?? null,
-    detailState: current?.state ?? `loading`,
+    detailError: page.enabled ? current?.error ?? null : page.message,
+    detailState: page.enabled ? current?.state ?? `loading` : page.state,
     readLabel: page.readState === `loading` ? `Loading` : page.readState !== `ready` ? `Unavailable` : isRead ? `Read` : `Unread`,
     reloadDetails: () => { attemptedRead.current = ``; setRevision((value) => value + 1); page.reload(); },
   };

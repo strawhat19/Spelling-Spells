@@ -1,0 +1,7 @@
+.billing-return { max-width: 680px; padding: 26px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); color: var(--lavender); }
+.billing-return p { color: var(--body); font-size: 13px; line-height: 1.9; overflow-wrap: anywhere; }
+.billing-return strong { color: var(--ink); }
+.billing-return-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.billing-return-actions button, .billing-return-actions a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; color: var(--lavender); background: var(--muted); font: inherit; font-size: 11px; text-decoration: none; }
+.billing-return-actions button:disabled { opacity: .55; cursor: not-allowed; }
+.billing-return-actions :focus-visible { outline: 2px solid var(--lavender); outline-offset: 3px; }

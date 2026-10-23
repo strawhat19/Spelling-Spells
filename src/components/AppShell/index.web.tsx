@@ -3,8 +3,8 @@ import Header from '../Header/index.web';
 import Footer from '../Footer/index.web';
 import PageMetadata from '../PageMetadata';
 import WebAnalytics from '../WebAnalytics';
-import PageTransition from '../PageTransition';
 import { useAppShell } from './useAppShell';
+import PageTransition from '../PageTransition';
 import type { PropsWithChildren } from 'react';
 import { getAccountRoute } from '../../shared/routes';
 import { RevealScope } from '../TextReveal/RevealScope';
@@ -12,11 +12,13 @@ import { useTheme } from '../../shared/themeContext/useTheme';
 import { useSpells } from '../../shared/spellsContext/useSpells';
 import { publicPageMetadata } from '../PageMetadata/publicRoutes';
 import SpellParchmentMarquees from '../SpellParchmentMarquees/index.web';
+import { useFeatureFlags } from '../../shared/featureFlags/useFeatureFlags';
 import '../../styles/global.scss';
 import './styles.scss';
 
 const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: boolean }>) => {
   const { theme, error: themeError } = useTheme();
+  const { marqueeEnabled } = useFeatureFlags();
   const { error, dismissError, catalogError, reloadCatalog } = useSpells();
   const { pathname, scrolled, showScrollTop, scrollToTop } = useAppShell();
 
@@ -28,7 +30,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
       {getAccountRoute(pathname) ? <PageMetadata noIndex title={getAccountRoute(pathname)?.label ?? `Account`} description='Private account and editorial tools' /> : metadata ? <PageMetadata title={metadata.title} description={metadata.description} canonicalPath={pathname} /> : null}
       <a id='skip-to-content' className='skip-to-content' href='#main-content'>Skip to Content</a>
       <Header sticky={sticky} scrolled={scrolled} />
-      {!getAccountRoute(pathname) ? <SpellParchmentMarquees /> : null}
+      {marqueeEnabled && !getAccountRoute(pathname) ? <SpellParchmentMarquees /> : null}
       {error || themeError ? (
         <div id='storage-notice' className='storage-notice' role='status'>
           <Icon name='shield' size={18} /><span>{error ?? themeError}</span>

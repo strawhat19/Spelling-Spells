@@ -19,12 +19,14 @@ const ContactPage = () => {
   const router = useRouter();
   const { palette } = useTheme();
   const fieldRefs = useRef<Partial<Record<typeof fields[number][`key`], TextInput | null>>>({});
-  const { input, busy, errors, error, receipt, loading, editable, configured, update, submit } = useContactPage();
+  const { input, busy, errors, error, receipt, allowed, loading, editable, configured, update, submit, retryAccess, accessMessage } = useContactPage();
 
   useEffect(() => {
     const field = fields.find((item) => errors[item.key]);
     if (field) fieldRefs.current[field.key]?.focus();
   }, [errors]);
+
+  if (!allowed) return <View nativeID='contact-page' style={styles.page}><PageMetadata title='Contact' canonicalPath='/contact' description='Contact Spelling Spells' /><View nativeID='contact-heading' style={styles.heading}><Text nativeID='contact-title' accessibilityRole='header' style={[styles.title, { color: palette.text }]}>{`Contact`}</Text><Text nativeID='contact-access-message' accessibilityLiveRegion='polite' style={[styles.intro, { color: palette.muted }]}>{accessMessage}</Text><Pressable nativeID='contact-access-reload' accessibilityRole='button' onPress={retryAccess} style={[styles.submit, { backgroundColor: palette.gold }]}><Icon name='refresh' size={17} color={palette.background} /><Text style={styles.submitText}>{`Reload Access`}</Text></Pressable></View></View>;
 
   return (
     <View nativeID='contact-page' style={styles.page}>

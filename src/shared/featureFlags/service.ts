@@ -4,7 +4,7 @@ import { getSupabaseClient } from '../supabase/client';
 import { canAccessOwner } from '../authentication/types';
 import { requireCurrentAccount } from '../authentication/service';
 import type { FeatureKey, FeaturePolicy, FeatureSettings, FeatureSnapshot } from './types';
-import { featureScope, featureColumns, readFeatureSettings, normalizeFeaturePolicy } from './values';
+import { featureKeys, featureScope, featureColumns, readFeatureSettings, normalizeFeaturePolicy } from './values';
 
 type OwnerScope = ReturnType<typeof requireCurrentAccount>;
 const refreshers = new Set<() => void>();
@@ -78,7 +78,7 @@ export const featuresService = {
   },
   saveFeature: async (key: FeatureKey, input: FeaturePolicy, expectedRevision: number): Promise<FeatureSettings> => {
     const access = ownerScope();
-    if (key !== `themeToggle` || !Number.isSafeInteger(expectedRevision) || expectedRevision < 1) throw new Error(`Confirm The Feature And Saved Revision Before Saving`);
+    if (!featureKeys.includes(key) || !Number.isSafeInteger(expectedRevision) || expectedRevision < 1) throw new Error(`Confirm The Feature And Saved Revision Before Saving`);
     const policy = normalizeFeaturePolicy(input);
     const { data, error } = await access.client.rpc(`owner_save_feature_policy`, {
       p_key: key,

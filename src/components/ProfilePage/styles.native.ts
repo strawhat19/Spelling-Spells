@@ -16,6 +16,7 @@ export default StyleSheet.create({
   button: { gap: 9, padding: 14, borderRadius: 9, flexDirection: `row`, alignItems: `center`, justifyContent: `center` },
   buttonText: { fontSize: 12, fontWeight: `700`, flexShrink: 1, textAlign: `center` },
   actions: { gap: 10 },
+  billingAction: { width: 44, height: 44, borderWidth: 1, borderRadius: 7, alignItems: `center`, justifyContent: `center` },
   disabled: { opacity: .55 },
   feedback: { fontSize: 13, lineHeight: 23, marginTop: 18 },
   identity: { gap: 16, flexDirection: `row`, alignItems: `center` },

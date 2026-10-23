@@ -16,12 +16,14 @@ const fields = [
 
 const ContactPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
-  const { input, busy, errors, error, receipt, loading, editable, configured, update, submit } = useContactPage();
+  const { input, busy, errors, error, receipt, allowed, loading, editable, configured, update, submit, retryAccess, accessMessage } = useContactPage();
 
   useEffect(() => {
     const field = fields.find((item) => errors[item.key]);
     if (field) formRef.current?.querySelector<HTMLInputElement | HTMLTextAreaElement>(`#contact-${field.key}`)?.focus();
   }, [errors]);
+
+  if (!allowed) return <article id='contact-page' className='ss-contact page-container' aria-labelledby='contact-title'><PageMetadata title='Contact' canonicalPath='/contact' description='Contact Spelling Spells' /><header id='contact-heading' className='ss-contact-heading'><h1 id='contact-title'>{`Contact`}</h1><p id='contact-access-message' role='status'>{accessMessage}</p><button id='contact-access-reload' type='button' className='primary-button' onClick={retryAccess}><Icon name='refresh' size={17} />{`Reload Access`}</button></header></article>;
 
   return (
     <article id='contact-page' className='ss-contact page-container' aria-labelledby='contact-title'>

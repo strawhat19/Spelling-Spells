@@ -1,4 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
+import { useAuth } from '../../shared/authContext/useAuth';
+import { useBilling } from '../../shared/billing/useBilling';
 import { useGrimoire } from '../../shared/grimoire/useGrimoire';
 import type { GrimoireEntry } from '../../shared/grimoire/types';
 import { useSpells } from '../../shared/spellsContext/useSpells';
@@ -8,10 +10,13 @@ const emptyEntry: GrimoireEntry = { note: ``, reviews: 0, correct: 0, streak: 0,
 
 export const useGrimoirePage = () => {
   const grimoire = useGrimoire();
+  const auth = useAuth();
+  const billing = useBilling();
   const catalog = useSpells();
   const params = useLocalSearchParams<{ spellId?: string | string[] }>();
   const requestedId = Array.isArray(params.spellId) ? params.spellId?.[0] : params.spellId;
   const pending = useRef(false);
+  const lifecycle = useRef({ mounted: true, scope: grimoire.scope });
   const [search, setSearch] = useState(``);
   const [name, setName] = useState(``);
   const [rename, setRename] = useState(``);
@@ -26,6 +31,7 @@ export const useGrimoirePage = () => {
   const [working, setWorking] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
+  const [confirmImport, setConfirmImport] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const collection = grimoire.collections.find((item) => item.id === collectionId);
@@ -48,12 +54,15 @@ export const useGrimoirePage = () => {
   const draft = selectedSpell ? drafts[selectedSpell.id] ?? entry.note : ``;
   const dirty = draft !== entry.note;
   const locked = !grimoire.ready || grimoire.busy || working;
+  const writeLocked = locked || !grimoire.writable;
   const stats = source.reduce((result, spell) => {
     const value = grimoire.entries[spell.id];
     return { notes: result.notes + (value?.note?.trim() ? 1 : 0), reviews: result.reviews + (value?.reviews ?? 0), mastered: result.mastered + ((value?.streak ?? 0) >= 3 ? 1 : 0) };
   }, { notes: 0, reviews: 0, mastered: 0 });
   const completed = source.filter((spell) => reviewedIds.includes(spell.id)).length;
   const sourceName = collection?.name ?? `All Spells`;
+
+  useEffect(() => { lifecycle.current.mounted = true; return () => { lifecycle.current.mounted = false; }; }, []);
 
   useEffect(() => {
     if (!requestedId) return;
@@ -66,23 +75,24 @@ export const useGrimoirePage = () => {
   useEffect(() => { setRevealed(false); }, [practiceSpell?.id]);
 
   const run = useCallback(async (operation: () => Promise<boolean>, success: string) => {
-    if (pending.current || !grimoire.ready || grimoire.busy) return false;
+    if (pending.current || !grimoire.ready || grimoire.busy || !lifecycle.current.mounted || lifecycle.current.scope !== grimoire.scope) return false;
     pending.current = true;
     setWorking(true);
     setMessage(null);
     setActionError(null);
     try {
       const confirmed = await operation();
+      if (!lifecycle.current.mounted || lifecycle.current.scope !== grimoire.scope) return false;
       if (confirmed) setMessage(success);
       return confirmed;
     } catch {
-      setActionError(`The Change Could Not Be Saved. Please Try Again`);
+      if (lifecycle.current.mounted) setActionError(`The Change Could Not Be Saved. Please Try Again`);
       return false;
     } finally {
       pending.current = false;
-      setWorking(false);
+      if (lifecycle.current.mounted) setWorking(false);
     }
-  }, [grimoire.ready, grimoire.busy]);
+  }, [grimoire.scope, grimoire.ready, grimoire.busy]);
 
   const selectCollection = (id: string) => {
     if (pending.current || grimoire.busy) return;
@@ -98,13 +108,13 @@ export const useGrimoirePage = () => {
   };
   const createCollection = async () => {
     const value = name.trim();
-    if (!value) return;
+    if (!value || !grimoire.writable) return;
     let id: string | null = null;
     const confirmed = await run(async () => { id = await grimoire.createCollection(value); return Boolean(id); }, `Collection Created`);
     if (confirmed && id) { selectCollection(id); setName(``); setManaging(true); setMessage(`Collection Created`); }
   };
   const renameCollection = async () => {
-    if (!collection || !rename.trim()) return;
+    if (!collection || !rename.trim() || !grimoire.writable) return;
     await run(() => grimoire.renameCollection(collection.id, rename), `Collection Renamed`);
   };
   const deleteCollection = async () => {
@@ -112,11 +122,11 @@ export const useGrimoirePage = () => {
     if (await run(() => grimoire.deleteCollection(collection.id), `Collection Deleted`)) { selectCollection(``); setMessage(`Collection Deleted. Notes And Progress Kept`); }
   };
   const setMembership = async (spellId: string, included: boolean) => {
-    if (!collection) return;
+    if (!collection || (included && !grimoire.writable)) return;
     await run(() => grimoire.setCollectionSpell(collection.id, spellId, included), included ? `Spell Added To Collection` : `Spell Removed From Collection`);
   };
   const changeDraft = (value: string) => {
-    if (!selectedSpell) return;
+    if (!selectedSpell || !grimoire.writable) return;
     setDrafts((current) => ({ ...current, [selectedSpell.id]: value }));
     setMessage(null);
   };
@@ -124,7 +134,7 @@ export const useGrimoirePage = () => {
     if (!selectedSpell) return;
     const id = selectedSpell.id;
     const savedDraft = draft;
-    const savedMessage = !savedDraft ? `Note Cleared` : grimoire.persisted ? `Note Saved On This Device` : `Note Saved In This Session`;
+    const savedMessage = !savedDraft ? `Note Cleared` : `Note Saved To Your Account`;
     if (await run(() => grimoire.saveNote(id, savedDraft), savedMessage)) {
       setDrafts((current) => {
         if (current[id] !== savedDraft) return current;
@@ -135,7 +145,7 @@ export const useGrimoirePage = () => {
     }
   };
   const review = async (remembered: boolean) => {
-    if (!practiceSpell || !revealed) return;
+    if (!practiceSpell || !revealed || !grimoire.writable) return;
     const id = practiceSpell.id;
     if (await run(() => grimoire.recordReview(id, remembered), remembered ? `Remembered Review Saved` : `Again Review Saved`)) {
       setReviewedIds((current) => [...current, id]);
@@ -153,13 +163,31 @@ export const useGrimoirePage = () => {
   const selectSpell = (id: string) => { if (pending.current || grimoire.busy) return; setSelectedId(id); setRevealed(false); setMessage(null); };
   const notifyExport = (text: string | null, failed = false) => { setMessage(failed ? null : text); setActionError(failed ? text : null); };
   const retry = async () => { setActionError(null); setMessage(null); await grimoire.refresh(); };
+  const clearNote = async () => {
+    if (!selectedSpell || !entry.note) return;
+    const id = selectedSpell.id;
+    if (await run(() => grimoire.saveNote(id, ``), `Note Cleared`)) setDrafts((current) => { const next = { ...current }; delete next[id]; return next; });
+  };
+  const importDevicePreview = async () => {
+    if (!confirmImport || !grimoire.canImportDevicePreview) return;
+    if (await run(grimoire.importDevicePreview, `Device Preview Copied To Your Account. The Device Copy Is Unchanged`)) setConfirmImport(false);
+  };
 
   return {
     mode, name, draft, dirty, entry, stats, search, rename, source, locked, message, revealed, managing, completed, collection,
     addSearch, addResults, sourceName, selectedSpell, practiceSpell, practiceEntry, confirmReset, confirmDelete,
     setName, setMode, setSearch, setRename, changeDraft, setAddSearch, setManaging, setRevealed, setConfirmReset, setConfirmDelete,
     retry, review, saveNote, selectSpell, resetProgress, notifyExport, setMembership, restartSession, selectCollection,
-    createCollection, renameCollection, deleteCollection,
+    createCollection, renameCollection, deleteCollection, writeLocked, clearNote, confirmImport, setConfirmImport, importDevicePreview,
+    writable: grimoire.writable,
+    canImportDevicePreview: grimoire.canImportDevicePreview,
+    authenticated: grimoire.authenticated,
+    authLoading: auth.loading,
+    authSignedOut: auth.status === `signed-out` && !auth.identity,
+    accessMessage: auth.message,
+    retryAccount: auth.retryHydration,
+    planLabel: billing.planLabel,
+    accountLabel: auth.account?.email ?? `Your Account`,
     ready: grimoire.ready,
     busy: grimoire.busy || working,
     persisted: grimoire.persisted,
@@ -170,7 +198,7 @@ export const useGrimoirePage = () => {
     reloadCatalog: catalog.reloadCatalog,
     filteredCount: filtered.length,
     visibleSpells: filtered.slice(0, 80),
-    membershipSpells: addResults.slice(0, 60),
+    membershipSpells: (grimoire.writable ? addResults : addResults.filter((spell) => collection?.spellIds.includes(spell.id))).slice(0, 60),
     error: actionError ?? grimoire.error,
     missingRequestedSpell: Boolean(requestedId && catalog.ready && !catalog.catalogError && !catalog.spells.some((spell) => spell.id === requestedId)),
   };

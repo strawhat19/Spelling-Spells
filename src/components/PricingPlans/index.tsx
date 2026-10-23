@@ -6,13 +6,15 @@ import styles, { parchment } from './styles.native';
 import { usePricingPlans } from './usePricingPlans';
 import { useTheme } from '../../shared/themeContext/useTheme';
 import { Text, View, Pressable, useWindowDimensions } from 'react-native';
+import { useFeatureFlags } from '../../shared/featureFlags/useFeatureFlags';
 import { formatPlanAmount, planIntervalLabel } from '../../shared/plans/values';
 
 const PricingPlans = (props: PricingPlansProps) => {
   const router = useRouter();
   const { palette } = useTheme();
   const { width } = useWindowDimensions();
-  const { plans, error, variant, loading, idPrefix, signedIn, unavailable, reloadPlans, accountLoading } = usePricingPlans(props);
+  const { grimoireToolsEnabled } = useFeatureFlags();
+  const { plans, error, billing, variant, loading, idPrefix, signedIn, unavailable, reloadPlans, accountLoading } = usePricingPlans(props);
   return (
     <View nativeID={`${idPrefix}-section`} style={[styles.section, variant === `page` && styles.pageSection]}>
       <View nativeID={`${idPrefix}-heading`} style={styles.heading}>
@@ -33,6 +35,7 @@ const PricingPlans = (props: PricingPlansProps) => {
           {plans.map((plan) => {
             const free = plan.priceCents === 0;
             const starter = plan.slug === `starter`;
+            const tools = signedIn && grimoireToolsEnabled;
             const planId = `${idPrefix}-${plan.id}`;
             return (
               <View key={plan.id} nativeID={planId} style={[styles.card, { flexBasis: width >= 760 ? `45%` : `100%` }, plan.highlighted && styles.highlightedCard]}>
@@ -41,25 +44,23 @@ const PricingPlans = (props: PricingPlansProps) => {
                 <Text nativeID={`${planId}-name`} accessibilityRole={`header`} style={styles.name}>{plan.name}</Text>
                 <Text nativeID={`${planId}-description`} style={styles.description}>{plan.description}</Text>
                 <View nativeID={`${planId}-price`} style={styles.price}><Text nativeID={`${planId}-amount`} style={styles.amount}>{formatPlanAmount(plan)}</Text><Text nativeID={`${planId}-interval`} style={styles.interval}>{planIntervalLabel(plan)}</Text></View>
-                {(plan.removesAds || free) && <View nativeID={`${planId}-reading`} style={styles.reading}><Icon name={plan.removesAds ? `spark` : `book`} size={16} color={plan.removesAds ? parchment.accent : parchment.soft} /><Text nativeID={`${planId}-reading-copy`} style={[styles.readingText, plan.removesAds && { color: parchment.accent }]}>{plan.removesAds ? `Ad-free reading when subscriptions launch` : `Ad-supported reading planned`}</Text></View>}
                 <View nativeID={`${planId}-features`} style={styles.features}>{plan.features.map((feature, index) => <View key={index} nativeID={`${planId}-feature-${index}`} style={styles.feature}><Icon name={`check`} size={16} color={plan.highlighted ? parchment.accent : parchment.soft} /><Text nativeID={`${planId}-feature-${index}-copy`} style={styles.featureCopy}>{feature}</Text></View>)}</View>
                 <View nativeID={`${planId}-action-area`} style={styles.actionArea}>
                   <Pressable
-                    disabled={!free || accountLoading}
+                    disabled={accountLoading || !free && !tools}
                     nativeID={`${planId}-action`}
-                    accessibilityRole={free ? `link` : `button`}
-                    accessibilityState={{ busy: free && accountLoading, disabled: !free || accountLoading }}
-                    onPress={free ? () => router.push(signedIn ? `/spells` : `/signup`) : undefined}
-                    style={({ pressed }) => [styles.action, !free && styles.unavailableAction, pressed && styles.pressedAction]}
+                    accessibilityRole={free || tools ? `link` : `button`}
+                    accessibilityState={{ busy: accountLoading, disabled: accountLoading || !free && !tools }}
+                    onPress={free || tools ? () => router.push(free ? signedIn ? `/spells` : `/signup` : `/grimoire`) : undefined}
+                    style={({ pressed }) => [styles.action, !free && !tools && styles.unavailableAction, pressed && styles.pressedAction]}
                   >
-                    <Icon name={free ? signedIn ? `book` : `user` : `spark`} size={16} color={free ? parchment.accent : parchment.paper} />
-                    <Text nativeID={`${planId}-action-copy`} style={[styles.actionText, !free && styles.unavailableActionText]}>{free ? accountLoading ? `Loading Account…` : signedIn ? `Browse Library` : `Sign Up Free` : `Coming Soon`}</Text>
-                    {free && !accountLoading && <Icon name={`arrow`} size={16} color={parchment.accent} />}
+                    <Icon name={free ? signedIn ? `book` : `user` : `spark`} size={16} color={free || tools ? parchment.accent : parchment.paper} />
+                    <Text nativeID={`${planId}-action-copy`} style={[styles.actionText, !free && !tools && styles.unavailableActionText]}>{accountLoading ? `Loading Account…` : free ? signedIn ? `Browse Library` : `Sign Up Free` : tools ? `Open Your Grimoire` : `Website Subscription`}</Text>
+                    {(free || tools) && !accountLoading && <Icon name={`arrow`} size={16} color={parchment.accent} />}
                   </Pressable>
                   {free && !accountLoading && !signedIn && <Pressable nativeID={`${planId}-signin`} accessibilityRole={`link`} onPress={() => router.push(`/signin`)} style={styles.secondaryLink}><Icon name={`user`} size={13} color={parchment.accent} /><Text nativeID={`${planId}-signin-copy`} style={styles.secondaryLinkText}>Already Have An Account? Sign In</Text></Pressable>}
-                  {starter && <Pressable nativeID={`${planId}-preview`} accessibilityRole={`link`} accessibilityLabel={`Preview Starter Tools, Device-Local Preview`} onPress={() => router.push(`/grimoire`)} style={styles.secondaryLink}><Icon name={`book`} size={14} color={parchment.accent} /><Text nativeID={`${planId}-preview-copy`} style={styles.secondaryLinkText}>Preview Starter Tools</Text><Icon name={`arrow`} size={14} color={parchment.accent} /></Pressable>}
-                  {starter && <Text nativeID={`${planId}-preview-note`} style={styles.previewNote}>Device-Local Preview</Text>}
-                  <Text nativeID={`${planId}-availability`} style={styles.cardNote}>{free ? signedIn ? `A little curiosity is all you need.` : `The public library stays free to browse.` : `Subscriptions are not available yet.`}</Text>
+                  {starter && tools && <Text nativeID={`${planId}-tools-note`} style={styles.previewNote}>{billing.planLabel}</Text>}
+                  <Text nativeID={`${planId}-availability`} style={styles.cardNote}>{free ? signedIn ? `A little curiosity is all you need.` : `The public library stays free to browse.` : `Subscriptions are purchased and managed on the Spelling Spells website. This app uses your account's confirmed access.`}</Text>
                 </View>
               </View>
             );

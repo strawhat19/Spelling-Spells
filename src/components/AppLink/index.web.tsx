@@ -1,11 +1,15 @@
 import { useRouter, type Href } from 'expo-router';
 import type { AnchorHTMLAttributes, MouseEvent } from 'react';
+import { publicFeatureForHref } from '../../shared/featureFlags/values';
+import { useFeatureFlags } from '../../shared/featureFlags/useFeatureFlags';
 import { announcePageNavigation, getNavigationKey } from '../../shared/navigation';
 
 export type AppLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
 
 const AppLink = ({ href, onClick, children, ...props }: AppLinkProps) => {
   const router = useRouter();
+  const features = useFeatureFlags();
+  const feature = publicFeatureForHref(href);
   const navigate = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -16,6 +20,7 @@ const AppLink = ({ href, onClick, children, ...props }: AppLinkProps) => {
     router.push(href as Href);
   };
 
+  if ((feature === `contact` && !features.contactEnabled) || (feature === `notifications` && !features.notificationsEnabled)) return null;
   return <a {...props} href={href} onClick={navigate}>{children}</a>;
 };
 

@@ -1,6 +1,7 @@
 import { contactsAPI } from '../../api/contacts';
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../shared/authContext/useAuth';
+import { useFeatureFlags } from '../../shared/featureFlags/useFeatureFlags';
 import type { ContactInput, ContactErrors, ContactReceipt } from '../../shared/contacts/types';
 import { emptyContactInput, validateContactInput, createContactRequestId } from '../../shared/contacts/values';
 
@@ -17,6 +18,7 @@ const emptyState = (scope: string): ContactState => ({ scope, busy: false, error
 
 export const useContactPage = () => {
   const auth = useAuth();
+  const features = useFeatureFlags();
   const scope = auth.identity?.authUid ?? auth.account?.authUid ?? (auth.loading ? `loading` : `guest`);
   const mounted = useRef(true);
   const operation = useRef(0);
@@ -25,9 +27,10 @@ export const useContactPage = () => {
   const attempt = useRef<{ id: string; signature: string } | null>(null);
   const [state, setState] = useState<ContactState>(() => emptyState(scope));
   const form = state.scope === scope ? state : emptyState(scope);
-  const loading = auth.loading || auth.status === `loading`;
+  const loading = auth.loading || auth.status === `loading` || features.status === `loading`;
   const configured = contactsAPI.configured;
-  const editable = configured && !loading && !form.busy;
+  const allowed = features.contactEnabled;
+  const editable = allowed && configured && !loading && !form.busy;
 
   if (scopeRef.current !== scope) {
     scopeRef.current = scope;
@@ -80,5 +83,5 @@ export const useContactPage = () => {
     }
   };
 
-  return { ...form, loading, editable, configured, update, submit };
+  return { ...form, allowed, loading, editable, configured, update, submit, retryAccess: features.reload, accessMessage: loading ? `Confirming Contact Access` : features.error ?? `Contact Is Not Available For This Account` };
 };
