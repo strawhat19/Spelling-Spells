@@ -1,8 +1,8 @@
-import Constants from 'expo-constants';
+import appConfiguration from '../../../app.json';
 
 // Set expo.extra.siteUrl only after a public deployment origin is confirmed.
 export const getPublicPageUrl = (path: string, fallbackOrigin?: string): string | undefined => {
-  const configured = Constants.expoConfig?.extra?.siteUrl;
+  const configured = appConfiguration.expo?.extra?.siteUrl;
   const origin = typeof configured === `string` && configured.trim() ? configured : fallbackOrigin;
   if (!origin) return undefined;
   try {

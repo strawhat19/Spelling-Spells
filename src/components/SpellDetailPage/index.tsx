@@ -4,6 +4,7 @@ import SpellCard from '../SpellCard';
 import styles from './styles.native';
 import SpellMedia from '../SpellMedia';
 import { useRouter } from 'expo-router';
+import PageMetadata from '../PageMetadata';
 import { getPublicPageUrl } from '../PageMetadata/urls';
 import { useSpellDetailPage } from './useSpellDetailPage';
 import { getSpellPath } from '../../shared/catalog/routes';
@@ -24,6 +25,7 @@ const SpellDetailPage = () => {
 
   if (!spell) return (
     <View nativeID="spell-detail-empty" style={[styles.page, styles.empty]}>
+      <PageMetadata noIndex title={ready ? `Spell Not Found` : `Opening Spell Record`} description={ready ? `This spell could not be found in the published archive.` : `The requested spell is being checked against the published archive.`} />
       <Icon name="book" size={32} color={palette.gold} />
       <Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>{ready ? `This page is missing.` : `Opening the spell record…`}</Text>
       <Text style={[styles.copy, { color: palette.muted }]}>{ready ? `We couldn’t find that spell. There are more words waiting in the archive.` : `Loading the public archive.`}</Text>

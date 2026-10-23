@@ -12,7 +12,7 @@ const NotificationsPage = () => {
   const loading = page.state === `loading`;
   const countLoading = loading || (page.state === `ready` && page.readState === `loading`);
   return <section id='notifications-page' className='notifications-page' aria-labelledby='notifications-page-title'>
-    <PageMetadata title='Notifications' canonicalPath='/notifications' description='The latest notes and announcements from Spelling Spells.' />
+    <PageMetadata noIndex title='Notifications' canonicalPath='/notifications' description='The latest notes and announcements from Spelling Spells.' />
     <header id='notifications-page-heading' className='notifications-page-heading'>
       <div id='notifications-page-heading-copy' className='notifications-page-heading-copy'><span id='notifications-page-eyebrow' className='notifications-page-eyebrow'><Icon name='bell' size={15} />From the Archive</span><h1 id='notifications-page-title'><TextReveal id='notifications-page-title-start' text='Stay in' />{` `}<em><TextReveal id='notifications-page-title-end' text='the know.' delay={.04} /></em></h1><p id='notifications-page-description'>The latest notes and announcements from Spelling Spells, all in one place.</p></div>
       <span id='notifications-page-emblem' className='notifications-page-emblem' aria-hidden='true'><Icon name='bell' size={48} /></span>

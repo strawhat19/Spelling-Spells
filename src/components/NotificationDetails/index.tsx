@@ -2,6 +2,7 @@ import Icon from '../Icon';
 import Skeleton from '../Skeleton';
 import styles from './styles.native';
 import { useState, useEffect } from 'react';
+import PageMetadata from '../PageMetadata';
 import { useRouter, type Href } from 'expo-router';
 import { Text, View, Linking, Pressable } from 'react-native';
 import { useTheme } from '../../shared/themeContext/useTheme';
@@ -23,6 +24,7 @@ const NotificationDetails = () => {
     catch { setLinkError(`This Link Could Not Be Opened`); }
   };
   return <View nativeID='notification-details' style={styles.page}>
+    <PageMetadata noIndex title={record?.title ?? `Notification`} description={record?.body.slice(0, 160) ?? `A note from the Spelling Spells archive.`} />
     <Pressable nativeID='notification-details-back' accessibilityRole='link' onPress={() => router.push(`/notifications`)} style={styles.back}><Icon name='arrow-left' size={16} color={palette.primary} /><Text style={[styles.buttonText, { color: palette.primary }]}>All Notifications</Text></Pressable>
     {record ? <View nativeID={`notification-details-${record.id}`} style={[styles.article, { borderColor: palette.border, backgroundColor: palette.surface }]}>
       <View nativeID='notification-details-emblem' style={[styles.emblem, { borderColor: palette.border, backgroundColor: palette.panel }]}><Icon name={getNotificationIcon(record)} size={34} color={palette.primary} /></View>

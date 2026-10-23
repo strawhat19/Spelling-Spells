@@ -11,8 +11,6 @@ description: Build or update connected account/profile/admin workflows, roles, r
 
 Read [references/features.md](references/features.md) for requested Owner feature controls or the connected starter: global settings, role/minimum-tier targeting, public-safe catalog ranks, consumer/intake enforcement and the slim table/settings modal. Feature eligibility uses existing trusted entitlements; it does not assign paid access.
 
-For a database-backed bell, published announcement page or notification manager, read [Notifications](../notifications/SKILL.md). It assembles this skill's workflow and layout contracts for header placement, private unread state, retained popup motion and Owner icon actions.
-
 For requested business payment/subscription charts, read [Payments](../payments/SKILL.md) and its [reporting contract](../payments/references/payment-reports.md). Keep active Owner authorization consistent across menus, direct routes and server reports; reuse compact Profile/Dashboard panels without exposing billing identities or treating public plan prices as revenue. Billing setup remains separate requested scope.
 
 4. Use [adoption](../../adoption.md) when connecting the system in another project. Keep actual project IDs, schemas, credentials, bootstrap identities and history outside ai/. Complete source and configuration examples within scope; describe external prerequisites accurately. Do not turn missing configuration into local authentication/data success.

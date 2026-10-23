@@ -19,7 +19,7 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
     resultsResolved, clearFilters, setSavedFilter,
   } = useCatalogPage(savedOnly);
   const savedView = savedOnly || savedFilter;
-  const opening = !ready || (savedView && !resultsVisible && !error && saveStatus !== `error` && saveStatus !== `cached` && saveStatus !== `pending`);
+  const opening = (!ready && !resultsVisible) || (savedView && !resultsVisible && !error && saveStatus !== `error` && saveStatus !== `cached` && saveStatus !== `pending`);
 
   const groups = [
     { id: `world`, label: `World`, value: world, change: setWorld, options: (savedOnly ? shelfWorlds : worlds).map(item => ({ id: item.id, name: item.name })) },

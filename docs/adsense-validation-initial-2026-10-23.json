@@ -1,0 +1,642 @@
+{
+  "checkedAt": "2026-10-23T21:19:26.482Z",
+  "scope": "Approved Local Production Export And Focused Artifact Checks",
+  "build": {
+    "routes": 97,
+    "spells": 30,
+    "worlds": 5,
+    "mode": "anonymous"
+  },
+  "publisher": {
+    "version": 1,
+    "verificationOnly": true,
+    "publisherId": null,
+    "publisherConfigured": false,
+    "verificationMetaPages": 0,
+    "sourceSellerFilePreserved": false,
+    "adsTxt": "absent"
+  },
+  "checks": [
+    {
+      "name": "All Public Routes Have Initial Title Canonical And Index Metadata",
+      "passed": false,
+      "details": {
+        "routes": 47,
+        "failures": [
+          {
+            "route": "/",
+            "title": "Every Spell Has a Story · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spells",
+            "title": "The spell index · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spells"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/worlds",
+            "title": "Fantasy Worlds and Their Spells · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/worlds"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/pricing",
+            "title": "Pricing · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/pricing"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/pronunciation",
+            "title": "How to Pronounce Fantasy Spells · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/pronunciation"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/about",
+            "title": "The story behind this spellbook · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/about"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/help",
+            "title": "A field guide to the archive · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/help"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/guidelines",
+            "title": "Editorial guidelines · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/guidelines"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/data-privacy",
+            "title": "Your data and choices · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/data-privacy"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/contact",
+            "title": "Contact · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/contact"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/privacy",
+            "title": "Privacy policy · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/privacy"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/terms",
+            "title": "Terms of use · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/terms"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/lumos",
+            "title": "Lumos: spelling, pronunciation &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/lumos"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/fus-ro-dah",
+            "title": "Fus Ro Dah: spelling, pronunciation &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/fus-ro-dah"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/brisingr",
+            "title": "Brisingr: spelling, pronunciation &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/brisingr"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/alohomora",
+            "title": "Alohomora: spelling, pronunciation &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/alohomora"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/wingardium-leviosa",
+            "title": "Wingardium Leviosa: spelling, pronunciation &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/wingardium-leviosa"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/expelliarmus",
+            "title": "Expelliarmus: spelling, pronunciation &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/expelliarmus"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/expecto-patronum",
+            "title": "Expecto Patronum: spelling, pronunciation &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/expecto-patronum"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/adurna",
+            "title": "Adurna: spelling, pronunciation &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/adurna"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/jierda",
+            "title": "Jierda: spelling, pronunciation &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/jierda"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/crimson-bands-of-cyttorak",
+            "title": "Crimson Bands of Cyttorak: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/crimson-bands-of-cyttorak"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/shield-of-the-seraphim",
+            "title": "Shield of the Seraphim: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/shield-of-the-seraphim"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/winds-of-watoomb",
+            "title": "Winds of Watoomb: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/winds-of-watoomb"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/astral-projection",
+            "title": "Astral Projection: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/astral-projection"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/soul-self",
+            "title": "Soul Self: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/soul-self"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/empathy",
+            "title": "Empathy: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/empathy"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/empathic-healing",
+            "title": "Empathic Healing: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/empathic-healing"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/azarath-metrion-zinthos",
+            "title": "Azarath Metrion Zinthos: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/azarath-metrion-zinthos"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/accio",
+            "title": "Accio: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/accio"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/reparo",
+            "title": "Reparo: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/reparo"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/protego",
+            "title": "Protego: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/protego"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/stupefy",
+            "title": "Stupefy: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/stupefy"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/riddikulus",
+            "title": "Riddikulus: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/riddikulus"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/nox",
+            "title": "Nox: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/nox"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/petrificus-totalus",
+            "title": "Petrificus Totalus: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/petrificus-totalus"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/rictusempra",
+            "title": "Rictusempra: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/rictusempra"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/incendio",
+            "title": "Incendio: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/incendio"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/aguamenti",
+            "title": "Aguamenti: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/aguamenti"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/obliviate",
+            "title": "Obliviate: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/obliviate"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/silencio",
+            "title": "Silencio: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/silencio"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/spell/reducto",
+            "title": "Reducto: spelling &amp; meaning · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/spell/reducto"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/world/dc-teen-titans",
+            "title": "DC / Teen Titans · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/world/dc-teen-titans"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/world/harry-potter",
+            "title": "Harry Potter · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/world/harry-potter"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/world/inheritance-cycle",
+            "title": "Inheritance Cycle · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/world/inheritance-cycle"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/world/marvel",
+            "title": "Marvel · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/world/marvel"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          },
+          {
+            "route": "/world/skyrim",
+            "title": "The Elder Scrolls · Spelling Spells",
+            "canonical": [
+              "https://spelling-spells.vercel.app/world/skyrim"
+            ],
+            "robots": [
+              "index, follow"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Spell Index Contains Published Entry Links Before Hydration",
+      "passed": true,
+      "details": {
+        "links": 30,
+        "expected": 30
+      }
+    },
+    {
+      "name": "World Index Contains Published World Links Before Hydration",
+      "passed": true,
+      "details": {
+        "links": 5,
+        "expected": 5
+      }
+    },
+    {
+      "name": "Complete about Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 7,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete terms Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 8,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete privacy Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 16,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete help Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 8,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete guidelines Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 10,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete data-privacy Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 6,
+        "missing": []
+      }
+    },
+    {
+      "name": "Contact Guidance Visible Without Ungated Form",
+      "passed": true
+    },
+    {
+      "name": "Google Privacy Resources Are Real Links",
+      "passed": true
+    },
+    {
+      "name": "Private Notification And Error Screens Are Noindex",
+      "passed": true,
+      "details": {
+        "failures": []
+      }
+    },
+    {
+      "name": "Sitemap Contains Exactly Intended Public Routes",
+      "passed": true,
+      "details": {
+        "locations": 47
+      }
+    },
+    {
+      "name": "Robots Allows Public Content And Excludes API Billing Workflows",
+      "passed": true
+    },
+    {
+      "name": "Unconfigured Publisher Emits No Seller File",
+      "passed": true
+    },
+    {
+      "name": "Every Exported HTML Page Has No Verification Tag Or Ad Loader",
+      "passed": true,
+      "details": {
+        "htmlFiles": 97
+      }
+    },
+    {
+      "name": "Unknown Spell World URLs Have No Successful Fallback Rewrite",
+      "passed": true
+    }
+  ],
+  "genericRecords": [
+    {
+      "route": "/spell",
+      "title": "",
+      "canonical": [],
+      "robots": []
+    },
+    {
+      "route": "/world",
+      "title": "",
+      "canonical": [],
+      "robots": []
+    },
+    {
+      "route": "/spell/[slug]",
+      "title": "",
+      "canonical": [],
+      "robots": []
+    },
+    {
+      "route": "/world/[slug]",
+      "title": "",
+      "canonical": [],
+      "robots": []
+    },
+    {
+      "route": "/_sitemap",
+      "title": "",
+      "canonical": [],
+      "robots": []
+    }
+  ],
+  "passed": false,
+  "deployed": false,
+  "browserUiChecked": false,
+  "adRequestsMade": false,
+  "googleReviewRequested": false
+}

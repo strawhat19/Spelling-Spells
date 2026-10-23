@@ -27,8 +27,6 @@ New connected account systems default to Firebase Google/email authentication, r
 
 The [complete analytics bundle](skills/admin/assets/analytics/) includes local country flags and source brand marks with code/source manifests and notices. Install/adapt artwork and resolver metadata into supported public/native paths and retain flags/device/source/page identities across Chart/List and compact/full views. Assets under ai/ are not automatically served routes.
 
-Use [Notifications](skills/notifications/SKILL.md) for a database-backed header bell, actual unread badge, public feed/status page and active Owner announcement management. It combines the existing persistence and layout contracts with the preferred bell placement, retained popup motion, private read-state recovery and account icon actions. Simple prompt: "Add connected in-app notifications using ai/skills/notifications/SKILL.md, preserving this app's theme and access policy."
-
 Dropping in guidance starts implementation; it does not itself create resources or supply credentials. Actual connection still needs the destination's implementation, Firebase providers/origins, trusted account bootstrap, deployed compatible rules/indexes, hosted private endpoints and available Vercel scope/plan. Show missing setup instead of mock success or silent local fallback. Follow AGENTS.md for checks, commits and live changes.
 
 ## Stripe Payments And Custom Domains
@@ -44,6 +42,12 @@ Existing projects keep their database and authentication provider; Firebase is t
 [Goals](goals/goals.md) keeps requested scope clear. [Prompts](prompts/prompts.md) provides focused requests without app-specific history.
 
 Use [Shop](skills/shop/SKILL.md) and [its adoption prompt](skills/shop/SKILL.md#adoption-prompt) for a themed Firestore store, cart/native Stripe checkout, permitted shop administration, sourced dropshipping Market, research and controlled fulfillment. It reuses the destination's existing account/store foundations and keeps project-specific pricing/setup outside this portable pack.
+
+## Google AdSense
+
+Use [AdSense](skills/adsense/SKILL.md) for submission readiness, original public content, truthful policies/contact, crawlable metadata, publisher verification and ads.txt. Start with [the submission prompt](adoption.md#google-adsense-submission-prompt); a missing publisher ID remains unconfigured and preparation does not enable ads.
+
+For explicitly requested advertising, use [the serving prompt](adoption.md#consented-ads-and-ad-free-plans-prompt) and [the serving contract](skills/adsense/references/serving.md). It covers consent, eligible public placements, trusted ad-free tiers, feature controls and navigation after advertising code has executed. Google approval, published consent, serving settings, the deployed loader and actual filled ads remain separate evidence. These workflows are optional additions to the app core and do not enable native advertising.
 
 ## Frontend Only, Before Connections
 

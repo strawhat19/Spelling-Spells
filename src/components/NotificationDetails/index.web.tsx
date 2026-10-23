@@ -30,7 +30,7 @@ const NotificationDetails = () => {
   const page = useNotificationDetails();
   const record = page.record;
   return <section id='notification-details' className='notification-details' aria-labelledby='notification-details-title'>
-    <PageMetadata title={record?.title ?? `Notification`} canonicalPath={page.slug ? `/notifications/${encodeURIComponent(page.slug)}` : `/notifications`} description={record?.body.slice(0, 160) ?? `A note from the Spelling Spells archive.`} />
+    <PageMetadata noIndex title={record?.title ?? `Notification`} canonicalPath={page.slug ? `/notifications/${encodeURIComponent(page.slug)}` : `/notifications`} description={record?.body.slice(0, 160) ?? `A note from the Spelling Spells archive.`} />
     <AppLink id='notification-details-back' className='notification-details-back' href='/notifications'><Icon name='arrow-left' size={16} />All Notifications</AppLink>
     {record ? <article id={`notification-details-${record.id}`} className='notification-details-article'>
       <span id='notification-details-emblem' className='notification-details-emblem' aria-hidden='true'><Icon name={getNotificationIcon(record)} size={34} /></span>

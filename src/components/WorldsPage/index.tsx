@@ -16,11 +16,11 @@ const WorldsPage = () => {
       <Text style={[styles.eyebrow, { color: palette.gold }]}>ACROSS PAGES, SCREENS & STORIES</Text>
       <Text accessibilityRole="header" style={[styles.title, { color: palette.text }]}>Every world has its words.</Text>
       <Text style={[styles.copy, { color: palette.muted }]}>Travel through fictional traditions of magic. Browse spells from books, films, games, and the languages their creators imagined.</Text>
-      {!ready && <Text style={[styles.copy, { color: palette.muted }]}>Opening the atlas…</Text>}
+      {!ready && !worlds.length && <Text style={[styles.copy, { color: palette.muted }]}>Opening the atlas…</Text>}
       {catalogError && <><Text nativeID='worlds-error' accessibilityRole='alert' style={{ color: palette.error }}>{catalogError}</Text><Pressable nativeID='worlds-retry' accessibilityRole='button' onPress={reloadCatalog}><Text style={{ color: palette.primary }}>Try Again</Text></Pressable></>}
-      {!ready && <View nativeID="worlds-loading-skeleton" style={[styles.card, { minHeight: 240, backgroundColor: palette.surface, borderColor: palette.border }]}>{[60, 90, 80].map((width, index) => <View key={index} nativeID={`worlds-skeleton-line-${index}`} style={{ height: index === 0 ? 30 : 15, width: `${width}%`, borderRadius: 6, backgroundColor: palette.panel }} />)}</View>}
+      {!ready && !worlds.length && <View nativeID="worlds-loading-skeleton" style={[styles.card, { minHeight: 240, backgroundColor: palette.surface, borderColor: palette.border }]}>{[60, 90, 80].map((width, index) => <View key={index} nativeID={`worlds-skeleton-line-${index}`} style={{ height: index === 0 ? 30 : 15, width: `${width}%`, borderRadius: 6, backgroundColor: palette.panel }} />)}</View>}
       <View nativeID="worlds-directory" style={styles.cards}>
-        {ready && worlds.map(world => (
+        {worlds.map(world => (
           <Pressable key={world.id} nativeID={`world-card-${world.id}`} accessibilityRole="link" onPress={() => router.push(getWorldPath(world))} style={[styles.card, { borderColor: palette.border, backgroundColor: palette.surface }]}>
             <Icon name="globe" size={28} color={palette.gold} />
             <Text style={[styles.medium, { color: palette.lavender }]}>{world.medium.toUpperCase()}</Text>

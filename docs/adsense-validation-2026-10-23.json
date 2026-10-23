@@ -1,0 +1,159 @@
+{
+  "checkedAt": "2026-10-23T21:22:03.955Z",
+  "scope": "Approved Local Production Export And Focused Artifact Checks",
+  "build": {
+    "routes": 97,
+    "spells": 30,
+    "worlds": 5,
+    "mode": "anonymous",
+    "webBundle": "entry-5071dab6bca6b87833e07c610ecd64bf.js"
+  },
+  "publisher": {
+    "version": 1,
+    "verificationOnly": true,
+    "publisherId": null,
+    "publisherConfigured": false,
+    "verificationMetaPages": 0,
+    "sourceSellerFilePreserved": false,
+    "adsTxt": "absent"
+  },
+  "checks": [
+    {
+      "name": "All Public Routes Have Initial Title Canonical And Index Metadata",
+      "passed": true,
+      "details": {
+        "routes": 47,
+        "failures": []
+      }
+    },
+    {
+      "name": "All Public Head And Structured Data URLs Avoid Old Hosting Origin",
+      "passed": true
+    },
+    {
+      "name": "Spell Index Contains Every Published Entry Before Hydration",
+      "passed": true,
+      "details": {
+        "links": 30,
+        "expected": 30
+      }
+    },
+    {
+      "name": "World Index Contains Every Published World Before Hydration",
+      "passed": true,
+      "details": {
+        "links": 5,
+        "expected": 5
+      }
+    },
+    {
+      "name": "Complete about Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 7,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete terms Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 8,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete privacy Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 16,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete help Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 8,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete guidelines Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 10,
+        "missing": []
+      }
+    },
+    {
+      "name": "Complete data-privacy Sections In Initial HTML",
+      "passed": true,
+      "details": {
+        "sections": 6,
+        "missing": []
+      }
+    },
+    {
+      "name": "Contact Guidance Visible Without Ungated Form",
+      "passed": true
+    },
+    {
+      "name": "Google Privacy Resources Are Real Links",
+      "passed": true
+    },
+    {
+      "name": "Private Notification Utility And Fallback Screens Are Noindex",
+      "passed": true,
+      "details": {
+        "routes": 15,
+        "failures": []
+      }
+    },
+    {
+      "name": "Sitemap Contains Exactly Intended Public Routes",
+      "passed": true,
+      "details": {
+        "locations": 47
+      }
+    },
+    {
+      "name": "Robots Allows Public Content And Excludes API Billing Workflows",
+      "passed": true
+    },
+    {
+      "name": "Unconfigured Publisher Emits No Seller File",
+      "passed": true
+    },
+    {
+      "name": "Every Exported HTML Page Has No Verification Tag Or Ad Loader",
+      "passed": true,
+      "details": {
+        "htmlFiles": 97
+      }
+    },
+    {
+      "name": "Unknown Spell World URLs Have No Successful Fallback Rewrite",
+      "passed": true
+    },
+    {
+      "name": "Internal Router Sitemap Has Noindex Hosting Header",
+      "passed": true
+    },
+    {
+      "name": "Publisher Configuration Contracts Passed In Isolation",
+      "passed": true,
+      "details": {
+        "checks": 9
+      }
+    }
+  ],
+  "passed": true,
+  "initialExportFinding": "Legacy Expo Constants Origin And Missing Fallback Noindex Corrected Before Final Export",
+  "deployed": false,
+  "hosted404AfterChangeVerified": false,
+  "browserUiChecked": false,
+  "standaloneTypecheckRun": false,
+  "adRequestsMade": false,
+  "googleReviewRequested": false
+}

@@ -6,6 +6,9 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "functions": { "api/billing.ts": { "maxDuration": 60 } },
+  "headers": [
+    { "source": "/_sitemap", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
+  ],
   "redirects": [
     { "source": "/admin/features", "destination": "/features", "permanent": true },
     { "source": "/plan", "destination": "/pricing", "permanent": true },
@@ -19,8 +22,6 @@
   ],
   "rewrites": [
     { "source": "/api/billing/:operation", "destination": "/api/billing?operation=:operation" },
-    { "source": "/spell/:slug", "destination": "/spell" },
-    { "source": "/world/:slug", "destination": "/world" },
     { "source": "/notifications/:slug", "destination": "/notification-details" }
   ]
 }

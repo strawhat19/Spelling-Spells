@@ -9,7 +9,7 @@ export const publicPageMetadata: Record<string, { title: string; description: st
   },
   '/pricing': {
     title: `Pricing`,
-    description: `Explore Spelling Spells plans. Browse the spell library for free, or preview upcoming plans for ad-free reading.`,
+    description: `Explore Spelling Spells plans. Browse for free and compare private collections, personal notes, flashcards and grimoire export.`,
   },
   '/pronunciation': {
     title: `How to Pronounce Fantasy Spells`,

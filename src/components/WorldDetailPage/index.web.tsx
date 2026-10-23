@@ -10,7 +10,7 @@ import './styles.scss';
 const WorldDetailPage = () => {
   const { ready, world, entries, catalogError, reloadCatalog } = useWorldDetailPage();
   if (catalogError) return <section id='world-detail-error' className='ss-world-detail' role='alert'><PageMetadata noIndex title='Universe Unavailable' description='The published universe could not be loaded' /><h1>Cannot open this universe</h1><p>{catalogError}</p><button id='world-detail-retry' className='secondary-button' onClick={reloadCatalog}><Icon name='refresh' size={16} />Try Again</button></section>;
-  if (!ready && !world) return <section id='world-detail-loading' className='ss-world-detail' role='status'>Opening this universe…</section>;
+  if (!ready && !world) return <section id='world-detail-loading' className='ss-world-detail' role='status'><PageMetadata noIndex title={`Opening Universe`} description={`The requested universe is being checked against the published archive.`} />Opening this universe…</section>;
   if (!world) return <section id='world-detail-missing' className='ss-world-detail'><PageMetadata noIndex title='Universe Not Found' description='This universe has no published entries in the archive' /><h1>Universe not found</h1><p>It may be unpublished or the link may be incomplete.</p><AppLink id='world-detail-browse' href='/worlds'><Icon name='world' size={16} />Browse Universes</AppLink></section>;
   const canonicalPath = getWorldPath(world);
   return (

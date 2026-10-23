@@ -41,7 +41,8 @@ export const useCatalogPage = (savedOnly = false) => {
     ? (collection.saveStatus === `live` || collection.saveStatus === `server`) && (collection.savedReady || collection.saveBusy)
     : collection.savedReady);
   const usesSaved = savedOnly || savedFilter;
-  const resultsResolved = collection.ready && !collection.catalogError && (!usesSaved || savedResolved);
+  const publicSnapshotVisible = !usesSaved && collection.spells.length > 0;
+  const resultsResolved = !collection.catalogError && (collection.ready || publicSnapshotVisible) && (!usesSaved || savedResolved);
   const snapshotVisible = collection.ready && !collection.catalogError && usesSaved && collection.saveScope === `account` && collection.savedIds.length > 0;
   const resultsVisible = resultsResolved || snapshotVisible;
 

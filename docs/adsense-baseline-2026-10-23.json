@@ -1,0 +1,125 @@
+{
+  "checkedAt": "2026-10-23T21:13:41.739Z",
+  "kind": "Read-Only Baseline Before Source Preparation Deployment",
+  "origin": "https://spellingspells.com",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "canonicals": [
+        "<link data-rh=\"true\" rel=\"canonical\" href=\"https://spellingspells.com/\"/>"
+      ],
+      "robots": [
+        "<meta data-rh=\"true\" name=\"robots\" content=\"index, follow\"/>"
+      ],
+      "spellLinks": 8,
+      "worldLinks": 0,
+      "publisherMeta": false,
+      "adLoader": false
+    },
+    {
+      "path": "/spells",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "canonicals": [
+        "<link data-rh=\"true\" rel=\"canonical\" href=\"https://spellingspells.com/spells\"/>"
+      ],
+      "robots": [
+        "<meta data-rh=\"true\" name=\"robots\" content=\"index, follow\"/>"
+      ],
+      "spellLinks": 0,
+      "worldLinks": 0,
+      "publisherMeta": false,
+      "adLoader": false
+    },
+    {
+      "path": "/worlds",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "canonicals": [
+        "<link data-rh=\"true\" rel=\"canonical\" href=\"https://spellingspells.com/worlds\"/>"
+      ],
+      "robots": [
+        "<meta data-rh=\"true\" name=\"robots\" content=\"index, follow\"/>"
+      ],
+      "spellLinks": 0,
+      "worldLinks": 0,
+      "publisherMeta": false,
+      "adLoader": false
+    },
+    {
+      "path": "/spell/lumos",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "canonicals": [
+        "<link data-rh=\"true\" rel=\"canonical\" href=\"https://spellingspells.com/spell/lumos\"/>"
+      ],
+      "robots": [
+        "<meta data-rh=\"true\" name=\"robots\" content=\"index, follow\"/>"
+      ],
+      "spellLinks": 7,
+      "worldLinks": 0,
+      "publisherMeta": false,
+      "adLoader": false
+    },
+    {
+      "path": "/spell/adsense-preparation-missing-entry",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "canonicals": [],
+      "robots": [],
+      "spellLinks": 0,
+      "worldLinks": 0,
+      "publisherMeta": false,
+      "adLoader": false
+    },
+    {
+      "path": "/world/adsense-preparation-missing-world",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "canonicals": [],
+      "robots": [],
+      "spellLinks": 0,
+      "worldLinks": 0,
+      "publisherMeta": false,
+      "adLoader": false
+    },
+    {
+      "path": "/ads.txt",
+      "status": 404,
+      "type": "text/plain; charset=utf-8",
+      "canonicals": [],
+      "robots": [],
+      "spellLinks": 0,
+      "worldLinks": 0,
+      "publisherMeta": false,
+      "adLoader": false,
+      "hasGoogleSeller": false
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "type": "text/plain; charset=utf-8",
+      "canonicals": [],
+      "robots": [],
+      "spellLinks": 0,
+      "worldLinks": 0,
+      "publisherMeta": false,
+      "adLoader": false,
+      "body": "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /auth\nDisallow: /users\nDisallow: /saved\nDisallow: /submit\nDisallow: /review\nDisallow: /health\nDisallow: /signin\nDisallow: /signup\nDisallow: /login\nDisallow: /sign-in\nDisallow: /sign-up\nDisallow: /register\nDisallow: /profile\nDisallow: /grimoire\nDisallow: /features\nDisallow: /contacts\nDisallow: /feedback\nDisallow: /analytics\nDisallow: /dashboard\nDisallow: /submissions\nDisallow: /catalog-editor\nDisallow: /reset-password\n\nSitemap: https://spellingspells.com/sitemap.xml\n"
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "type": "application/xml",
+      "canonicals": [],
+      "robots": [],
+      "spellLinks": 0,
+      "worldLinks": 0,
+      "publisherMeta": false,
+      "adLoader": false,
+      "includesNotifications": true
+    }
+  ]
+}

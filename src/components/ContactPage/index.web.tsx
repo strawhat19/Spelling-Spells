@@ -23,19 +23,17 @@ const ContactPage = () => {
     if (field) formRef.current?.querySelector<HTMLInputElement | HTMLTextAreaElement>(`#contact-${field.key}`)?.focus();
   }, [errors]);
 
-  if (!allowed) return <article id='contact-page' className='ss-contact page-container' aria-labelledby='contact-title'><PageMetadata title='Contact' canonicalPath='/contact' description='Contact Spelling Spells' /><header id='contact-heading' className='ss-contact-heading'><h1 id='contact-title'>{`Contact`}</h1><p id='contact-access-message' role='status'>{accessMessage}</p><button id='contact-access-reload' type='button' className='primary-button' onClick={retryAccess}><Icon name='refresh' size={17} />{`Reload Access`}</button></header></article>;
-
   return (
     <article id='contact-page' className='ss-contact page-container' aria-labelledby='contact-title'>
       <PageMetadata title='Contact' canonicalPath='/contact' description='Send Spelling Spells a private message about the spellbook, a correction, credit, or support.' />
       <header id='contact-heading' className='ss-contact-heading'>
         <span className='ss-contact-kicker'><Icon name='mail' size={17} />A conversation beyond the spellbook</span>
         <h1 id='contact-title'><TextReveal id='contact-title-copy' text={`A little note. A new connection.`} /></h1>
-        <p>Have a question, a correction, or a story worth sharing? Leave a message for the people behind Spelling Spells.</p>
+        <p>Questions, corrections and concerns about credit, privacy or billing belong with the people behind Spelling Spells.</p>
       </header>
       <div id='contact-workspace' className='ss-contact-workspace'>
-        <form noValidate ref={formRef} id='contact-form' className='ss-contact-form' aria-labelledby='contact-form-title' aria-busy={busy} onSubmit={(event) => { event.preventDefault(); void submit(); }}>
-          <div id='contact-form-heading' className='ss-contact-form-heading'><span className='ss-contact-step'>01 / Your message</span><h2 id='contact-form-title'>Leave a little ink.</h2><p>No account needed. Your message stays private.</p></div>
+        {allowed ? <form noValidate ref={formRef} id='contact-form' className='ss-contact-form' aria-labelledby='contact-form-title' aria-busy={busy} onSubmit={(event) => { event.preventDefault(); void submit(); }}>
+          <div id='contact-form-heading' className='ss-contact-form-heading'><span className='ss-contact-step'>01 / Your message</span><h2 id='contact-form-title'>Leave a little ink.</h2><p>Messages are stored privately for review.</p></div>
           {!configured ? <div id='contact-unavailable' className='ss-contact-feedback is-error' role='status'><Icon name='lock' size={18} /><div><strong>Contact Unavailable</strong><p>Messages cannot be saved right now. Please try again later.</p></div></div> : null}
           <fieldset id='contact-fields' className='ss-contact-fields' disabled={!editable}>
             <legend className='sr-only'>Contact details</legend>
@@ -56,14 +54,14 @@ const ContactPage = () => {
           </fieldset>
           {error ? <div id='contact-save-error' className='ss-contact-feedback is-error' role='alert'><Icon name='shield' size={19} /><div><strong>Message Not Confirmed</strong><p>{error}</p><p>Your entries are still here. You can retry.</p></div></div> : null}
           {receipt ? <div id='contact-save-success' className='ss-contact-feedback' role='status'><Icon name='check' size={22} /><div><strong>Message Saved</strong><p>Thank you. Your message was received and is stored privately for review.</p></div></div> : null}
-        </form>
+        </form> : <section id='contact-access' className='ss-contact-form' aria-labelledby='contact-access-title'><h2 id='contact-access-title'>{loading ? `Opening Contact` : `Contact Unavailable`}</h2><p id='contact-access-message' role='status'>{accessMessage}</p><button id='contact-access-reload' type='button' className='primary-button' onClick={retryAccess}><Icon name='refresh' size={17} />Reload Access</button></section>}
         <aside id='contact-guidance' className='ss-contact-guidance' aria-labelledby='contact-guidance-title'>
           <span className='ss-contact-seal'><Icon name='spark' size={32} /></span>
           <span className='ss-contact-step'>A note from the archive</span>
           <h2 id='contact-guidance-title'>Every good story starts with a word.</h2>
           <p>Questions about an entry, a missing credit, or something that feels out of place are all welcome here.</p>
           <div id='contact-reference-tip' className='ss-contact-tip'><Icon name='book' size={20} /><div><h3>Keep the source close.</h3><p>For corrections, include the spell’s exact name and a link or reference to the original work.</p></div></div>
-          <div id='contact-privacy-tip' className='ss-contact-tip'><Icon name='shield' size={20} /><div><h3>A private conversation.</h3><p>Your message is for the site owner to review. It will not appear in the public spellbook.</p></div></div>
+          <div id='contact-privacy-tip' className='ss-contact-tip'><Icon name='shield' size={20} /><div><h3>A private conversation.</h3><p>Saved messages are private to the site owner. Wait for Message Saved before treating a message as received; no automated email is sent.</p></div></div>
           <nav id='contact-help-links' className='ss-contact-links' aria-label='More About Spelling Spells'><AppLink id='contact-about-link' href='/about'><Icon name='book' size={16} />About the project<Icon name='arrow' size={15} /></AppLink><AppLink id='contact-guidelines-link' href='/guidelines'><Icon name='edit' size={16} />Editorial Guidelines<Icon name='arrow' size={15} /></AppLink><AppLink id='contact-privacy-link' href='/privacy'><Icon name='shield' size={16} />Privacy Policy<Icon name='arrow' size={15} /></AppLink></nav>
         </aside>
       </div>

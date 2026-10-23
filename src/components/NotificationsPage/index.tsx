@@ -1,6 +1,7 @@
 import Icon from '../Icon';
 import Skeleton from '../Skeleton';
 import styles from './styles.native';
+import PageMetadata from '../PageMetadata';
 import NotificationCard from '../NotificationCard';
 import { Text, View, Pressable } from 'react-native';
 import { useNotificationsPage } from './useNotificationsPage';
@@ -11,6 +12,7 @@ const NotificationsPage = () => {
   const { palette } = useTheme();
   const countPending = page.state === `loading` || (page.state === `ready` && page.readState === `loading`);
   return <View nativeID='notifications-page' style={styles.page}>
+    <PageMetadata noIndex title='Notifications' canonicalPath='/notifications' description='The latest notes and announcements from Spelling Spells.' />
     <View nativeID='notifications-page-heading' style={styles.heading}><View style={styles.eyebrowRow}><Icon name='bell' size={15} color={palette.primary} /><Text nativeID='notifications-page-eyebrow' style={[styles.eyebrow, { color: palette.primary }]}>FROM THE ARCHIVE</Text></View><Text nativeID='notifications-page-title' accessibilityRole='header' style={[styles.title, { color: palette.text }]}>Stay in the know.</Text><Text nativeID='notifications-page-description' style={[styles.copy, { color: palette.muted }]}>The latest notes and announcements from Spelling Spells, all in one place.</Text></View>
     <View nativeID='notifications-page-updates' style={[styles.updates, { borderColor: palette.border, backgroundColor: palette.surface }]}>
       {countPending ? <Text nativeID='notifications-page-loading-status' accessibilityLiveRegion='polite' style={styles.loadingLabel}>{page.state === `loading` ? `Loading Notifications` : `Loading Read Status`}</Text> : null}

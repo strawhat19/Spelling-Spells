@@ -21,7 +21,7 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
   const cancelClear = useRef<HTMLButtonElement>(null);
   const visibleWorlds = savedOnly ? shelfWorlds : worlds;
   const savedView = savedOnly || savedFilter;
-  const opening = !ready || (savedView && !resultsVisible && !error && saveStatus !== `error` && saveStatus !== `cached` && saveStatus !== `pending`);
+  const opening = (!ready && !resultsVisible) || (savedView && !resultsVisible && !error && saveStatus !== `error` && saveStatus !== `cached` && saveStatus !== `pending`);
   const countLabel = savedResolved ? `Saved` : `Unconfirmed`;
 
   useEffect(() => {

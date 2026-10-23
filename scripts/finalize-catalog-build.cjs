@@ -1,6 +1,7 @@
 const fs = require(`node:fs`);
 const path = require(`node:path`);
 const { snapshotHash } = require(`./prepare-catalog-build.cjs`);
+const { finalizeAdSenseBuild } = require(`./finalize-adsense-build.cjs`);
 
 const projectRoot = path.resolve(__dirname, `..`);
 
@@ -26,7 +27,15 @@ const finalizeCatalogBuild = (options = {}) => {
     if (!fs.statSync(source, { throwIfNoEntry: false })?.isFile()) throw new Error(`Prepared Catalog Metadata Is Missing ${file}`);
   }
   for (const file of [`sitemap.xml`, `robots.txt`]) fs.copyFileSync(path.join(generatedDirectory, file), path.join(outputDirectory, file));
+  const routerSitemap = path.join(outputDirectory, `_sitemap.html`);
+  if (fs.statSync(routerSitemap, { throwIfNoEntry: false })?.isFile()) {
+    const html = fs.readFileSync(routerSitemap, `utf8`);
+    const clean = html.replace(/<meta\b(?=[^>]*\bname\s*=\s*["']robots["'])[^>]*>/gi, ``);
+    const updated = clean.replace(/<\/head>/i, `<meta name="robots" content="noindex, nofollow" /></head>`);
+    if (updated !== html) fs.writeFileSync(routerSitemap, updated);
+  }
   fs.writeFileSync(path.join(outputDirectory, `catalog-build.json`), `${JSON.stringify(manifest, null, 2)}\n`);
+  finalizeAdSenseBuild({ ...options, projectRoot: root, outputDirectory });
   if (!options.quiet) console.log(`Catalog Export Metadata Finalized: ${manifest.spellCount} Spell(s), ${manifest.worldCount} Universe(s), ${manifest.mode} Snapshot`);
   return manifest;
 };
