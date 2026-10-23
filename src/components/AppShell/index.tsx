@@ -12,7 +12,7 @@ import { canAccessOwner } from '../../shared/authentication/types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AccountShellContext, type AccountShellRail } from '../../shared/accountShellContext';
 import { useRef, useMemo, useState, useEffect, useCallback, type PropsWithChildren } from 'react';
-import { Text, View, Alert, Linking, Animated, Pressable, ScrollView, AccessibilityInfo, useWindowDimensions } from 'react-native';
+import { Text, View, Alert, Easing, Linking, Animated, Pressable, ScrollView, AccessibilityInfo, useWindowDimensions } from 'react-native';
 
 const navigation = [
   { href: `/about`, label: `About`, icon: `info` },
@@ -35,12 +35,14 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
   const [headerHeight, setHeaderHeight] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(height);
   const [rail, setRail] = useState<AccountShellRail | null>(null);
+  const [menuHeight, setMenuHeight] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showTop, setShowTop] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const menuProgress = useRef(new Animated.Value(0)).current;
   const topOpacity = useRef(new Animated.Value(0)).current;
-  const { theme, palette, toggleTheme, error: themeError } = useTheme();
+  const { theme, palette, toggleTheme, themeToggleEnabled, error: themeError } = useTheme();
   const navigationAccent = theme === `night` ? palette.gold : palette.primary;
   const { error, savedIds, dismissError } = useSpells();
   const accountShell = Boolean(getAccountRoute(pathname));
@@ -62,6 +64,22 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
       useNativeDriver: true,
     }).start();
   }, [showTop, reducedMotion, topOpacity]);
+
+  useEffect(() => {
+    menuProgress.stopAnimation();
+    if (reducedMotion) {
+      menuProgress.setValue(menuOpen ? 1 : 0);
+      return;
+    }
+    const animation = Animated.timing(menuProgress, {
+      toValue: menuOpen ? 1 : 0,
+      useNativeDriver: false,
+      duration: menuOpen ? 260 : 220,
+      easing: Easing.out(Easing.cubic),
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [menuOpen, reducedMotion, menuProgress]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -107,7 +125,7 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
             {savedIds.length > 0 ? <View nativeID='header-saved-badge' accessibilityElementsHidden importantForAccessibility='no-hide-descendants' style={[styles.savedBadge, { borderColor: palette.background, backgroundColor: palette.gold }]}><Text nativeID='header-saved-count' style={styles.savedBadgeText}>{savedIds.length}</Text></View> : null}
           </Pressable>
           <NotificationMenu />
-          <Pressable
+          {themeToggleEnabled ? <Pressable
             nativeID='header-theme-toggle'
             accessibilityRole='button'
             onPress={() => void toggleTheme()}
@@ -115,12 +133,12 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
             style={[styles.iconButton, { borderColor: palette.border, backgroundColor: palette.panel }]}
           >
             <Icon name={theme === `night` ? `sun` : `moon`} size={20} color={palette.gold} />
-          </Pressable>
+          </Pressable> : null}
           <UserMenu />
           <Pressable
             nativeID='header-menu-toggle'
             accessibilityRole='button'
-            onPress={() => setMenuOpen(!menuOpen)}
+            onPress={() => setMenuOpen(current => !current)}
             accessibilityState={{ expanded: menuOpen }}
             accessibilityLabel={menuOpen ? `Close menu` : `Open menu`}
             style={[styles.iconButton, { borderColor: palette.border, backgroundColor: palette.panel }]}
@@ -129,11 +147,25 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
           </Pressable>
         </View>
       </View>
-      {menuOpen && (
-        <View nativeID="header-navigation" style={styles.nav}>
+      <Animated.View
+        nativeID='header-navigation-clip'
+        pointerEvents={menuOpen ? `auto` : `none`}
+        accessibilityElementsHidden={!menuOpen}
+        importantForAccessibility={menuOpen ? `auto` : `no-hide-descendants`}
+        style={[styles.navClip, { height: menuProgress.interpolate({ inputRange: [0, 1], outputRange: [0, menuHeight] }) }]}
+      >
+        <Animated.View
+          nativeID='header-navigation'
+          onLayout={(event) => setMenuHeight(event.nativeEvent.layout.height)}
+          style={[styles.nav, {
+            opacity: menuProgress,
+            transform: [{ translateY: menuProgress.interpolate({ inputRange: [0, 1], outputRange: [-8, 0] }) }],
+          }]}
+        >
           {navigation.map(item => (
             <Pressable
               key={item.href}
+              disabled={!menuOpen}
               accessibilityRole="link"
               accessibilityState={{ selected: pathname === item.href }}
               nativeID={`navigation-${item.icon}`}
@@ -144,8 +176,8 @@ const AppShell = ({ children, sticky = true }: PropsWithChildren<{ sticky?: bool
               <Text style={[styles.navText, { color: pathname === item.href ? palette.gold : palette.text }]}>{item.label}</Text>
             </Pressable>
           ))}
-        </View>
-      )}
+        </Animated.View>
+      </Animated.View>
     </View>
   );
 

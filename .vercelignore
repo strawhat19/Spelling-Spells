@@ -1,0 +1,14 @@
+/.git/
+.env*
+/.expo/
+/.agents/
+/.vercel/
+/dist/
+/docs/
+/tests/
+/test-results/
+/node_modules/
+/supabase/
+/ai/
+/AGENTS.md
+/public/visuals/spells/*.md

@@ -12,3 +12,5 @@ ui-debug.log*
 supabase/.temp/
 supabase/.branches/
 test-results/
+.vercel
+.env*.local

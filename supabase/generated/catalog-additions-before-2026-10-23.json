@@ -1,0 +1,2137 @@
+{
+  "links": [
+    {
+      "spell_id": "Spell_1_Lumos_2026-10-06_719dd0e1-506a-4e67-9b02-04d4af1b4931",
+      "source_id": "Source_1_Reference_2026-10-21_2ff24364-be41-41de-89d3-21718270288f"
+    },
+    {
+      "spell_id": "Spell_1_Lumos_2026-10-06_719dd0e1-506a-4e67-9b02-04d4af1b4931",
+      "source_id": "Source_2_Reference_2026-10-21_6b3e2a55-3eb5-4d17-8dfe-0971993c8170"
+    },
+    {
+      "spell_id": "Spell_10_Crimson-Bands-of-Cyttorak_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004010",
+      "source_id": "Source_15_Reference_2026-10-21_3d999e23-a37b-4527-845d-bbbf2d1bb8b8"
+    },
+    {
+      "spell_id": "Spell_11_Shield-of-the-Seraphim_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004011",
+      "source_id": "Source_16_Reference_2026-10-21_d700653f-cbc1-40fc-8273-a3699504a1ff"
+    },
+    {
+      "spell_id": "Spell_12_Winds-of-Watoomb_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004012",
+      "source_id": "Source_16_Reference_2026-10-21_d700653f-cbc1-40fc-8273-a3699504a1ff"
+    },
+    {
+      "spell_id": "Spell_13_Astral-Projection_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004013",
+      "source_id": "Source_17_Reference_2026-10-21_12944210-4e43-497f-822b-e98e4940a2fd"
+    },
+    {
+      "spell_id": "Spell_14_Mellon_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004014",
+      "source_id": "Source_18_Reference_2026-10-21_0b42285f-f8c9-47e9-8bde-9d4eab37657c"
+    },
+    {
+      "spell_id": "Spell_15_Naur-an-edraith-ammen_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004015",
+      "source_id": "Source_19_Reference_2026-10-21_f6218ec3-abf1-4b01-8228-2f1168eb2a13"
+    },
+    {
+      "spell_id": "Spell_16_Annon-edhellen-edro-hi-ammen_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004016",
+      "source_id": "Source_18_Reference_2026-10-21_0b42285f-f8c9-47e9-8bde-9d4eab37657c"
+    },
+    {
+      "spell_id": "Spell_16_Annon-edhellen-edro-hi-ammen_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004016",
+      "source_id": "Source_19_Reference_2026-10-21_f6218ec3-abf1-4b01-8228-2f1168eb2a13"
+    },
+    {
+      "spell_id": "Spell_17_Shutting-Spell_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004017",
+      "source_id": "Source_20_Reference_2026-10-21_6edd1330-f2e6-46c0-8942-99043750e570"
+    },
+    {
+      "spell_id": "Spell_17_Shutting-Spell_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004017",
+      "source_id": "Source_23_Reference_2026-10-23_53398b4b-a4e0-4363-8682-5b70bd2e01be"
+    },
+    {
+      "spell_id": "Spell_18_Soul-Self_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004018",
+      "source_id": "Source_21_Reference_2026-10-21_508fcce0-6e3d-4e66-84b1-130c2b4ace3a"
+    },
+    {
+      "spell_id": "Spell_19_Empathy_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004019",
+      "source_id": "Source_21_Reference_2026-10-21_508fcce0-6e3d-4e66-84b1-130c2b4ace3a"
+    },
+    {
+      "spell_id": "Spell_2_Fus-Ro-Dah_2026-10-06_719dd0e2-506a-4e67-9b02-04d4af1b4932",
+      "source_id": "Source_3_Reference_2026-10-21_e9ffeb83-7d3c-4cb6-85c1-b3558a34e9e9"
+    },
+    {
+      "spell_id": "Spell_2_Fus-Ro-Dah_2026-10-06_719dd0e2-506a-4e67-9b02-04d4af1b4932",
+      "source_id": "Source_4_Reference_2026-10-21_a707279a-2ba2-4a87-82b3-8aecf65954df"
+    },
+    {
+      "spell_id": "Spell_20_Empathic-Healing_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004020",
+      "source_id": "Source_21_Reference_2026-10-21_508fcce0-6e3d-4e66-84b1-130c2b4ace3a"
+    },
+    {
+      "spell_id": "Spell_21_Azarath-Metrion-Zinthos_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004021",
+      "source_id": "Source_22_Reference_2026-10-21_32127b94-f8db-49d7-89b2-074fb64f4b6e"
+    },
+    {
+      "spell_id": "Spell_3_Brisingr_2026-10-06_719dd0e3-506a-4e67-9b02-04d4af1b4933",
+      "source_id": "Source_5_Reference_2026-10-21_ef8e6e14-53f2-4e68-848a-374fbf770351"
+    },
+    {
+      "spell_id": "Spell_3_Brisingr_2026-10-06_719dd0e3-506a-4e67-9b02-04d4af1b4933",
+      "source_id": "Source_6_Reference_2026-10-21_5fdefc60-0b88-4654-80ab-268419b388d9"
+    },
+    {
+      "spell_id": "Spell_3_Brisingr_2026-10-06_719dd0e3-506a-4e67-9b02-04d4af1b4933",
+      "source_id": "Source_7_Reference_2026-10-21_fe158af6-7fe9-4aeb-86be-7ac674a73dc6"
+    },
+    {
+      "spell_id": "Spell_4_Alohomora_2026-10-06_719dd0e4-506a-4e67-9b02-04d4af1b4934",
+      "source_id": "Source_8_Reference_2026-10-21_7a1670a2-7b09-4165-8f42-2dadcd19051e"
+    },
+    {
+      "spell_id": "Spell_5_Wingardium-Leviosa_2026-10-06_719dd0e5-506a-4e67-9b02-04d4af1b4935",
+      "source_id": "Source_8_Reference_2026-10-21_7a1670a2-7b09-4165-8f42-2dadcd19051e"
+    },
+    {
+      "spell_id": "Spell_5_Wingardium-Leviosa_2026-10-06_719dd0e5-506a-4e67-9b02-04d4af1b4935",
+      "source_id": "Source_9_Reference_2026-10-21_2c7f70b2-f1eb-4c39-8e54-b101012a49a8"
+    },
+    {
+      "spell_id": "Spell_6_Expelliarmus_2026-10-06_719dd0e6-506a-4e67-9b02-04d4af1b4936",
+      "source_id": "Source_10_Reference_2026-10-21_226d2be1-e988-4dd0-8e86-33414e564a38"
+    },
+    {
+      "spell_id": "Spell_7_Expecto-Patronum_2026-10-06_719dd0e7-506a-4e67-9b02-04d4af1b4937",
+      "source_id": "Source_1_Reference_2026-10-21_2ff24364-be41-41de-89d3-21718270288f"
+    },
+    {
+      "spell_id": "Spell_7_Expecto-Patronum_2026-10-06_719dd0e7-506a-4e67-9b02-04d4af1b4937",
+      "source_id": "Source_11_Reference_2026-10-21_b48e7c6c-d5d7-49b0-8a0e-a169737a08aa"
+    },
+    {
+      "spell_id": "Spell_8_Adurna_2026-10-06_719dd0e8-506a-4e67-9b02-04d4af1b4938",
+      "source_id": "Source_12_Reference_2026-10-21_e0759bae-20f3-46d0-87d1-ebf4b1e87fb7"
+    },
+    {
+      "spell_id": "Spell_8_Adurna_2026-10-06_719dd0e8-506a-4e67-9b02-04d4af1b4938",
+      "source_id": "Source_13_Reference_2026-10-21_a7e68dd8-77b3-4337-8213-ceca725a6af2"
+    },
+    {
+      "spell_id": "Spell_9_Jierda_2026-10-06_719dd0e9-506a-4e67-9b02-04d4af1b4939",
+      "source_id": "Source_12_Reference_2026-10-21_e0759bae-20f3-46d0-87d1-ebf4b1e87fb7"
+    },
+    {
+      "spell_id": "Spell_9_Jierda_2026-10-06_719dd0e9-506a-4e67-9b02-04d4af1b4939",
+      "source_id": "Source_13_Reference_2026-10-21_a7e68dd8-77b3-4337-8213-ceca725a6af2"
+    },
+    {
+      "spell_id": "Spell_9_Jierda_2026-10-06_719dd0e9-506a-4e67-9b02-04d4af1b4939",
+      "source_id": "Source_14_Reference_2026-10-21_750bde87-86d8-434d-8935-30634905183b"
+    }
+  ],
+  "spells": [
+    {
+      "id": "Spell_1_Lumos_2026-10-06_719dd0e1-506a-4e67-9b02-04d4af1b4931",
+      "name": "Lumos",
+      "slug": "lumos",
+      "number": 1,
+      "status": "published",
+      "payload": {
+        "id": "Spell_1_Lumos_2026-10-06_719dd0e1-506a-4e67-9b02-04d4af1b4931",
+        "kind": "Wand-Lighting Charm",
+        "name": "Lumos",
+        "slug": "lumos",
+        "media": [
+          {
+            "id": "lumos-illustration",
+            "alt": "Luminous magic illuminating a dark fantasy setting",
+            "url": "/visuals/spells/lumos.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Beginner",
+        "usage": "Illuminates dark spaces. Nox is its wand-extinguishing counterspell.",
+        "accent": "light",
+        "danger": 1,
+        "effect": "Produces a light at the wand tip that remains useful for exploring dark places until extinguished with Nox.",
+        "medium": "Books",
+        "number": 1,
+        "aliases": [
+          "Wand-Lighting Charm"
+        ],
+        "casters": [
+          "Harry Potter",
+          "Albus Dumbledore"
+        ],
+        "sources": [
+          {
+            "url": "https://www.harrypotter.com/features/the-etymology-of-harry-potter-spells",
+            "label": "Harry Potter · Spell Etymology"
+          },
+          {
+            "url": "https://www.harrypotter.com/fact-file/spells/the-wand-lighting-charm",
+            "label": "Harry Potter · Official Lumos Entry"
+          }
+        ],
+        "utility": 5,
+        "worldId": "harry-potter",
+        "category": "Light",
+        "language": "Latin-inspired incantation",
+        "breakdown": [
+          {
+            "label": "Lumos",
+            "meaning": "The complete incantation; the syllables above are a reading aid, not separate translated words."
+          }
+        ],
+        "entryType": "spell",
+        "etymology": "The official etymology guide suggests a connection to the Latin lumen, meaning light. It presents this origin as a possibility.",
+        "sourceIds": [
+          "Source_1_Reference_2026-10-21_2ff24364-be41-41de-89d3-21718270288f",
+          "Source_2_Reference_2026-10-21_6b3e2a55-3eb5-4d17-8dfe-0971993c8170"
+        ],
+        "syllables": [
+          "LU",
+          "MOS"
+        ],
+        "continuity": "Harry Potter novels; also depicted in the film adaptations",
+        "definition": "Creates light at the tip of a wand.",
+        "sourceTitle": "Harry Potter",
+        "counterspell": "Nox",
+        "pronunciation": "LOO-mos",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Suggested",
+        "pronunciationNote": "An English reader aid, rather than an official phonetic transcription. Accents can vary across performances.",
+        "pronunciationStatus": "approximate"
+      },
+      "revision": 2,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-23T05:38:04.315519+00:00",
+      "universe_id": "harry-potter"
+    },
+    {
+      "id": "Spell_2_Fus-Ro-Dah_2026-10-06_719dd0e2-506a-4e67-9b02-04d4af1b4932",
+      "name": "Fus Ro Dah",
+      "slug": "fus-ro-dah",
+      "number": 2,
+      "status": "published",
+      "payload": {
+        "id": "Spell_2_Fus-Ro-Dah_2026-10-06_719dd0e2-506a-4e67-9b02-04d4af1b4932",
+        "kind": "Unrelenting Force",
+        "name": "Fus Ro Dah",
+        "slug": "fus-ro-dah",
+        "media": [
+          {
+            "id": "fus-ro-dah-illustration",
+            "alt": "An expanding wave of force sweeping across a rugged landscape",
+            "url": "/visuals/spells/fus-ro-dah.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Advanced",
+        "usage": "Its full three-word form can send opponents airborne. Strength and effects depend on the game context.",
+        "accent": "wind",
+        "danger": 4,
+        "effect": "A forceful vocal blast pushes enemies away; the complete three-word shout can launch them into the air.",
+        "medium": "Games",
+        "number": 2,
+        "aliases": [
+          "Unrelenting Force",
+          "Thu’um",
+          "Dragon Shout"
+        ],
+        "casters": [
+          "The Dragonborn"
+        ],
+        "sources": [
+          {
+            "url": "https://elderscrolls.bethesda.net/en-AU/news/1rL4bCScN6RYXaXQb4ownj/how-bethesda-game-studios-made-skyrims-dragon-language",
+            "label": "Bethesda · Creating Skyrim’s Dragon Language"
+          },
+          {
+            "url": "https://elderscrolls.bethesda.net/zh-TW/news/7-memorable-moments-from-the-elder-scrolls-v-skyrim",
+            "label": "Bethesda · Memorable Skyrim Moments"
+          }
+        ],
+        "utility": 4,
+        "worldId": "skyrim",
+        "category": "Force",
+        "language": "Dragon language",
+        "breakdown": [
+          {
+            "label": "Fus",
+            "meaning": "The first word of the three-word shout."
+          },
+          {
+            "label": "Ro",
+            "meaning": "The second word of the three-word shout."
+          },
+          {
+            "label": "Dah",
+            "meaning": "The final word of the three-word shout."
+          }
+        ],
+        "entryType": "ability",
+        "etymology": "Bethesda describes the Dragon language as drawing on several Germanic languages, especially Old English. This is language inspiration; an individual word-origin analysis is not confirmed here.",
+        "sourceIds": [
+          "Source_3_Reference_2026-10-21_e9ffeb83-7d3c-4cb6-85c1-b3558a34e9e9",
+          "Source_4_Reference_2026-10-21_a707279a-2ba2-4a87-82b3-8aecf65954df"
+        ],
+        "syllables": [
+          "FUS",
+          "RO",
+          "DAH"
+        ],
+        "continuity": "The Elder Scrolls V: Skyrim",
+        "definition": "A Dragon Shout that pushes opponents away with powerful force.",
+        "sourceTitle": "The Elder Scrolls V: Skyrim",
+        "pronunciation": "FOOS · ROH · DAH",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "An approximate English reader aid. Bethesda identifies each word as a single syllable; the in-game voice is the performance reference.",
+        "pronunciationStatus": "approximate"
+      },
+      "revision": 2,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-23T05:38:04.320962+00:00",
+      "universe_id": "skyrim"
+    },
+    {
+      "id": "Spell_3_Brisingr_2026-10-06_719dd0e3-506a-4e67-9b02-04d4af1b4933",
+      "name": "Brisingr",
+      "slug": "brisingr",
+      "number": 3,
+      "status": "published",
+      "payload": {
+        "id": "Spell_3_Brisingr_2026-10-06_719dd0e3-506a-4e67-9b02-04d4af1b4933",
+        "kind": "Word of Power",
+        "name": "Brisingr",
+        "slug": "brisingr",
+        "media": [
+          {
+            "id": "brisingr-illustration",
+            "alt": "Swirling flames glowing against a dark fantasy backdrop",
+            "url": "/visuals/spells/brisingr.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Intermediate",
+        "usage": "A fire-related word of power. A word’s translation alone does not describe every possible magical effect.",
+        "accent": "fire",
+        "danger": 4,
+        "effect": "Names fire in the Ancient Language and supplies a fire-related word for magic; the intended result depends on how it is used.",
+        "medium": "Books",
+        "number": 3,
+        "aliases": [
+          "Fire",
+          "Ancient Language"
+        ],
+        "casters": [],
+        "sources": [
+          {
+            "url": "https://www.paolini.net/faq/",
+            "label": "Christopher Paolini · Language Origins FAQ"
+          },
+          {
+            "url": "https://www.paolini.net/2018/06/11/man-arms-brisingr/",
+            "label": "Christopher Paolini · Brisingr Pronunciation"
+          },
+          {
+            "url": "https://www.paolini.net/audio-pronunciation-guide/things/",
+            "label": "Christopher Paolini · Official Audio Guide"
+          }
+        ],
+        "utility": 4,
+        "worldId": "inheritance-cycle",
+        "category": "Fire",
+        "language": "Ancient Language",
+        "breakdown": [
+          {
+            "label": "Brisingr",
+            "meaning": "Fire — the complete Ancient Language word."
+          }
+        ],
+        "entryType": "incantation",
+        "etymology": "Paolini explains that he found brisingr, meaning fire, in an Old Norse word-origin reference and used it as inspiration for the Ancient Language.",
+        "sourceIds": [
+          "Source_5_Reference_2026-10-21_ef8e6e14-53f2-4e68-848a-374fbf770351",
+          "Source_6_Reference_2026-10-21_5fdefc60-0b88-4654-80ab-268419b388d9",
+          "Source_7_Reference_2026-10-21_fe158af6-7fe9-4aeb-86be-7ac674a73dc6"
+        ],
+        "syllables": [
+          "BRISS",
+          "ing",
+          "gur"
+        ],
+        "continuity": "Inheritance Cycle novels; Ancient Language word entry",
+        "definition": "The Ancient Language word for fire, used in the series’ magic.",
+        "sourceTitle": "Inheritance Cycle",
+        "pronunciation": "BRISS-ing-gur",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Confirmed",
+        "pronunciationNote": "Paolini’s official website supplies this pronunciation for the sword bearing the same word, and provides an audio pronunciation guide.",
+        "pronunciationStatus": "verified"
+      },
+      "revision": 2,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-23T05:38:04.322449+00:00",
+      "universe_id": "inheritance-cycle"
+    },
+    {
+      "id": "Spell_4_Alohomora_2026-10-06_719dd0e4-506a-4e67-9b02-04d4af1b4934",
+      "name": "Alohomora",
+      "slug": "alohomora",
+      "number": 4,
+      "status": "published",
+      "payload": {
+        "id": "Spell_4_Alohomora_2026-10-06_719dd0e4-506a-4e67-9b02-04d4af1b4934",
+        "kind": "Unlocking Charm",
+        "name": "Alohomora",
+        "slug": "alohomora",
+        "media": [
+          {
+            "id": "alohomora-illustration",
+            "alt": "Magical light unlocking an ornate door",
+            "url": "/visuals/spells/alohomora.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Beginner",
+        "usage": "Hermione uses it on the forbidden third-floor corridor door in the first book.",
+        "accent": "unlock",
+        "danger": 2,
+        "effect": "Unlocks a locked door, allowing the caster to open it; the cited example is Hermione’s escape into the forbidden third-floor corridor.",
+        "medium": "Books",
+        "number": 4,
+        "aliases": [
+          "Unlocking Charm",
+          "Thief’s Friend"
+        ],
+        "casters": [
+          "Hermione Granger"
+        ],
+        "sources": [
+          {
+            "url": "https://www.harrypotter.com/features/guide-to-the-spells-creatures-and-potions-of-philosophers-stone",
+            "label": "Harry Potter · Philosopher’s Stone Spell Guide"
+          }
+        ],
+        "utility": 5,
+        "worldId": "harry-potter",
+        "category": "Access",
+        "language": "Fictional incantation",
+        "breakdown": [
+          {
+            "label": "Alohomora",
+            "meaning": "The complete incantation; no component translations are asserted here."
+          }
+        ],
+        "entryType": "spell",
+        "etymology": "An origin for this incantation has not been confirmed by the primary references included in this entry.",
+        "sourceIds": [
+          "Source_8_Reference_2026-10-21_7a1670a2-7b09-4165-8f42-2dadcd19051e"
+        ],
+        "syllables": [
+          "a",
+          "lo",
+          "ho",
+          "MO",
+          "ra"
+        ],
+        "continuity": "Harry Potter novels; the cited scene is from Philosopher’s Stone",
+        "definition": "An unlocking charm used to open locked doors.",
+        "sourceTitle": "Harry Potter and the Philosopher’s Stone",
+        "pronunciation": "uh-loh-huh-MOR-uh",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "An English reader aid. The linked official story guide confirms the spell and its use, but does not supply this phonetic spelling.",
+        "pronunciationStatus": "approximate"
+      },
+      "revision": 2,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-23T05:38:04.324096+00:00",
+      "universe_id": "harry-potter"
+    },
+    {
+      "id": "Spell_5_Wingardium-Leviosa_2026-10-06_719dd0e5-506a-4e67-9b02-04d4af1b4935",
+      "name": "Wingardium Leviosa",
+      "slug": "wingardium-leviosa",
+      "number": 5,
+      "status": "published",
+      "payload": {
+        "id": "Spell_5_Wingardium-Leviosa_2026-10-06_719dd0e5-506a-4e67-9b02-04d4af1b4935",
+        "kind": "Levitation Charm",
+        "name": "Wingardium Leviosa",
+        "slug": "wingardium-leviosa",
+        "media": [
+          {
+            "id": "wingardium-leviosa-illustration",
+            "alt": "A feather suspended in the air by levitation magic",
+            "url": "/visuals/spells/wingardium-leviosa.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Beginner",
+        "usage": "Associated with the swish-and-flick wand movement and careful pronunciation.",
+        "accent": "wand",
+        "danger": 2,
+        "effect": "Raises an object into the air. Ron uses the charm on a mountain troll’s club after learning it in Professor Flitwick’s class.",
+        "medium": "Books",
+        "number": 5,
+        "aliases": [
+          "Levitation Charm",
+          "Swish and Flick"
+        ],
+        "casters": [
+          "Ron Weasley",
+          "Hermione Granger"
+        ],
+        "sources": [
+          {
+            "url": "https://www.harrypotter.com/features/your-guide-to-the-best-spells-in-harry-potter",
+            "label": "Harry Potter · Official Spell Guide"
+          },
+          {
+            "url": "https://www.harrypotter.com/features/guide-to-the-spells-creatures-and-potions-of-philosophers-stone",
+            "label": "Harry Potter · Philosopher’s Stone Spell Guide"
+          }
+        ],
+        "utility": 4,
+        "worldId": "harry-potter",
+        "category": "Levitation",
+        "language": "Latin-inspired incantation",
+        "breakdown": [
+          {
+            "label": "Wingardium",
+            "meaning": "First word of the incantation."
+          },
+          {
+            "label": "Leviosa",
+            "meaning": "Second word; the official guide highlights its pronunciation."
+          }
+        ],
+        "entryType": "spell",
+        "etymology": "The supplied official reference explains the charm’s use, but does not establish a complete linguistic derivation.",
+        "sourceIds": [
+          "Source_9_Reference_2026-10-21_2c7f70b2-f1eb-4c39-8e54-b101012a49a8",
+          "Source_8_Reference_2026-10-21_7a1670a2-7b09-4165-8f42-2dadcd19051e"
+        ],
+        "syllables": [
+          "win",
+          "GAR",
+          "di",
+          "um",
+          "le",
+          "vi",
+          "O",
+          "sa"
+        ],
+        "continuity": "Harry Potter novels; the cited lesson is from Philosopher’s Stone",
+        "definition": "Makes an object levitate.",
+        "sourceTitle": "Harry Potter",
+        "pronunciation": "win-GAR-dee-um leh-vee-OH-suh",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "An English reader aid. The official guide emphasizes the Levi-o-sa pronunciation; the full respelling here is not an official transcription.",
+        "pronunciationStatus": "approximate"
+      },
+      "revision": 2,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-23T05:38:04.325541+00:00",
+      "universe_id": "harry-potter"
+    },
+    {
+      "id": "Spell_6_Expelliarmus_2026-10-06_719dd0e6-506a-4e67-9b02-04d4af1b4936",
+      "name": "Expelliarmus",
+      "slug": "expelliarmus",
+      "number": 6,
+      "status": "published",
+      "payload": {
+        "id": "Spell_6_Expelliarmus_2026-10-06_719dd0e6-506a-4e67-9b02-04d4af1b4936",
+        "kind": "Disarming Charm",
+        "name": "Expelliarmus",
+        "slug": "expelliarmus",
+        "media": [
+          {
+            "id": "expelliarmus-illustration",
+            "alt": "A wand flying away amid a burst of disarming magic",
+            "url": "/visuals/spells/expelliarmus.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Intermediate",
+        "usage": "A practical disarming charm associated with Harry’s duelling.",
+        "accent": "wand",
+        "danger": 3,
+        "effect": "Makes a target release a held object, commonly a wand, and gives a duellist a way to disarm an opponent.",
+        "medium": "Books",
+        "number": 6,
+        "aliases": [
+          "Disarming Charm",
+          "Harry’s Signature Spell"
+        ],
+        "casters": [
+          "Harry Potter",
+          "Severus Snape"
+        ],
+        "sources": [
+          {
+            "url": "https://www.harrypotter.com/features/expelliarmus-exploring-harry-potters-signature-spell",
+            "label": "Harry Potter · Harry’s Signature Spell"
+          }
+        ],
+        "utility": 4,
+        "worldId": "harry-potter",
+        "category": "Defense",
+        "language": "Latin-inspired incantation",
+        "breakdown": [
+          {
+            "label": "Expelliarmus",
+            "meaning": "The official explanation gives the combined meaning “drive out a weapon”; no exact morpheme boundary is claimed here."
+          }
+        ],
+        "entryType": "spell",
+        "etymology": "The official guide describes a combination of Latin with the approximate sense of driving out a weapon.",
+        "sourceIds": [
+          "Source_10_Reference_2026-10-21_226d2be1-e988-4dd0-8e86-33414e564a38"
+        ],
+        "syllables": [
+          "ex",
+          "PELL",
+          "i",
+          "AR",
+          "mus"
+        ],
+        "continuity": "Harry Potter novels; Harry learns it during the Chamber of Secrets Duelling Club",
+        "definition": "Forces an opponent to release what they are holding, often a wand.",
+        "sourceTitle": "Harry Potter",
+        "pronunciation": "ex-PELL-ee-AR-muss",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Confirmed",
+        "pronunciationNote": "An English reader aid rather than an official phonetic transcription. Performances may vary.",
+        "pronunciationStatus": "approximate"
+      },
+      "revision": 2,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-23T05:38:04.326786+00:00",
+      "universe_id": "harry-potter"
+    },
+    {
+      "id": "Spell_7_Expecto-Patronum_2026-10-06_719dd0e7-506a-4e67-9b02-04d4af1b4937",
+      "name": "Expecto Patronum",
+      "slug": "expecto-patronum",
+      "number": 7,
+      "status": "published",
+      "payload": {
+        "id": "Spell_7_Expecto-Patronum_2026-10-06_719dd0e7-506a-4e67-9b02-04d4af1b4937",
+        "kind": "Patronus Charm",
+        "name": "Expecto Patronum",
+        "slug": "expecto-patronum",
+        "media": [
+          {
+            "id": "expecto-patronum-illustration",
+            "alt": "A luminous animal guardian casting protective light through mist",
+            "url": "/visuals/spells/expecto-patronum.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Advanced",
+        "usage": "An advanced defensive charm; Patronuses can also carry messages in the stories.",
+        "accent": "shield",
+        "danger": 2,
+        "effect": "Creates a protective positive force against Dementors. A fully formed Patronus takes an animal shape, and some casters use Patronuses to deliver messages.",
+        "medium": "Books",
+        "number": 7,
+        "aliases": [
+          "Patronus Charm",
+          "Protective Guardian"
+        ],
+        "casters": [
+          "Harry Potter",
+          "Remus Lupin",
+          "Minerva McGonagall"
+        ],
+        "sources": [
+          {
+            "url": "https://www.harrypotter.com/features/what-is-a-patronus",
+            "label": "Harry Potter · What Is a Patronus?"
+          },
+          {
+            "url": "https://www.harrypotter.com/features/the-etymology-of-harry-potter-spells",
+            "label": "Harry Potter · Spell Etymology"
+          }
+        ],
+        "utility": 5,
+        "worldId": "harry-potter",
+        "category": "Defense",
+        "language": "Latin-inspired incantation",
+        "breakdown": [
+          {
+            "label": "Expecto",
+            "meaning": "I expect or await, in the official guide’s approximate Latin translation."
+          },
+          {
+            "label": "Patronum",
+            "meaning": "A guardian or protector, in the official guide’s approximate Latin translation."
+          }
+        ],
+        "entryType": "spell",
+        "etymology": "The official etymology guide connects the Latin phrase with expecting or awaiting a guardian; patronus carries the sense of a protector.",
+        "sourceIds": [
+          "Source_11_Reference_2026-10-21_b48e7c6c-d5d7-49b0-8a0e-a169737a08aa",
+          "Source_1_Reference_2026-10-21_2ff24364-be41-41de-89d3-21718270288f"
+        ],
+        "syllables": [
+          "ex",
+          "PEC",
+          "to",
+          "pa",
+          "TRO",
+          "num"
+        ],
+        "continuity": "Harry Potter novels; first taught to Harry in Prisoner of Azkaban",
+        "definition": "Conjures a protective Patronus to oppose Dementors.",
+        "sourceTitle": "Harry Potter and the Prisoner of Azkaban",
+        "pronunciation": "ex-PEK-toh puh-TROH-num",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Confirmed",
+        "pronunciationNote": "An English reader aid. The source confirms the written incantation, but does not supply this phonetic transcription.",
+        "pronunciationStatus": "approximate"
+      },
+      "revision": 2,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-23T05:38:04.327787+00:00",
+      "universe_id": "harry-potter"
+    },
+    {
+      "id": "Spell_8_Adurna_2026-10-06_719dd0e8-506a-4e67-9b02-04d4af1b4938",
+      "name": "Adurna",
+      "slug": "adurna",
+      "number": 8,
+      "status": "published",
+      "payload": {
+        "id": "Spell_8_Adurna_2026-10-06_719dd0e8-506a-4e67-9b02-04d4af1b4938",
+        "kind": "Ancient Language Word",
+        "name": "Adurna",
+        "slug": "adurna",
+        "media": [
+          {
+            "id": "adurna-illustration",
+            "alt": "Water rising and swirling under magical control",
+            "url": "/visuals/spells/adurna.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Intermediate",
+        "usage": "A water-related word in the language used for magic. The dictionary confirms its translation, rather than a complete spell recipe.",
+        "accent": "wind",
+        "danger": 2,
+        "effect": "Names water in the Ancient Language. This entry records the magical vocabulary rather than claiming that the word alone creates or moves water.",
+        "medium": "Books",
+        "number": 8,
+        "aliases": [
+          "Water",
+          "Ancient Language"
+        ],
+        "casters": [],
+        "sources": [
+          {
+            "url": "https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/",
+            "label": "Christopher Paolini · Ancient Language Guide"
+          },
+          {
+            "url": "https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/english-ancient-language-dictionary/",
+            "label": "Christopher Paolini · Ancient Language Dictionary"
+          }
+        ],
+        "utility": 4,
+        "worldId": "inheritance-cycle",
+        "category": "Water",
+        "language": "Ancient Language",
+        "breakdown": [
+          {
+            "label": "Adurna",
+            "meaning": "Water — the complete Ancient Language word."
+          }
+        ],
+        "entryType": "incantation",
+        "etymology": "The Ancient Language draws on Old Norse, but a separate origin for adurna is not established by the supplied primary references.",
+        "sourceIds": [
+          "Source_12_Reference_2026-10-21_e0759bae-20f3-46d0-87d1-ebf4b1e87fb7",
+          "Source_13_Reference_2026-10-21_a7e68dd8-77b3-4337-8213-ceca725a6af2"
+        ],
+        "syllables": [
+          "a",
+          "DUR",
+          "na"
+        ],
+        "continuity": "Inheritance Cycle novels; Ancient Language word entry",
+        "definition": "The Ancient Language word for water.",
+        "sourceTitle": "Inheritance Cycle",
+        "pronunciation": "ah-DUR-nuh",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "A reader aid based on the official language’s sound guide; a dedicated pronunciation for this word is not asserted.",
+        "pronunciationStatus": "approximate"
+      },
+      "revision": 2,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-23T05:38:04.328946+00:00",
+      "universe_id": "inheritance-cycle"
+    },
+    {
+      "id": "Spell_9_Jierda_2026-10-06_719dd0e9-506a-4e67-9b02-04d4af1b4939",
+      "name": "Jierda",
+      "slug": "jierda",
+      "number": 9,
+      "status": "published",
+      "payload": {
+        "id": "Spell_9_Jierda_2026-10-06_719dd0e9-506a-4e67-9b02-04d4af1b4939",
+        "kind": "Word of Power",
+        "name": "Jierda",
+        "slug": "jierda",
+        "media": [
+          {
+            "id": "jierda-illustration",
+            "alt": "A forceful burst of magic fracturing a stone object",
+            "url": "/visuals/spells/jierda.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Intermediate",
+        "usage": "A force-related word of power. The translation identifies the action; a specific target or outcome depends on its story context.",
+        "accent": "wand",
+        "danger": 4,
+        "effect": "Expresses breaking or hitting in the Ancient Language. The word identifies an action; the target and full outcome require further story context.",
+        "medium": "Books",
+        "number": 9,
+        "aliases": [
+          "Break",
+          "Hit",
+          "Ancient Language"
+        ],
+        "casters": [],
+        "sources": [
+          {
+            "url": "https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/",
+            "label": "Christopher Paolini · Ancient Language Guide"
+          },
+          {
+            "url": "https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/english-ancient-language-dictionary/",
+            "label": "Christopher Paolini · Ancient Language Dictionary"
+          },
+          {
+            "url": "https://www.paolini.net/audio-pronunciation-guide/words-phrases/",
+            "label": "Christopher Paolini · Words and Phrases Audio"
+          }
+        ],
+        "utility": 3,
+        "worldId": "inheritance-cycle",
+        "category": "Force",
+        "language": "Ancient Language",
+        "breakdown": [
+          {
+            "label": "Jierda",
+            "meaning": "Break; hit — the complete Ancient Language word."
+          }
+        ],
+        "entryType": "incantation",
+        "etymology": "The word’s translation and pronunciation are documented, but an individual real-world etymology is not confirmed in these sources.",
+        "sourceIds": [
+          "Source_12_Reference_2026-10-21_e0759bae-20f3-46d0-87d1-ebf4b1e87fb7",
+          "Source_13_Reference_2026-10-21_a7e68dd8-77b3-4337-8213-ceca725a6af2",
+          "Source_14_Reference_2026-10-21_750bde87-86d8-434d-8935-30634905183b"
+        ],
+        "syllables": [
+          "JEER",
+          "duh"
+        ],
+        "continuity": "Inheritance Cycle novels; Ancient Language word entry",
+        "definition": "An Ancient Language word meaning break or hit.",
+        "sourceTitle": "Inheritance Cycle",
+        "pronunciation": "JEER-duh",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "The official Ancient Language guide supplies JEER-duh and the official audio guide includes this word.",
+        "pronunciationStatus": "verified"
+      },
+      "revision": 2,
+      "created_at": "2026-10-21T08:33:45.714711+00:00",
+      "updated_at": "2026-10-23T05:38:04.33017+00:00",
+      "universe_id": "inheritance-cycle"
+    },
+    {
+      "id": "Spell_10_Crimson-Bands-of-Cyttorak_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004010",
+      "name": "Crimson Bands of Cyttorak",
+      "slug": "crimson-bands-of-cyttorak",
+      "number": 10,
+      "status": "published",
+      "payload": {
+        "id": "Spell_10_Crimson-Bands-of-Cyttorak_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004010",
+        "kind": "Binding Spell",
+        "name": "Crimson Bands of Cyttorak",
+        "slug": "crimson-bands-of-cyttorak",
+        "media": [
+          {
+            "id": "crimson-bands-of-cyttorak-illustration",
+            "alt": "Luminous crimson binding bands tightly encircling a weathered stone pillar",
+            "url": "/visuals/spells/crimson-bands-of-cyttorak.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Advanced",
+        "usage": "Doctor Strange calls on Cyttorak's power to capture foes. Marvel describes the restraints as exceptionally strong; this entry does not promise they are impossible to break or identify the separate physical artifact as the same working.",
+        "accent": "shield",
+        "danger": 3,
+        "effect": "Conjures crimson restraints to hold an opponent.",
+        "medium": "Comics",
+        "number": 10,
+        "aliases": [],
+        "casters": [
+          "Doctor Strange"
+        ],
+        "sources": [
+          {
+            "url": "https://www.marvel.com/articles/comics/cyttorak-history-hosts-juggernaut-cain-marko-colossus-doctor-strange?linkId=208887688",
+            "label": "Marvel · A History of Cyttorak, Who Is Cyttorak?"
+          }
+        ],
+        "utility": 4,
+        "worldId": "marvel",
+        "category": "Binding",
+        "language": "English spell name",
+        "breakdown": [],
+        "entryType": "spell",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_15_Reference_2026-10-21_3d999e23-a37b-4527-845d-bbbf2d1bb8b8"
+        ],
+        "syllables": [],
+        "continuity": "Marvel Comics",
+        "definition": "A binding spell that draws on Cyttorak to restrain opponents with ribbons of energy.",
+        "sourceTitle": "Marvel Comics",
+        "pronunciation": "",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.448351+00:00",
+      "universe_id": "marvel"
+    },
+    {
+      "id": "Spell_11_Shield-of-the-Seraphim_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004011",
+      "name": "Shield of the Seraphim",
+      "slug": "shield-of-the-seraphim",
+      "number": 11,
+      "status": "published",
+      "payload": {
+        "id": "Spell_11_Shield-of-the-Seraphim_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004011",
+        "kind": "Defensive Spell",
+        "name": "Shield of the Seraphim",
+        "slug": "shield-of-the-seraphim",
+        "media": [
+          {
+            "id": "shield-of-the-seraphim-illustration",
+            "alt": "A circular golden-orange magical shield scattering incoming blue-violet sparks",
+            "url": "/visuals/spells/shield-of-the-seraphim.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Intermediate",
+        "usage": "In Tony's Workshop, Doctor Strange raises the shield against Dormammu. An attack can shatter its protection and carry excess damage through. This is the named tabletop version; the document also contains experimental rules.",
+        "accent": "shield",
+        "danger": 1,
+        "effect": "Forms magical protection that can break under an attack.",
+        "medium": "Games",
+        "number": 11,
+        "aliases": [],
+        "casters": [
+          "Doctor Strange"
+        ],
+        "sources": [
+          {
+            "url": "https://cdn.marvel.com/u/prod/marvel/i/pdf/MMRPG_Tonys_Workshop_20250327.pdf",
+            "label": "Marvel · Tony's Workshop (2025), PDF Pages 1–2"
+          }
+        ],
+        "utility": 5,
+        "worldId": "marvel",
+        "category": "Defense",
+        "language": "English spell name",
+        "breakdown": [],
+        "entryType": "spell",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_16_Reference_2026-10-21_d700653f-cbc1-40fc-8273-a3699504a1ff"
+        ],
+        "syllables": [],
+        "continuity": "Marvel Multiverse Role-Playing Game · Tony's Workshop (2025)",
+        "definition": "A protective spell illustrated in Marvel's tabletop rules discussion with Doctor Strange and Dormammu.",
+        "sourceTitle": "Marvel Multiverse Role-Playing Game",
+        "pronunciation": "",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.452105+00:00",
+      "universe_id": "marvel"
+    },
+    {
+      "id": "Spell_12_Winds-of-Watoomb_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004012",
+      "name": "Winds of Watoomb",
+      "slug": "winds-of-watoomb",
+      "number": 12,
+      "status": "published",
+      "payload": {
+        "id": "Spell_12_Winds-of-Watoomb_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004012",
+        "kind": "Defensive Spell",
+        "name": "Winds of Watoomb",
+        "slug": "winds-of-watoomb",
+        "media": [
+          {
+            "id": "winds-of-watoomb-illustration",
+            "alt": "A teal and gold magical wind funnel lifting debris through a ruined stone courtyard",
+            "url": "/visuals/spells/winds-of-watoomb.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Intermediate",
+        "usage": "Doctor Strange uses it as a reaction during Dormammu's attack, redirecting the remaining 24 damage from Health to Focus in the example. The entry describes that tabletop rule rather than assigning a universal wind attack to every version.",
+        "accent": "wind",
+        "danger": 1,
+        "effect": "In the cited tabletop example, takes incoming damage against Focus instead of Health.",
+        "medium": "Games",
+        "number": 12,
+        "aliases": [],
+        "casters": [
+          "Doctor Strange"
+        ],
+        "sources": [
+          {
+            "url": "https://cdn.marvel.com/u/prod/marvel/i/pdf/MMRPG_Tonys_Workshop_20250327.pdf",
+            "label": "Marvel · Tony's Workshop (2025), PDF Pages 1–2"
+          }
+        ],
+        "utility": 4,
+        "worldId": "marvel",
+        "category": "Defense",
+        "language": "English spell name",
+        "breakdown": [],
+        "entryType": "spell",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_16_Reference_2026-10-21_d700653f-cbc1-40fc-8273-a3699504a1ff"
+        ],
+        "syllables": [],
+        "continuity": "Marvel Multiverse Role-Playing Game · Tony's Workshop (2025)",
+        "definition": "A spell that Doctor Strange uses defensively in the inspected Marvel tabletop example.",
+        "sourceTitle": "Marvel Multiverse Role-Playing Game",
+        "pronunciation": "",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.453524+00:00",
+      "universe_id": "marvel"
+    },
+    {
+      "id": "Spell_13_Astral-Projection_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004013",
+      "name": "Astral Projection",
+      "slug": "astral-projection",
+      "number": 13,
+      "status": "published",
+      "payload": {
+        "id": "Spell_13_Astral-Projection_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004013",
+        "kind": "Mystical Ability",
+        "name": "Astral Projection",
+        "slug": "astral-projection",
+        "media": [
+          {
+            "id": "astral-projection-illustration",
+            "alt": "A pale-blue astral silhouette rising from a resting robed figure in a violet sanctum",
+            "url": "/visuals/spells/astral-projection.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Advanced",
+        "usage": "Marvel's on-screen profile describes Strange watching events while his astral self is apart from his body. It also recounts his astral fight with Lucian during surgery in Doctor Strange (2016). No single spoken formula is identified.",
+        "accent": "light",
+        "danger": 2,
+        "effect": "Separates Strange's astral self from his physical body to observe events.",
+        "medium": "Films",
+        "number": 13,
+        "aliases": [
+          "Astral Form"
+        ],
+        "casters": [
+          "Doctor Strange"
+        ],
+        "sources": [
+          {
+            "url": "https://www.marvel.com/characters/doctor-strange-stephen-strange/on-screen?mobile-app=true&theme=dark%2F1000",
+            "label": "Marvel · Doctor Strange On Screen, Astral Projection"
+          }
+        ],
+        "utility": 4,
+        "worldId": "marvel",
+        "category": "Projection",
+        "language": "English ability label",
+        "breakdown": [],
+        "entryType": "ability",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_17_Reference_2026-10-21_12944210-4e43-497f-822b-e98e4940a2fd"
+        ],
+        "syllables": [],
+        "continuity": "Marvel Cinematic Universe · Doctor Strange (2016)",
+        "definition": "An ability that lets Doctor Strange send his astral self away from his physical body.",
+        "sourceTitle": "Doctor Strange (2016)",
+        "pronunciation": "",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.45462+00:00",
+      "universe_id": "marvel"
+    },
+    {
+      "id": "Spell_14_Mellon_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004014",
+      "name": "Mellon",
+      "slug": "mellon",
+      "number": 14,
+      "status": "draft",
+      "payload": {
+        "id": "Spell_14_Mellon_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004014",
+        "kind": "Door Password",
+        "name": "Mellon",
+        "slug": "mellon",
+        "media": [
+          {
+            "id": "mellon-illustration",
+            "alt": "A moonlit stone doorway with silver tree and star motifs and a narrow welcoming seam of light",
+            "url": "/visuals/spells/mellon.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Beginner",
+        "usage": "Secondary research identifies The Fellowship of the Ring, Book II, chapter 4, A Journey in the Dark. This is a particular door's password, not a general unlocking spell. Primary-text review is still required.",
+        "accent": "unlock",
+        "danger": 1,
+        "effect": "Opens the Doors of Durin when spoken as their password.",
+        "medium": "Books",
+        "number": 14,
+        "aliases": [
+          "Doors of Durin Password"
+        ],
+        "casters": [
+          "Gandalf"
+        ],
+        "sources": [
+          {
+            "url": "https://tolkiengateway.net/wiki/Doors_of_Durin",
+            "label": "Tolkien Gateway · Doors of Durin (Secondary Reference)"
+          }
+        ],
+        "utility": 3,
+        "worldId": "tolkien",
+        "category": "Access",
+        "language": "Sindarin",
+        "breakdown": [],
+        "entryType": "incantation",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_18_Reference_2026-10-21_0b42285f-f8c9-47e9-8bde-9d4eab37657c"
+        ],
+        "syllables": [],
+        "continuity": "The Lord of the Rings · Book Continuity",
+        "definition": "The Sindarin word for friend, used as the password to the Doors of Durin.",
+        "sourceTitle": "The Fellowship of the Ring",
+        "pronunciation": "",
+        "evidenceStatus": "unverified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.457171+00:00",
+      "universe_id": "tolkien"
+    },
+    {
+      "id": "Spell_15_Naur-an-edraith-ammen_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004015",
+      "name": "Naur an edraith ammen",
+      "slug": "naur-an-edraith-ammen",
+      "number": 15,
+      "status": "draft",
+      "payload": {
+        "id": "Spell_15_Naur-an-edraith-ammen_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004015",
+        "kind": "Fire Incantation",
+        "name": "Naur an edraith ammen",
+        "slug": "naur-an-edraith-ammen",
+        "media": [
+          {
+            "id": "naur-an-edraith-ammen-illustration",
+            "alt": "An amber campfire flaring among snowy ground and wet ancient tree roots at night",
+            "url": "/visuals/spells/naur-an-edraith-ammen.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Advanced",
+        "usage": "The source-linked linguistic index records this phrase with Lord of the Rings and Parma Eldalamberon locators. The phrase is not presented as a formal spell title; the exact scene and primary wording await review.",
+        "accent": "fire",
+        "danger": 4,
+        "effect": "Calls on fire to aid the Fellowship in the cited story context.",
+        "medium": "Books",
+        "number": 15,
+        "aliases": [],
+        "casters": [
+          "Gandalf"
+        ],
+        "sources": [
+          {
+            "url": "https://www.elfdict.com/w/ammen",
+            "label": "Parf Edhellen · Ammen, With Tolkien Bibliography Locators"
+          }
+        ],
+        "utility": 4,
+        "worldId": "tolkien",
+        "category": "Fire",
+        "language": "Sindarin",
+        "breakdown": [],
+        "entryType": "incantation",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_19_Reference_2026-10-21_f6218ec3-abf1-4b01-8228-2f1168eb2a13"
+        ],
+        "syllables": [],
+        "continuity": "The Lord of the Rings · Book Continuity",
+        "definition": "A Sindarin utterance associated with Gandalf's use of fire.",
+        "sourceTitle": "The Fellowship of the Ring",
+        "pronunciation": "",
+        "evidenceStatus": "unverified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.458456+00:00",
+      "universe_id": "tolkien"
+    },
+    {
+      "id": "Spell_16_Annon-edhellen-edro-hi-ammen_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004016",
+      "name": "Annon edhellen, edro hi ammen",
+      "slug": "annon-edhellen-edro-hi-ammen",
+      "number": 16,
+      "status": "draft",
+      "payload": {
+        "id": "Spell_16_Annon-edhellen-edro-hi-ammen_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004016",
+        "kind": "Gate-Opening Attempt",
+        "name": "Annon edhellen, edro hi ammen",
+        "slug": "annon-edhellen-edro-hi-ammen",
+        "media": [
+          {
+            "id": "annon-edhellen-edro-hi-ammen-illustration",
+            "alt": "A cloaked traveler raising a hand toward a firmly closed stone gate with a faint silver-blue spell glimmer",
+            "url": "/visuals/spells/annon-edhellen-edro-hi-ammen.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Advanced",
+        "usage": "The linguistic index records the utterance and primary bibliography locators. The eventual password is Mellon. The failed attempt must not be described as a successful general opening spell; primary-text review remains pending.",
+        "accent": "unlock",
+        "danger": 1,
+        "effect": "Appeals for an Elvish gate to open; does not open the Doors of Durin.",
+        "medium": "Books",
+        "number": 16,
+        "aliases": [],
+        "casters": [
+          "Gandalf"
+        ],
+        "sources": [
+          {
+            "url": "https://www.elfdict.com/w/ammen",
+            "label": "Parf Edhellen · Ammen, With Tolkien Bibliography Locators"
+          },
+          {
+            "url": "https://tolkiengateway.net/wiki/Doors_of_Durin",
+            "label": "Tolkien Gateway · Doors of Durin (Secondary Reference)"
+          }
+        ],
+        "utility": 2,
+        "worldId": "tolkien",
+        "category": "Access",
+        "language": "Sindarin",
+        "breakdown": [],
+        "entryType": "incantation",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_19_Reference_2026-10-21_f6218ec3-abf1-4b01-8228-2f1168eb2a13",
+          "Source_18_Reference_2026-10-21_0b42285f-f8c9-47e9-8bde-9d4eab37657c"
+        ],
+        "syllables": [],
+        "continuity": "The Lord of the Rings · Book Continuity",
+        "definition": "An attempted gate-opening incantation associated with Gandalf at Moria's western entrance.",
+        "sourceTitle": "The Fellowship of the Ring",
+        "pronunciation": "",
+        "evidenceStatus": "unverified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.459208+00:00",
+      "universe_id": "tolkien"
+    },
+    {
+      "id": "Spell_17_Shutting-Spell_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004017",
+      "name": "Shutting-Spell",
+      "slug": "shutting-spell",
+      "number": 17,
+      "status": "draft",
+      "payload": {
+        "id": "Spell_17_Shutting-Spell_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004017",
+        "kind": "Descriptive Spell Label",
+        "name": "Shutting-Spell",
+        "slug": "shutting-spell",
+        "media": [
+          {
+            "id": "shutting-spell-illustration",
+            "alt": "Violet binding light sealing an old stone door against an orange glow beyond",
+            "url": "/visuals/spells/shutting-spell.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Advanced",
+        "usage": "The secondary chapter summary supports the contested working in Book II, chapter 5, The Bridge of Khazad-dûm. No spoken formula or formal spellbook title is asserted; exact primary wording remains to be verified.",
+        "accent": "shield",
+        "danger": 3,
+        "effect": "Attempts to hold a door closed while the Fellowship escapes Moria.",
+        "medium": "Books",
+        "number": 17,
+        "aliases": [],
+        "casters": [
+          "Gandalf"
+        ],
+        "sources": [
+          {
+            "url": "https://tolkiengateway.net/wiki/The_Bridge_of_Khazad-d%C3%BBm",
+            "label": "Tolkien Gateway · The Bridge of Khazad-dûm (Secondary Reference)"
+          },
+          {
+            "url": "https://www.connotations.de/article/lynn-forest-hill-hey-dol-merry-dol-tom-bombadils-nonsense-or-tolkiens-creative-uncertainty-a-response-to-thomas-kullmann/",
+            "label": "Connotations · Lynn Forest-Hill, Vol. 25.1 (2015/16), Page 95 (Secondary Reference)"
+          }
+        ],
+        "utility": 3,
+        "worldId": "tolkien",
+        "category": "Defense",
+        "language": "English descriptive label",
+        "breakdown": [],
+        "entryType": "spell",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_20_Reference_2026-10-21_6edd1330-f2e6-46c0-8942-99043750e570",
+          "Source_23_Reference_2026-10-23_53398b4b-a4e0-4363-8682-5b70bd2e01be"
+        ],
+        "syllables": [],
+        "continuity": "The Lord of the Rings · Book Continuity",
+        "definition": "A descriptive label for Gandalf's contested working on a door during the escape through Moria.",
+        "sourceTitle": "The Fellowship of the Ring",
+        "pronunciation": "",
+        "evidenceStatus": "unverified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 3,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.460104+00:00",
+      "universe_id": "tolkien"
+    },
+    {
+      "id": "Spell_18_Soul-Self_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004018",
+      "name": "Soul Self",
+      "slug": "soul-self",
+      "number": 18,
+      "status": "published",
+      "payload": {
+        "id": "Spell_18_Soul-Self_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004018",
+        "kind": "Spiritual Projection",
+        "name": "Soul Self",
+        "slug": "soul-self",
+        "media": [
+          {
+            "id": "soul-self-illustration",
+            "alt": "A vast violet spectral raven spreading its wings above a seated hooded figure",
+            "url": "/visuals/spells/soul-self.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Advanced",
+        "usage": "The official game profile identifies scouting, fighting and moving objects as uses. Soul Self names Raven's projected spirit; no spoken formula is supplied.",
+        "accent": "shield",
+        "danger": 3,
+        "effect": "Projects Raven's spirit for scouting, combat and manipulating objects.",
+        "medium": "Games",
+        "number": 18,
+        "aliases": [
+          "Soul-Self"
+        ],
+        "casters": [
+          "Raven"
+        ],
+        "sources": [
+          {
+            "url": "https://www.dcuniverseonline.com/news/2013-august-20-raven-character-spotlight-dcuo",
+            "label": "DC Universe Online · Raven Character Spotlight (2013)"
+          }
+        ],
+        "utility": 4,
+        "worldId": "dc-teen-titans",
+        "category": "Projection",
+        "language": "English ability name",
+        "breakdown": [],
+        "entryType": "ability",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_21_Reference_2026-10-21_508fcce0-6e3d-4e66-84b1-130c2b4ace3a"
+        ],
+        "syllables": [],
+        "continuity": "DC Universe Online · Raven Character Spotlight (2013)",
+        "definition": "Raven's ability to project her spirit beyond her physical body.",
+        "sourceTitle": "DC Universe Online",
+        "pronunciation": "",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.460821+00:00",
+      "universe_id": "dc-teen-titans"
+    },
+    {
+      "id": "Spell_19_Empathy_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004019",
+      "name": "Empathy",
+      "slug": "empathy",
+      "number": 19,
+      "status": "published",
+      "payload": {
+        "id": "Spell_19_Empathy_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004019",
+        "kind": "Emotion Sensing",
+        "name": "Empathy",
+        "slug": "empathy",
+        "media": [
+          {
+            "id": "empathy-illustration",
+            "alt": "Two robed figures linked by violet and gold light across a moonlit ruined garden",
+            "url": "/visuals/spells/empathy.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Intermediate",
+        "usage": "The game profile supports sharing emotional experiences. It gives no spoken incantation and does not establish unrestricted access to another person's thoughts.",
+        "accent": "light",
+        "danger": 1,
+        "effect": "Lets Raven experience other people's emotions as if they were her own.",
+        "medium": "Games",
+        "number": 19,
+        "aliases": [],
+        "casters": [
+          "Raven"
+        ],
+        "sources": [
+          {
+            "url": "https://www.dcuniverseonline.com/news/2013-august-20-raven-character-spotlight-dcuo",
+            "label": "DC Universe Online · Raven Character Spotlight (2013)"
+          }
+        ],
+        "utility": 3,
+        "worldId": "dc-teen-titans",
+        "category": "Perception",
+        "language": "English ability label",
+        "breakdown": [],
+        "entryType": "ability",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_21_Reference_2026-10-21_508fcce0-6e3d-4e66-84b1-130c2b4ace3a"
+        ],
+        "syllables": [],
+        "continuity": "DC Universe Online · Raven Character Spotlight (2013)",
+        "definition": "Raven's empathic perception of other people's emotional states.",
+        "sourceTitle": "DC Universe Online",
+        "pronunciation": "",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.463288+00:00",
+      "universe_id": "dc-teen-titans"
+    },
+    {
+      "id": "Spell_20_Empathic-Healing_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004020",
+      "name": "Empathic Healing",
+      "slug": "empathic-healing",
+      "number": 20,
+      "status": "published",
+      "payload": {
+        "id": "Spell_20_Empathic-Healing_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004020",
+        "kind": "Pain Transference",
+        "name": "Empathic Healing",
+        "slug": "empathic-healing",
+        "media": [
+          {
+            "id": "empathic-healing-illustration",
+            "alt": "A hooded healer drawing violet light from a seated traveler's injured forearm",
+            "url": "/visuals/spells/empathic-healing.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Advanced",
+        "usage": "Healing comes through Raven taking on someone else's pain. Empathic Healing and Pain Transference are descriptive catalog labels for this use of empathy, not a documented spoken formula.",
+        "accent": "light",
+        "danger": 3,
+        "effect": "Helps another person by taking their pain into Raven herself.",
+        "medium": "Games",
+        "number": 20,
+        "aliases": [],
+        "casters": [
+          "Raven"
+        ],
+        "sources": [
+          {
+            "url": "https://www.dcuniverseonline.com/news/2013-august-20-raven-character-spotlight-dcuo",
+            "label": "DC Universe Online · Raven Character Spotlight (2013)"
+          }
+        ],
+        "utility": 4,
+        "worldId": "dc-teen-titans",
+        "category": "Healing",
+        "language": "English descriptive label",
+        "breakdown": [],
+        "entryType": "ability",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_21_Reference_2026-10-21_508fcce0-6e3d-4e66-84b1-130c2b4ace3a"
+        ],
+        "syllables": [],
+        "continuity": "DC Universe Online · Raven Character Spotlight (2013)",
+        "definition": "A healing use of Raven's empathy, described in her official game profile.",
+        "sourceTitle": "DC Universe Online",
+        "pronunciation": "",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.464065+00:00",
+      "universe_id": "dc-teen-titans"
+    },
+    {
+      "id": "Spell_21_Azarath-Metrion-Zinthos_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004021",
+      "name": "Azarath Metrion Zinthos",
+      "slug": "azarath-metrion-zinthos",
+      "number": 21,
+      "status": "published",
+      "payload": {
+        "id": "Spell_21_Azarath-Metrion-Zinthos_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004021",
+        "kind": "Magical Incantation",
+        "name": "Azarath Metrion Zinthos",
+        "slug": "azarath-metrion-zinthos",
+        "media": [
+          {
+            "id": "azarath-metrion-zinthos-illustration",
+            "alt": "A hovering hooded figure holding a violet energy orb in a ruined stone hall",
+            "url": "/visuals/spells/azarath-metrion-zinthos.png",
+            "type": "image",
+            "credit": "AI-generated illustration · Spelling Spells",
+            "caption": "Original illustration inspired by the spell’s fictional effect"
+          }
+        ],
+        "skill": "Intermediate",
+        "usage": "On printed page 5 Raven speaks the formula before throwing objects with black energy. The source verifies a script version, not final-broadcast equivalence. No translation or single fixed effect is asserted.",
+        "accent": "wand",
+        "danger": 3,
+        "effect": "Accompanies Raven's black-energy manipulation of objects in the cited script.",
+        "medium": "Television",
+        "number": 21,
+        "aliases": [],
+        "casters": [
+          "Raven"
+        ],
+        "sources": [
+          {
+            "url": "https://dwaynemcduffie.com/wp-content/uploads/2025/06/WEBSITE_TT_ep205_Fear_Itself_SCRIPT_D2.pdf",
+            "label": "Dwayne McDuffie · Fear Itself Script, Printed Page 5"
+          }
+        ],
+        "utility": 4,
+        "worldId": "dc-teen-titans",
+        "category": "Manipulation",
+        "language": "Fictional incantation",
+        "breakdown": [],
+        "entryType": "incantation",
+        "etymology": "No individual word origin is established by the references included in this entry.",
+        "sourceIds": [
+          "Source_22_Reference_2026-10-21_32127b94-f8db-49d7-89b2-074fb64f4b6e"
+        ],
+        "syllables": [],
+        "continuity": "Teen Titans Animated Series · Fear Itself · Dwayne McDuffie's Script",
+        "definition": "Raven's three-word incantation, documented in Dwayne McDuffie's script for Fear Itself.",
+        "sourceTitle": "Teen Titans · Fear Itself",
+        "pronunciation": "",
+        "evidenceStatus": "verified",
+        "etymologyStatus": "Unconfirmed",
+        "pronunciationNote": "No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.",
+        "pronunciationStatus": "unavailable"
+      },
+      "revision": 2,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T16:30:15.4648+00:00",
+      "universe_id": "dc-teen-titans"
+    }
+  ],
+  "sources": [
+    {
+      "id": "Source_1_Reference_2026-10-21_2ff24364-be41-41de-89d3-21718270288f",
+      "url": "https://www.harrypotter.com/features/the-etymology-of-harry-potter-spells",
+      "label": "Harry Potter · Spell Etymology",
+      "number": 1,
+      "payload": {
+        "url": "https://www.harrypotter.com/features/the-etymology-of-harry-potter-spells",
+        "kind": "reference",
+        "label": "Harry Potter · Spell Etymology",
+        "publisher": "www.harrypotter.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_2_Reference_2026-10-21_6b3e2a55-3eb5-4d17-8dfe-0971993c8170",
+      "url": "https://www.harrypotter.com/fact-file/spells/the-wand-lighting-charm",
+      "label": "Harry Potter · Official Lumos Entry",
+      "number": 2,
+      "payload": {
+        "url": "https://www.harrypotter.com/fact-file/spells/the-wand-lighting-charm",
+        "kind": "reference",
+        "label": "Harry Potter · Official Lumos Entry",
+        "publisher": "www.harrypotter.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_3_Reference_2026-10-21_e9ffeb83-7d3c-4cb6-85c1-b3558a34e9e9",
+      "url": "https://elderscrolls.bethesda.net/en-AU/news/1rL4bCScN6RYXaXQb4ownj/how-bethesda-game-studios-made-skyrims-dragon-language",
+      "label": "Bethesda · Creating Skyrim’s Dragon Language",
+      "number": 3,
+      "payload": {
+        "url": "https://elderscrolls.bethesda.net/en-AU/news/1rL4bCScN6RYXaXQb4ownj/how-bethesda-game-studios-made-skyrims-dragon-language",
+        "kind": "reference",
+        "label": "Bethesda · Creating Skyrim’s Dragon Language",
+        "publisher": "elderscrolls.bethesda.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_4_Reference_2026-10-21_a707279a-2ba2-4a87-82b3-8aecf65954df",
+      "url": "https://elderscrolls.bethesda.net/zh-TW/news/7-memorable-moments-from-the-elder-scrolls-v-skyrim",
+      "label": "Bethesda · Memorable Skyrim Moments",
+      "number": 4,
+      "payload": {
+        "url": "https://elderscrolls.bethesda.net/zh-TW/news/7-memorable-moments-from-the-elder-scrolls-v-skyrim",
+        "kind": "reference",
+        "label": "Bethesda · Memorable Skyrim Moments",
+        "publisher": "elderscrolls.bethesda.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_5_Reference_2026-10-21_ef8e6e14-53f2-4e68-848a-374fbf770351",
+      "url": "https://www.paolini.net/faq/",
+      "label": "Christopher Paolini · Language Origins FAQ",
+      "number": 5,
+      "payload": {
+        "url": "https://www.paolini.net/faq/",
+        "kind": "reference",
+        "label": "Christopher Paolini · Language Origins FAQ",
+        "publisher": "www.paolini.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_6_Reference_2026-10-21_5fdefc60-0b88-4654-80ab-268419b388d9",
+      "url": "https://www.paolini.net/2018/06/11/man-arms-brisingr/",
+      "label": "Christopher Paolini · Brisingr Pronunciation",
+      "number": 6,
+      "payload": {
+        "url": "https://www.paolini.net/2018/06/11/man-arms-brisingr/",
+        "kind": "reference",
+        "label": "Christopher Paolini · Brisingr Pronunciation",
+        "publisher": "www.paolini.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_7_Reference_2026-10-21_fe158af6-7fe9-4aeb-86be-7ac674a73dc6",
+      "url": "https://www.paolini.net/audio-pronunciation-guide/things/",
+      "label": "Christopher Paolini · Official Audio Guide",
+      "number": 7,
+      "payload": {
+        "url": "https://www.paolini.net/audio-pronunciation-guide/things/",
+        "kind": "reference",
+        "label": "Christopher Paolini · Official Audio Guide",
+        "publisher": "www.paolini.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_8_Reference_2026-10-21_7a1670a2-7b09-4165-8f42-2dadcd19051e",
+      "url": "https://www.harrypotter.com/features/guide-to-the-spells-creatures-and-potions-of-philosophers-stone",
+      "label": "Harry Potter · Philosopher’s Stone Spell Guide",
+      "number": 8,
+      "payload": {
+        "url": "https://www.harrypotter.com/features/guide-to-the-spells-creatures-and-potions-of-philosophers-stone",
+        "kind": "reference",
+        "label": "Harry Potter · Philosopher’s Stone Spell Guide",
+        "publisher": "www.harrypotter.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_9_Reference_2026-10-21_2c7f70b2-f1eb-4c39-8e54-b101012a49a8",
+      "url": "https://www.harrypotter.com/features/your-guide-to-the-best-spells-in-harry-potter",
+      "label": "Harry Potter · Official Spell Guide",
+      "number": 9,
+      "payload": {
+        "url": "https://www.harrypotter.com/features/your-guide-to-the-best-spells-in-harry-potter",
+        "kind": "reference",
+        "label": "Harry Potter · Official Spell Guide",
+        "publisher": "www.harrypotter.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_10_Reference_2026-10-21_226d2be1-e988-4dd0-8e86-33414e564a38",
+      "url": "https://www.harrypotter.com/features/expelliarmus-exploring-harry-potters-signature-spell",
+      "label": "Harry Potter · Harry’s Signature Spell",
+      "number": 10,
+      "payload": {
+        "url": "https://www.harrypotter.com/features/expelliarmus-exploring-harry-potters-signature-spell",
+        "kind": "reference",
+        "label": "Harry Potter · Harry’s Signature Spell",
+        "publisher": "www.harrypotter.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_11_Reference_2026-10-21_b48e7c6c-d5d7-49b0-8a0e-a169737a08aa",
+      "url": "https://www.harrypotter.com/features/what-is-a-patronus",
+      "label": "Harry Potter · What Is a Patronus?",
+      "number": 11,
+      "payload": {
+        "url": "https://www.harrypotter.com/features/what-is-a-patronus",
+        "kind": "reference",
+        "label": "Harry Potter · What Is a Patronus?",
+        "publisher": "www.harrypotter.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_12_Reference_2026-10-21_e0759bae-20f3-46d0-87d1-ebf4b1e87fb7",
+      "url": "https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/",
+      "label": "Christopher Paolini · Ancient Language Guide",
+      "number": 12,
+      "payload": {
+        "url": "https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/",
+        "kind": "reference",
+        "label": "Christopher Paolini · Ancient Language Guide",
+        "publisher": "www.paolini.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_13_Reference_2026-10-21_a7e68dd8-77b3-4337-8213-ceca725a6af2",
+      "url": "https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/english-ancient-language-dictionary/",
+      "label": "Christopher Paolini · Ancient Language Dictionary",
+      "number": 13,
+      "payload": {
+        "url": "https://www.paolini.net/fans/invented-languages-inheritance-cycle/ancient-language/english-ancient-language-dictionary/",
+        "kind": "reference",
+        "label": "Christopher Paolini · Ancient Language Dictionary",
+        "publisher": "www.paolini.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_14_Reference_2026-10-21_750bde87-86d8-434d-8935-30634905183b",
+      "url": "https://www.paolini.net/audio-pronunciation-guide/words-phrases/",
+      "label": "Christopher Paolini · Words and Phrases Audio",
+      "number": 14,
+      "payload": {
+        "url": "https://www.paolini.net/audio-pronunciation-guide/words-phrases/",
+        "kind": "reference",
+        "label": "Christopher Paolini · Words and Phrases Audio",
+        "publisher": "www.paolini.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_15_Reference_2026-10-21_3d999e23-a37b-4527-845d-bbbf2d1bb8b8",
+      "url": "https://www.marvel.com/articles/comics/cyttorak-history-hosts-juggernaut-cain-marko-colossus-doctor-strange?linkId=208887688",
+      "label": "Marvel · A History of Cyttorak, Who Is Cyttorak?",
+      "number": 15,
+      "payload": {
+        "url": "https://www.marvel.com/articles/comics/cyttorak-history-hosts-juggernaut-cain-marko-colossus-doctor-strange?linkId=208887688",
+        "kind": "reference",
+        "label": "Marvel · A History of Cyttorak, Who Is Cyttorak?",
+        "publisher": "www.marvel.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_16_Reference_2026-10-21_d700653f-cbc1-40fc-8273-a3699504a1ff",
+      "url": "https://cdn.marvel.com/u/prod/marvel/i/pdf/MMRPG_Tonys_Workshop_20250327.pdf",
+      "label": "Marvel · Tony's Workshop (2025), PDF Pages 1–2",
+      "number": 16,
+      "payload": {
+        "url": "https://cdn.marvel.com/u/prod/marvel/i/pdf/MMRPG_Tonys_Workshop_20250327.pdf",
+        "kind": "reference",
+        "label": "Marvel · Tony's Workshop (2025), PDF Pages 1–2",
+        "publisher": "cdn.marvel.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_17_Reference_2026-10-21_12944210-4e43-497f-822b-e98e4940a2fd",
+      "url": "https://www.marvel.com/characters/doctor-strange-stephen-strange/on-screen?mobile-app=true&theme=dark%2F1000",
+      "label": "Marvel · Doctor Strange On Screen, Astral Projection",
+      "number": 17,
+      "payload": {
+        "url": "https://www.marvel.com/characters/doctor-strange-stephen-strange/on-screen?mobile-app=true&theme=dark%2F1000",
+        "kind": "reference",
+        "label": "Marvel · Doctor Strange On Screen, Astral Projection",
+        "publisher": "www.marvel.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_18_Reference_2026-10-21_0b42285f-f8c9-47e9-8bde-9d4eab37657c",
+      "url": "https://tolkiengateway.net/wiki/Doors_of_Durin",
+      "label": "Tolkien Gateway · Doors of Durin (Secondary Reference)",
+      "number": 18,
+      "payload": {
+        "url": "https://tolkiengateway.net/wiki/Doors_of_Durin",
+        "kind": "reference",
+        "label": "Tolkien Gateway · Doors of Durin (Secondary Reference)",
+        "publisher": "tolkiengateway.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_19_Reference_2026-10-21_f6218ec3-abf1-4b01-8228-2f1168eb2a13",
+      "url": "https://www.elfdict.com/w/ammen",
+      "label": "Parf Edhellen · Ammen, With Tolkien Bibliography Locators",
+      "number": 19,
+      "payload": {
+        "url": "https://www.elfdict.com/w/ammen",
+        "kind": "reference",
+        "label": "Parf Edhellen · Ammen, With Tolkien Bibliography Locators",
+        "publisher": "www.elfdict.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_20_Reference_2026-10-21_6edd1330-f2e6-46c0-8942-99043750e570",
+      "url": "https://tolkiengateway.net/wiki/The_Bridge_of_Khazad-d%C3%BBm",
+      "label": "Tolkien Gateway · The Bridge of Khazad-dûm (Secondary Reference)",
+      "number": 20,
+      "payload": {
+        "url": "https://tolkiengateway.net/wiki/The_Bridge_of_Khazad-d%C3%BBm",
+        "kind": "reference",
+        "label": "Tolkien Gateway · The Bridge of Khazad-dûm (Secondary Reference)",
+        "publisher": "tolkiengateway.net",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_21_Reference_2026-10-21_508fcce0-6e3d-4e66-84b1-130c2b4ace3a",
+      "url": "https://www.dcuniverseonline.com/news/2013-august-20-raven-character-spotlight-dcuo",
+      "label": "DC Universe Online · Raven Character Spotlight (2013)",
+      "number": 21,
+      "payload": {
+        "url": "https://www.dcuniverseonline.com/news/2013-august-20-raven-character-spotlight-dcuo",
+        "kind": "reference",
+        "label": "DC Universe Online · Raven Character Spotlight (2013)",
+        "publisher": "www.dcuniverseonline.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_22_Reference_2026-10-21_32127b94-f8db-49d7-89b2-074fb64f4b6e",
+      "url": "https://dwaynemcduffie.com/wp-content/uploads/2025/06/WEBSITE_TT_ep205_Fear_Itself_SCRIPT_D2.pdf",
+      "label": "Dwayne McDuffie · Fear Itself Script, Printed Page 5",
+      "number": 22,
+      "payload": {
+        "url": "https://dwaynemcduffie.com/wp-content/uploads/2025/06/WEBSITE_TT_ep205_Fear_Itself_SCRIPT_D2.pdf",
+        "kind": "reference",
+        "label": "Dwayne McDuffie · Fear Itself Script, Printed Page 5",
+        "publisher": "dwaynemcduffie.com",
+        "evidenceNote": "See the entry continuity and source label for the supported scope; importing does not approve publication"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "Source_23_Reference_2026-10-23_53398b4b-a4e0-4363-8682-5b70bd2e01be",
+      "url": "https://www.connotations.de/article/lynn-forest-hill-hey-dol-merry-dol-tom-bombadils-nonsense-or-tolkiens-creative-uncertainty-a-response-to-thomas-kullmann/",
+      "label": "Connotations · Lynn Forest-Hill, Vol. 25.1 (2015/16), Page 95 (Secondary Reference)",
+      "number": 23,
+      "payload": {
+        "url": "https://www.connotations.de/article/lynn-forest-hill-hey-dol-merry-dol-tom-bombadils-nonsense-or-tolkiens-creative-uncertainty-a-response-to-thomas-kullmann/",
+        "kind": "reference",
+        "label": "Connotations · Lynn Forest-Hill, Vol. 25.1 (2015/16), Page 95 (Secondary Reference)",
+        "publisher": "www.connotations.de",
+        "evidenceNote": "Secondary journal reference names Gandalf's shutting-spell on page 95; complete primary-text review remains pending"
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T16:20:14.541373+00:00",
+      "updated_at": "2026-10-23T16:20:14.541373+00:00"
+    }
+  ],
+  "counters": {
+    "catalog_spells": 21,
+    "catalog_sources": 23
+  },
+  "universes": [
+    {
+      "id": "harry-potter",
+      "kind": "fictional",
+      "name": "Harry Potter",
+      "slug": "harry-potter",
+      "number": 1,
+      "payload": {
+        "id": "harry-potter",
+        "kind": "fictional",
+        "name": "Harry Potter",
+        "slug": "harry-potter",
+        "medium": "Books & Films",
+        "description": "Wandwork, charms, and incantations from the Wizarding World."
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "skyrim",
+      "kind": "fictional",
+      "name": "The Elder Scrolls",
+      "slug": "skyrim",
+      "number": 2,
+      "payload": {
+        "id": "skyrim",
+        "kind": "fictional",
+        "name": "The Elder Scrolls",
+        "slug": "skyrim",
+        "medium": "Games",
+        "description": "Words of power and the Dragon language of Skyrim."
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "inheritance-cycle",
+      "kind": "fictional",
+      "name": "Inheritance Cycle",
+      "slug": "inheritance-cycle",
+      "number": 3,
+      "payload": {
+        "id": "inheritance-cycle",
+        "kind": "fictional",
+        "name": "Inheritance Cycle",
+        "slug": "inheritance-cycle",
+        "medium": "Books",
+        "description": "The Ancient Language and the word-based magic of Alagaësia."
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "marvel",
+      "kind": "fictional",
+      "name": "Marvel",
+      "slug": "marvel",
+      "number": 4,
+      "payload": {
+        "id": "marvel",
+        "kind": "fictional",
+        "name": "Marvel",
+        "slug": "marvel",
+        "medium": "Comics, Films & Games",
+        "description": "Doctor Strange's spells and mystical abilities, with each comics, film or tabletop version identified."
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "tolkien",
+      "kind": "fictional",
+      "name": "Tolkien's Middle-earth",
+      "slug": "tolkien",
+      "number": 5,
+      "payload": {
+        "id": "tolkien",
+        "kind": "fictional",
+        "name": "Tolkien's Middle-earth",
+        "slug": "tolkien",
+        "medium": "Books",
+        "description": "Words and workings from Tolkien's fiction, distinguishing passwords, incantations and descriptive spell labels."
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    },
+    {
+      "id": "dc-teen-titans",
+      "kind": "fictional",
+      "name": "DC / Teen Titans",
+      "slug": "dc-teen-titans",
+      "number": 6,
+      "payload": {
+        "id": "dc-teen-titans",
+        "kind": "fictional",
+        "name": "DC / Teen Titans",
+        "slug": "dc-teen-titans",
+        "medium": "Animation & Games",
+        "description": "Raven's powers and incantations, with individual animated and game continuities kept explicit."
+      },
+      "revision": 1,
+      "created_at": "2026-10-23T05:38:04.253751+00:00",
+      "updated_at": "2026-10-23T05:38:04.253751+00:00"
+    }
+  ]
+}

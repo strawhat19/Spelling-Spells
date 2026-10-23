@@ -3,7 +3,7 @@
   margin: 32px auto 75px;
   &-topbar { display: flex; align-items: center; justify-content: space-between; gap: 17px; margin-bottom: 45px; font-size: 10px; }
   &-topbar a { display: inline-flex; align-items: center; gap: 7px; color: var(--soft, #b8aacd); text-decoration: none; }
-  &-topbar button { display: flex; align-items: center; gap: 7px; background: var(--muted, #2d2043); color: var(--lavender, #d8c8f2); border: 1px solid var(--line, #514065); border-radius: 9px; padding: 10px 13px; font-size: 10px; cursor: pointer; }
+  &-topbar button, &-actions a { display: flex; align-items: center; gap: 7px; background: var(--muted, #2d2043); color: var(--lavender, #d8c8f2); border: 1px solid var(--line, #514065); border-radius: 9px; padding: 10px 13px; font-size: 10px; cursor: pointer; }
   &-topbar button.is-saved { color: var(--gold, #ffc857); border-color: #ffc85766; }
   &-heading { position: relative; padding-bottom: 37px; margin-bottom: 29px; border-bottom: 1px solid var(--line, #514065); }
   &-eyebrow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--lavender, #d8c8f2); font-size: 10px; }
@@ -78,7 +78,7 @@
   &-status--confirmed { color: #487f57; }
   &-status--suggested { color: #9f720c; }
   &-level-bars i.is-active { background: #6039d8; }
-  &-topbar button { color: #6039d8; }
+  &-topbar button, &-actions a { color: #6039d8; }
   &-topbar button.is-saved { color: #6039d8; background: #e7d9fa; border-color: #bca0e2; }
 }
 @media (max-width: 900px) { .ss-detail { width: calc(100% - 64px); } .ss-detail-layout { grid-template-columns: 1fr 245px; gap: 19px; } .ss-detail-panel { padding: 24px; } .ss-detail-levels, .ss-detail-world-panel { padding: 23px 19px; } .ss-detail-related-grid { gap: 13px; } }

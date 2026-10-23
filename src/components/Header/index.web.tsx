@@ -10,7 +10,7 @@ import { useSpells } from '../../shared/spellsContext/useSpells';
 import './styles.scss';
 
 const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolled?: boolean }) => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, themeToggleEnabled } = useTheme();
   const { savedIds } = useSpells();
   const { pathname, menuOpen, setMenuOpen, headerRef } = useHeader();
 
@@ -40,7 +40,7 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
             {savedIds.length > 0 ? <span id='header-saved-count' className='saved-count' aria-hidden='true'>{savedIds.length > 99 ? `99+` : savedIds.length}</span> : null}
           </AppLink>
           <NotificationMenu />
-          <button
+          {themeToggleEnabled ? <button
             type='button'
             id='header-theme-toggle'
             onClick={toggleTheme}
@@ -49,7 +49,7 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
             title={`Switch to ${theme === `night` ? `Ivory` : `Night`} Mode`}
           >
             <Icon name={theme === `night` ? `sun` : `moon`} size={21} />
-          </button>
+          </button> : null}
           <UserMenu />
           <button
             type='button'
@@ -64,17 +64,19 @@ const Header = ({ sticky = true, scrolled = false }: { sticky?: boolean; scrolle
           </button>
         </div>
       </div>
-      {menuOpen ? (
-        <nav id='mobile-navigation' className='mobile-navigation' aria-label='Mobile Navigation'>
-          <AppLink id='mobile-saved-link' href='/saved' className='mobile-nav-link'><Icon name='bookmark' />Saved Spells</AppLink>
-          <button id='mobile-theme-toggle' type='button' className='mobile-nav-link mobile-theme-toggle' onClick={toggleTheme}><Icon name={theme === `night` ? `sun` : `moon`} />Switch to {theme === `night` ? `Ivory` : `Night`} Mode</button>
-          {navigation.map((item) => (
-            <AppLink key={item.href} href={item.href} id={`mobile-link-${item.href.slice(1)}`} className='mobile-nav-link'>
-              <Icon name={item.icon} />{item.label}
-            </AppLink>
-          ))}
-        </nav>
-      ) : null}
+      <div id={`mobile-navigation-shell`} className={`mobile-navigation-shell${menuOpen ? ` is-open` : ``}`} inert={!menuOpen} aria-hidden={!menuOpen}>
+        <div id={`mobile-navigation-content`} className={`mobile-navigation-content`}>
+          <nav id='mobile-navigation' className='mobile-navigation' aria-label='Mobile Navigation'>
+            <AppLink id='mobile-saved-link' href='/saved' className='mobile-nav-link' onClick={() => setMenuOpen(false)}><Icon name='bookmark' />Saved Spells</AppLink>
+            {themeToggleEnabled ? <button id='mobile-theme-toggle' type='button' className='mobile-nav-link mobile-theme-toggle' onClick={toggleTheme}><Icon name={theme === `night` ? `sun` : `moon`} />Switch to {theme === `night` ? `Ivory` : `Night`} Mode</button> : null}
+            {navigation.map((item) => (
+              <AppLink key={item.href} href={item.href} id={`mobile-link-${item.href.slice(1)}`} className='mobile-nav-link' onClick={() => setMenuOpen(false)}>
+                <Icon name={item.icon} />{item.label}
+              </AppLink>
+            ))}
+          </nav>
+        </div>
+      </div>
     </header>
   );
 };

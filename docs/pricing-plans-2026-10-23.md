@@ -23,7 +23,9 @@ RLS permits public reads of published plans and trusted Owner reads of hidden pl
 
 ## Payments And Advertising
 
-Stripe, checkout, subscriptions, webhooks, entitlements, and Google AdSense are not connected. Editing or publishing a plan does not upgrade accounts or remove ads. Paid offers show Coming Soon, and public copy states that subscriptions and advertising are not active. Free offers link to the public spell library.
+Stripe, checkout, subscriptions, webhooks, entitlements, and Google AdSense are not connected. Editing or publishing a plan does not upgrade accounts or remove ads. Paid offers show Coming Soon, and public copy states that subscriptions and advertising are not active. Free offers show Sign Up Free and Sign In when signed out, wait for account hydration, and link to the public spell library when signed in.
+
+Starter now includes custom collections, personal notes, flashcard practice with mastery tracking, and grimoire export. The source includes a separate Device-Local Preview link to `/grimoire`, with shared web/native tools and explicit local-storage disclosures. See [Starter Tools](starter-tools-2026-10-23.md) for scope and data boundaries. This preview does not assign subscription access or sync local records to an account.
 
 Future billing requires trusted server-side subscription state and provider event handling before paid access can be granted. Future AdSense integration requires its account/site setup and an actual advertising consumer that respects trusted ad-free access. Catalog flags alone are offer metadata.
 
@@ -33,3 +35,4 @@ Future billing requires trusted server-side subscription state and provider even
 - An anonymous REST read returned HTTP 200 with Free at 0 cents and Starter at 100 cents/month, including the expected visibility/ad-free flags.
 - Public, shared service, and Owner editor integrations were reviewed from source. No authenticated management RPC was exercised.
 - No tests, builds, browser/device checks, or frontend deployment were performed. Vercel redirects are configured in source and require deployment to affect hosted traffic.
+- The Starter benefits content update returned revision 2 at 100 cents/month on October 23, 2026. Collections, notes, practice/mastery and export are implemented in source as an explicit device-local preview; frontend deployment and runtime validation remain pending.

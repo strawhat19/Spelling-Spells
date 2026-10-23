@@ -1,0 +1,304 @@
+{
+  "checkedAt": "2026-10-23T18:06:06.207Z",
+  "project": "qtfajiuilwdtywkklbjq",
+  "entries": 34,
+  "added": 13,
+  "published": 30,
+  "drafts": 4,
+  "withImages": 34,
+  "withReferences": 34,
+  "sourceRecords": 38,
+  "sourceLinks": 50,
+  "counters": {
+    "catalog_spells": 34,
+    "catalog_sources": 38
+  },
+  "preserved": {
+    "originalEntries": 21,
+    "originalSources": 23,
+    "universes": 6,
+    "originalLinks": 32,
+    "allUnchanged": true
+  },
+  "problems": [],
+  "newEntries": [
+    {
+      "id": "Spell_22_Accio_2026-10-23_9f30574b-478e-461c-959e-000000000022",
+      "number": 22,
+      "slug": "accio",
+      "name": "Accio",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "accio-illustration",
+          "alt": "A summoned object flying toward an outstretched hand",
+          "url": "/visuals/spells/accio.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_24_Reference_2026-10-23_b2393b3e-5a51-415b-b5dd-16d5be48e11e",
+        "Source_25_Reference_2026-10-23_c3612510-dac5-454f-add5-af525334fa04"
+      ]
+    },
+    {
+      "id": "Spell_23_Reparo_2026-10-23_9f30574b-478e-461c-959e-000000000023",
+      "number": 23,
+      "slug": "reparo",
+      "name": "Reparo",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "reparo-illustration",
+          "alt": "Broken pieces joining together in a glow of repair magic",
+          "url": "/visuals/spells/reparo.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_26_Reference_2026-10-23_b406a337-818d-4132-b870-2b4e7f0d1656",
+        "Source_25_Reference_2026-10-23_c3612510-dac5-454f-add5-af525334fa04"
+      ]
+    },
+    {
+      "id": "Spell_24_Protego_2026-10-23_9f30574b-478e-461c-959e-000000000024",
+      "number": 24,
+      "slug": "protego",
+      "name": "Protego",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "protego-illustration",
+          "alt": "A luminous shield intercepting incoming magical sparks",
+          "url": "/visuals/spells/protego.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_27_Reference_2026-10-23_2c96a52e-5d3f-404a-bebb-fb5683e08aca"
+      ]
+    },
+    {
+      "id": "Spell_25_Stupefy_2026-10-23_9f30574b-478e-461c-959e-000000000025",
+      "number": 25,
+      "slug": "stupefy",
+      "name": "Stupefy",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "stupefy-illustration",
+          "alt": "A red stunning spell directed toward an armored training dummy",
+          "url": "/visuals/spells/stupefy.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_9_Reference_2026-10-21_2c7f70b2-f1eb-4c39-8e54-b101012a49a8",
+        "Source_28_Reference_2026-10-23_6f5dc4f1-7343-4569-93a7-5fdf303adcab"
+      ]
+    },
+    {
+      "id": "Spell_26_Riddikulus_2026-10-23_9f30574b-478e-461c-959e-000000000026",
+      "number": 26,
+      "slug": "riddikulus",
+      "name": "Riddikulus",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "riddikulus-illustration",
+          "alt": "A frightening apparition transformed into a comical shape",
+          "url": "/visuals/spells/riddikulus.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_29_Reference_2026-10-23_7c3e079a-2365-4ea1-ae88-36497afe6985",
+        "Source_30_Reference_2026-10-23_337e61c9-d390-4bda-856a-4ed9c233d6c5"
+      ]
+    },
+    {
+      "id": "Spell_27_Nox_2026-10-23_9f30574b-478e-461c-959e-000000000027",
+      "number": 27,
+      "slug": "nox",
+      "name": "Nox",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "nox-illustration",
+          "alt": "A wand's last point of light fading in a dark archive",
+          "url": "/visuals/spells/nox.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_31_Reference_2026-10-23_40cb44e1-1c6d-4348-acbd-bce3cc221630"
+      ]
+    },
+    {
+      "id": "Spell_28_Petrificus-Totalus_2026-10-23_9f30574b-478e-461c-959e-000000000028",
+      "number": 28,
+      "slug": "petrificus-totalus",
+      "name": "Petrificus Totalus",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "petrificus-totalus-illustration",
+          "alt": "A wooden training figure held motionless by binding magic",
+          "url": "/visuals/spells/petrificus-totalus.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_32_Reference_2026-10-23_67a2d164-4584-4055-bcd9-c4fd20083b84"
+      ]
+    },
+    {
+      "id": "Spell_29_Rictusempra_2026-10-23_9f30574b-478e-461c-959e-000000000029",
+      "number": 29,
+      "slug": "rictusempra",
+      "name": "Rictusempra",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "rictusempra-illustration",
+          "alt": "A fully clothed wizard laughing amid curling magical wisps",
+          "url": "/visuals/spells/rictusempra.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_9_Reference_2026-10-21_2c7f70b2-f1eb-4c39-8e54-b101012a49a8",
+        "Source_33_Reference_2026-10-23_b2017d47-cf7f-4dcf-bbc7-5ab9dae448c5"
+      ]
+    },
+    {
+      "id": "Spell_30_Incendio_2026-10-23_9f30574b-478e-461c-959e-000000000030",
+      "number": 30,
+      "slug": "incendio",
+      "name": "Incendio",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "incendio-illustration",
+          "alt": "Magical fire glowing in an old stone hearth",
+          "url": "/visuals/spells/incendio.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_34_Reference_2026-10-23_f8ea9377-bbf2-4eef-878a-b98406c73d14"
+      ]
+    },
+    {
+      "id": "Spell_31_Aguamenti_2026-10-23_9f30574b-478e-461c-959e-000000000031",
+      "number": 31,
+      "slug": "aguamenti",
+      "name": "Aguamenti",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "aguamenti-illustration",
+          "alt": "A clear stream of water pouring from a wand into a jug",
+          "url": "/visuals/spells/aguamenti.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_35_Reference_2026-10-23_bf10ff99-0710-4ca9-923c-479d4858e8b2"
+      ]
+    },
+    {
+      "id": "Spell_32_Obliviate_2026-10-23_9f30574b-478e-461c-959e-000000000032",
+      "number": 32,
+      "slug": "obliviate",
+      "name": "Obliviate",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "obliviate-illustration",
+          "alt": "Silver-violet memory threads fading around a clothed adult figure",
+          "url": "/visuals/spells/obliviate.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_36_Reference_2026-10-23_bbc43538-1f20-4e17-93be-e6bb26020a49"
+      ]
+    },
+    {
+      "id": "Spell_33_Silencio_2026-10-23_9f30574b-478e-461c-959e-000000000033",
+      "number": 33,
+      "slug": "silencio",
+      "name": "Silencio",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "silencio-illustration",
+          "alt": "A perched bird surrounded by a still magical silence field",
+          "url": "/visuals/spells/silencio.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_37_Reference_2026-10-23_f360b1e7-529b-4cc9-8f9e-c97ae725635c"
+      ]
+    },
+    {
+      "id": "Spell_34_Reducto_2026-10-23_9f30574b-478e-461c-959e-000000000034",
+      "number": 34,
+      "slug": "reducto",
+      "name": "Reducto",
+      "status": "published",
+      "revision": 1,
+      "media": [
+        {
+          "id": "reducto-illustration",
+          "alt": "A stone block breaking into fragments under a magical blast",
+          "url": "/visuals/spells/reducto.png",
+          "type": "image",
+          "credit": "AI-generated illustration · Spelling Spells",
+          "caption": "Original illustration inspired by the spell’s fictional effect"
+        }
+      ],
+      "sourceIds": [
+        "Source_38_Reference_2026-10-23_4fd179e7-385e-44b8-bb12-a147d10fd16c"
+      ]
+    }
+  ]
+}

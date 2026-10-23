@@ -18,7 +18,9 @@ export const useHeader = () => {
   useEffect(() => {
     if (!menuOpen) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === `Escape`) setMenuOpen(false);
+      if (event.key !== `Escape`) return;
+      setMenuOpen(false);
+      headerRef.current?.querySelector<HTMLButtonElement>(`#header-menu-toggle`)?.focus();
     };
     window.addEventListener(`keydown`, onKey);
     return () => window.removeEventListener(`keydown`, onKey);

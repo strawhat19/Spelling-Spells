@@ -16,6 +16,7 @@
   &-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 21px 2px 24px; color: var(--soft, #b8aacd); font-size: 10px; }
   &-toolbar p { margin: 0; }
   &-toolbar-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; }
+  &-tools-link { display: inline-flex; align-items: center; gap: 6px; color: var(--lavender, #d8c8f2); text-decoration: none; }
   &-toolbar button { display: flex; align-items: center; gap: 6px; padding: 0; background: transparent; border: 0; color: var(--body, #c8bcda); font-size: 10px; cursor: pointer; }
   &-toolbar button:disabled { opacity: .5; cursor: not-allowed; }
   &-saved-filter { display: flex; align-items: center; gap: 7px; cursor: pointer; }

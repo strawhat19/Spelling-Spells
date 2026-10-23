@@ -1,3 +1,4 @@
+import { spellMedia } from './media';
 import { createRecordId } from '../common/ids';
 import type { Spell, World } from '../models/Spell';
 
@@ -53,6 +54,7 @@ const createExpansionSpell = (spell: ExpansionInput): Spell => ({
   etymology: `No individual word origin is established by the references included in this entry.`,
   pronunciationNote: `No supported phonetic transcription is available in the inspected sources. No pronunciation is asserted.`,
   ...spell,
+  media: spell.media ?? spellMedia[spell.name] ?? [],
   id: createRecordId(`Spell`, spell.number, spell.name, `2026-10-21`, `f8a2d690-8ca7-4d06-9a86-32c5cb0040${spell.number}`),
 });
 

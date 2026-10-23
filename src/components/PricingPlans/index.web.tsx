@@ -7,7 +7,7 @@ import { usePricingPlans } from './usePricingPlans';
 import { formatPlanAmount, planIntervalLabel } from '../../shared/plans/values';
 
 const PricingPlans = (props: PricingPlansProps) => {
-  const { plans, error, variant, loading, idPrefix, unavailable, reloadPlans } = usePricingPlans(props);
+  const { plans, error, variant, loading, idPrefix, signedIn, unavailable, reloadPlans, accountLoading } = usePricingPlans(props);
   const Title = variant === `page` ? `h1` : `h2`;
   return (
     <section id={`${idPrefix}-section`} className={`ss-pricing ss-pricing--${variant}`} aria-labelledby={`${idPrefix}-title`}>
@@ -26,6 +26,7 @@ const PricingPlans = (props: PricingPlansProps) => {
         <div id={`${idPrefix}-cards`} className={`ss-pricing-grid`}>
           {plans.map((plan) => {
             const free = plan.priceCents === 0;
+            const starter = plan.slug === `starter`;
             const planId = `${idPrefix}-${plan.id}`;
             return (
               <article key={plan.id} id={planId} className={`ss-pricing-card${plan.highlighted ? ` ss-pricing-card--highlighted` : ``}`} aria-labelledby={`${planId}-name`}>
@@ -36,8 +37,17 @@ const PricingPlans = (props: PricingPlansProps) => {
                 {(plan.removesAds || free) && <p id={`${planId}-reading`} className={`ss-pricing-reading`}><Icon name={plan.removesAds ? `spark` : `book`} size={16} />{plan.removesAds ? `Ad-free reading when subscriptions launch` : `Ad-supported reading planned`}</p>}
                 <ul id={`${planId}-features`} className={`ss-pricing-features`}>{plan.features.map((feature, index) => <li key={index} id={`${planId}-feature-${index}`} className={`ss-pricing-feature`}><Icon name={`check`} size={16} /><span id={`${planId}-feature-${index}-copy`} className={`ss-pricing-feature-copy`}>{feature}</span></li>)}</ul>
                 <div id={`${planId}-action-area`} className={`ss-pricing-action-area`}>
-                  {free ? <AppLink id={`${planId}-browse`} className={`ss-pricing-action`} href={`/spells`}><Icon name={`book`} size={16} />Browse Library<Icon name={`arrow`} size={16} /></AppLink> : <button disabled type={`button`} id={`${planId}-coming-soon`} className={`ss-pricing-action ss-pricing-action--unavailable`} aria-describedby={`${planId}-availability`}><Icon name={`spark`} size={16} />Coming Soon</button>}
-                  <p id={`${planId}-availability`} className={`ss-pricing-card-note`}>{free ? `A little curiosity is all you need.` : `Subscriptions are not available yet.`}</p>
+                  {free ? accountLoading ? (
+                    <button disabled type={`button`} id={`${planId}-account-loading`} className={`ss-pricing-action`} aria-busy><Icon name={`user`} size={16} />Loading Account…</button>
+                  ) : (
+                    <AppLink id={`${planId}-${signedIn ? `browse` : `signup`}`} className={`ss-pricing-action`} href={signedIn ? `/spells` : `/signup`}><Icon name={signedIn ? `book` : `user`} size={16} />{signedIn ? `Browse Library` : `Sign Up Free`}<Icon name={`arrow`} size={16} /></AppLink>
+                  ) : (
+                    <button disabled type={`button`} id={`${planId}-coming-soon`} className={`ss-pricing-action ss-pricing-action--unavailable`} aria-describedby={`${planId}-availability`}><Icon name={`spark`} size={16} />Coming Soon</button>
+                  )}
+                  {free && !accountLoading && !signedIn && <AppLink id={`${planId}-signin`} className={`ss-pricing-secondary-link`} href={`/signin`}><Icon name={`user`} size={13} />Already Have An Account? Sign In</AppLink>}
+                  {starter && <AppLink id={`${planId}-preview`} className={`ss-pricing-secondary-link`} href={`/grimoire`} aria-describedby={`${planId}-preview-note`}><Icon name={`book`} size={14} />Preview Starter Tools<Icon name={`arrow`} size={14} /></AppLink>}
+                  {starter && <p id={`${planId}-preview-note`} className={`ss-pricing-preview-note`}>Device-Local Preview</p>}
+                  <p id={`${planId}-availability`} className={`ss-pricing-card-note`}>{free ? signedIn ? `A little curiosity is all you need.` : `The public library stays free to browse.` : `Subscriptions are not available yet.`}</p>
                 </div>
               </article>
             );

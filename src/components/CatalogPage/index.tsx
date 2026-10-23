@@ -32,6 +32,7 @@ const CatalogPage = ({ savedOnly = false }: { savedOnly?: boolean }) => {
       <Text style={[styles.eyebrow, { color: palette.gold }]}>{savedOnly ? `A SHELF OF YOUR OWN` : `THE SPELL ARCHIVE`}</Text>
       <Text accessibilityRole="header" style={[styles.title, { color: palette.text }]}>{savedOnly ? `Your personal spellbook.` : `Find your next magic word.`}</Text>
       <Text style={[styles.description, { color: palette.muted }]}>{savedOnly ? `The words you want to keep close. Revisit a favorite, or make room for your next discovery.` : `Browse fictional spells by world, language, purpose, and skill. Every record begins with its exact spelling.`}</Text>
+      {savedOnly && <Pressable nativeID={`saved-grimoire-preview`} accessibilityRole={`link`} onPress={() => router.push(`/grimoire`)} style={styles.action}><Icon name={`edit`} size={16} color={palette.gold} /><Text style={[styles.actionText, { color: palette.gold }]}>Starter Tools Preview</Text></Pressable>}
       {savedOnly && <View nativeID="saved-shelf-overview" style={[styles.shelf, { backgroundColor: palette.surface, borderColor: palette.border }]}>
         <View nativeID="saved-shelf-stats" style={styles.shelfStats}>
           <View style={styles.shelfStat}><Icon name="bookmark" size={20} color={palette.gold} /><Text style={[styles.statValue, { color: palette.text }]}>{savedResolved || savedCount > 0 ? savedCount : `…`}</Text><Text style={[styles.statLabel, { color: palette.muted }]}>{savedResolved ? `Saved bookmarks` : `Unconfirmed bookmarks`}</Text></View>

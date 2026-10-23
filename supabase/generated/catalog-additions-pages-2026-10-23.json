@@ -1,0 +1,362 @@
+{
+  "checkedAt": "2026-10-23T18:09:57.007Z",
+  "origin": "https://spelling-spells.vercel.app",
+  "deploymentId": "dpl_ASW6zhGEdHaypsdxFHDfMKq23NCq",
+  "buildStatus": 200,
+  "build": {
+    "version": 1,
+    "mode": "anonymous",
+    "generatedAt": "2026-10-23T18:06:29.300Z",
+    "catalogTimestamp": "2026-10-23T18:06:29.300Z",
+    "siteOrigin": "https://spelling-spells.vercel.app",
+    "spellCount": 30,
+    "worldCount": 5,
+    "spellPaths": [
+      "/spell/lumos",
+      "/spell/fus-ro-dah",
+      "/spell/brisingr",
+      "/spell/alohomora",
+      "/spell/wingardium-leviosa",
+      "/spell/expelliarmus",
+      "/spell/expecto-patronum",
+      "/spell/adurna",
+      "/spell/jierda",
+      "/spell/crimson-bands-of-cyttorak",
+      "/spell/shield-of-the-seraphim",
+      "/spell/winds-of-watoomb",
+      "/spell/astral-projection",
+      "/spell/soul-self",
+      "/spell/empathy",
+      "/spell/empathic-healing",
+      "/spell/azarath-metrion-zinthos",
+      "/spell/accio",
+      "/spell/reparo",
+      "/spell/protego",
+      "/spell/stupefy",
+      "/spell/riddikulus",
+      "/spell/nox",
+      "/spell/petrificus-totalus",
+      "/spell/rictusempra",
+      "/spell/incendio",
+      "/spell/aguamenti",
+      "/spell/obliviate",
+      "/spell/silencio",
+      "/spell/reducto"
+    ],
+    "worldPaths": [
+      "/world/dc-teen-titans",
+      "/world/harry-potter",
+      "/world/inheritance-cycle",
+      "/world/marvel",
+      "/world/skyrim"
+    ],
+    "snapshotSha256": "ae1dc99b3473e5f53ecd1f8e1cc686cffc6d4bdfe8f300c52c2357f4bee3703b",
+    "files": [
+      "sitemap.xml",
+      "robots.txt"
+    ]
+  },
+  "pages": [
+    {
+      "number": 1,
+      "path": "/spell/lumos",
+      "status": 200,
+      "heading": "Lumos",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 2,
+      "path": "/spell/fus-ro-dah",
+      "status": 200,
+      "heading": "Fus Ro Dah",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 3,
+      "path": "/spell/brisingr",
+      "status": 200,
+      "heading": "Brisingr",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 3,
+      "referencesInHtml": 3
+    },
+    {
+      "number": 4,
+      "path": "/spell/alohomora",
+      "status": 200,
+      "heading": "Alohomora",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 5,
+      "path": "/spell/wingardium-leviosa",
+      "status": 200,
+      "heading": "Wingardium Leviosa",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 6,
+      "path": "/spell/expelliarmus",
+      "status": 200,
+      "heading": "Expelliarmus",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 7,
+      "path": "/spell/expecto-patronum",
+      "status": 200,
+      "heading": "Expecto Patronum",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 8,
+      "path": "/spell/adurna",
+      "status": 200,
+      "heading": "Adurna",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 9,
+      "path": "/spell/jierda",
+      "status": 200,
+      "heading": "Jierda",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 3,
+      "referencesInHtml": 3
+    },
+    {
+      "number": 10,
+      "path": "/spell/crimson-bands-of-cyttorak",
+      "status": 200,
+      "heading": "Crimson Bands of Cyttorak",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 11,
+      "path": "/spell/shield-of-the-seraphim",
+      "status": 200,
+      "heading": "Shield of the Seraphim",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 12,
+      "path": "/spell/winds-of-watoomb",
+      "status": 200,
+      "heading": "Winds of Watoomb",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 13,
+      "path": "/spell/astral-projection",
+      "status": 200,
+      "heading": "Astral Projection",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 18,
+      "path": "/spell/soul-self",
+      "status": 200,
+      "heading": "Soul Self",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 19,
+      "path": "/spell/empathy",
+      "status": 200,
+      "heading": "Empathy",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 20,
+      "path": "/spell/empathic-healing",
+      "status": 200,
+      "heading": "Empathic Healing",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 21,
+      "path": "/spell/azarath-metrion-zinthos",
+      "status": 200,
+      "heading": "Azarath Metrion Zinthos",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 22,
+      "path": "/spell/accio",
+      "status": 200,
+      "heading": "Accio",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 23,
+      "path": "/spell/reparo",
+      "status": 200,
+      "heading": "Reparo",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 24,
+      "path": "/spell/protego",
+      "status": 200,
+      "heading": "Protego",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 25,
+      "path": "/spell/stupefy",
+      "status": 200,
+      "heading": "Stupefy",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 26,
+      "path": "/spell/riddikulus",
+      "status": 200,
+      "heading": "Riddikulus",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 27,
+      "path": "/spell/nox",
+      "status": 200,
+      "heading": "Nox",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 28,
+      "path": "/spell/petrificus-totalus",
+      "status": 200,
+      "heading": "Petrificus Totalus",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 29,
+      "path": "/spell/rictusempra",
+      "status": 200,
+      "heading": "Rictusempra",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 30,
+      "path": "/spell/incendio",
+      "status": 200,
+      "heading": "Incendio",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 31,
+      "path": "/spell/aguamenti",
+      "status": 200,
+      "heading": "Aguamenti",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 32,
+      "path": "/spell/obliviate",
+      "status": 200,
+      "heading": "Obliviate",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 33,
+      "path": "/spell/silencio",
+      "status": 200,
+      "heading": "Silencio",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 34,
+      "path": "/spell/reducto",
+      "status": 200,
+      "heading": "Reducto",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    }
+  ],
+  "problems": []
+}

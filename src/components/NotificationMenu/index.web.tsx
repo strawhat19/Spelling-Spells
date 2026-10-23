@@ -13,6 +13,7 @@ const NotificationMenu = () => {
   const trigger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
+  const [portalReady, setPortalReady] = useState(false);
   const [position, setPosition] = useState({ top: 80, left: 18, maxHeight: 500 });
   const close = useCallback((restoreFocus = true) => {
     page.close();
@@ -24,13 +25,14 @@ const NotificationMenu = () => {
     window.dispatchEvent(new CustomEvent(`spelling-spells:header-popover-open`, { detail: `notifications` }));
     page.setOpen(true);
   };
+  useEffect(() => setPortalReady(true), []);
   useEffect(() => {
     const otherMenu = (event: Event) => { if ((event as CustomEvent).detail !== `notifications`) close(false); };
     window.addEventListener(`spelling-spells:header-popover-open`, otherMenu);
     return () => window.removeEventListener(`spelling-spells:header-popover-open`, otherMenu);
   }, [close]);
   useEffect(() => {
-    if (!page.open) return;
+    if (!page.open || !portalReady) return;
     const updatePosition = () => {
       const anchor = trigger.current?.getBoundingClientRect();
       if (!anchor) return;
@@ -55,20 +57,22 @@ const NotificationMenu = () => {
       document.removeEventListener(`pointerdown`, outside);
       document.removeEventListener(`keydown`, escape);
     };
-  }, [page.open, close]);
+  }, [page.open, portalReady, close]);
   const loading = page.state === `loading`;
   const countLoading = loading || (page.state === `ready` && page.readState === `loading`);
   const unreadDescription = page.unreadCount === null ? `Unread Count ${countLoading ? `Loading` : `Unavailable`}` : `${page.unreadCount} Unread`;
   return <div id='header-notifications' className='notification-menu'>
     <button ref={trigger} id='header-notifications-trigger' type='button' onClick={toggle} className={`notification-menu-trigger${page.open ? ` is-open` : ``}`} aria-label={`Notifications, ${unreadDescription}`} title='Notifications' aria-haspopup='dialog' aria-expanded={page.open} aria-controls={page.open ? `header-notifications-panel` : undefined}><Icon name='bell' size={20} />{countLoading || page.unreadCount === null || page.unreadCount > 0 ? <span id='header-notifications-badge' className={`notification-menu-badge${countLoading ? ` is-loading` : ``}`} aria-hidden='true'>{countLoading ? <Skeleton id='header-notifications-badge-skeleton' width={10} height={8} /> : page.unreadLabel}</span> : null}</button>
-    {page.open && typeof document !== `undefined` ? createPortal(<section
+    {portalReady ? createPortal(<section
       ref={panel}
       role='dialog'
       aria-modal='false'
       style={position}
+      inert={!page.open}
+      aria-hidden={!page.open}
       id='header-notifications-panel'
-      className='notification-menu-panel'
       aria-labelledby='header-notifications-title'
+      className={`notification-menu-panel${page.open ? ` is-open` : ``}`}
       onBlur={(event) => { if (event.relatedTarget instanceof Node && !event.currentTarget.contains(event.relatedTarget) && !trigger.current?.contains(event.relatedTarget)) close(false); }}
     >
       <header id='header-notifications-heading' className='notification-menu-heading'><div id='header-notifications-heading-copy' className='notification-menu-heading-copy'><span id='header-notifications-eyebrow'>From the Archive</span><h2 id='header-notifications-title'>Notifications</h2></div><button ref={closeButton} id='header-notifications-close' type='button' onClick={() => close()} className='notification-menu-close' aria-label='Close Notifications'><Icon name='close' size={18} /></button></header>

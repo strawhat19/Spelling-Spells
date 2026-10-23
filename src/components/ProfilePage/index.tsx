@@ -67,11 +67,11 @@ const ProfilePage = (props: ProfilePageProps) => {
         <Pressable nativeID='profile-open-connections' accessibilityRole='link' onPress={() => router.push(`/profile/connections`)} style={secondaryStyle}><Icon name='link' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>Private connections</Text></Pressable>
         <Pressable nativeID='profile-open-spellbook' accessibilityRole='link' onPress={() => router.push(`/saved`)} style={secondaryStyle}><Icon name='bookmark' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>Your spellbook</Text></Pressable>
         <Pressable nativeID='profile-open-submissions' accessibilityRole='link' onPress={() => router.push(`/submissions`)} style={secondaryStyle}><Icon name='edit' color={page.palette.primary} size={17} /><Text style={[styles.buttonText, { color: page.palette.primary }]}>My submissions</Text></Pressable>
-        <View nativeID='profile-device-settings' style={[styles.deviceSettings, { borderTopColor: page.palette.border }]}>
+        {page.themeToggleEnabled ? <View nativeID='profile-device-settings' style={[styles.deviceSettings, { borderTopColor: page.palette.border }]}>
           <Text accessibilityRole='header' style={[styles.title, { color: page.palette.text }]}>Make yourself at home.</Text>
           <Text style={[styles.copy, { color: page.palette.muted }]}>Theme is saved on this device, independently of your account.</Text>
           <Pressable nativeID='profile-toggle-theme' accessibilityRole='button' onPress={() => void page.toggleTheme()} style={secondaryStyle}><Icon name={page.theme === `night` ? `sun` : `moon`} color={page.palette.primary} size={18} /><Text style={[styles.buttonText, { color: page.palette.text }]}>Use {page.theme === `night` ? `Ivory` : `Midnight`} theme</Text></Pressable>
-        </View>
+        </View> : null}
       </View>
     </View>}
     {page.feedback ? <Text nativeID='profile-feedback' accessibilityRole={page.feedback.tone === `error` ? `alert` : undefined} accessibilityLiveRegion='polite' style={[styles.feedback, { color: page.feedback.tone === `error` ? page.palette.error : page.palette.text }]}>{page.feedback.message}</Text> : null}

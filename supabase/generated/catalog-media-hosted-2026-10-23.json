@@ -1,0 +1,196 @@
+{
+  "origin": "https://spelling-spells.vercel.app",
+  "deploymentId": "dpl_2XoMhbRmFMFMeix21xmcJSMFeeVG",
+  "checkedAt": "2026-10-23T16:34:52.918Z",
+  "images": [
+    {
+      "number": 1,
+      "url": "/visuals/spells/lumos.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2377706,
+      "sha256": "718bea275d3fce9f6f0a7abe9a3636745b3024a8c49638c9d123e2ba5978b1b2",
+      "match": true
+    },
+    {
+      "number": 2,
+      "url": "/visuals/spells/fus-ro-dah.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3325738,
+      "sha256": "db2a1ff6008af40514b6ca0e0bf765dc39763cd641da818126eb679bad2ffe8b",
+      "match": true
+    },
+    {
+      "number": 3,
+      "url": "/visuals/spells/brisingr.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2424789,
+      "sha256": "7ea56fb9c570d3bc87db7cb39c92f43f646293b1c2423ea671a4e94445980e96",
+      "match": true
+    },
+    {
+      "number": 4,
+      "url": "/visuals/spells/alohomora.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2628622,
+      "sha256": "2b4488aad0a98a228f54ed6361faf520f2f20fa238aa19e4bbfa060224257c8d",
+      "match": true
+    },
+    {
+      "number": 5,
+      "url": "/visuals/spells/wingardium-leviosa.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2047964,
+      "sha256": "8b7f3cec0cfb72ddd91583c218162586c4989a888658c3ed25f00b917b0d6935",
+      "match": true
+    },
+    {
+      "number": 6,
+      "url": "/visuals/spells/expelliarmus.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2344132,
+      "sha256": "c884a3e02755cf09cdec408cbc9b1b3233fd146c71070c78f629b30458ee50cb",
+      "match": true
+    },
+    {
+      "number": 7,
+      "url": "/visuals/spells/expecto-patronum.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2963795,
+      "sha256": "e6ac4d4c49bd487bafbd92195f237f514f9ff9b9433f6c51c94098c9937dc942",
+      "match": true
+    },
+    {
+      "number": 8,
+      "url": "/visuals/spells/adurna.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2509368,
+      "sha256": "249c41410d0ad54128e7b79f52991a1adf223c6d617794b3420885c48b7baa8f",
+      "match": true
+    },
+    {
+      "number": 9,
+      "url": "/visuals/spells/jierda.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2393185,
+      "sha256": "085b8b50fd4702a64074667d9b47e398f48e955ff5ae68b1f304f96c91cb5a0b",
+      "match": true
+    },
+    {
+      "number": 10,
+      "url": "/visuals/spells/crimson-bands-of-cyttorak.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2617605,
+      "sha256": "1ad5686c746b8c0eff791524b3bfed1eefda9f95cf6cfb984ee1110af6ef9806",
+      "match": true
+    },
+    {
+      "number": 11,
+      "url": "/visuals/spells/shield-of-the-seraphim.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3035924,
+      "sha256": "080dfc1904e7a0def915a523f7418ba4e930e74401a3e7652803e7fb5a4cbd37",
+      "match": true
+    },
+    {
+      "number": 12,
+      "url": "/visuals/spells/winds-of-watoomb.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3230987,
+      "sha256": "fb30c7cdc731f0f8b4d7124e575c2151c4e008ce143428fc786000525d7b840f",
+      "match": true
+    },
+    {
+      "number": 13,
+      "url": "/visuals/spells/astral-projection.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2762940,
+      "sha256": "99b079c96e66844a23b851acc7794fdb2bfe2398c2b713fe920a9735a2a260b0",
+      "match": true
+    },
+    {
+      "number": 14,
+      "url": "/visuals/spells/mellon.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3452129,
+      "sha256": "0c7e3fc947f3d70c4a0fda291478e6155ca3f5eeef14205e0c7b6c2145086642",
+      "match": true
+    },
+    {
+      "number": 15,
+      "url": "/visuals/spells/naur-an-edraith-ammen.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2679696,
+      "sha256": "9a7f8919be6408ee68739fd15231515051067689d0cd944bdaab94ba59fb3401",
+      "match": true
+    },
+    {
+      "number": 16,
+      "url": "/visuals/spells/annon-edhellen-edro-hi-ammen.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3035115,
+      "sha256": "c1e0d5dfd780a6fef7d349015072912d1a7726bb511a5007ffb263efe52d07bd",
+      "match": true
+    },
+    {
+      "number": 17,
+      "url": "/visuals/spells/shutting-spell.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2832318,
+      "sha256": "38eea08c79424e47239edd50c14cb0be58ec399f05db97747a9b321976db1e50",
+      "match": true
+    },
+    {
+      "number": 18,
+      "url": "/visuals/spells/soul-self.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2883563,
+      "sha256": "3b08922e2d3a2e4d487853a4a5c41481994018a21ad193159695bfd78b7fe04a",
+      "match": true
+    },
+    {
+      "number": 19,
+      "url": "/visuals/spells/empathy.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2374319,
+      "sha256": "0fc4f8cd51cc58aa70f4b041761813fbd3a1235c26020716f4a5d41d0ae86e21",
+      "match": true
+    },
+    {
+      "number": 20,
+      "url": "/visuals/spells/empathic-healing.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2346691,
+      "sha256": "bdc9e0f59ac272dd901913c097f54aa09f7697c0f6fad293ec06f92bd3de2f68",
+      "match": true
+    },
+    {
+      "number": 21,
+      "url": "/visuals/spells/azarath-metrion-zinthos.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2595012,
+      "sha256": "5038aa7b6ff4a49f8629fcb8c71f1b662277411124d1b47e5a8875de3284de73",
+      "match": true
+    }
+  ]
+}

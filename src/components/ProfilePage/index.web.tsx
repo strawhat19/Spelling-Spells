@@ -67,7 +67,7 @@ const ProfilePage = (props: ProfilePageProps) => {
           <AppLink id='profile-open-spellbook' href='/saved' className='profile-metadata-link'><Icon name='bookmark' size={15} /> Your spellbook<Icon name='arrow-right' size={14} /></AppLink>
           <AppLink id='profile-open-submissions' href='/submissions' className='profile-metadata-link'><Icon name='edit' size={15} /> My submissions<Icon name='arrow-right' size={14} /></AppLink>
           <AppLink id='profile-data-choices' href='/data-privacy' className='profile-metadata-link'><Icon name='shield' size={15} /> Your data and choices<Icon name='arrow-right' size={14} /></AppLink>
-          <div className='profile-device-settings'><Icon name='moon' size={19} /><h3>Make yourself at home.</h3><p>Theme is saved on this device, independently of your account.</p><button id='profile-toggle-theme' type='button' onClick={() => void page.toggleTheme()}><Icon name={page.theme === `night` ? `sun` : `moon`} size={15} /> Use {page.theme === `night` ? `Ivory` : `Midnight`} theme</button></div>
+          {page.themeToggleEnabled ? <div className='profile-device-settings'><Icon name='moon' size={19} /><h3>Make yourself at home.</h3><p>Theme is saved on this device, independently of your account.</p><button id='profile-toggle-theme' type='button' onClick={() => void page.toggleTheme()}><Icon name={page.theme === `night` ? `sun` : `moon`} size={15} /> Use {page.theme === `night` ? `Ivory` : `Midnight`} theme</button></div> : null}
         </aside>
       </div>
     )}

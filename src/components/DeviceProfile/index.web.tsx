@@ -13,7 +13,7 @@ const DeviceProfile = () => {
       <div className='profile-form-actions'>
         <button id='device-profile-save' type='submit' disabled={disabled}><Icon name='check' size={16} />Save on this device</button>
         <button id='device-profile-clear' type='button' disabled={disabled} onClick={() => { if (window.confirm(`Clear your device nickname and reading note? This does not remove bookmarks or contribution drafts.`)) void page.persist(true); }}><Icon name='trash' size={16} />Clear device profile</button>
-        <button id='device-profile-theme' type='button' onClick={() => void page.toggleTheme()}><Icon name='moon' size={16} />Use {page.theme === `night` ? `Ivory` : `Midnight`} theme</button>
+        {page.themeToggleEnabled ? <button id='device-profile-theme' type='button' onClick={() => void page.toggleTheme()}><Icon name='moon' size={16} />Use {page.theme === `night` ? `Ivory` : `Midnight`} theme</button> : null}
       </div>
     </form>
     <p id='device-profile-status' role='status'>{page.loading ? `Loading device preferences…` : page.notice}</p>

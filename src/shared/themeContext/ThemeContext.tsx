@@ -3,6 +3,7 @@ import { themeAPI } from '../../api';
 import type { ThemeName } from '../../types/types';
 import { themePalettes } from '../../styles/theme/theme';
 import type { ThemePalette } from '../../styles/theme/theme';
+import { useFeatureFlags } from '../featureFlags/useFeatureFlags';
 import { createContext, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 export type ThemeContextValue = {
@@ -10,6 +11,7 @@ export type ThemeContextValue = {
   ready: boolean;
   error: string | null;
   palette: ThemePalette;
+  themeToggleEnabled: boolean;
   toggleTheme: () => void;
   setTheme: (theme: ThemeName) => void;
 };
@@ -17,12 +19,17 @@ export type ThemeContextValue = {
 export const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const features = useFeatureFlags();
   const hydrated = useRef(false);
+  const featureAllowed = useRef(false);
   const requestNumber = useRef(0);
   const themeRef = useRef<ThemeName>(`night`);
   const [ready, setReady] = useState(false);
-  const [theme, updateTheme] = useState<ThemeName>(`night`);
+  const [preferredTheme, updateTheme] = useState<ThemeName>(`night`);
   const [error, setError] = useState<string | null>(null);
+  const themeToggleEnabled = ready && hydrated.current && features.themeToggleEnabled;
+  const theme = themeToggleEnabled ? preferredTheme : `night`;
+  featureAllowed.current = themeToggleEnabled;
 
   useEffect(() => {
     let active = true;
@@ -49,6 +56,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, [theme]);
 
   const setTheme = useCallback((selected: ThemeName): void => {
+    if (!featureAllowed.current) return;
     if (selected !== `night` && selected !== `ivory`) {
       setError(`Unsupported Theme`);
       return;
@@ -79,8 +87,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     error,
     setTheme,
     toggleTheme,
+    themeToggleEnabled,
     palette: themePalettes[theme],
-  }), [theme, ready, error, setTheme, toggleTheme]);
+  }), [theme, ready, error, setTheme, toggleTheme, themeToggleEnabled]);
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };

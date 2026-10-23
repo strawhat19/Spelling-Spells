@@ -1,0 +1,527 @@
+[
+  {
+    "id": "Spell_1_Lumos_2026-10-06_719dd0e1-506a-4e67-9b02-04d4af1b4931",
+    "number": 1,
+    "name": "Lumos",
+    "slug": "lumos",
+    "media": [
+      {
+        "alt": "Luminous magic illuminating a dark fantasy setting",
+        "type": "image",
+        "id": "lumos-illustration",
+        "url": "/visuals/spells/lumos.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/lumos.png",
+        "bytes": 2377706,
+        "width": 1672,
+        "height": 941,
+        "sha256": "718bea275d3fce9f6f0a7abe9a3636745b3024a8c49638c9d123e2ba5978b1b2"
+      }
+    ]
+  },
+  {
+    "id": "Spell_2_Fus-Ro-Dah_2026-10-06_719dd0e2-506a-4e67-9b02-04d4af1b4932",
+    "number": 2,
+    "name": "Fus Ro Dah",
+    "slug": "fus-ro-dah",
+    "media": [
+      {
+        "alt": "An expanding wave of force sweeping across a rugged landscape",
+        "type": "image",
+        "id": "fus-ro-dah-illustration",
+        "url": "/visuals/spells/fus-ro-dah.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/fus-ro-dah.png",
+        "bytes": 3325738,
+        "width": 1672,
+        "height": 941,
+        "sha256": "db2a1ff6008af40514b6ca0e0bf765dc39763cd641da818126eb679bad2ffe8b"
+      }
+    ]
+  },
+  {
+    "id": "Spell_3_Brisingr_2026-10-06_719dd0e3-506a-4e67-9b02-04d4af1b4933",
+    "number": 3,
+    "name": "Brisingr",
+    "slug": "brisingr",
+    "media": [
+      {
+        "alt": "Swirling flames glowing against a dark fantasy backdrop",
+        "type": "image",
+        "id": "brisingr-illustration",
+        "url": "/visuals/spells/brisingr.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/brisingr.png",
+        "bytes": 2424789,
+        "width": 1672,
+        "height": 941,
+        "sha256": "7ea56fb9c570d3bc87db7cb39c92f43f646293b1c2423ea671a4e94445980e96"
+      }
+    ]
+  },
+  {
+    "id": "Spell_4_Alohomora_2026-10-06_719dd0e4-506a-4e67-9b02-04d4af1b4934",
+    "number": 4,
+    "name": "Alohomora",
+    "slug": "alohomora",
+    "media": [
+      {
+        "alt": "Magical light unlocking an ornate door",
+        "type": "image",
+        "id": "alohomora-illustration",
+        "url": "/visuals/spells/alohomora.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/alohomora.png",
+        "bytes": 2628622,
+        "width": 1672,
+        "height": 941,
+        "sha256": "2b4488aad0a98a228f54ed6361faf520f2f20fa238aa19e4bbfa060224257c8d"
+      }
+    ]
+  },
+  {
+    "id": "Spell_5_Wingardium-Leviosa_2026-10-06_719dd0e5-506a-4e67-9b02-04d4af1b4935",
+    "number": 5,
+    "name": "Wingardium Leviosa",
+    "slug": "wingardium-leviosa",
+    "media": [
+      {
+        "alt": "A feather suspended in the air by levitation magic",
+        "type": "image",
+        "id": "wingardium-leviosa-illustration",
+        "url": "/visuals/spells/wingardium-leviosa.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/wingardium-leviosa.png",
+        "bytes": 2047964,
+        "width": 1672,
+        "height": 941,
+        "sha256": "8b7f3cec0cfb72ddd91583c218162586c4989a888658c3ed25f00b917b0d6935"
+      }
+    ]
+  },
+  {
+    "id": "Spell_6_Expelliarmus_2026-10-06_719dd0e6-506a-4e67-9b02-04d4af1b4936",
+    "number": 6,
+    "name": "Expelliarmus",
+    "slug": "expelliarmus",
+    "media": [
+      {
+        "alt": "A wand flying away amid a burst of disarming magic",
+        "type": "image",
+        "id": "expelliarmus-illustration",
+        "url": "/visuals/spells/expelliarmus.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/expelliarmus.png",
+        "bytes": 2344132,
+        "width": 1672,
+        "height": 941,
+        "sha256": "c884a3e02755cf09cdec408cbc9b1b3233fd146c71070c78f629b30458ee50cb"
+      }
+    ]
+  },
+  {
+    "id": "Spell_7_Expecto-Patronum_2026-10-06_719dd0e7-506a-4e67-9b02-04d4af1b4937",
+    "number": 7,
+    "name": "Expecto Patronum",
+    "slug": "expecto-patronum",
+    "media": [
+      {
+        "alt": "A luminous animal guardian casting protective light through mist",
+        "type": "image",
+        "id": "expecto-patronum-illustration",
+        "url": "/visuals/spells/expecto-patronum.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/expecto-patronum.png",
+        "bytes": 2963795,
+        "width": 1672,
+        "height": 941,
+        "sha256": "e6ac4d4c49bd487bafbd92195f237f514f9ff9b9433f6c51c94098c9937dc942"
+      }
+    ]
+  },
+  {
+    "id": "Spell_8_Adurna_2026-10-06_719dd0e8-506a-4e67-9b02-04d4af1b4938",
+    "number": 8,
+    "name": "Adurna",
+    "slug": "adurna",
+    "media": [
+      {
+        "alt": "Water rising and swirling under magical control",
+        "type": "image",
+        "id": "adurna-illustration",
+        "url": "/visuals/spells/adurna.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/adurna.png",
+        "bytes": 2509368,
+        "width": 1672,
+        "height": 941,
+        "sha256": "249c41410d0ad54128e7b79f52991a1adf223c6d617794b3420885c48b7baa8f"
+      }
+    ]
+  },
+  {
+    "id": "Spell_9_Jierda_2026-10-06_719dd0e9-506a-4e67-9b02-04d4af1b4939",
+    "number": 9,
+    "name": "Jierda",
+    "slug": "jierda",
+    "media": [
+      {
+        "alt": "A forceful burst of magic fracturing a stone object",
+        "type": "image",
+        "id": "jierda-illustration",
+        "url": "/visuals/spells/jierda.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/jierda.png",
+        "bytes": 2393185,
+        "width": 1672,
+        "height": 941,
+        "sha256": "085b8b50fd4702a64074667d9b47e398f48e955ff5ae68b1f304f96c91cb5a0b"
+      }
+    ]
+  },
+  {
+    "id": "Spell_10_Crimson-Bands-of-Cyttorak_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004010",
+    "number": 10,
+    "name": "Crimson Bands of Cyttorak",
+    "slug": "crimson-bands-of-cyttorak",
+    "media": [
+      {
+        "alt": "Luminous crimson binding bands tightly encircling a weathered stone pillar",
+        "type": "image",
+        "id": "crimson-bands-of-cyttorak-illustration",
+        "url": "/visuals/spells/crimson-bands-of-cyttorak.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/crimson-bands-of-cyttorak.png",
+        "bytes": 2617605,
+        "width": 1672,
+        "height": 941,
+        "sha256": "1ad5686c746b8c0eff791524b3bfed1eefda9f95cf6cfb984ee1110af6ef9806"
+      }
+    ]
+  },
+  {
+    "id": "Spell_11_Shield-of-the-Seraphim_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004011",
+    "number": 11,
+    "name": "Shield of the Seraphim",
+    "slug": "shield-of-the-seraphim",
+    "media": [
+      {
+        "alt": "A circular golden-orange magical shield scattering incoming blue-violet sparks",
+        "type": "image",
+        "id": "shield-of-the-seraphim-illustration",
+        "url": "/visuals/spells/shield-of-the-seraphim.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/shield-of-the-seraphim.png",
+        "bytes": 3035924,
+        "width": 1672,
+        "height": 941,
+        "sha256": "080dfc1904e7a0def915a523f7418ba4e930e74401a3e7652803e7fb5a4cbd37"
+      }
+    ]
+  },
+  {
+    "id": "Spell_12_Winds-of-Watoomb_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004012",
+    "number": 12,
+    "name": "Winds of Watoomb",
+    "slug": "winds-of-watoomb",
+    "media": [
+      {
+        "alt": "A teal and gold magical wind funnel lifting debris through a ruined stone courtyard",
+        "type": "image",
+        "id": "winds-of-watoomb-illustration",
+        "url": "/visuals/spells/winds-of-watoomb.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/winds-of-watoomb.png",
+        "bytes": 3230987,
+        "width": 1672,
+        "height": 941,
+        "sha256": "fb30c7cdc731f0f8b4d7124e575c2151c4e008ce143428fc786000525d7b840f"
+      }
+    ]
+  },
+  {
+    "id": "Spell_13_Astral-Projection_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004013",
+    "number": 13,
+    "name": "Astral Projection",
+    "slug": "astral-projection",
+    "media": [
+      {
+        "alt": "A pale-blue astral silhouette rising from a resting robed figure in a violet sanctum",
+        "type": "image",
+        "id": "astral-projection-illustration",
+        "url": "/visuals/spells/astral-projection.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/astral-projection.png",
+        "bytes": 2762940,
+        "width": 1672,
+        "height": 940,
+        "sha256": "99b079c96e66844a23b851acc7794fdb2bfe2398c2b713fe920a9735a2a260b0"
+      }
+    ]
+  },
+  {
+    "id": "Spell_14_Mellon_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004014",
+    "number": 14,
+    "name": "Mellon",
+    "slug": "mellon",
+    "media": [
+      {
+        "alt": "A moonlit stone doorway with silver tree and star motifs and a narrow welcoming seam of light",
+        "type": "image",
+        "id": "mellon-illustration",
+        "url": "/visuals/spells/mellon.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/mellon.png",
+        "bytes": 3452129,
+        "width": 1672,
+        "height": 941,
+        "sha256": "0c7e3fc947f3d70c4a0fda291478e6155ca3f5eeef14205e0c7b6c2145086642"
+      }
+    ]
+  },
+  {
+    "id": "Spell_15_Naur-an-edraith-ammen_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004015",
+    "number": 15,
+    "name": "Naur an edraith ammen",
+    "slug": "naur-an-edraith-ammen",
+    "media": [
+      {
+        "alt": "An amber campfire flaring among snowy ground and wet ancient tree roots at night",
+        "type": "image",
+        "id": "naur-an-edraith-ammen-illustration",
+        "url": "/visuals/spells/naur-an-edraith-ammen.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/naur-an-edraith-ammen.png",
+        "bytes": 2679696,
+        "width": 1672,
+        "height": 941,
+        "sha256": "9a7f8919be6408ee68739fd15231515051067689d0cd944bdaab94ba59fb3401"
+      }
+    ]
+  },
+  {
+    "id": "Spell_16_Annon-edhellen-edro-hi-ammen_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004016",
+    "number": 16,
+    "name": "Annon edhellen, edro hi ammen",
+    "slug": "annon-edhellen-edro-hi-ammen",
+    "media": [
+      {
+        "alt": "A cloaked traveler raising a hand toward a firmly closed stone gate with a faint silver-blue spell glimmer",
+        "type": "image",
+        "id": "annon-edhellen-edro-hi-ammen-illustration",
+        "url": "/visuals/spells/annon-edhellen-edro-hi-ammen.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/annon-edhellen-edro-hi-ammen.png",
+        "bytes": 3035115,
+        "width": 1672,
+        "height": 941,
+        "sha256": "c1e0d5dfd780a6fef7d349015072912d1a7726bb511a5007ffb263efe52d07bd"
+      }
+    ]
+  },
+  {
+    "id": "Spell_17_Shutting-Spell_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004017",
+    "number": 17,
+    "name": "Shutting-Spell",
+    "slug": "shutting-spell",
+    "media": [
+      {
+        "alt": "Violet binding light sealing an old stone door against an orange glow beyond",
+        "type": "image",
+        "id": "shutting-spell-illustration",
+        "url": "/visuals/spells/shutting-spell.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/shutting-spell.png",
+        "bytes": 2832318,
+        "width": 1672,
+        "height": 940,
+        "sha256": "38eea08c79424e47239edd50c14cb0be58ec399f05db97747a9b321976db1e50"
+      }
+    ]
+  },
+  {
+    "id": "Spell_18_Soul-Self_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004018",
+    "number": 18,
+    "name": "Soul Self",
+    "slug": "soul-self",
+    "media": [
+      {
+        "alt": "A vast violet spectral raven spreading its wings above a seated hooded figure",
+        "type": "image",
+        "id": "soul-self-illustration",
+        "url": "/visuals/spells/soul-self.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/soul-self.png",
+        "bytes": 2883563,
+        "width": 1672,
+        "height": 941,
+        "sha256": "3b08922e2d3a2e4d487853a4a5c41481994018a21ad193159695bfd78b7fe04a"
+      }
+    ]
+  },
+  {
+    "id": "Spell_19_Empathy_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004019",
+    "number": 19,
+    "name": "Empathy",
+    "slug": "empathy",
+    "media": [
+      {
+        "alt": "Two robed figures linked by violet and gold light across a moonlit ruined garden",
+        "type": "image",
+        "id": "empathy-illustration",
+        "url": "/visuals/spells/empathy.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/empathy.png",
+        "bytes": 2374319,
+        "width": 1672,
+        "height": 941,
+        "sha256": "0fc4f8cd51cc58aa70f4b041761813fbd3a1235c26020716f4a5d41d0ae86e21"
+      }
+    ]
+  },
+  {
+    "id": "Spell_20_Empathic-Healing_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004020",
+    "number": 20,
+    "name": "Empathic Healing",
+    "slug": "empathic-healing",
+    "media": [
+      {
+        "alt": "A hooded healer drawing violet light from a seated traveler's injured forearm",
+        "type": "image",
+        "id": "empathic-healing-illustration",
+        "url": "/visuals/spells/empathic-healing.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/empathic-healing.png",
+        "bytes": 2346691,
+        "width": 1672,
+        "height": 941,
+        "sha256": "bdc9e0f59ac272dd901913c097f54aa09f7697c0f6fad293ec06f92bd3de2f68"
+      }
+    ]
+  },
+  {
+    "id": "Spell_21_Azarath-Metrion-Zinthos_2026-10-21_f8a2d690-8ca7-4d06-9a86-32c5cb004021",
+    "number": 21,
+    "name": "Azarath Metrion Zinthos",
+    "slug": "azarath-metrion-zinthos",
+    "media": [
+      {
+        "alt": "A hovering hooded figure holding a violet energy orb in a ruined stone hall",
+        "type": "image",
+        "id": "azarath-metrion-zinthos-illustration",
+        "url": "/visuals/spells/azarath-metrion-zinthos.png",
+        "credit": "AI-generated illustration · Spelling Spells",
+        "caption": "Original illustration inspired by the spell’s fictional effect"
+      }
+    ],
+    "files": [
+      {
+        "url": "/visuals/spells/azarath-metrion-zinthos.png",
+        "bytes": 2595012,
+        "width": 1672,
+        "height": 941,
+        "sha256": "5038aa7b6ff4a49f8629fcb8c71f1b662277411124d1b47e5a8875de3284de73"
+      }
+    ]
+  }
+]

@@ -3,7 +3,8 @@
 .notification-menu-trigger:is(:hover, :focus-visible, .is-open) { border-color: var(--lavender); background: var(--card); box-shadow: 0 0 16px #6039d81f; }
 .notification-menu-badge { position: absolute; top: -5px; right: -5px; display: grid; min-width: 18px; height: 18px; place-items: center; border: 2px solid var(--page); border-radius: 99px; padding: 0 3px; background: var(--gold); color: var(--night-ink); font-size: 9px; font-weight: 700; line-height: 1; }
 .notification-menu-badge.is-loading { background: var(--card); }
-.notification-menu-panel { z-index: 80; position: fixed; width: min(400px, calc(100vw - 36px)); overflow-y: auto; overscroll-behavior: contain; border: 1px solid var(--line); border-radius: 16px; padding: 22px; background: var(--card); color: var(--ink); box-shadow: 0 24px 60px #08031545; scrollbar-width: thin; animation: notification-menu-appear .22s ease both; }
+.notification-menu-panel { z-index: 80; position: fixed; width: min(400px, calc(100vw - 36px)); overflow-y: auto; overscroll-behavior: contain; border: 1px solid var(--line); border-radius: 16px; padding: 22px; background: var(--card); color: var(--ink); box-shadow: 0 24px 60px #08031545; scrollbar-width: thin; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-8px); transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s; }
+.notification-menu-panel.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); transition-delay: 0s; }
 .notification-menu-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .notification-menu-heading-copy > span { color: var(--soft); font-size: 8px; letter-spacing: 1.3px; text-transform: uppercase; }
 .notification-menu-heading h2 { margin: 8px 0 0; font: 500 32px/1.1 Georgia, serif; letter-spacing: -.7px; }
@@ -24,5 +25,4 @@
 .notification-menu-footer p { margin: 0 0 4px; color: var(--soft); font-size: 9px; line-height: 1.8; }
 .notification-menu-footer a { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; color: var(--lavender); font-size: 11px; }
 .notification-menu-panel :is(button, a):focus-visible, .notification-menu-trigger:focus-visible { outline: 2px solid var(--lavender); outline-offset: 3px; }
-@keyframes notification-menu-appear { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-@media (prefers-reduced-motion: reduce) { .notification-menu-trigger { transition: none; } .notification-menu-panel { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .notification-menu-trigger, .notification-menu-panel { transition: none; } }

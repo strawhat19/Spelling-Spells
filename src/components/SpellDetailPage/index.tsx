@@ -77,6 +77,7 @@ const SpellDetailPage = () => {
       {(error || saveMessage || !savedReady || presentation.session) && <Text nativeID={`detail-save-feedback-${spell.id}`} accessibilityLiveRegion="polite" style={[styles.copy, { color: error ? palette.error : palette.muted }]}>{error || presentation.description}</Text>}
 
       <Pressable nativeID={`detail-share-${spell.id}`} accessibilityRole="button" disabled={sharing} onPress={() => void shareSpell()} style={styles.link}><Icon name="external-link" size={17} color={palette.gold} /><Text style={[styles.linkText, { color: palette.gold }]}>{sharing ? `Opening sharing…` : `Share this spell`}</Text></Pressable>
+      <Pressable nativeID={`detail-grimoire-${spell.id}`} accessibilityRole={`link`} onPress={() => router.push(`/grimoire?spellId=${encodeURIComponent(spell.id)}`)} style={styles.link}><Icon name={`edit`} size={17} color={palette.gold} /><Text style={[styles.linkText, { color: palette.gold }]}>Notes & Practice Preview</Text></Pressable>
 
       <View nativeID="spell-spelling-section" style={sectionStyle}>
         <View style={styles.sectionHeading}><Icon name="book" size={20} color={palette.gold} /><Text accessibilityRole="header" style={[styles.sectionTitle, { color: palette.text }]}>How to spell it</Text></View>

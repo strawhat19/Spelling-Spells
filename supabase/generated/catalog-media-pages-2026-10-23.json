@@ -1,0 +1,217 @@
+{
+  "checkedAt": "2026-10-23T16:33:46.303Z",
+  "origin": "https://spelling-spells.vercel.app",
+  "deploymentId": "dpl_2XoMhbRmFMFMeix21xmcJSMFeeVG",
+  "pages": [
+    {
+      "number": 1,
+      "path": "/spell/lumos",
+      "status": 200,
+      "heading": "Lumos",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 2,
+      "path": "/spell/fus-ro-dah",
+      "status": 200,
+      "heading": "Fus Ro Dah",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 3,
+      "path": "/spell/brisingr",
+      "status": 200,
+      "heading": "Brisingr",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 3,
+      "referencesInHtml": 3
+    },
+    {
+      "number": 4,
+      "path": "/spell/alohomora",
+      "status": 200,
+      "heading": "Alohomora",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 5,
+      "path": "/spell/wingardium-leviosa",
+      "status": 200,
+      "heading": "Wingardium Leviosa",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 6,
+      "path": "/spell/expelliarmus",
+      "status": 200,
+      "heading": "Expelliarmus",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 7,
+      "path": "/spell/expecto-patronum",
+      "status": 200,
+      "heading": "Expecto Patronum",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 8,
+      "path": "/spell/adurna",
+      "status": 200,
+      "heading": "Adurna",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 2,
+      "referencesInHtml": 2
+    },
+    {
+      "number": 9,
+      "path": "/spell/jierda",
+      "status": 200,
+      "heading": "Jierda",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 3,
+      "referencesInHtml": 3
+    },
+    {
+      "number": 10,
+      "path": "/spell/crimson-bands-of-cyttorak",
+      "status": 200,
+      "heading": "Crimson Bands of Cyttorak",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 11,
+      "path": "/spell/shield-of-the-seraphim",
+      "status": 200,
+      "heading": "Shield of the Seraphim",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 12,
+      "path": "/spell/winds-of-watoomb",
+      "status": 200,
+      "heading": "Winds of Watoomb",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 13,
+      "path": "/spell/astral-projection",
+      "status": 200,
+      "heading": "Astral Projection",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 18,
+      "path": "/spell/soul-self",
+      "status": 200,
+      "heading": "Soul Self",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 19,
+      "path": "/spell/empathy",
+      "status": 200,
+      "heading": "Empathy",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 20,
+      "path": "/spell/empathic-healing",
+      "status": 200,
+      "heading": "Empathic Healing",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    },
+    {
+      "number": 21,
+      "path": "/spell/azarath-metrion-zinthos",
+      "status": 200,
+      "heading": "Azarath Metrion Zinthos",
+      "correctHeading": true,
+      "hasOwnImage": true,
+      "referenceCount": 1,
+      "referencesInHtml": 1
+    }
+  ],
+  "build": {
+    "version": 1,
+    "mode": "anonymous",
+    "generatedAt": "2026-10-23T16:31:24.160Z",
+    "catalogTimestamp": "2026-10-23T16:31:24.160Z",
+    "siteOrigin": "https://spelling-spells.vercel.app",
+    "spellCount": 17,
+    "worldCount": 5,
+    "spellPaths": [
+      "/spell/lumos",
+      "/spell/fus-ro-dah",
+      "/spell/brisingr",
+      "/spell/alohomora",
+      "/spell/wingardium-leviosa",
+      "/spell/expelliarmus",
+      "/spell/expecto-patronum",
+      "/spell/adurna",
+      "/spell/jierda",
+      "/spell/crimson-bands-of-cyttorak",
+      "/spell/shield-of-the-seraphim",
+      "/spell/winds-of-watoomb",
+      "/spell/astral-projection",
+      "/spell/soul-self",
+      "/spell/empathy",
+      "/spell/empathic-healing",
+      "/spell/azarath-metrion-zinthos"
+    ],
+    "worldPaths": [
+      "/world/dc-teen-titans",
+      "/world/harry-potter",
+      "/world/inheritance-cycle",
+      "/world/marvel",
+      "/world/skyrim"
+    ],
+    "snapshotSha256": "ede692499eb62e54352b445bea10bcb2600d3b5dc1aed038e8227465dd9e2947",
+    "files": [
+      "sitemap.xml",
+      "robots.txt"
+    ]
+  }
+}

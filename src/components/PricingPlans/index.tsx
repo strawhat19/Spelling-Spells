@@ -12,7 +12,7 @@ const PricingPlans = (props: PricingPlansProps) => {
   const router = useRouter();
   const { palette } = useTheme();
   const { width } = useWindowDimensions();
-  const { plans, error, variant, loading, idPrefix, unavailable, reloadPlans } = usePricingPlans(props);
+  const { plans, error, variant, loading, idPrefix, signedIn, unavailable, reloadPlans, accountLoading } = usePricingPlans(props);
   return (
     <View nativeID={`${idPrefix}-section`} style={[styles.section, variant === `page` && styles.pageSection]}>
       <View nativeID={`${idPrefix}-heading`} style={styles.heading}>
@@ -32,6 +32,7 @@ const PricingPlans = (props: PricingPlansProps) => {
         <View nativeID={`${idPrefix}-cards`} style={styles.cards}>
           {plans.map((plan) => {
             const free = plan.priceCents === 0;
+            const starter = plan.slug === `starter`;
             const planId = `${idPrefix}-${plan.id}`;
             return (
               <View key={plan.id} nativeID={planId} style={[styles.card, { flexBasis: width >= 760 ? `45%` : `100%` }, plan.highlighted && styles.highlightedCard]}>
@@ -44,18 +45,21 @@ const PricingPlans = (props: PricingPlansProps) => {
                 <View nativeID={`${planId}-features`} style={styles.features}>{plan.features.map((feature, index) => <View key={index} nativeID={`${planId}-feature-${index}`} style={styles.feature}><Icon name={`check`} size={16} color={plan.highlighted ? parchment.accent : parchment.soft} /><Text nativeID={`${planId}-feature-${index}-copy`} style={styles.featureCopy}>{feature}</Text></View>)}</View>
                 <View nativeID={`${planId}-action-area`} style={styles.actionArea}>
                   <Pressable
-                    disabled={!free}
+                    disabled={!free || accountLoading}
                     nativeID={`${planId}-action`}
                     accessibilityRole={free ? `link` : `button`}
-                    accessibilityState={{ disabled: !free }}
-                    onPress={free ? () => router.push(`/spells`) : undefined}
+                    accessibilityState={{ busy: free && accountLoading, disabled: !free || accountLoading }}
+                    onPress={free ? () => router.push(signedIn ? `/spells` : `/signup`) : undefined}
                     style={({ pressed }) => [styles.action, !free && styles.unavailableAction, pressed && styles.pressedAction]}
                   >
-                    <Icon name={free ? `book` : `spark`} size={16} color={free ? parchment.accent : parchment.paper} />
-                    <Text nativeID={`${planId}-action-copy`} style={[styles.actionText, !free && styles.unavailableActionText]}>{free ? `Browse Library` : `Coming Soon`}</Text>
-                    {free && <Icon name={`arrow`} size={16} color={parchment.accent} />}
+                    <Icon name={free ? signedIn ? `book` : `user` : `spark`} size={16} color={free ? parchment.accent : parchment.paper} />
+                    <Text nativeID={`${planId}-action-copy`} style={[styles.actionText, !free && styles.unavailableActionText]}>{free ? accountLoading ? `Loading Account…` : signedIn ? `Browse Library` : `Sign Up Free` : `Coming Soon`}</Text>
+                    {free && !accountLoading && <Icon name={`arrow`} size={16} color={parchment.accent} />}
                   </Pressable>
-                  <Text nativeID={`${planId}-availability`} style={styles.cardNote}>{free ? `A little curiosity is all you need.` : `Subscriptions are not available yet.`}</Text>
+                  {free && !accountLoading && !signedIn && <Pressable nativeID={`${planId}-signin`} accessibilityRole={`link`} onPress={() => router.push(`/signin`)} style={styles.secondaryLink}><Icon name={`user`} size={13} color={parchment.accent} /><Text nativeID={`${planId}-signin-copy`} style={styles.secondaryLinkText}>Already Have An Account? Sign In</Text></Pressable>}
+                  {starter && <Pressable nativeID={`${planId}-preview`} accessibilityRole={`link`} accessibilityLabel={`Preview Starter Tools, Device-Local Preview`} onPress={() => router.push(`/grimoire`)} style={styles.secondaryLink}><Icon name={`book`} size={14} color={parchment.accent} /><Text nativeID={`${planId}-preview-copy`} style={styles.secondaryLinkText}>Preview Starter Tools</Text><Icon name={`arrow`} size={14} color={parchment.accent} /></Pressable>}
+                  {starter && <Text nativeID={`${planId}-preview-note`} style={styles.previewNote}>Device-Local Preview</Text>}
+                  <Text nativeID={`${planId}-availability`} style={styles.cardNote}>{free ? signedIn ? `A little curiosity is all you need.` : `The public library stays free to browse.` : `Subscriptions are not available yet.`}</Text>
                 </View>
               </View>
             );

@@ -1,0 +1,124 @@
+{
+  "checkedAt": "2026-10-23T18:04:55.484Z",
+  "origin": "https://spelling-spells.vercel.app",
+  "deploymentId": "dpl_73di8ayKHi71zY91TV2i7cZn9uLV",
+  "images": [
+    {
+      "number": 22,
+      "url": "/visuals/spells/accio.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2192447,
+      "sha256": "2ab73f8574e1c99fb463207fb461bfae49d7f693bbde6f28bff1e6e44a892e45",
+      "match": true
+    },
+    {
+      "number": 23,
+      "url": "/visuals/spells/reparo.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2199469,
+      "sha256": "e2585e946bccbb14dd8861e3b5abb71b4e9768c163d5b225345c0df521b57d6c",
+      "match": true
+    },
+    {
+      "number": 24,
+      "url": "/visuals/spells/protego.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2961999,
+      "sha256": "6ba85d200f58f9ffa50d1ae2e496732054bb74eac0a6ca50fda23e9040d8f36c",
+      "match": true
+    },
+    {
+      "number": 25,
+      "url": "/visuals/spells/stupefy.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2287578,
+      "sha256": "ff7c1ae6be50004a79372acea6485960701dd240cb52befcffa26dc401b1f852",
+      "match": true
+    },
+    {
+      "number": 26,
+      "url": "/visuals/spells/riddikulus.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2540814,
+      "sha256": "822d249f22215a644bd74063726748d166c11e8fb2168271306b1fd3ba65ec58",
+      "match": true
+    },
+    {
+      "number": 27,
+      "url": "/visuals/spells/nox.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 1845203,
+      "sha256": "aec417b0733e6420ec28325495be7082aca214ba95a972585f976951033eb7db",
+      "match": true
+    },
+    {
+      "number": 28,
+      "url": "/visuals/spells/petrificus-totalus.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2331214,
+      "sha256": "38a371fb0583fc0a825d8918771778beed90b3fa453cfa96d298287e79ba6977",
+      "match": true
+    },
+    {
+      "number": 29,
+      "url": "/visuals/spells/rictusempra.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2830785,
+      "sha256": "7eb7a75a0c44b8aaa7859fb56f541d07a7eedf1e07e713fcd047e03a22133016",
+      "match": true
+    },
+    {
+      "number": 30,
+      "url": "/visuals/spells/incendio.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2729947,
+      "sha256": "e6bd14482a654e086cda109cefc5ffa3c35a12c6d16fbc10f468b91aa992ff7e",
+      "match": true
+    },
+    {
+      "number": 31,
+      "url": "/visuals/spells/aguamenti.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2568340,
+      "sha256": "8d73b7c72d39ae82f11b516833fccd06500b374104659f2e54ebd6b979069926",
+      "match": true
+    },
+    {
+      "number": 32,
+      "url": "/visuals/spells/obliviate.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2403173,
+      "sha256": "1ca5e98b394d79ef073dc01997d30b9166a506beff2fee51348f6e46a261bad1",
+      "match": true
+    },
+    {
+      "number": 33,
+      "url": "/visuals/spells/silencio.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 2471541,
+      "sha256": "e5058c106dfbf31e10343a9165178a7a08583aee5e5a4d0d8e09cd13acc546f9",
+      "match": true
+    },
+    {
+      "number": 34,
+      "url": "/visuals/spells/reducto.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3240897,
+      "sha256": "a2eda0b356840f204d3018eb17adeac2cbcc087b62dad8e619fd1ac07e8b9ce1",
+      "match": true
+    }
+  ]
+}
